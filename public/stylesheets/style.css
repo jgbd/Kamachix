@@ -79,15 +79,15 @@ a {
 #divtable, #divtable2, #divtable3, #divgraph1, #divgraph2, #divgraph3, #divgraph4, #divgraph5 {
 	height		: 300px;
 	font-size	: 12px;
-  	border: 2px dotted lightgreen;
-  	overflow-y: scroll ;
-  	border-radius: 15px;
+	/*border: 2px dotted lightgreen;*/
+	overflow-y: scroll ;
+	/*border-radius: 15px;*/
 }
 
-#divtable:hover, #divtable2:hover, #divtable3:hover, #divgraph1:hover,
+/*#divtable:hover, #divtable2:hover, #divtable3:hover, #divgraph1:hover,
 #divgraph2:hover, #divgraph3:hover, #divgraph4:hover {
   border: 2px dotted blue;
-}
+}*/
 
 #escudo,#logo{
   margin-top: 60px;

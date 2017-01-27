@@ -376,10 +376,14 @@ function gaugesGraph(data,contentName, co1, co2, co3, soso, goal, title, symbol 
     var gaugeChart = AmCharts.makeChart( contentName, {
       "type": "gauge",
       "theme": "chalk",
+      "titles": [{"text":title}],
       "axes": [ {
         "axisThickness": 1,
         "axisAlpha": 0.2,
         "tickAlpha": 0.2,
+        "gridInside": true,
+        "inside": true,
+        "radius": "100%",
         "valueInterval": 10,
         "bands": [ {
           "color": c1,
@@ -392,11 +396,11 @@ function gaugesGraph(data,contentName, co1, co2, co3, soso, goal, title, symbol 
         }, {
           "color": c3,
           "endValue": 100,
-          "innerRadius": "95%",
+          "innerRadius": "90%",
           "startValue": goal
         } ],
-        "bottomText": data + symbol + "\n" + title ,
-        "bottomTextYOffset": -20,
+        "bottomText": data + symbol,
+        "bottomTextYOffset": -10,
         "endValue": 100
       } ],
       "arrows": [{}], //es el valor que tiene

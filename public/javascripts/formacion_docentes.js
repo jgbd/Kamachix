@@ -126,7 +126,7 @@ $(document).ready(function(){
          gaugesGraph(magist,divsem3,'r','y','g',40,70, 'Magister', '%');
        }
 
-       gaugesGraph(profes,divsem4,'g','y','r',40,70, 'Cantidad \n Profesionales', ' ');
+       gaugesGraph(profes,divsem4,'g','y','r',40,70, 'Cantidad Profesionales', ' ');
      }
   });
  }
@@ -255,7 +255,7 @@ $(document).ready(function(){
        else{
          gaugesGraph(magist,divsem3,'r','y','g',40,70, 'Magister', '%');
        }
-       gaugesGraph(profes,divsem4,'g','y','r',40,70, 'Cantidad \n Profesionales', ' ');
+       gaugesGraph(profes,divsem4,'g','y','r',40,70, 'Cantidad Profesionales', ' ');
      }
    });
    closedivfilter();
