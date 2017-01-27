@@ -81,19 +81,19 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
       });
       $("#graph2").change(function () {
         if($(this).val() === '1'){
-          columnTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0);
+          columnTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
         }
         else if($(this).val() === '2'){
-          columnTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30);
+          columnTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"Programas Acreditados","Total Programas");
         }
         else if($(this).val() === '3'){
-          lineTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name);
+          lineTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,"Programas Acreditados","Total Programas");
         }
         else if($(this).val() === '4'){
-          barTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0);
+          barTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
         }
         else if($(this).val() === '5'){
-          barTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30);
+          barTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"Programas Acreditados","Total Programas");
         }
       });
       /*$("input[name=graph1]").click(function () {
@@ -112,7 +112,7 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
       });*/
 
       columnGraph(json.rows,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,0,0);
-      columnTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0);
+      columnTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
       gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','r','y','g',10,20, 'Acreditación \n Alta Calidad', '%');
     }
   });
@@ -245,19 +245,19 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI de acredi
         $("#lblper").html("Indicador Acreditación Alta Calidad años: "+json.datos[0].Anho+" a "+json.datos[json.count-1].Anho);
         $("#graph2").change(function () {
           if($(this).val() === '1'){
-            columnTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],0,0);
+            columnTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],0,0,"Programas Acreditados","Total Programas");
           }
           else if($(this).val() === '2'){
-            columnTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],40,30);
+            columnTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],40,30,"Programas Acreditados","Total Programas");
           }
           else if($(this).val() === '3'){
-            lineTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2]);
+            lineTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],"Programas Acreditados","Total Programas");
           }
           else if($(this).val() === '4'){
-            barTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],0,0);
+            barTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],0,0,"Programas Acreditados","Total Programas");
           }
           else if($(this).val() === '5'){
-            barTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],40,30);
+            barTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],40,30,"Programas Acreditados","Total Programas");
           }
         });
         /*$("input[name=graph2]").click(function () {
@@ -267,7 +267,7 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI de acredi
             lineTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2]);
           }
         });*/
-        columnTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],0,0);
+        columnTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],0,0,"Programas Acreditados","Total Programas");
         gaugesGraph(json.datos[json.count-1].razon,'divgraph3','r','y','g',10,20, 'Acreditación \n Alta Calidad', '%');
       }
     });

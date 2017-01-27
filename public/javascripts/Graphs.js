@@ -79,7 +79,7 @@ function columnGraph(data, content_name, title, namecolumn, namerows, depth3D, a
   * namerow2 es el segundo valor por columna
   * depth3d y angle son los valores que definen profundidad
 */
-function columnTwoGraph(data, content_name, title, namecolumn, namerow1, namerow2, depth3D, angle ){
+function columnTwoGraph(data, content_name, title, namecolumn, namerow1, namerow2, depth3D, angle, legen1, legen2 ){
   $("#"+content_name).empty();
   var chart = AmCharts.makeChart(content_name, {
     "type": "serial",
@@ -100,22 +100,22 @@ function columnTwoGraph(data, content_name, title, namecolumn, namerow1, namerow
     }],
     "startDuration": 1,
     "graphs": [{
-      "balloonText": "<b>Deserción: [[value]]</b>",
+      "balloonText": "<b>" + legen1 + ": [[value]]</b>",
       "fillColorsField": "color",
       "id":"gr1",
       "fillAlphas": 0.9,
       "lineAlpha": 0.2,
       "type": "column",
-      "title":"Deserción:",
+      "title":legen1,
       "valueField": namerow1
     },{
-      "balloonText": "<b>Retención: [[value]]</b>",
+      "balloonText": "<b>" + legen2 + ": [[value]]</b>",
       "fillColorsField": "color",
       "id":"gr2",
       "fillAlphas": 0.9,
       "lineAlpha": 0.2,
       "type": "column",
-      "title":"Retención:",
+      "title":legen2,
       "valueField": namerow2,
     }
     ],
@@ -235,7 +235,7 @@ function lineGraph(data, contentname, title, namecolumn, namerows ){
 }
 
 //doble line
-function lineTwoGraph(data, contentname, title, namecolumn, namerow1, namerow2 ){
+function lineTwoGraph(data, contentname, title, namecolumn, namerow1, namerow2, legen1, legen2 ){
     $("#"+contentname).empty();
     var chart = AmCharts.makeChart(contentname, {
       "type": "serial",
@@ -275,7 +275,7 @@ function lineTwoGraph(data, contentname, title, namecolumn, namerow1, namerow2 )
           "bulletSize": 3,
           "hideBulletsCount": 30,
           "lineThickness": 2,
-          "title": "Deserción",
+          "title": legen1,
           "useLineColorForBulletBorder": true,
           "valueField": namerow1,
           "balloonText": "<span style='font-size:10px;'>[[value]]</span>"
@@ -292,7 +292,7 @@ function lineTwoGraph(data, contentname, title, namecolumn, namerow1, namerow2 )
           "bulletSize": 3,
           "hideBulletsCount": 30,
           "lineThickness": 2,
-          "title": "Retención",
+          "title": legen2,
           "useLineColorForBulletBorder": true,
           "valueField": namerow2,
           "balloonText": "<span style='font-size:10px;'>[[value]]</span>"
@@ -544,7 +544,7 @@ function barGraph(data, contentName, title, namecolumn, namerows, depth3D, angle
 }
 
 //grafica doble barra horizontales
-function barTwoGraph(data, content_name, title, namecolumn, namerow1, namerow2, depth3D, angle){
+function barTwoGraph(data, content_name, title, namecolumn, namerow1, namerow2, depth3D, angle, legen1, legen2){
   var chart = AmCharts.makeChart(content_name, {
   	"type": "serial",
     "theme": "light",
@@ -565,20 +565,20 @@ function barTwoGraph(data, content_name, title, namecolumn, namerow1, namerow2, 
   	"trendLines": [],
   	"graphs": [
   		{
-  			"balloonText": "<b>Deserción: [[value]]</b>",
+  			"balloonText": "<b>" + legen1 + ": [[value]]</b>",
   			"fillAlphas": 0.8,
   			"id": "AmGraph-1",
   			"lineAlpha": 0.2,
-  			"title": "Deserción",
+  			"title": legen1+":",
   			"type": "column",
   			"valueField": namerow1
   		},
   		{
-  			"balloonText": "<b>Retención: [[value]]</b>",
+  			"balloonText": "<b>" + legen2 + ": [[value]]</b>",
   			"fillAlphas": 0.8,
   			"id": "AmGraph-2",
   			"lineAlpha": 0.2,
-  			"title": "Retención",
+  			"title": legen2+":",
   			"type": "column",
   			"valueField": namerow2
   		}
@@ -614,6 +614,7 @@ function areaGraph(data, contentname, title, namecolumn, namerows){
   var chart = AmCharts.makeChart( contentname, {
     "type": "serial",
     "theme": "light",
+    "titles":[{"text":title}],
     "marginRight": 40,
     "marginLeft": 40,
     "autoMarginOffset": 20,

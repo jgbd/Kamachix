@@ -127,23 +127,23 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
      //$("input[name=graph3]").click(function () {
      $("#graph3").change(function () {
         if($(this).val() === '1'){
-          columnTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0);
+          columnTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
         }
         else if($(this).val() === '2'){
-          columnTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30);
+          columnTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"A","B");
         }
         else if($(this).val() === '3'){
-          lineTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name);
+          lineTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
         }
         else if($(this).val() === '4'){
-          barTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0);
+          barTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
         }
         else if($(this).val() === '5'){
-          barTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30);
+          barTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"A","B");
         }
       });
-     columnTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0);
-     lineTwoGraph(json.rows,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name);
+     columnTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
+     lineTwoGraph(json.rows,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
      gaugesGraph(json.rows[0].razonanual,'divper1','g','y','r',35,45, 'Estudiantes por Docente', '%');
      gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','g','y','r',35,45, 'Estudiantes por Docente', '%');
    }
@@ -208,19 +208,19 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
         $("#fin").html("Indicador año: "+json.datos[json.count-1].Anho);
         $("#graph3").change(function () {
           if($(this).val() === '1'){
-            columnTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0);
+            columnTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0,"A","B");
           }
           else if($(this).val() === '2'){
-            columnTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],40,30);
+            columnTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],40,30,"A","B");
           }
           else if($(this).val() === '3'){
-            lineTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2]);
+            lineTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],"A","B");
           }
           else if($(this).val() === '4'){
-            barTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0);
+            barTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0,"A","B");
           }
           else if($(this).val() === '5'){
-            barTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],40,30);
+            barTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],40,30,"A","B");
           }
         });
         /*$("input[name=graph3]").click(function () {
@@ -230,8 +230,8 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
             lineTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2]);
           }
         });*/
-        columnTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0);
-        lineTwoGraph(json.datos,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2]);
+        columnTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0,"A","B");
+        lineTwoGraph(json.datos,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],"A","B");
         gaugesGraph(json.datos[0].razonanual,'divper1','g','y','r',35,45, 'Estudiantes por Docente', '%');
         gaugesGraph(json.datos[json.count-1].razonanual,'divper2','g','y','r',35,45, 'Estudiantes por Docente', '%');
       }
