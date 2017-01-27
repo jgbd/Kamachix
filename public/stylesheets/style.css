@@ -1,0 +1,160 @@
+/*Controla los estylos propios de cada contendor
+que se van creando sea por clase por id o tipo */
+
+@font-face {
+    font-family: titulo;
+    src:url("/fonts/GreatVibes-Regular.ttf");
+}
+
+.title{
+  font-family: titulo;
+  font-size: 40px;
+  font-weight: lighter bolder;
+}
+
+.body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
+  background-color: azure;
+  color:black;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#divcontent{
+  text-align: left;
+  border: 2px solid red;
+  background-color: lightgreen;
+  border-radius: 15px;
+}
+
+#txtuser,#txtpass{
+  border-radius: 15px;
+}
+
+#txtuser:hover,#txtpass:hover{
+  border: solid 2px green;
+}
+
+#btnlogin:hover{
+  border: solid 2px blue;
+}
+
+#divbtn{
+  text-align: right;
+}
+
+#respuesta{
+  color: red;
+  font-size: 16px;
+  text-align: center;
+}
+
+.head{
+  height: 100px
+}
+
+.logout{
+  text-align: right;
+  font-family: titulo;
+  font-size: 20px;
+  color: orange;
+}
+
+.logout:hover{
+  color: lightblue;
+}
+
+#divfilter{
+  font-size	: 12px;
+  border: 2px dotted lightgreen;
+}
+
+.modal-content{
+  background-color: 255;
+}
+
+#divtable, #divtable2, #divtable3, #divgraph1, #divgraph2, #divgraph3, #divgraph4, #divgraph5 {
+	height		: 300px;
+	font-size	: 12px;
+  	border: 2px dotted lightgreen;
+  	overflow-y: scroll ;
+  	border-radius: 15px;
+}
+
+#divtable:hover, #divtable2:hover, #divtable3:hover, #divgraph1:hover,
+#divgraph2:hover, #divgraph3:hover, #divgraph4:hover {
+  border: 2px dotted blue;
+}
+
+#escudo,#logo{
+  margin-top: 60px;
+  height: 120px
+}
+
+.th, td{
+  text-align: center;
+  margin: auto;
+  align-items: center;
+}
+
+#tabind th, #tabind td, #tabinfo th ,#tabinfo td, #tabindres th, #tabindres td{
+  text-align: justify;
+  color: black;
+}
+
+#est{
+  height: 20px;
+}
+
+thead{
+  background-color: lightblue;
+}
+
+table{
+  border-radius: 20px;
+}
+
+img{
+  border-radius: 40px;
+}
+
+#btnfil{
+  border-radius: 30px;
+  width: 60px;
+  height: 30px;
+}
+
+#divsem1,#divsem2,#divsem3,#divsem4{
+ 	width		: 50%;
+ 	height		: 150px;
+ 	font-size	: 9px;
+   /*border: 2px dotted lightgreen;*/
+ }
+
+ #divper1,#divper2{
+ 	width		: 100%;
+ 	height		: 150px;
+ 	font-size	: 9px;
+}
+
+ .dropdown-menu{
+   background-color: #222;
+ }
+
+ .dropdown-menu li a{
+   color: gray;
+ }
+
+ .dropdown-menu li:hover a:hover,
+ .dropdown-menu li:focus a:focus,
+ .dropdown-menu li.active{
+   color: black;
+ }
+
+ #modalinfobody{
+  width: 90%;
+  margin-left: 5%;
+ }

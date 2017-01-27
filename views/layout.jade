@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    block title
+    //Permite caracteres especiales como la Ñ y los asentos 
+    meta(charset='UTF-8') 
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no')
+    //CSS generales del proyecto
+    //style.css es archivo con estilos propios del proyecto
+    //los css bootstrap pertenecen a estas librerias de ayuda grafica y control
+    //export.css referencia a la posibilidad de descargar en diferentes formatos 
+    //las graficas de los indicadores EJ: JPG, PDF, etc. 
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-datepicker.min.css')
+    link(rel='stylesheet', href='/stylesheets/jquery-ui.css') 
+    link(rel='stylesheet', href='/stylesheets/jquery-ui.theme.min.css') 
+    link(rel='stylesheet', href='/stylesheets/style.css') 
+    
+    //JS generales del proyecto
+    script(src='/javascripts/jquery.js')
+    script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
+    script(type='text/javascript',src='/javascripts/bootstrap.min.js')
+    script(type='text/javascript',src='/javascripts/bootstrap-datepicker.min.js')
+    script(type='text/javascript',src='/javascripts/bootstrap-datepicker.es.min.js')
+    //En este bloque se permite colocar los scripts que no son comunes a todo el proyecto y solo 
+    //pertenecen a una pagina en especifico  
+    block scripts
+  body.body
+    //este bloque es el que contiene todo lo que pertenece a las diferentes paginas 
+    block content

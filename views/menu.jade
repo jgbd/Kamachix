@@ -1,0 +1,128 @@
+extends layout
+block title
+block scripts
+  link(rel='stylesheet', href="/javascripts/amcharts/plugins/export/export.css")
+  link(rel='stylesheet', href='/stylesheets/bootstrap-submenu.min.css')
+  //scripts que se usan despues de login
+  script(src='/javascripts/bootstrap-submenu.min.js', defer='')
+  script(src="/javascripts/amcharts/amcharts.js")
+  script(src="/javascripts/amcharts/plugins/export/export.min.js")
+  script(src="/javascripts/amcharts/serial.js")
+  script(src="/javascripts/amcharts/pie.js")
+  script(src="/javascripts/amcharts/gauge.js")
+  script(src="/javascripts/amcharts/themes/light.js")
+  script(type='text/javascript', src='/javascripts/Graphs.js')
+  script(type='text/javascript', src='http://canvg.github.io/canvg/rgbcolor.js')
+  script(type='text/javascript', src='http://canvg.github.io/canvg/StackBlur.js')
+  script(type='text/javascript', src='http://canvg.github.io/canvg/canvg.js')
+  script(type='text/javascript', src='/javascripts/jspdf.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js')
+  script(type='text/javascript', src='/javascripts/html2canvas.js')
+  script(type='text/javascript', src='/javascripts/menu.js')
+  block scriptpage
+block content
+  //contiene el head y el menu con los nombres de los indicadores 
+  center.col-md-12
+    .col-md-12
+       h3.title.col-md-12 Kamachix
+         br
+         small(style="color:black") Cuadro de Mando Integral
+  .col-md-12
+     nav.navbar.navbar-inverse.col-md-12
+       .container-fluid
+         .navbar-header
+           button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+             span.sr-only Toggle navigation
+             span.icon-bar
+             span.icon-bar
+             span.icon-bar
+           a.navbar-brand(href='indicadores').active Home 
+             span.glyphicon.glyphicon-home(aria-hidden='true')
+         #bs-example-navbar-collapse-1.collapse.navbar-collapse
+           ul.nav.navbar-nav
+             li.dropdown
+               a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')
+                 | Archivo 
+                 span.caret
+               ul.dropdown-menu
+                 li.dropdown-submenu
+                   a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                     | Carga y actualizacion de datos  
+                   ul.dropdown-menu
+                     li
+                       a(href='/upload') 
+                         | Encuesta Satisfacción.
+                     li.divider
+                     li.dropdown-submenu
+                       a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                         | Datos Deserción 
+                       ul.dropdown-menu
+                         li
+                           a(href='#') 
+                             | Deserción Cohorte.
+                         li.divider
+                         li
+                           a(href='#') 
+                             | Deserción Periodo.
+                     li.divider
+                     li.dropdown-submenu
+                       a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                         | Actualizacion Nivel de Formacion Docentes 
+                       ul.dropdown-menu
+                         li
+                           a(href='update_formacionDO') 
+                             | Doctor.
+                         li.divider
+                         li
+                           a(href='update_formacionMA') 
+                             | Magister.
+                         li.divider
+                         li
+                           a(href='update_formacionES') 
+                             | Especialista.
+                         li.divider
+                         li
+                           a(href='update_formacionPR') 
+                             | Profesional.        
+                 li
+                  a(href="javascript:getPDF()") 
+                    |Generar Reportes.
+             li.dropdown
+               a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')
+                 | Indicadores Academicos 
+                 span.caret
+               ul.dropdown-menu
+                 li
+                   a(href='satisfacion')
+                     | Satisfacción
+                 li.divider
+                 li
+                   a(href='formacion')
+                     | Formacion docentes
+                 li.divider
+                 li
+                   a(href='relacion_docentes')
+                     | Relacion Docentes
+                 li.divider
+                 li
+                   a(href='acreditacion')
+                     | Acreditación en Alta Calidad
+                 li.divider
+                 li
+                   a(href='estudiantesDocente')
+                     | Estudiantes por Docente Tiempo Completo
+                 li.divider
+                 li.dropdown-submenu
+                   a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                     | Deserción 
+                   ul.dropdown-menu
+                     li
+                       a(href='cohorte') 
+                         | Deserción por Cohorte
+                     li.divider
+                     li
+                       a(href='periodo') 
+                         | Deserción por Periodo
+           p.navbar-text.navbar-right 
+             a.logout(href='logout') Salir  
+  block resto

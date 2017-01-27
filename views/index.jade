@@ -1,0 +1,25 @@
+extends layout
+block title
+  title!=title
+block scripts
+  //este script es propio para esta pagina
+  script(src='/javascripts/code.js')
+block content
+  //este es el contenido que tiene la pagina al renderizar se convierte en html
+  h1.title Iniciar Sesión
+  #divcontent.col-md-4.col-md-offset-4
+    form#frmlogin.form-horizontal(action="consultaUsuario" method="POST")
+      .form-group
+        br
+        //aqui se resive la respuesta si existe el error de no autorización de ingreso 
+        p#respuesta
+        label.col-sm-3.control-label(for='txtuser') Usuario: 
+        .col-sm-9
+          input#txtuser.form-control(type='text', placeholder='Usuario' required)
+      .form-group
+        label.col-sm-3.control-label(for='txtpass') Contraseña: 
+        .col-sm-9
+          input#txtpass.form-control(type='password', placeholder='Contraseña' required)
+      #divbtn
+        button#btnlogin.btn.btn-info(type='submit') Ingresar   
+      br
