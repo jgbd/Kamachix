@@ -1,5 +1,6 @@
 var now = new Date();//Hora del sistema.
 var mes=now.getMonth()+1;//formato string mes actual
+//var mes=7;//formato string mes actual
 
 $(document).ready(function(){
   Load_Insert();//Define si muestra o no el formulario
@@ -25,7 +26,7 @@ function Load_Insert(){//Define si muestra o no el formulario
                       //de ingreso de datos tomando en cuenta la fecha de sistema y
                       //anterior entrada
   var anho=now.getFullYear();//formato string año actual
-  var mes=now.getMonth()+1;
+  //var mes=now.getMonth()+1;
   //var mes=7;
   if(mes<3){
     $.ajax({
@@ -107,7 +108,8 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
         }
       });
       columnGraph(json.rows,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
-      gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph2','g','y','r',35,45,'Estudiantes por Docente', '%');
+      if(mes<=6) gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph2','g','y','r',35,45,'Estudiantes por Docente', '%');
+      else gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph2','g','y','r',35,45,'Estudiantes por Docente', '%');
    }
  });
 }
@@ -123,7 +125,7 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
      var fin;
      $("#lblper").html("Indicador Estudiantes por Docente Tiempo Completo años: "+json.rows[0].Anho+" a "+now.getFullYear());
      //$("#inicio").html("Indicador año: "+json.rows[0].Anho);
-     if(mes<3) fin = now.getFullYear()-1;
+     if(mes<=6) fin = now.getFullYear()-1;
      else fin = now.getFullYear();
      //$("input[name=graph3]").click(function () {
      $("#graph3").change(function () {
