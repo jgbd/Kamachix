@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
 
   if(req.query.c == 1)
-    var sql = 'SELECT sl."Programa" FROM "Datawarehouse"."KPI_Satisfaction_level" sl GROUP BY sl."Programa" ORDER BY sl."Programa"';
+    var sql = 'SELECT sl."Programa", p.nombre From "Datawarehouse"."KPI_Satisfaction_level"  sl JOIN public.programas p ON p.snies=sl."Programa"';
   else if (req.query.c ==2)
     var sql = 'SELECT sl."Anho" FROM "Datawarehouse"."KPI_Satisfaction_level" sl GROUP BY sl."Anho" ORDER BY sl."Anho"';
   else return console.log("error");

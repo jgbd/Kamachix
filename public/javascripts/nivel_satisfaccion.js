@@ -5,13 +5,16 @@ $(document).ready(function(){
   Load_Year_List();
 
   //al hacer clik en el boton para realizar submit al formualrio
+
   $("#frmfilter").submit(function(event){
     Load_Filter();
     event.preventDefault();
   });
+
   // al hacer click para cambiar grafica del primer div
   // se puede obtar por de columna o de barras horizontales
   //$("input[name=cgdiv1]").click(function () {
+
   $("#cgdiv1").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
@@ -27,9 +30,11 @@ $(document).ready(function(){
       barGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],40,30);
     }
   });
+
   // cambia grafica del segundo div
   // se puede tener o de linea o de area
   //$("input[name=cgdiv2]").click(function () {
+
   $("#cgdiv2").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
@@ -38,19 +43,6 @@ $(document).ready(function(){
       areaGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
     }
   });
-
-  //click para camniar entrte graficas 2d y 3d
-  // $("#c3d").click(function(){
-  //   if($("#c3d").is(":checked")){
-  //     var json = JSON.parse($('#txtjson').val());
-  //     alert($("input[name=cgdiv1]").val());
-  //     if($("input[name=cgdiv1]").val() === '1'){
-  //       columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],30,20);
-  //     }else if($("input[name=cgdiv1]").val() === '2'){
-  //       barGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],30,20);
-  //     }
-  //   }
-  // });
 });
 
 function Load_Programs_Lst(){
@@ -61,18 +53,18 @@ function Load_Programs_Lst(){
    data:{c:1},//Primera consulta
    //se ejecutasi todo se realiza bien
    success : function(json) {
-     //alert(json.rowCount);
+     //alert(JSON.stringify(json));
 
      for (var i = 0; i < json.rowCount; i++) {
        if (json.rows[i].Programa == "Udenar") {
          $("#lstprog").append('<option value="'+
          json.rows[i].Programa+'"selected>'
-         +json.rows[i].Programa
+         +json.rows[i].nombre
          +'</option>');
        }else {
          $("#lstprog").append('<option value="'+
          json.rows[i].Programa+'">'
-         +json.rows[i].Programa
+         +json.rows[i].nombre
          +'</option>');
        }
      }
@@ -107,7 +99,7 @@ function Load_Year_List(){
 }
 
 function Load_Fist_time(){
-  $("#cgc1").attr('checked',true);
+  //$("#cgc1").attr('checked',true);
   $("#tableres").append('');
   $.ajax({
    type: "get", //el el tipo de peticion puede ser GET y POsT
@@ -170,48 +162,6 @@ function Load_Filter(){
      success : function(json) {
        $("#txtjson").val(JSON.stringify(json));
       //  alert($("#txtjson").val());
-       //Arreglo para ver el nombre completo y calcular su posicion
-       var listProgFullName = [  "Administración de Empresas",
-                                 "Ingeniería Agroforestal",
-                                 "Ingeniería Agroindustrial",
-                                 "Ingeniería Agronómica",
-                                 "Ingeniería Ambiental",
-                                 "Ingeniería Civil",
-                                 "Ingeniería Electrónica",
-                                 "Ingeniería de Sistemas",
-                                 "Ingeniería en Producción Acuícola",
-                                 "Lengua Castellana y Literatura",
-                                 "Lic. en Educación básica Humanidades Lengua Castellana e Ingles",
-                                 "Licenciatura en Artes Visuales",
-                                 "Licenciatura en Ciencias Sociales",
-                                 "Licenciatura en Educación Básica con Énfasis en Ciencias Naturales y Educación Ambiental",
-                                 "Licenciatura en Informática",
-                                 "Licenciatura en Matemáticas",
-                                 "Medicina Veterinaria",
-                                 "Tecnología en Computación",
-                                 "Tecnología en Promoción de la Salud"
-                               ]
-      //arreglo con los nombre cortos de cada programa
-       var listProgSortName = [  "Adm. de Empresas",
-                                 "Ing. Agroforestal",
-                                 "Ing. Agroindustrial",
-                                 "Ing. Agronómica",
-                                 "Ing. Ambiental",
-                                 "Ing. Civil",
-                                 "Ing. Electrónica",
-                                 "Ing. de Sistemas",
-                                 "Ing. en Producción Acuícola",
-                                 "Leng. Castellana y Literatura",
-                                 "Lic. en Castellana e Ingles",
-                                 "Lic. en Artes Visuales",
-                                 "Lic. en Ciencias Sociales",
-                                 "Lic. en Cien. Naturales y Edu. Ambiental",
-                                 "Lic. en Informática",
-                                 "Lic. en Matemáticas",
-                                 "Med. Veterinaria",
-                                 "Tec. en Computación",
-                                 "Tec. en Promoción de la Salud"
-                               ];
        //recorre el json y se coloca el resultado en la tabla correspondiente
        $("#programa").html(json.Programa);
        for (var j = 0; j <json.count; j++) {
@@ -225,10 +175,6 @@ function Load_Filter(){
            else
              $("#tableres").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Satisfacción es bueno "></td>');
          $("#tableres").append('</tr>');
-         var pos = listProgFullName.indexOf(json.Programa);
-         if(pos>=0){
-           json.Programa = listProgSortName[pos];
-         }
        }
 
       //se envia los datos a las diferentes graficasque se realizan

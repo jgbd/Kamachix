@@ -12,7 +12,7 @@ var pool = configdb.configdb();
 //next que es la siguiente function
 
 router.get('/', function(req, res, next) {
-  var sql ='SELECT sl."Programa", sl."Nivel", sl."Anho" FROM "Datawarehouse"."KPI_Satisfaction_level" sl WHERE sl."Programa" LIKE '+"'Udenar'"+' ORDER BY sl."Programa", sl."Anho"';
+  var sql ='SELECT p.abreviatura, sl."Nivel", sl."Anho" FROM "Datawarehouse"."KPI_Satisfaction_level" sl JOIN public.programas p ON p.snies=sl."Programa" WHERE sl."Programa" = '+"'000000'"+' ORDER BY p."abreviatura", sl."Anho"';
   //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
         return console.error('error running query', err);
       }
       var re ={
-        "Programa":result.rows[0].Programa,
+        "Programa":result.rows[0].abreviatura,
         "datos":[],
         "fields":[result.fields[2].name,result.fields[1].name],
         "count":result.rowCount
@@ -36,7 +36,7 @@ router.get('/', function(req, res, next) {
       var datalst=[];
 
       for (var i = 0; i < result.rowCount; i++) {
-        if(re.Programa==result.rows[i].Programa){
+        if(re.Programa==result.rows[i].abreviatura){
           var d = {
             "Nivel":result.rows[i].Nivel,
             "Anho":result.rows[i].Anho
@@ -59,7 +59,7 @@ router.post('/', function(req, res, next) {
     //arreglo que contine filtros
     var filters=[req.body.program];
     //consulta basica sin condiciones
-    var sql ='SELECT sl."Programa", sl."Nivel", sl."Anho" FROM "Datawarehouse"."KPI_Satisfaction_level" sl WHERE ';
+    var sql ='SELECT p.abreviatura, sl."Nivel", sl."Anho" FROM "Datawarehouse"."KPI_Satisfaction_level" sl JOIN public.programas p ON p.snies=sl."Programa" WHERE ';
 
     //concatena al sql los valores d elos filtros
     sql=sql+'sl."Programa" = $1';
@@ -76,7 +76,7 @@ router.post('/', function(req, res, next) {
     }
 
     //al final se concatena al sql un ORDER BY por programa y año
-    sql = sql+' ORDER BY sl."Programa", sl."Anho"';
+    sql = sql+' ORDER BY p.abreviatura, sl."Anho"';
 
     pool.connect(function(err, client, done) {
       if(err) {
@@ -87,10 +87,10 @@ router.post('/', function(req, res, next) {
         if(err) {
           return console.error('error running query', err);
         }
-
+        console.log(result.rows);
         //objeto que va acontener la estructura del json a retornar
         var re={
-          "Programa": result.rows[0].Programa,
+          "Programa": result.rows[0].abreviatura,
           "datos":[],
           "fields":[result.fields[2].name,result.fields[1].name],
           "count":result.rowCount
@@ -99,7 +99,7 @@ router.post('/', function(req, res, next) {
         //estos seran los datos de cada objeto o programa devuelto
         var datarray=[];
         for (var i = 0; i < result.rowCount; i++) {
-          if(re.Programa==result.rows[i].Programa){
+          if(re.Programa==result.rows[i].abreviatura){
             var d ={
               "Nivel":result.rows[i].Nivel,
               "Anho": result.rows[i].Anho
