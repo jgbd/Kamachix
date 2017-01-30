@@ -16,8 +16,8 @@ var indicater = require('./routes/indicadores'); //pagina de bienvenida
 var logout = require('./routes/logout'); //pagina de logout
 //para controlar todo lo del KPI satisfaccion
 var satisfaction = require('./routes/satisfaccion'); //pagina del indicador de satisfaccion
-var filter = require('./routes/consultaFiltros'); //consulta filtros para satisfaccion
-var consultation = require('./routes/consulta'); //consulta datos iniciales desatisfaccion por get y con filtros por POST
+var filter = require('./routes/consultaFiltrosSatisfaccion'); //consulta filtros para satisfaccion
+var consultation = require('./routes/consultaSatisfaccion'); //consulta datos iniciales desatisfaccion por get y con filtros por POST
 
 //para controlar todo lo del KPI desercion periodo
 var consultationperiod = require('./routes/consultaperiodinit'); //consulta los datos iniciales de desercion por periodo
