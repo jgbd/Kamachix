@@ -40,6 +40,7 @@ function load_start(){
    dataType : 'json',
    //se ejecutasi todo se realiza bien
    success : function(json) {
+     alert(JSON.stringify(json));
       $("#txtjson").val(JSON.stringify(json));
       $("#lblprog").html(json.programa);
        for (var j = json.count-1; j >=0; j--) {
@@ -107,7 +108,7 @@ function loadlstsprogram(){
      for (var i = 0; i < json.rowCount; i++) {
        $("#lstprog").append('<option value="'+
        json.rows[i].programa+'">'
-       +json.rows[i].programa
+       +json.rows[i].nombre
        +'</option>');
      }
    }

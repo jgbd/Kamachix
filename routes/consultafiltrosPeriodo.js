@@ -14,7 +14,7 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
 
   if(req.query.c == 1)
-    var sql = 'SELECT sl."programa" FROM "Datawarehouse"."KPI_Period_Dropout" sl GROUP BY sl."programa" ORDER BY sl."programa"';
+    var sql = 'SELECT p.nombre,  pd.programa FROM "Datawarehouse"."KPI_Period_Dropout" pd JOIN public.programas p ON p.snies=pd.programa GROUP BY pd.programa, p.nombre  ORDER BY p.nombre';
   else if (req.query.c ==2){
     var prog=[req.query.program];
     var sql = 'SELECT chd.periodo FROM	"Datawarehouse"."KPI_Period_Dropout" chd WHERE chd."programa" LIKE $1 GROUP BY chd.periodo ORDER BY chd.periodo';

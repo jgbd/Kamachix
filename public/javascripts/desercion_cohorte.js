@@ -73,7 +73,8 @@ function load_start(){
        }
       columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
       lineGraph(json.datos,'divgraph2','Desercion por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
-      gaugesGraph(json.datos[json.count-1].porcentaje,'divgraph3','g','y','r',40,70 ,'Nivel de Desercion', '%');
+      var titleg="Nivel de Deserción por cohorte "+ json.datos[json.count-1].periodo +" "+ json.Programa
+      gaugesGraph(json.datos[json.count-1].porcentaje,'divgraph3','g','y','r',40,70 ,titleg, '%');
    }
  });
 }
@@ -126,7 +127,7 @@ function loadlstsprogram(){
      for (var i = 0; i < json.rowCount; i++) {
        $("#lstprog").append('<option value="'+
        json.rows[i].programa+'">'
-       +json.rows[i].programa
+       +json.rows[i].nombre
        +'</option>');
      }
    }
@@ -173,8 +174,16 @@ function load_filters(){
          $("#messageError").html("No existen datos");
          $('#myModal').modal('show');
        }else{
-         $("#txtjson").val(JSON.stringify(json));
-         $("#lblprog").html(json.Programa+"<br> Periodo Inicial: "+periodfrom+" A "+periodto);
+          $("#txtjson").val(JSON.stringify(json));
+          if(periodfrom!=0){
+            if(periodto!=0){
+              $("#lblprog").html(json.Programa+"<br> Periodo: "+periodfrom+" A "+periodto);
+            }else{
+              $("#lblprog").html(json.Programa+"<br> Periodo: "+periodfrom);
+            }
+          }else{
+            $("#lblprog").html(json.Programa);
+          }
           for (var j = json.count-1; j >=0; j--) {
             $("#tableres").append('<tr>');
               $("#tableres").append('<td>'+json.datos[j].periodo+'</td>');
@@ -190,7 +199,8 @@ function load_filters(){
           }
          columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
          lineGraph(json.datos,'divgraph2','Desercion por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
-         gaugesGraph(json.datos[json.count-1].porcentaje,'divgraph3','g','y','r',40,70,'Nivel de Desercion', '%');
+         var titleg="Nivel de Deserción por cohorte "+ json.datos[json.count-1].periodo +" "+ json.Programa
+         gaugesGraph(json.datos[json.count-1].porcentaje,'divgraph3','g','y','r',40,70,titleg, '%');
        }
      }
     });

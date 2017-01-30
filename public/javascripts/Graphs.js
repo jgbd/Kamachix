@@ -534,6 +534,11 @@ function barGraph(data, contentName, title, namecolumn, namerows, depth3D, angle
   "depth3D": depth3D,
   "angle": angle,
   "rotate": true,
+  "chartCursor": {
+    "categoryBalloonEnabled": false,
+    "cursorAlpha": 0,
+    "zoomable": true
+  },
   "categoryField": namecolumn,
   "categoryAxis": {
       "gridPosition": "start",

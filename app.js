@@ -14,20 +14,21 @@ var routes = require('./routes/index'); //pagina inicio
 var users = require('./routes/consultaUsuario'); //consulta el usuario
 var indicater = require('./routes/indicadores'); //pagina de bienvenida
 var logout = require('./routes/logout'); //pagina de logout
+
 //para controlar todo lo del KPI satisfaccion
 var satisfaction = require('./routes/satisfaccion'); //pagina del indicador de satisfaccion
 var filter = require('./routes/consultaFiltrosSatisfaccion'); //consulta filtros para satisfaccion
 var consultation = require('./routes/consultaSatisfaccion'); //consulta datos iniciales desatisfaccion por get y con filtros por POST
 
 //para controlar todo lo del KPI desercion periodo
-var consultationperiod = require('./routes/consultaperiodinit'); //consulta los datos iniciales de desercion por periodo
+var consultationperiod = require('./routes/consultaperiodo'); //consulta los datos iniciales de desercion por periodo
 var filterperiod = require('./routes/consultafiltrosPeriodo');//para cargar las listas de filtros periodo
 var period = require('./routes/periodo'); //pagina inicial de desercion periodo
 
 //para controlar todo lo del KPI desercion por cohorte
 var cohorte = require('./routes/cohorte'); //pagina inicial de desercion cohorte
 var consultationcohorte = require('./routes/consultacohorte'); //consulta datos iniciales de desercion por cohorte
-var filtercohorte = require('./routes/filtroscohorte'); //consulta de filtros para cohorte
+var filtercohorte = require('./routes/consultafiltroscohorte'); //consulta de filtros para cohorte
 
 //datos de stephen que colocar comentarios invocacionde routers
 var acreditacion = require('./routes/acreditacion');

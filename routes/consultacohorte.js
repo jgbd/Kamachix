@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
 
-  var sql ='SELECT pd."programa", pd."periodo", pd."porcentaje" FROM "Datawarehouse"."KPI_Cohort_Dropout" pd WHERE pd."programa" '+"LIKE 'udenar'"+ ' ORDER BY pd."periodo" DESC LIMIT 5';
+  var sql ='SELECT p.abreviatura, cd."periodo", cd."porcentaje" FROM "Datawarehouse"."KPI_Cohort_Dropout" cd JOIN public.programas p ON p.snies=cd."programa" WHERE cd."programa" '+"= '000000'"+ ' ORDER BY cd."periodo" DESC LIMIT 5';
   //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
@@ -29,7 +29,7 @@ router.get('/', function(req, res, next) {
         return console.error('error running query', err);
       }
       var re={
-        "Programa": result.rows[0].programa,
+        "Programa": result.rows[0].abreviatura,
         "datos":[],
         "fields":[result.fields[1].name,result.fields[2].name],
         "count":result.rowCount
@@ -38,7 +38,7 @@ router.get('/', function(req, res, next) {
       //estos seran los datos de cada objeto o programa devuelto
       var datarray=[];
       for (var i = 0; i < result.rowCount; i++) {
-        if(re.Programa==result.rows[i].programa){
+        if(re.Programa==result.rows[i].abreviatura){
           var d ={
             "periodo":result.rows[i].periodo,
             "porcentaje": result.rows[i].porcentaje
@@ -62,13 +62,13 @@ router.post('/', function(req, res, next) {
   var periodfrom = req.body.periodfrom;
   var periodto = req.body.periodto;
 
-  var sql ='SELECT pd."programa", pd."periodo", pd."porcentaje" FROM "Datawarehouse"."KPI_Cohort_Dropout" pd WHERE ';
+  var sql ='SELECT p.abreviatura, cd."periodo", cd."porcentaje" FROM "Datawarehouse"."KPI_Cohort_Dropout" cd JOIN public.programas p ON p.snies=cd."programa" WHERE ';
   //aqui se crea la conexion a DB
   //en este punto se colomcan los diferentes filtros que se aplicaran al sql de la DB
-  sql = sql+'pd.programa LIKE $1'
+  sql = sql+'cd.programa LIKE $1'
   if(periodfrom!=0){
     filters.push(periodfrom);
-    sql = sql +'AND pd."periodo" BETWEEN $2'; //se uutiliza la funcion BETWEEN ya que se necesita                                    //crear rangos en la consulta
+    sql = sql +'AND cd."periodo" BETWEEN $2'; //se uutiliza la funcion BETWEEN ya que se necesita                                    //crear rangos en la consulta
     if(periodto!=0){
       filters.push(periodto);
       sql = sql +' AND $3';
@@ -77,7 +77,7 @@ router.post('/', function(req, res, next) {
     }
   }
 
-  sql=sql+'ORDER BY pd."periodo" DESC';
+  sql=sql+'ORDER BY cd."periodo" DESC';
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -94,7 +94,7 @@ router.post('/', function(req, res, next) {
       //objeto que va acontener la estructura del json a retornar
       if(result.rowCount>0){
         var re={
-          "Programa": result.rows[0].programa,
+          "Programa": result.rows[0].abreviatura,
           "datos":[],
           "fields":[result.fields[1].name,result.fields[2].name],
           "count":result.rowCount
@@ -103,7 +103,7 @@ router.post('/', function(req, res, next) {
         //estos seran los datos de cada objeto o programa devuelto
         var datarray=[];
         for (var i = 0; i < result.rowCount; i++) {
-          if(re.Programa==result.rows[i].programa){
+          if(re.Programa==result.rows[i].abreviatura){
             var d ={
               "periodo":result.rows[i].periodo,
               "porcentaje": result.rows[i].porcentaje
