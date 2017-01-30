@@ -83,7 +83,8 @@ router.post('/', function(req, res, next) {
         return console.error('error fetching client from pool', err);
       }
       client.query(sql,filters, function(err, result) {
-        done();
+        done
+        
         if(err) {
           return console.error('error running query', err);
         }
