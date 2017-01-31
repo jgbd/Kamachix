@@ -18,7 +18,7 @@ router.post('/', function(req, res, next) {
   var password = req.body.pass; //aqui se crea el password y se encripta en MD5
 
   //esta variable es la que contien la consulta a realizarse en la DB
-  var sql = 'SELECT u.name FROM public.users u WHERE u.user LIKE MD5($1) AND u.pass LIKE MD5($2)';
+  var sql = 'SELECT u.name, u.rol FROM public.users u WHERE u.user LIKE MD5($1) AND u.pass LIKE MD5($2)';
 
   //aquui se crea la conexion a DB
   pool.connect(function(err, client, done) {
@@ -41,6 +41,7 @@ router.post('/', function(req, res, next) {
       //y es falso se devuelve el cero que sera para jusgar que realizar del lado Frond
       if(result.rowCount>0){
         req.session.name = result.rows[0].name;
+        req.session.rol = result.rows[0].rol;
         res.json(result.rowCount);
       }else{
         res.json(result.rowCount);

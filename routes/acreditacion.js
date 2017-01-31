@@ -4,8 +4,18 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   //valida si está creada la variable de sesion caso contrario envía mensaje de error
-  if(req.session.name!=null) res.render('acreditacion');
-  else res.send('fallosesion');
+  if(req.session.name!=null) {
+    if(req.session.rol!=1){
+      res.render('acreditacion',{title:'acreditacion', rols:'display:none'});
+    }else{
+      res.render('acreditacion',{title:'acreditacion', rols:'display:block'});
+    }
+  }
+
+  else{
+    res.send('Inicie Sesion Adecuadamente');
+    res.end();
+  }
 });
 
 module.exports = router;

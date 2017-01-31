@@ -75,10 +75,6 @@ block resto
           optgroup(label='Tendencia')
             option(value='3') Línea
             option(value='4') Area
-        //input#graph1a(type='radio', name='graph1', value='1', checked) 
-        //| barras 
-        //input#graph1b(type='radio', name='graph1', value='2')
-        //| tendencia
     #divtable.col-md-6
       h6#goal
       table.table.table-hover.table-bordered.table-responsed(border='1')
@@ -107,15 +103,11 @@ block resto
             option(value='5') 3D
           optgroup(label='Tendencia')
             option(value='3') Línea
-        //input#graph2a(type='radio', name='graph2', value='1', checked) 
-        //| tendencia 
-        //input#graph2b(type='radio', name='graph2', value='2')
-        //| barras
     #divgraph3.col-md-6
     .col-md-6
         br
         br
-    #divtable2.col-md-6
+    #divtable2.col-md-6(style!=rols)
       #anhoactual
       table.table.table-hover.table-bordered.table-responsed(border='1')
         thead 
@@ -123,7 +115,7 @@ block resto
             th.th Programa Académico
             th.th Estado
         tbody#tableresprogram
-    #divtable3.col-md-6
+    #divtable3.col-md-6(style!=rols)
       #anhoactual2
       table.table.table-hover.table-bordered.table-responsed(border='1')
         thead 
@@ -145,6 +137,7 @@ block resto
   canvas#canvas(style='display:none')
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
+  // campo oculto para controlar rols
   //modal para los informes 
   #modalinfo.modal.fade.bd-example-modal-lg
     #modalinfobody.modal-content
