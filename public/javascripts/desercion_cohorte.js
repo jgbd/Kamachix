@@ -41,11 +41,11 @@ $(document).ready(function(){
       areaGraph(json.datos.reverse(),'divgraph2','Desercion por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
     }
   });
-
 });
 
 function load_start(){
-  $("#cgc1").attr('checked',true);
+  $('#cgdiv1 > option[value="0"]').attr('selected', 'selected');
+  $('#cgdiv2 > option[value="0"]').attr('selected', 'selected');
   $("#tableres").html('');
   $("#divgraph1").html('');
   $("#divgraph2").html('');
@@ -73,7 +73,7 @@ function load_start(){
        }
       columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
       lineGraph(json.datos,'divgraph2','Desercion por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
-      var titleg="Nivel de Deserción por cohorte "+ json.datos[json.count-1].periodo +" "+ json.Programa
+      var titleg="Nivel de Deserción por cohorte "+ json.datos[json.count-1].periodo +"\n"+ json.Programa
       gaugesGraph(json.datos[json.count-1].porcentaje,'divgraph3','g','y','r',40,70 ,titleg, '%');
    }
  });
@@ -139,7 +139,8 @@ function loadlstsprogram(){
 function load_filters(){
   var ban = true;
   //vacea el contenido de la tabla para volver a cargar datos nuevos
-  $("#cgc1").attr('checked',true);
+  $('#cgdiv1 > option[value="0"]').attr('selected', 'selected');
+  $('#cgdiv2 > option[value="0"]').attr('selected', 'selected');
   $("#tableres").html("");
   $("#divgraph1").html("");
   $("#divgraph2").html("");
@@ -201,7 +202,7 @@ function load_filters(){
           }
          columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
          lineGraph(json.datos,'divgraph2','Desercion por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
-         var titleg="Nivel de Deserción por cohorte "+ json.datos[json.count-1].periodo +" "+ json.Programa
+         var titleg="Nivel de Deserción por cohorte "+ json.datos[json.count-1].periodo +"\n"+ json.Programa
          gaugesGraph(json.datos[json.count-1].porcentaje,'divgraph3','g','y','r',40,70,titleg, '%');
        }
      }

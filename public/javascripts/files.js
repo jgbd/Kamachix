@@ -1,23 +1,4 @@
-$(document).ready(function(){
-  $('#uploadform').submit(function(event){
-    var cx = comprueba_extension($('#files').val());
-    $('#mesage').css('color','red');
-    if(cx===0) {
-      $('#mesage span').addClass('glyphicon glyphicon-alert');
-      $('#mesage p').html('Seleccione un archivo!!');
-    }
-    else if(cx===1) {
-      $('#mesage span').addClass('glyphicon glyphicon-alert');
-      $('#mesage p').html('Formato de archivo no valido!!');
-    }
-    else{
-      $('#mesage').css('color','green');
-      loadfile();
-    }
-    event.preventDefault();
-  });
-});
-
+//function que comprueba del lado cliente las extensiones de los archivos
 function comprueba_extension(archivo) {
    var extensiones_permitidas = new Array(".csv");
    if (!archivo) {
@@ -42,13 +23,14 @@ function comprueba_extension(archivo) {
    }
 }
 
-function loadfile(){
-
+//function para cargar los archivos con ayas a la que le enviamos la url del
+// router que tratara cada archivo
+function loadfile(url, name){
   $('#mesage span').removeClass('glyphicon glyphicon-alert')
   var formData = new FormData();
-  formData.append('file', $('#files')[0].files[0]);
+  formData.append('file', $('#'+name)[0].files[0]);
   $.ajax({
-     url : '/upload',
+     url : url,
      type : 'POST',
      data : formData,
      processData: false,  // tell jQuery not to process the data

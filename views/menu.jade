@@ -18,9 +18,61 @@ block scripts
   script(type='text/javascript', src='/javascripts/jspdf.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js')
   script(type='text/javascript', src='/javascripts/html2canvas.js')
+  script(type='text/javascript', src='/javascripts/files.js')
   script(type='text/javascript', src='/javascripts/menu.js')
   block scriptpage
 block content
+  //modaluploadperiodo
+  #modaluploadperiodo.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Carga Archivo Deserción por Periodo.
+        #modal-body.modal-body
+          form(class='form-inline' ref='uploadformperiodo' id='uploadformperiodo' action='/uploadfileperiodo', method='POST', enctype='multipart/form-data')
+            .form-group
+              input.file(type='file', name='archivo', id='filesperiodo')
+            input(type='submit', value='Subir' class='btn btn-primary')
+          br
+          div#mesage(style='color:red;')
+            span
+            p
+  //modaluploadcohorte
+  #modaluploadcohorte.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Carga Archivo Deserción por Cohorte.
+        #modal-body.modal-body
+          form(class='form-inline' ref='uploadformcohorte' id='uploadformcohorte' action='/uploadfilecohorte', method='POST', enctype='multipart/form-data')
+            .form-group
+              input.file(type='file', name='archivo', id='filescohorte')
+            input(type='submit', value='Subir' class='btn btn-primary')
+          br
+          div#mesage(style='color:red;')
+            span
+            p
+  //modaluploadsatisfacion
+  #modaluploadsatisfaccion.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Carga Archivo Nivel de Satisfacción.
+        #modal-body.modal-body
+          form(class='form-inline' ref='uploadformsatisfaccion' id='uploadformsatisfaccion' action='/uploadfilesatisfaccion', method='POST', enctype='multipart/form-data')
+            .form-group
+              input.file(type='file', name='archivo', id='filesatisfaccion')
+            input(type='submit', value='Subir' class='btn btn-primary')
+          br
+          div#mesage(style='color:red;')
+            span
+            p
   //contiene el head y el menu con los nombres de los indicadores 
   center.col-md-12
     .col-md-12
@@ -50,19 +102,19 @@ block content
                      | Carga y actualizacion de datos  
                    ul.dropdown-menu
                      li
-                       a(href='/upload') 
-                         | Encuesta Satisfacción.
+                       a(href='#' onclick='openmodaluploadsatisfaccion()') 
+                         | Nivel de Satisfacción.
                      li.divider
                      li.dropdown-submenu
                        a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                          | Datos Deserción 
                        ul.dropdown-menu
                          li
-                           a(href='#') 
+                           a(href='#' onclick='openmodaluploadcohorte()') 
                              | Deserción Cohorte.
                          li.divider
                          li
-                           a(href='#') 
+                           a(href='#' onclick='openmodaluploadperiodo()') 
                              | Deserción Periodo.
                      li.divider
                      li.dropdown-submenu
