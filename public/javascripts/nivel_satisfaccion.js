@@ -2,8 +2,9 @@ $(document).ready(function(){
   //invoca la funcion cargar programas
   Load_Fist_time();
   Load_Programs_Lst();
-  Load_Year_List();
-
+  //solo queda el valor de Seleccionar periodo en las listas
+  $("#lstanho1").append('<option value="0" selected>Seleccionar Año</option>');
+  $("#lstanho2").append('<option value="0" selected>Seleccionar Año</option>');
   //al hacer clik en el boton para realizar submit al formualrio
 
   $("#frmfilter").submit(function(event){
@@ -53,31 +54,31 @@ function Load_Programs_Lst(){
    data:{c:1},//Primera consulta
    //se ejecutasi todo se realiza bien
    success : function(json) {
-     //alert(JSON.stringify(json));
-
+     $("#lstprog").append('<option selected value="'+
+     '0'+'">'
+     +'Seleccione Programa'
+     +'</option>');
      for (var i = 0; i < json.rowCount; i++) {
-       if (json.rows[i].Programa == "Udenar") {
-         $("#lstprog").append('<option value="'+
-         json.rows[i].Programa+'"selected>'
-         +json.rows[i].nombre
-         +'</option>');
-       }else {
          $("#lstprog").append('<option value="'+
          json.rows[i].Programa+'">'
          +json.rows[i].nombre
          +'</option>');
-       }
      }
    }
  });
 }
 
 function Load_Year_List(){
+  $("#lstanho1").html("");
+  $("#lstanho2").html("");
    $.ajax({
     type: "get", //el el tipo de peticion puede ser GET y POsT
     url: "consultaFiltros", //la url del que realizara la consulta
     dataType : 'json',
-    data:{c:2},//se envia un valor para despues coneste saber que consulta
+    data:{
+      c:2,
+      'program':$("#lstprog").val()
+    },//se envia un valor para despues coneste saber que consulta
     //realizar a la base de daos
     //se ejecutasi todo se realiza bien
     success : function(json) {
@@ -123,7 +124,8 @@ function Load_Fist_time(){
 
     columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
     lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
-    gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,'Satisfacción Actual', '%');
+    var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +" "+ json.Programa
+    gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');
    }
   });
 }
@@ -138,6 +140,7 @@ function Load_Filter(){
 
   if(yearfrom==yearto  && yearfrom!=0 && yearto!=0){
     ban=false;
+    $("#messageError").html("No seleccione el mismo periodo");
     $('#myModal').modal('show');
   }
   if(yearfrom>yearto && yearto!=0){
@@ -160,28 +163,33 @@ function Load_Filter(){
      data : formData,
      dataType : 'json',
      success : function(json) {
-       $("#txtjson").val(JSON.stringify(json));
-      //  alert($("#txtjson").val());
-       //recorre el json y se coloca el resultado en la tabla correspondiente
-       $("#programa").html(json.Programa);
-       for (var j = 0; j <json.count; j++) {
-         $("#tableres").append('<tr>');
-           $("#tableres").append('<td>'+json.datos[j].Nivel+'</td>');
-           $("#tableres").append('<td>'+json.datos[j].Anho+'</td>');
-           if(json.datos[j].Nivel<=40)
-             $("#tableres").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Satisfacción esta muy bajo"></td>');
-           else if(json.datos[j].Nivel>40 && json.datos[j].Nivel<=70)
-             $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Satisfacción esta bajando demasiado"></td>');
-           else
-             $("#tableres").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Satisfacción es bueno "></td>');
-         $("#tableres").append('</tr>');
-       }
+       if(json.Error){
+         $("#messageError").html("No existen datos");
+         $('#myModal').modal('show');
+       }else{
+         $("#txtjson").val(JSON.stringify(json));
+         //recorre el json y se coloca el resultado en la tabla correspondiente
+         $("#programa").html(json.Programa);
+         for (var j = 0; j <json.count; j++) {
+           $("#tableres").append('<tr>');
+             $("#tableres").append('<td>'+json.datos[j].Nivel+'</td>');
+             $("#tableres").append('<td>'+json.datos[j].Anho+'</td>');
+             if(json.datos[j].Nivel<=40)
+               $("#tableres").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Satisfacción esta muy bajo"></td>');
+             else if(json.datos[j].Nivel>40 && json.datos[j].Nivel<=70)
+               $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Satisfacción esta bajando demasiado"></td>');
+             else
+               $("#tableres").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Satisfacción es bueno "></td>');
+           $("#tableres").append('</tr>');
+         }
 
-      //se envia los datos a las diferentes graficasque se realizan
-      columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
-      lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
-      gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,'Satisfaccion Actual', '%');
-     }
+        //se envia los datos a las diferentes graficasque se realizan
+        columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
+        lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
+        var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +" "+ json.Programa
+        gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');
+       }
+      }
     });
   }
   closedivfilter();

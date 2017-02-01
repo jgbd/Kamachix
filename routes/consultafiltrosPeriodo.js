@@ -13,9 +13,11 @@ var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
 
-  if(req.query.c == 1)
-    var sql = 'SELECT p.nombre,  pd.programa FROM "Datawarehouse"."KPI_Period_Dropout" pd JOIN public.programas p ON p.snies=pd.programa GROUP BY pd.programa, p.nombre  ORDER BY p.nombre';
-  else if (req.query.c ==2){
+  if(req.query.c == 1){
+    var sql = 'SELECT p.nombre,  pd.programa FROM "Datawarehouse"."KPI_Period_Dropout" pd JOIN public.programas p ON p.snies=pd.programa';
+    if(req.session.rol!=1)
+      sql=sql+' WHERE p.departamento='+"'"+req.session.codigo+"'"+' OR pd.programa = '+"'000000'"+' GROUP BY pd.programa, p.nombre  ORDER BY p.nombre';
+  }else if (req.query.c ==2){
     var prog=[req.query.program];
     var sql = 'SELECT chd.periodo FROM	"Datawarehouse"."KPI_Period_Dropout" chd WHERE chd."programa" LIKE $1 GROUP BY chd.periodo ORDER BY chd.periodo';
   }else return console.log("error");

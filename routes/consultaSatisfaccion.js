@@ -84,32 +84,37 @@ router.post('/', function(req, res, next) {
       }
       client.query(sql,filters, function(err, result) {
         done
-        
+
         if(err) {
           return console.error('error running query', err);
         }
         console.log(result.rows);
         //objeto que va acontener la estructura del json a retornar
-        var re={
-          "Programa": result.rows[0].abreviatura,
-          "datos":[],
-          "fields":[result.fields[2].name,result.fields[1].name],
-          "count":result.rowCount
-        };
+        if(result.rowCount>0){
+          var re={
+            "Programa": result.rows[0].abreviatura,
+            "datos":[],
+            "fields":[result.fields[2].name,result.fields[1].name],
+            "count":result.rowCount
+          };
 
-        //estos seran los datos de cada objeto o programa devuelto
-        var datarray=[];
-        for (var i = 0; i < result.rowCount; i++) {
-          if(re.Programa==result.rows[i].abreviatura){
-            var d ={
-              "Nivel":result.rows[i].Nivel,
-              "Anho": result.rows[i].Anho
-            };
-            datarray.push(d);
+          //estos seran los datos de cada objeto o programa devuelto
+          var datarray=[];
+          for (var i = 0; i < result.rowCount; i++) {
+            if(re.Programa==result.rows[i].abreviatura){
+              var d ={
+                "Nivel":result.rows[i].Nivel,
+                "Anho": result.rows[i].Anho
+              };
+              datarray.push(d);
+            }
           }
+          re.datos = datarray;
+          res.json(re);
+        }else{
+          var re = {"Error":true}
+          res.json(re);
         }
-        re.datos = datarray;
-        res.json(re);
       });
     });
     //se ejecuta si el usuario o password no son correctas y no se puede conectar al SGBD

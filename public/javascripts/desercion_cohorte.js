@@ -86,8 +86,10 @@ function loadlstsperiod(){
    type: "get", //el el tipo de peticion puede ser GET y POsT
    url: "filtroscohorte", //la url del que realizara la consulta
    dataType : 'json',
-   data:{c:2,
-     'program':$("#lstprog").val()},//se envia un valor para despues coneste saber que consulta
+   data:{
+     c:2,
+     'program':$("#lstprog").val()
+   },//se envia un valor para despues coneste saber que consulta
    //realizar a la base de daos
    //se ejecutasi todo se realiza bien
    success : function(json) {

@@ -403,13 +403,13 @@ function gaugesGraph(data,contentName, co1, co2, co3, soso, goal, title, symbol 
         "bottomTextYOffset": -10,
         "endValue": 100
       } ],
-      "arrows": [{}], //es el valor que tiene
+      "arrows": [{"value":data}], //es el valor que tiene
       "export": {
         "enabled": true,
         "menu": menu_export
       }
     });
-    gaugeChart.arrows[0].setValue( data );
+    //gaugeChart.arrows[0].setValue( data );
 }
 
 //Grafica de acelerometro doble

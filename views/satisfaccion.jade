@@ -21,7 +21,7 @@ block resto
             .col-md-3
               label(for='lstprog') Programa:  
             .col-md-9
-              select#lstprog.form-control(name='lstprog' )
+              select#lstprog.form-control(name='lstprog' onchange='Load_Year_List()')
           .col-md-6
             .col-sm-6
               .col-md-3  
@@ -86,7 +86,7 @@ block resto
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Error De Filtros
         #modal-body.modal-body
-          p No seleccione el mismo año dos veces 
+          p#messageError
         .modal-footer
           button.btn.btn-primary(type='button', onclick='hidenmodal()') Aceptar
   //canvas para sacar imagen svg para pdf toca tner segun la cantidad de imagens a sacar
