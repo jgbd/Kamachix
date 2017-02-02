@@ -86,6 +86,7 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
 
         $("#tableres").append('</tr>');
        }
+       //cambio
       //$("input[name=graph1]").click(function () {
       $("#graph1").change(function () {
         if($(this).val() === '1'){
