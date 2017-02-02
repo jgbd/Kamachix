@@ -124,7 +124,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
     type: "GET", //peticion
     url: "consultaAcreditacion", //la url del que realizara la consulta
     dataType : 'json',
-    data:{c:2},//señala a consulta general de programas acreditados activos en public
+    data:{c:2,flag:1},//señala a consulta general de programas acreditados activos en public
     success : function(json) {
       //var now = new Date();
       $("#anhoactual").html('<h6>Programas Acreditados en Alta Calidad al año '+now.getFullYear()+'</h>');
@@ -177,7 +177,7 @@ function Load_Not_Accredited(){//carga tabla-menú de programas no acreditados a
     type: "GET",
     url: "consultaAcreditacion",
     dataType : 'json',
-    data:{c:3},//señala a consulta excepcion de programas no acreditados
+    data:{c:3,flag:1},//señala a consulta excepcion de programas no acreditados
     success : function(json) {
       $("#anhoactual2").html('<h6>Programas No Acreditados al año '+now.getFullYear()+'</h>');
       for (var j = json.rowCount-1; j >=0; j--) {
@@ -361,7 +361,7 @@ function Ins_KPI(anho){//ingresa nuevo kpi en función de primer programa acredi
   $.ajax({
       type: "get",
       url: "actualizaKPIAcreditacion",
-      data : {c:1,'anho': anho},//señala a inserción en datawarehouse
+      data : {c:1,'anho': anho, 'flag': 1},//señala a inserción en datawarehouse
       dataType : 'json',
       success : function(json) {
         Load_Start();
@@ -375,7 +375,7 @@ function Upd_KPI(anho){//actualiza kpi en presencia de más de un programa acred
   $.ajax({
       type: "get",
       url: "actualizaKPIAcreditacion", //la url del que realizara la consulta
-      data : {c:2,'anho': anho},////señala a actualización en datawarehouse
+      data : {c:2,'anho': anho, 'flag': 1},////señala a actualización en datawarehouse
       dataType : 'json',
       success : function(json) {
         Load_Start();

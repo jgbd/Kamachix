@@ -12,14 +12,14 @@ var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
     //consulta basica sin condiciones
-    var beforedata=[req.query.anho.substr(6, 9)];
+    var beforedata=[req.query.anho.substr(6, 9),req.query.flag];
     console.log(beforedata);
     if(req.query.c == 1)
         var sql ='INSERT INTO "Datawarehouse"."KPI_Accreditation" VALUES '+
-            '($1,(select count(*) from acreditacion_alta_calidad WHERE activo=true),(select count(*) from programas),ROUND((select count(*) from acreditacion_alta_calidad where activo=true)*100/(select count(*) from programas),0))';
+            '($1,(select count(*) from acreditacion_alta_calidad WHERE activo=true),(select count(*) from programas WHERE nivel=$2 AND estado=true),ROUND((select count(*) from acreditacion_alta_calidad where activo=true)*100/(select count(*) from programas WHERE nivel=$2 AND estado=true),0))';
     else if (req.query.c == 2)
         var sql ='UPDATE "Datawarehouse"."KPI_Accreditation" SET '+
-            'acreditados=(select count(*) from "public"."acreditacion_alta_calidad" WHERE activo=true),programas=(select count(*) from "public"."programas"),razon=(ROUND((select count(*) from acreditacion_alta_calidad where activo=true)*100/(select count(*) from programas),0))'+
+            'acreditados=(select count(*) from acreditacion_alta_calidad WHERE activo=true),programas=(select count(*) from programas WHERE nivel=$2 AND estado=true),razon=(ROUND((select count(*) from acreditacion_alta_calidad where activo=true)*100/(select count(*) from programas WHERE nivel=$2 AND estado=true),0))'+
             'WHERE "Anho"=$1';
     else return console.log("error");
     pool.connect(function(err, client, done) {

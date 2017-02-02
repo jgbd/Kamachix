@@ -14,10 +14,14 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
   if(req.query.c == 1)
     var sql ='SELECT al."Anho", al."acreditados", al."programas", al."razon" FROM "Datawarehouse"."KPI_Accreditation" al ORDER BY al."Anho"';
-  else if (req.query.c == 2)
-    var sql = 'SELECT DISTINCT p."abreviatura",aac."inicioacreditacion",aac."periodo",(aac."inicioacreditacion"+aac."periodo"*365) as finacreditacion, aac."programa" FROM "programas" p JOIN "acreditacion_alta_calidad" aac ON codigo=programa WHERE aac.activo=true ORDER BY finacreditacion DESC';
-  else if (req.query.c == 3)
-    var sql = 'SELECT DISTINCT p."codigo",p."abreviatura" FROM "programas" p EXCEPT SELECT DISTINCT aac."programa",p."abreviatura" FROM "programas" p JOIN "acreditacion_alta_calidad" aac ON codigo=programa WHERE activo=true ORDER BY abreviatura DESC';
+  else if (req.query.c == 2){
+    var beforedata=[req.query.flag];
+    var sql = 'SELECT DISTINCT p.abreviatura,aac.inicioacreditacion,aac.periodo,(aac.inicioacreditacion+aac.periodo*365) as finacreditacion, aac.programa FROM programas p JOIN acreditacion_alta_calidad aac ON codigo=programa WHERE aac.activo=true AND p.nivel=$1 AND p.estado=true ORDER BY finacreditacion DESC';
+  }
+  else if (req.query.c == 3){
+    var beforedata=[req.query.flag];
+    var sql = 'SELECT DISTINCT p.codigo,p.abreviatura FROM programas p WHERE p.nivel=$1 AND p.estado=true EXCEPT SELECT DISTINCT aac.programa,p.abreviatura FROM programas p JOIN acreditacion_alta_calidad aac ON codigo=programa WHERE activo=true ORDER BY abreviatura DESC';
+  }
   else if (req.query.c == 4){
     var beforedata=[req.query.anho.substr(6, 9)];
     var sql='SELECT * FROM "Datawarehouse"."KPI_Accreditation" WHERE "Anho"=$1';
