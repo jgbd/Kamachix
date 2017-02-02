@@ -1,4 +1,4 @@
-$(document).ready(function(){
+﻿$(document).ready(function(){
   load_start(); //carga inicial de la pagina
   loadlstsprogram();
   //solo queda el valor de Seleccionar periodo en las listas
@@ -6,7 +6,8 @@ $(document).ready(function(){
   $("#lstperiod2").append('<option value="0" selected>Seleccionar Año</option>');
 
 
-  //click para cargar los filtros
+  //click para cargar los filtros aqui hice cambios
+// otro cambio
   $("#frmfilter").submit(function(event){
     load_filters();
     event.preventDefault();
