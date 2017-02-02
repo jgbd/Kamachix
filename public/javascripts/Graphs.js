@@ -482,6 +482,13 @@ function pieGraph(data, contentName, namePart, valuePart){
     var chart = AmCharts.makeChart( contentName, {
       "type": "pie",
       "theme": "chalk",
+      "legend": {
+        "equalWidths": true,
+        "periodValueText": "[[value]]",
+        "position": "bottom",
+        "valueAlign": "left",
+        "valueWidth": 5
+      },
       "dataProvider": data,
       "valueField": valuePart,
       "titleField": namePart,
