@@ -21,61 +21,55 @@ router.post('/',function(req, res, next){
           console.log(error);
       }
       else {
-        var regex = new RegExp("\"", "g");
-        var arrdata = datos.toString().replace(/\t/g, ",").replace(regex,"'").split('\n');
+        var regex = new RegExp(",", "g");
+        var regex2 = new RegExp(";", "g");
+        var arrdata = datos.toString().replace(regex,".").replace(regex2,",").replace(/\r/g,"").split('\n');
         arrdata.splice(0,1);
+        arrdata.splice(arrdata.length-1,2);
         console.log(arrdata);
         var sql = 'INSERT INTO "Datawarehouse"."KPI_Satisfaction_level" VALUES ';
         for (var i = 0; i < arrdata.length; i++) {
-          sql=sql+"("+arrdata[i]+"),";
+          var cam = arrdata[i].split(',');
           console.log(arrdata[i].length);
-          if(i===arrdata.length-1 || arrdata[i].length===0){
-            sql=sql+"("+arrdata[i]+")";
+          if(i===arrdata.length-1){
+            sql=sql+"('"+cam[0]+"','"+cam[1]+"',"+cam[2]+")";
+          }
+          else{
+            sql=sql+"('"+cam[0]+"','"+cam[1]+"',"+cam[2]+"),";
           }
         }
         console.log(sql);
-        // pool.connect(function(err, client, done) {
-        //   if(err) {
-        //     return console.error('error fetching client from pool', err);
-        //   }
-        //   //Aqui es donde se realiza el query de la DB
-        //   //resive el sql, el arreglo siguiente contiene los parametros que van en el sql  preparado
-        //   //la funcion anonima recive la variable de err que controla el error  y la result
-        //   //que es la que controla el resultado de la consulta el cual es un JSON
-        //   client.query(sql, function(err, result) {
-        //     done();
-        //     if(err) {
-        //       return console.error('error running query', err);
-        //     }
-        //     console.log(result);
-        //     //res.json(result);
-        //   });
-        // });
-        // //se ejecuta si el usuario o password no son correctas y no se puede conectar al SGBD
-        // pool.on('error', function (err, client) {
-        //   console.error('idle client error', err.message, err.stack)
-        // });
+        pool.connect(function(err, client, done) {
+          if(err) {
+            return console.error('error fetching client from pool', err);
+          }
+          //Aqui es donde se realiza el query de la DB
+          //resive el sql, el arreglo siguiente contiene los parametros que van en el sql  preparado
+          //la funcion anonima recive la variable de err que controla el error  y la result
+          //que es la que controla el resultado de la consulta el cual es un JSON
+          client.query(sql, function(err, result) {
+            done();
+            var count;
+            if(err) {
+              count=0;
+              //return console.error('error running query', err);
+            }else {
+              count = result.rowCount;
+            }            
+            var re = {
+              "upload" : upload,
+              "count" : count
+            };
+            res.json(re);
+          });
+        });
+        //se ejecuta si el usuario o password no son correctas y no se puede conectar al SGBD
+        pool.on('error', function (err, client) {
+          console.error('idle client error', err.message, err.stack)
+        });
       }
     });
-
-    // pool.connect(function(err, client, done) {
-    //   if(err) {
-    //     return console.error('error fetching client from pool', err);
-    //   }
-    //   var stream = client.query(copyFrom('COPY "Datawarehouse"."KPI_Satisfaction_level" FROM STDIN'));
-    //   console.log(stream);
-    //   var fileStream = fs.createReadStream('../files/'+filename);
-    //   fileStream.on('error', done);
-    //   stream.on('error', done);
-    //   stream.on('end', done);
-    //   fileStream.pipe(stream);
-    //
-    //
-    // });
-  //   var sql= 'COPY "Datawarehouse"."KPI_Satisfaction_level" ("Programa", "Nivel", "Anho") FROM'+
-  //   console.log('Listo para copy a db');
-
   }
-  res.send(upload);
+
 });
 module.exports = router;

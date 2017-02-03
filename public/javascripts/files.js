@@ -36,25 +36,30 @@ function loadfile(url, name){
      processData: false,  // tell jQuery not to process the data
      contentType: false,  // tell jQuery not to set contentType
      success : function(data) {
-       if(data==='0') {
-         $('#mesage').css('color','red');
+       alert(JSON.stringify(data));
+       if(data.upload==='0') {
          $('#mesage span').addClass('glyphicon glyphicon-alert')
          $('#mesage p').html('Seleccione un archivo!!');
        }
-       else if(data==='1'){
-         $('#mesage').css('color','red');
+       else if(data.upload==='1'){
          $('#mesage span').addClass('glyphicon glyphicon-alert')
          $('#mesage p').html('Formato de archivo no valido!!');
        }
-       else if(data==='2'){
-         $('#mesage').css('color','red');
+       else if(data.upload==='2'){
          $('#mesage span').addClass('glyphicon glyphicon-alert')
          $('#mesage p').html('Error!!');
        }
        else {
-         $('#mesage').css('color','green');
-         $('#mesage span').addClass('glyphicon glyphicon-ok')
-         $('#mesage p').html('Carga Exitosa!!');
+         if(data.count!='0'){
+           $('#mesage').css('color','green');
+           $('#mesage span').removeClass('glyphicon glyphicon-alert')
+           $('#mesage span').removeClass('glyphicon glyphicon-remove')
+           $('#mesage span').addClass('glyphicon glyphicon-ok')
+           $('#mesage p').html('Carga Exitosa!!');
+         }else{
+           $('#mesage span').addClass('glyphicon glyphicon-remove')
+           $('#mesage p').html('Error Cargar Datos!!');
+         }
        }
      }
   });

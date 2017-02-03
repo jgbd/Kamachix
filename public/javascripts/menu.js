@@ -4,7 +4,6 @@ $(document).ready(function(){
   //se ejecuta al submit de el boton para cargar el archivo de informacion satisfaccion
   $('#uploadformsatisfaccion').submit(function(event){
     var cx = comprueba_extension($('#filesatisfaccion').val());
-    $('#mesage').css('color','red');
     if(cx===0) {
       $('#mesage span').addClass('glyphicon glyphicon-alert');
       $('#mesage p').html('Seleccione un archivo!!');
@@ -14,8 +13,6 @@ $(document).ready(function(){
       $('#mesage p').html('Formato de archivo no valido!!');
     }
     else{
-      $('#mesage').html('');
-      $('#mesage').css('color','green');
       loadfile('/uploadfilesatisfaccion','filesatisfaccion');
     }
     event.preventDefault();
@@ -24,7 +21,6 @@ $(document).ready(function(){
   //se ejecuta al submit de el boton para cargar el archivo de informacion cohorte
   $('#uploadformcohorte').submit(function(event){
     var cx = comprueba_extension($('#filescohorte').val());
-    $('#mesage').css('color','red');
     if(cx===0) {
       $('#mesage span').addClass('glyphicon glyphicon-alert');
       $('#mesage p').html('Seleccione un archivo!!');
@@ -34,7 +30,6 @@ $(document).ready(function(){
       $('#mesage p').html('Formato de archivo no valido!!');
     }
     else{
-      $('#mesage').css('color','green');
       loadfile('/uploadfilecohorte','filescohorte');
     }
     event.preventDefault();
@@ -43,7 +38,6 @@ $(document).ready(function(){
   //se ejecuta al submit de el boton para cargar el archivo de informacion periodo
   $('#uploadformperiodo').submit(function(event){
     var cx = comprueba_extension($('#filesperiodo').val());
-    $('#mesage').css('color','red');
     if(cx===0) {
       $('#mesage span').addClass('glyphicon glyphicon-alert');
       $('#mesage p').html('Seleccione un archivo!!');
@@ -53,7 +47,6 @@ $(document).ready(function(){
       $('#mesage p').html('Formato de archivo no valido!!');
     }
     else{
-      $('#mesage').css('color','green');
       loadfile('/uploadfileperiodo','filesperiodo');
     }
     event.preventDefault();
@@ -193,12 +186,15 @@ function pdf(){
 
 function openmodaluploadsatisfaccion(){
   $("#modaluploadsatisfaccion").modal('show');
+  $('#mesage').html("");
 }
 
 function openmodaluploadcohorte(){
   $("#modaluploadcohorte").modal('show');
+  $('#mesage').html("");
 }
 
 function openmodaluploadperiodo(){
   $("#modaluploadperiodo").modal('show');
+  $('#mesage').html("");
 }
