@@ -207,3 +207,13 @@ function modalupdateformacionMA(){
   $("#modalupdateformacionMA").modal('show');
   $('#mesage').html("");
 }
+
+function modalupdateformacionES(){
+  $("#modalupdateformacionES").modal('show');
+  $('#mesage').html("");
+}
+
+function modalupdateformacionPR(){
+  $("#modalupdateformacionPR").modal('show');
+  $('#mesage').html("");
+}

@@ -154,6 +154,86 @@ block content
           div#mesage(style='color:green;')
             span
             p
+  
+  //modalupdateformacionES
+  #modalupdateformacionES.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Actualizacion de Datos Docentes Con Titulo de Especialista
+        #modal-body.modal-body
+          form(id="frm3")            
+              label
+                | Cantidad de profesores tiempo completo
+                br
+                input#tc3.form-control(type='number', name='tc3',max='99999')
+              br
+              br
+              label
+                | Cantidad de profesores hora catedra
+                br 
+                input#hc3.form-control(type='number', name='hc3',max='99999') 
+              br
+              br
+              label
+                | Cantidad de profesores tiempo ocasional 
+                br
+                input#to3.form-control(type='number', name='to3',max='99999') 
+              br
+              br 
+              label
+                | Año       
+                select#lst_Anio3.form-control
+                  p#filter!=dat 
+              p#dato
+              br              
+              input(type='submit' value='Actualizar' class='btn btn-info' name="btncal1" id="btncal1")      
+          br
+          div#mesage(style='color:green;')
+            span
+            p
+
+  //modalupdateformacionPR
+  #modalupdateformacionPR.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Actualizacion de Datos Docentes Con Titulo de Pregrado
+        #modal-body.modal-body
+          form(id="frm4")            
+              label
+                | Cantidad de profesores tiempo completo
+                br
+                input#tc4.form-control(type='number', name='tc4',max='99999')
+              br
+              br
+              label
+                | Cantidad de profesores hora catedra
+                br 
+                input#hc4.form-control(type='number', name='hc4',max='99999') 
+              br
+              br
+              label
+                | Cantidad de profesores tiempo ocasional 
+                br
+                input#to4.form-control(type='number', name='to4',max='99999') 
+              br
+              br 
+              label
+                | Año       
+                select#lst_Anio4.form-control
+                  p#filter!=dat 
+              p#dato
+              br              
+              input(type='submit' value='Actualizar' class='btn btn-info' name="btncal1" id="btncal1")      
+          br
+          div#mesage(style='color:green;')
+            span
+            p
   //contiene el head y el menu con los nombres de los indicadores 
   center.col-md-12
     .col-md-12
@@ -211,11 +291,11 @@ block content
                              | Magister.
                          li.divider
                          li
-                           a(href='update_formacionES') 
+                           a(href='#' onclick='modalupdateformacionES()') 
                              | Especialista.
                          li.divider
                          li
-                           a(href='update_formacionPR') 
+                           a(href='#' onclick='modalupdateformacionPR()') 
                              | Profesional.        
                  li
                   a(href="javascript:getPDF()") 
