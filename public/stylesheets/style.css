@@ -158,3 +158,10 @@ img{
   width: 90%;
   margin-left: 5%;
  }
+
+.vinculoFormato{
+  text-align: left;
+  color: blue;
+  text-decoration: none;
+  
+}
