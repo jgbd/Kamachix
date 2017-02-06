@@ -45,7 +45,7 @@ $(document).ready(function(){
        var r2="";
        var conta = json.rowCount;
 
-       for(var i = conta-3 ; i<conta; i++){
+       for(var i = 0 ; i<3; i++){
          r = r+"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
          "</label></td><td><label id='tc"+i+"'>"+json.rows[i].cant_docentes_tc+"</label>"+
          "</label></td><td><label id='hc"+i+"'>"+json.rows[i].cant_docentes_hc+"</label>"+

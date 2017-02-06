@@ -143,7 +143,7 @@ $(document).ready(function(){
        for(var j = 0 ; j<json.rowCount; j++){
          r2 = r2+"<option value='"+json.rows[j].anio+"'>"+ json.rows[j].anio+"</option> ";
        }
-       $("#lst_Anio").append(r2);
+       $("#lst_Anio5").append(r2);
       }
    });
   }
@@ -154,7 +154,7 @@ $(document).ready(function(){
     //se coloca los datos del form en el formato adecuado para enviar al server
     var formData = {
           //aqui se encriptan en MD5 antes de enviar
-          'anio': $('#lst_Anio').val()
+          'anio': $('#lst_Anio5').val()
         };
     //el metodo ajax para consulta asyncronica
     $.ajax({
@@ -223,18 +223,18 @@ $(document).ready(function(){
         });
 
        //
-       columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);rs
+       columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
        // Cambio de graficas de pastel
       $("#graph2").change(function () {
         if($(this).val() === '1'){
-           pieGraph(arra, divgraph2, "nivel", "cantidad");
+           pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
         }
         else{
-           pieGraph3D(arra, divgraph2, "nivel", "cantidad");
+           pieGraph3D(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
         }
       });
 
-       pieGraph(arra, divgraph2, "nivel", "cantidad");
+       pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
 
        if(doctor>100){
          doctor=100;
