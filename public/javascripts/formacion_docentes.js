@@ -99,13 +99,13 @@ $(document).ready(function(){
         // Cambio de graficas de pastel
       $("#graph2").change(function () {
         if($(this).val() === '1'){
-           pieGraph(arra, divgraph2, "nivel", "cantidad");
+           pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
         }
         else{
-           pieGraph3D(arra, divgraph2, "nivel", "cantidad");
+           pieGraph3D(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
         }
       });
-       pieGraph(arra, "divgraph2", "nivel", "cantidad");
+       pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
        if(doctor>100){
          doctor=100;
          gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
