@@ -198,3 +198,12 @@ function openmodaluploadperiodo(){
   $("#modaluploadperiodo").modal('show');
   $('#mesage').html("");
 }
+function modalupdateformacionDO(){
+  $("#modalupdateformacionDO").modal('show');
+  $('#mesage').html("");
+}
+
+function modalupdateformacionMA(){
+  $("#modalupdateformacionMA").modal('show');
+  $('#mesage').html("");
+}

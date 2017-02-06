@@ -7,6 +7,10 @@ $(document).ready(function (){
     }
     
     $("#lst_Anio").append(r2);
+    $("#lst_Anio2").append(r2);
+    $("#lst_Anio3").append(r2);
+    $("#lst_Anio4").append(r2);
+
 
     //zona de eventos
 
@@ -97,15 +101,15 @@ $(document).ready(function (){
     //formulario de actulizacion de magister
     $("#frm2").submit(function (event){
 
-        var aniojs = $('#lst_Anio').val().toString(); // obtener el año actual
+        var aniojs = $('#lst_Anio2').val().toString(); // obtener el año actual
         var formData;
 
         //alert(ano.toString());
         formData = {
           //se toman los dos años seleccionados
-          'cantc': parseInt($("#tc").val()),
-          'canhc': parseInt($("#hc").val()),
-          'canto': parseInt($("#to").val()),
+          'cantc': parseInt($("#tc2").val()),
+          'canhc': parseInt($("#hc2").val()),
+          'canto': parseInt($("#to2").val()),
           'c':1,
           'nom':'Magister',
           'anio':aniojs
@@ -175,10 +179,10 @@ $(document).ready(function (){
     //formulario de actulizacion de especialistas
     $("#frm3").submit(function (event){
 
-        var aniojs = $('#lst_Anio').val().toString(); // obtener el año actual
-        var tiempoc= parseInt($("#tc").val());
-        var horac=parseInt($("#hc").val());
-        var tiempoo=parseInt($("#to").val());
+        var aniojs = $('#lst_Anio3').val().toString(); // obtener el año actual
+        var tiempoc= parseInt($("#tc3").val());
+        var horac=parseInt($("#hc3").val());
+        var tiempoo=parseInt($("#to3").val());
         var formData;
 
         //alert(ano.toString());
@@ -261,7 +265,7 @@ $(document).ready(function (){
     //ormulario de actulizacion de profesionales
     $("#frm4").submit(function (event){
 
-        var aniojs = $('#lst_Anio').val().toString(); // obtener el año actual
+        var aniojs = $('#lst_Anio4').val().toString(); // obtener el año actual
         var formData;
 
         //alert(ano.toString());

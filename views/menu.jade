@@ -19,6 +19,7 @@ block scripts
   script(src='https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js')
   script(type='text/javascript', src='/javascripts/html2canvas.js')
   script(type='text/javascript', src='/javascripts/files.js')
+  script(src='/javascripts/update_formacion_docentes.js')
   script(type='text/javascript', src='/javascripts/menu.js')
   block scriptpage
 block content
@@ -73,6 +74,86 @@ block content
           div#mesage(style='color:red;')
             span
             p
+  
+  //modalupdateformacionDO
+  #modalupdateformacionDO.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Actualizacion de Datos Docentes con Titulo de Doctor.
+        #modal-body.modal-body
+          form(id="frm1")            
+              label
+                | Cantidad de profesores tiempo completo
+                br
+                input#tc.form-control(type='number', name='tc',max='99999')
+              br
+              br
+              label
+                | Cantidad de profesores hora catedra
+                br 
+                input#hc.form-control(type='number', name='hc',max='99999') 
+              br
+              br
+              label
+                | Cantidad de profesores tiempo ocasional 
+                br
+                input#to.form-control(type='number', name='to',max='99999') 
+              br
+              br
+              label
+                | Año       
+                select#lst_Anio.form-control
+                  p#filter!=dat 
+              p#dato  
+              br        
+              input(type='submit' value='Actualizar' class='btn btn-info' name="btncal1" id="btncal1")   
+          br
+          div#mesage(style='color:green;')
+            span
+            p
+  
+  //modalupdateformacionMA
+  #modalupdateformacionMA.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Actualizacion de Datos Docentes Con Titulo de Magister
+        #modal-body.modal-body
+          form(id="frm2")            
+              label
+                | Cantidad de profesores tiempo completo
+                br
+                input#tc2.form-control(type='number', name='tc2',max='99999')
+              br
+              br
+              label
+                | Cantidad de profesores hora catedra
+                br 
+                input#hc2.form-control(type='number', name='hc2',max='99999') 
+              br
+              br
+              label
+                | Cantidad de profesores tiempo ocasional 
+                br
+                input#to2.form-control(type='number', name='to2',max='99999') 
+              br
+              br 
+              label
+                | Año       
+                select#lst_Anio2.form-control
+                  p#filter!=dat 
+              p#dato
+              br              
+              input(type='submit' value='Actualizar' class='btn btn-info' name="btncal1" id="btncal1")      
+          br
+          div#mesage(style='color:green;')
+            span
+            p
   //contiene el head y el menu con los nombres de los indicadores 
   center.col-md-12
     .col-md-12
@@ -122,11 +203,11 @@ block content
                          | Actualizacion Nivel de Formacion Docentes 
                        ul.dropdown-menu
                          li
-                           a(href='update_formacionDO') 
+                           a(href='#' onclick='modalupdateformacionDO()') 
                              | Doctor.
                          li.divider
                          li
-                           a(href='update_formacionMA') 
+                           a(href='#' onclick='modalupdateformacionMA()') 
                              | Magister.
                          li.divider
                          li
