@@ -46,17 +46,23 @@ var consultationstudentsperteacher = require('./routes/consultaDocentesTC');
 var insertionstudentsperteacher = require('./routes/actualizaDocentesTC');
 var updatekpistudentsperteacher = require('./routes/actualizaKPIDocentesTC');
 
-//datos oscar comentarios
+//para controlar todo lo del KPI del nivel de formacion docentes
 var formacion = require('./routes/formacion');
+var filterFormacionDocente = require('./routes/consultaFormacion');
+var consulta_update = require('./routes/consultas_update_formacion');
+
+//para controlar todo lo del KPI de relacion docentes tiempo completo respecto a hora catedra
 var relacionTCHC = require('./routes/relacion_docentes');
 var filterTCHC = require('./routes/consultaTCHC');
-var filterFormacionDocente = require('./routes/consultaFormacion');
-var update_formacionDO=require('./routes/update_formacionDO');
+var consulta_update_relacionTCHC = require('./routes/consulta_update_relacionTCHC');
+
+
+/*var update_formacionDO=require('./routes/update_formacionDO');
 var update_formacionMA=require('./routes/update_formacionMA');
 var update_formacionES=require('./routes/update_formacionES');
-var update_formacionPR=require('./routes/update_formacionPR');
-var consulta_update = require('./routes/consultas_update_formacion');
-var consulta_update_relacionTCHC = require('./routes/consulta_update_relacionTCHC');
+var update_formacionPR=require('./routes/update_formacionPR');*/
+
+
 
 //aqui se crea el framework de express
 var app = express();
@@ -120,16 +126,16 @@ app.use('/actualizaDocentesTC',insertionstudentsperteacher);
 app.use('/actualizaKPIDocentesTC',updatekpistudentsperteacher);
 
 //datos oscar
-app.use('/formacion',formacion);
-app.use('/relacion_docentes',relacionTCHC);
-app.use('/consultaTCHC',filterTCHC);
-app.use('/consultaFormacion',filterFormacionDocente);
-app.use('/update_formacionDO',update_formacionDO);
+app.use('/formacion',formacion); //visualizacion del KPI nivel de formacion
+app.use('/relacion_docentes',relacionTCHC);// visualizacion del KPI relacion docentes
+app.use('/consultaTCHC',filterTCHC);// consulta de filtro del KPI relacion docentes
+app.use('/consultaFormacion',filterFormacionDocente);// consulta filtros del KPI nivel de formacion docentes
+/*app.use('/update_formacionDO',update_formacionDO);
 app.use('/update_formacionMA',update_formacionMA);
 app.use('/update_formacionES',update_formacionES);
-app.use('/update_formacionPR',update_formacionPR);
-app.use('/consultas_update_formacion',consulta_update);
-app.use('/consulta_update_relacionTCHC',consulta_update_relacionTCHC);
+app.use('/update_formacionPR',update_formacionPR);*/
+app.use('/consultas_update_formacion',consulta_update);// consultas de actualizacion del KPI nivel de formacion docentes
+app.use('/consulta_update_relacionTCHC',consulta_update_relacionTCHC); // consultas de actualizacion del KPI relacion docentes
 
 //upload
 app.use('/uploadfilesatisfaccion',uploadfilesatisfaccion);

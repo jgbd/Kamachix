@@ -38,15 +38,7 @@ router.post('/', function(req, res, next) {
     console.log(anio);
 
   }
-  
-  else if(req.body.d == 3){
     
-    var sql='UPDATE "Datawarehouse".relacion_docentes_kpi SET cant_docentes_tc = ( select sum(t_completo)  from "Datawarehouse".formacion_kpi where anio=$1),'+
-    'cant_docentes_hc = ( select sum(hora_catedra)  from "Datawarehouse".formacion_kpi where anio=$1),'+
-    'relacion_docentes =  (select (sum(t_completo) *100) / sum(hora_catedra)  from "Datawarehouse".formacion_kpi where anio=$1) WHERE anio=$1';
-    arre = [anio];
-    console.log('actualizando yeahhhhhh');
-  }
 
   else return console.log("error");
   //aquui se crea la conexion a DB
