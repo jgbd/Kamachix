@@ -52,13 +52,13 @@ $(document).ready(function (){
            data:formData,
            dataType : 'json',
            //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
-           success : function(json) {
-             alert('Actualizacion realizada correctamente');
-
+           success : function(json) {             
+              
            }
 
         });        
-       
+        alert('Actualizacion realizada correctamente');
+
 
 
     });
@@ -101,12 +101,12 @@ $(document).ready(function (){
            dataType : 'json',
            //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
            success : function(json) {
-             alert('Actualizacion realizada correctamente');
+             
 
            }
 
         });
-
+        alert('Actualizacion realizada correctamente');
         
     });
 
@@ -152,12 +152,12 @@ $(document).ready(function (){
           dataType : 'json',
           //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
           success : function(json) {
-            alert('Actualizacion realizada correctamente');
+            
 
           }
         });
 
-       
+       alert('Actualizacion realizada correctamente');
 
     });
     //ormulario de actulizacion de profesionales
@@ -198,12 +198,12 @@ $(document).ready(function (){
            dataType : 'json',
            //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
            success : function(json) {
-             alert('Actualizacion realizada correctamente');
+             
 
            }
 
         });
-        
+        alert('Actualizacion realizada correctamente');
 
     });
     
