@@ -23,6 +23,24 @@ block scripts
   script(type='text/javascript', src='/javascripts/menu.js')
   block scriptpage
 block content
+  //modal para enviar reporte por correo 
+  #modaluploadreport.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Enviar Reporte.
+        #modal-body.modal-body
+          form(class='form-inline' ref='uploadformreport' id='uploadformreport' action='/uploadfilereport', method='POST', enctype='multipart/form-data')
+            .form-group
+              label Asunto:
+              input.file(type='text', name='txtsubject', id='txtsubject')
+              br
+              br
+              input.file(type='file', name='archivo', id='filesreport')
+            br
+            input(type='submit', value='Enviar' class='btn btn-primary')
   //modaluploadperiodo
   #modaluploadperiodo.modal.fade.bd-example-modal-lg
     .modal-dialog
@@ -308,7 +326,7 @@ block content
                          | Descargar Formatos
                      li.divider
                      li
-                       a(href='#')
+                       a(href='#' onclick='openmodalsendreport()')
                          | Enviar Reporte
              li.dropdown
                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')

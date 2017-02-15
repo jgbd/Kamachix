@@ -184,6 +184,11 @@ $(document).ready(function(){
 //   // });
 // }
 
+
+function openmodalsendreport(){
+  $("#modaluploadreport").modal('show');
+}
+
 function openmodaluploadsatisfaccion(){
   $("#modaluploadsatisfaccion").modal('show');
   $('#mesage').html("");
