@@ -12,12 +12,12 @@ block scripts
   script(src="/javascripts/amcharts/gauge.js")
   script(src="/javascripts/amcharts/themes/light.js")
   script(type='text/javascript', src='/javascripts/Graphs.js')
-  script(type='text/javascript', src='http://canvg.github.io/canvg/rgbcolor.js')
-  script(type='text/javascript', src='http://canvg.github.io/canvg/StackBlur.js')
-  script(type='text/javascript', src='http://canvg.github.io/canvg/canvg.js')
-  script(type='text/javascript', src='/javascripts/jspdf.min.js')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js')
-  script(type='text/javascript', src='/javascripts/html2canvas.js')
+  //- script(type='text/javascript', src='http://canvg.github.io/canvg/rgbcolor.js')
+  //- script(type='text/javascript', src='http://canvg.github.io/canvg/StackBlur.js')
+  //- script(type='text/javascript', src='http://canvg.github.io/canvg/canvg.js')
+  //- script(type='text/javascript', src='/javascripts/jspdf.min.js')
+  //- script(src='https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js')
+  //- script(type='text/javascript', src='/javascripts/html2canvas.js')
   script(type='text/javascript', src='/javascripts/files.js')
   script(src='/javascripts/update_formacion_docentes.js')
   script(type='text/javascript', src='/javascripts/menu.js')
@@ -299,9 +299,17 @@ block content
                          li
                            a(href='#' onclick='modalupdateformacionPR()') 
                              | Profesional.        
-                 li
-                  a(href="javascript:getPDF()") 
-                    |Generar Reportes.
+                 li.dropdown-submenu
+                   a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                     | Reportes
+                   ul.dropdown-menu
+                     li
+                       a(href='#')
+                         | Descargar Formatos
+                     li.divider
+                     li
+                       a(href='#')
+                         | Enviar Reporte
              li.dropdown
                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')
                  | Indicadores Academicos 
