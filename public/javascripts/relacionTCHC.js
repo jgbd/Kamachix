@@ -64,7 +64,7 @@ $(document).ready(function(){
        $("#datBody").append(r);
 
        // titulo
-       tittle="Relacion Docentes de los ultimos 3 años";
+       tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC de los ultimos 3 años";
        $("#titulo").append(tittle);
 
        //arreglo para la grafica de la division 4 con la relacion de docentes
@@ -155,19 +155,19 @@ $(document).ready(function(){
        $("#graph3").change(function () {
 
           if($(this).val() === '1'){
-            pieGraph(arra, divgraph3, "nivel", "cantidad");
+            pieGraph(arra, divgraph3, "nivel", "cantidad","Relacion docentes");
           }
           else if($(this).val() === '2'){
-            pieGraph3D(arra, divgraph3, "nivel", "cantidad");
+            pieGraph3D(arra, divgraph3, "nivel", "cantidad","Relacion docentes");
           }      
           else if($(this).val() === '3'){
-            lineGraph(arra,divgraph3,"Tendencia formacion docentes","anio","cantidad");
+            lineGraph(arra,divgraph3," Relacion docentes","anio","cantidad");
           }
           else if($(this).val() === '4'){
-            areaGraph(arra,divgraph3,"Tendencia formacion docentes","anio","cantidad");
+            areaGraph(arra,divgraph3," Relacion docentes","anio","cantidad");
           }
       });
-       lineGraph(arra,divgraph3,"Tendencia formacion docentes","anio","cantidad");
+       lineGraph(arra,divgraph3," Relacion docentes","anio","cantidad");
      }
    });
  }
@@ -221,15 +221,15 @@ $(document).ready(function(){
        // condiciones para el titulo de las graficas
        // si en los filtros se escogio que el primer año sea mayor al segundo
        if($('#lstfilter1').val() > $('#lstfilter2').val()){
-         tittle="Relacion Docentes <br> Del año "+$('#lstfilter2').val()+" Al año "+$('#lstfilter1').val();
+         tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC <br> del Año "+$('#lstfilter2').val()+" al Año "+$('#lstfilter1').val();
        }
        // si se scogio el mismo año en los dos filtros
        else if($('#lstfilter1').val() == $('#lstfilter2').val()){
-         tittle="Relacion Docentes <br> Del año "+$('#lstfilter1').val();
+         tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC <br> del Año "+$('#lstfilter1').val();
        }
        // si se escogio que el primer año sea menor al segundo año
        else {
-         tittle="Relacion Docentes <br> Del año "+$('#lstfilter1').val()+" Al año "+$('#lstfilter2').val();
+         tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC <br> del Año "+$('#lstfilter1').val()+" al Año "+$('#lstfilter2').val();
        }
 
        // se llena la tabla
@@ -324,19 +324,19 @@ $(document).ready(function(){
        $("#graph3").change(function () {
 
           if($(this).val() === '1'){
-            pieGraph(arra, divgraph3, "nivel", "cantidad");
+            pieGraph(arra, divgraph3, "nivel", "cantidad","Relacion docentes");
           }
           else if($(this).val() === '2'){
-            pieGraph3D(arra, divgraph3, "nivel", "cantidad");
+            pieGraph3D(arra, divgraph3, "nivel", "cantidad","Relacion docentes");
           }      
           else if($(this).val() === '3'){
-            lineGraph(arra,divgraph3,"Tendencia formacion docentes","anio","cantidad");
+            lineGraph(arra,divgraph3,"Relacion docentes","anio","cantidad");
           }
           else if($(this).val() === '4'){
-            areaGraph(arra,divgraph3,"Tendencia formacion docentes","anio","cantidad");
+            areaGraph(arra,divgraph3,"Relacion docentes","anio","cantidad");
           }
       });
-       lineGraph(arra,divgraph3,"Tendencia formacion docentes","anio","cantidad");
+       lineGraph(arra,divgraph3,"Relacion docentes","anio","cantidad");
 
      }
    });

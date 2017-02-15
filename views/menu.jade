@@ -311,9 +311,17 @@ block content
                    a(href='satisfacion')
                      | Satisfacción
                  li.divider
-                 li
-                   a(href='formacion')
-                     | Formacion docentes
+                 li.dropdown-submenu
+                   a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                     | Nivel de Formacion Docentes 
+                   ul.dropdown-menu
+                     li
+                      a(href='formacion')
+                        | KPI Formacion Docentes
+                     li.divider
+                     li
+                       a(href='#') 
+                         | Formacion Docentes por Programa
                  li.divider
                  li
                    a(href='relacion_docentes')
