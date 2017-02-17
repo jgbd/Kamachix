@@ -60,7 +60,7 @@ block resto
       #divgraph1.col-md-12
       .col-md-12
         select#cgdiv1
-          option(selected='', value='1') Seleccione un tipo de gráfica
+          option(selected='selected', value='0') Seleccione un tipo de gráfica
           optgroup(label='Columnas')
             option(value='1') 2D
             option(value='2') 3D
@@ -72,149 +72,149 @@ block resto
         #divgraph2.col-md-12
         .col-md-12
           select#cgdiv2
-            option(selected='', value='1') Seleccione un tipo de gráfica
+            option(selected='selected', value='0') Seleccione un tipo de gráfica
               option(value='1') Línea
               option(value='2') Area
     #divgraph3.col-md-6
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
   //modal para los infomes 
-  #modalinfo.modal.fade.bd-example-modal-lg
-    #modalinfobody.modal-content
-      #modal-bodyinfo.modal-body.table-responsive
-        button.close(type='button', data-dismiss='modal', aria-label='Close')
-          span(aria-hidden='true') ×
-        input.btn.btn-info(type ='button' value='PDF' onclick='pdf()')
-        table#tabinfo.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-          tr
-            td
-              img.drap(src='/images/escudo.png')
-            td
-              center
-                h3 SISTEMA DE GESTIÓN DE CALIDAD
-                h3
-                  b Manual de Indicador- 
-            td
-              table.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-                tr
-                  td Código: SGC-FR-04
-                tr
-                  td Página: 1 de 2
-                tr
-                  td Versión: 3
-                tr
-                  td Vigente a partir de: 21/06/2010
-        br
-        table#tabind.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-          tr
-            td(colspan='2')
-              h5(style='text-align:center') DATOS DEL INDICADOR
-          tr
-            td 1. PROCESO:
-            td 
-              | Bienestar Concertado
-          tr
-            td 2. LÍDER:
-            td Dirección de Planeación y Desarrollo
-          tr
-            td 3. OBJETIVO DEL PROCESO:
-            td
-              p
-                | Establecer el porcentaje de estudiantes que no 
-                | renuevan matricula en la institución semestralmente
-          tr
-            td 4. NOMBRE DEL INDICADOR:
-            td 
-              | Deserción Académica por Cohorte
-          tr
-            td 5. ATRIBUTO A MEDIR:
-            td
-              | Nivel de Deserción de la Universidad por Cohorte
-          tr
-            td 6. OBJETIVO DE CALIDAD AL CUAL CONTRIBUYE:
-            td
-              ul
-                li
-                  | Propiciar espacios de Bienestar a la comunidad 
-                  | Universitaria tendientes a potenciar la capacidad y 
-                  | dignidad del ser humano en todas sus dimensiones, 
-                  | respetando y reconociendo la presencia e interacción 
-                  | de la multiculturalidad y de distintas 
-                  | formas de expresión política.
-                li
-                  | Llevar políticas, programas y proyectos de bienestar
-                  | universitario hacia las extensiones, comprometiendo a 
-                  | los entes territoriales y otras instancias del Estado.
-          tr
-            td 7. TIPO DE INDICADOR:
-            td PROCESO
-          tr
-            td 8. FRECUENCIA:
-            td Semestral
-          tr
-            td 9. PERIODO DE CALCULO:
-            td Último mes antes de finalizar el semestre
-          tr
-            td 10. TENDENCIA ESPERADA:
-            td Disminución
-          tr
-            td 11. META
-            td
-              | Disminuir la deserción al 24% 
-          tr
-            td 12. OBJETIVO DEL INDICADOR:
-            td
-              |Establecer el porcentaje de estudiantes que no renuevan matricula en la institución semestralmente
-          tr
-            td 13. RANGO Y FORMA DE INTERPRETACIÓN:
-            td
-              input.form-control(type='text', value='10%', width='5')
-          tr
-            td 14. FÓRMULA:
-            td
-              | (No. de Estudiantes que se retiran en forma definitiva
-              | del Proceso de Formación Académica por cohorte/Total  de 
-              | Estudiantes Matriculados por Periodo en una cohorte)*100
-          tr
-            td 15. MANERA QUE PODÍA SER GRAFICADO:
-            td
-              | Diagrama de Bloque, señalando el
-              | porcentaje obtenido de deserción, frente a la meta.
-          tr
-            td 16. PUNTO DE REGISTRO:
-            td Aplicativo SPADIES, el cual es respaldado por el MEN.
-          tr
-            td 17. RESPONSABLE DEL CALCULO
-            td
-              | Directores de Departamento
-          tr
-            td 18. INSTRUCTIVO:
-            td
-              | Al finalizar cada semestre se aplica la fórmula y se confronta los resultados
-              | del semestre anterior con los del 
-              | semestre actual.
-        br
-        table#tabindres.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-          tr
-            td(colspan='2')
-              h5(style='text-align:center') RESULTADOS Y EVOLUCIÓN DEL INDICADOR
-          tr
-            td 19. FECHA DE CALCULO:
-            td 22 de  noviembre  de 2015
-          tr
-            td 20. RESULTADO DEL INDICADOR:
-            td 
-              #divtab(style='width: 100%; height: 40%;')
-          tr
-            td 21. CALIFICACIÓN:
-            td
-              textarea#txtcal.form-control(cols='100', rows='3')
-          tr
-            td 22. LECTURA DE LA EVOLUCIÓN DEL INDICADOR:
-            td
-              textarea#txtlec.form-control(cols='100', rows='6')
-          tr
-            td 23. EVOLUCIÓN GRÁFICA:
-            td 
-              #divg1
-              #divg2
+  //- #modalinfo.modal.fade.bd-example-modal-lg
+  //-   #modalinfobody.modal-content
+  //-     #modal-bodyinfo.modal-body.table-responsive
+  //-       button.close(type='button', data-dismiss='modal', aria-label='Close')
+  //-         span(aria-hidden='true') ×
+  //-       input.btn.btn-info(type ='button' value='PDF' onclick='pdf()')
+  //-       table#tabinfo.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
+  //-         tr
+  //-           td
+  //-             img.drap(src='/images/escudo.png')
+  //-           td
+  //-             center
+  //-               h3 SISTEMA DE GESTIÓN DE CALIDAD
+  //-               h3
+  //-                 b Manual de Indicador- 
+  //-           td
+  //-             table.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
+  //-               tr
+  //-                 td Código: SGC-FR-04
+  //-               tr
+  //-                 td Página: 1 de 2
+  //-               tr
+  //-                 td Versión: 3
+  //-               tr
+  //-                 td Vigente a partir de: 21/06/2010
+  //-       br
+  //-       table#tabind.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
+  //-         tr
+  //-           td(colspan='2')
+  //-             h5(style='text-align:center') DATOS DEL INDICADOR
+  //-         tr
+  //-           td 1. PROCESO:
+  //-           td 
+  //-             | Bienestar Concertado
+  //-         tr
+  //-           td 2. LÍDER:
+  //-           td Dirección de Planeación y Desarrollo
+  //-         tr
+  //-           td 3. OBJETIVO DEL PROCESO:
+  //-           td
+  //-             p
+  //-               | Establecer el porcentaje de estudiantes que no 
+  //-               | renuevan matricula en la institución semestralmente
+  //-         tr
+  //-           td 4. NOMBRE DEL INDICADOR:
+  //-           td 
+  //-             | Deserción Académica por Cohorte
+  //-         tr
+  //-           td 5. ATRIBUTO A MEDIR:
+  //-           td
+  //-             | Nivel de Deserción de la Universidad por Cohorte
+  //-         tr
+  //-           td 6. OBJETIVO DE CALIDAD AL CUAL CONTRIBUYE:
+  //-           td
+  //-             ul
+  //-               li
+  //-                 | Propiciar espacios de Bienestar a la comunidad 
+  //-                 | Universitaria tendientes a potenciar la capacidad y 
+  //-                 | dignidad del ser humano en todas sus dimensiones, 
+  //-                 | respetando y reconociendo la presencia e interacción 
+  //-                 | de la multiculturalidad y de distintas 
+  //-                 | formas de expresión política.
+  //-               li
+  //-                 | Llevar políticas, programas y proyectos de bienestar
+  //-                 | universitario hacia las extensiones, comprometiendo a 
+  //-                 | los entes territoriales y otras instancias del Estado.
+  //-         tr
+  //-           td 7. TIPO DE INDICADOR:
+  //-           td PROCESO
+  //-         tr
+  //-           td 8. FRECUENCIA:
+  //-           td Semestral
+  //-         tr
+  //-           td 9. PERIODO DE CALCULO:
+  //-           td Último mes antes de finalizar el semestre
+  //-         tr
+  //-           td 10. TENDENCIA ESPERADA:
+  //-           td Disminución
+  //-         tr
+  //-           td 11. META
+  //-           td
+  //-             | Disminuir la deserción al 24% 
+  //-         tr
+  //-           td 12. OBJETIVO DEL INDICADOR:
+  //-           td
+  //-             |Establecer el porcentaje de estudiantes que no renuevan matricula en la institución semestralmente
+  //-         tr
+  //-           td 13. RANGO Y FORMA DE INTERPRETACIÓN:
+  //-           td
+  //-             input.form-control(type='text', value='10%', width='5')
+  //-         tr
+  //-           td 14. FÓRMULA:
+  //-           td
+  //-             | (No. de Estudiantes que se retiran en forma definitiva
+  //-             | del Proceso de Formación Académica por cohorte/Total  de 
+  //-             | Estudiantes Matriculados por Periodo en una cohorte)*100
+  //-         tr
+  //-           td 15. MANERA QUE PODÍA SER GRAFICADO:
+  //-           td
+  //-             | Diagrama de Bloque, señalando el
+  //-             | porcentaje obtenido de deserción, frente a la meta.
+  //-         tr
+  //-           td 16. PUNTO DE REGISTRO:
+  //-           td Aplicativo SPADIES, el cual es respaldado por el MEN.
+  //-         tr
+  //-           td 17. RESPONSABLE DEL CALCULO
+  //-           td
+  //-             | Directores de Departamento
+  //-         tr
+  //-           td 18. INSTRUCTIVO:
+  //-           td
+  //-             | Al finalizar cada semestre se aplica la fórmula y se confronta los resultados
+  //-             | del semestre anterior con los del 
+  //-             | semestre actual.
+  //-       br
+  //-       table#tabindres.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
+  //-         tr
+  //-           td(colspan='2')
+  //-             h5(style='text-align:center') RESULTADOS Y EVOLUCIÓN DEL INDICADOR
+  //-         tr
+  //-           td 19. FECHA DE CALCULO:
+  //-           td 22 de  noviembre  de 2015
+  //-         tr
+  //-           td 20. RESULTADO DEL INDICADOR:
+  //-           td 
+  //-             #divtab(style='width: 100%; height: 40%;')
+  //-         tr
+  //-           td 21. CALIFICACIÓN:
+  //-           td
+  //-             textarea#txtcal.form-control(cols='100', rows='3')
+  //-         tr
+  //-           td 22. LECTURA DE LA EVOLUCIÓN DEL INDICADOR:
+  //-           td
+  //-             textarea#txtlec.form-control(cols='100', rows='6')
+  //-         tr
+  //-           td 23. EVOLUCIÓN GRÁFICA:
+  //-           td 
+  //-             #divg1
+  //-             #divg2

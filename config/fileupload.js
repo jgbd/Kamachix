@@ -14,7 +14,8 @@ function fileupload(files){
       result='1';
     }
     else{
-      file.mv('files/'+file.name,function(err){
+      var fina = file.name.replace(/\s/g, "");
+      file.mv('files/'+fina,function(err){
         if(err) result='2';
         else result='3';
       });

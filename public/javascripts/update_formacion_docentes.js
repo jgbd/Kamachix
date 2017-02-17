@@ -7,6 +7,10 @@ $(document).ready(function (){
     }
     
     $("#lst_Anio").append(r2);
+    $("#lst_Anio2").append(r2);
+    $("#lst_Anio3").append(r2);
+    $("#lst_Anio4").append(r2);
+
 
     //zona de eventos
 
@@ -48,48 +52,13 @@ $(document).ready(function (){
            data:formData,
            dataType : 'json',
            //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
-           success : function(json) {
-             alert('Actualizacion realizada correctamente')
-
+           success : function(json) {             
+              
            }
 
-        });
+        });        
+        alert('Actualizacion realizada correctamente');
 
-        // ajax para consultar si existe unregistro en la tabla relacion_docentes_kpi
-        $.ajax({
-
-           type: "POST", //el el tipo de peticion puede ser GET y POsT
-           url: "consulta_update_relacionTCHC", //la url del que realizara la consulta
-           data:formDataRela,
-           dataType : 'json',
-           //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
-           success : function(json) {
-
-
-             // si existen un registro de ese año en la tabla relacion_docentes_kpi
-             if(json.rows[0].conteo > 0){
-               // ajax para actualizar el registro con los datos de la tabla formacion_kpi
-               $.ajax({
-                type: "POST", //el el tipo de peticion puede ser GET y POsT
-                url: "consulta_update_relacionTCHC", //la url del que realizara la consulta
-                data:formDataRela3,
-                dataType : 'json',
-                //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
-                success : function(json) {
-                  //alert('registro actualizado')
-
-                  }
-
-              });
-
-
-             }
-
-
-           }
-
-       });
-       
 
 
     });
@@ -97,15 +66,15 @@ $(document).ready(function (){
     //formulario de actulizacion de magister
     $("#frm2").submit(function (event){
 
-        var aniojs = $('#lst_Anio').val().toString(); // obtener el año actual
+        var aniojs = $('#lst_Anio2').val().toString(); // obtener el año actual
         var formData;
 
         //alert(ano.toString());
         formData = {
           //se toman los dos años seleccionados
-          'cantc': parseInt($("#tc").val()),
-          'canhc': parseInt($("#hc").val()),
-          'canto': parseInt($("#to").val()),
+          'cantc': parseInt($("#tc2").val()),
+          'canhc': parseInt($("#hc2").val()),
+          'canto': parseInt($("#to2").val()),
           'c':1,
           'nom':'Magister',
           'anio':aniojs
@@ -123,7 +92,7 @@ $(document).ready(function (){
         };
 
 
-        // inserta el registro de profesores con titulo de doctor a la tabla formacion_kpi
+        // inserta el registro de profesores con titulo de magister a la tabla formacion_kpi
         $.ajax({
 
            type: "POST", //el el tipo de peticion puede ser GET y POsT
@@ -132,53 +101,22 @@ $(document).ready(function (){
            dataType : 'json',
            //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
            success : function(json) {
-             alert('Actualizacion realizada correctamente')
+             
 
            }
 
         });
-
-        // ajax para consultar si existe unregistro en la tabla relacion_docentes_kpi
-        $.ajax({
-
-           type: "POST", //el el tipo de peticion puede ser GET y POsT
-           url: "consulta_update_relacionTCHC", //la url del que realizara la consulta
-           data:formDataRela,
-           dataType : 'json',
-           //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
-           success : function(json) {
-
-
-             // si existen un registro de ese año en la tabla relacion_docentes_kpi
-             if(json.rows[0].conteo > 0){
-               // ajax para actualizar el registro con los datos de la tabla formacion_kpi
-               $.ajax({
-                type: "POST", //el el tipo de peticion puede ser GET y POsT
-                url: "consulta_update_relacionTCHC", //la url del que realizara la consulta
-                data:formDataRela3,
-                dataType : 'json',
-                //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
-                success : function(json) {
-                  //alert('registro actualizado')
-
-                  }
-
-              });
-
-
-             }
-           }
-
-       })
+        alert('Actualizacion realizada correctamente');
+        
     });
 
     //formulario de actulizacion de especialistas
     $("#frm3").submit(function (event){
 
-        var aniojs = $('#lst_Anio').val().toString(); // obtener el año actual
-        var tiempoc= parseInt($("#tc").val());
-        var horac=parseInt($("#hc").val());
-        var tiempoo=parseInt($("#to").val());
+        var aniojs = $('#lst_Anio3').val().toString(); // obtener el año actual
+        var tiempoc= parseInt($("#tc3").val());
+        var horac=parseInt($("#hc3").val());
+        var tiempoo=parseInt($("#to3").val());
         var formData;
 
         //alert(ano.toString());
@@ -214,62 +152,26 @@ $(document).ready(function (){
           dataType : 'json',
           //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
           success : function(json) {
-            alert('Actualizacion realizada correctamente')
+            
 
           }
         });
 
-        consulta_relacion();
-
-        function consulta_relacion(){
-          // ajax para consultar si existe unregistro en la tabla relacion_docentes_kpi
-          $.ajax({
-
-             type: "POST", //el el tipo de peticion puede ser GET y POsT
-             url: "consulta_update_relacionTCHC", //la url del que realizara la consulta
-             data:formDataRela,
-             dataType : 'json',
-             //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
-             success : function(json) {
-
-
-               // si existen un registro de ese año en la tabla relacion_docentes_kpi
-               if(json.rows[0].conteo > 0){
-                 // ajax para actualizar el registro con los datos de la tabla formacion_kpi
-                 $.ajax({
-                  type: "POST", //el el tipo de peticion puede ser GET y POsT
-                  url: "consulta_update_relacionTCHC", //la url del que realizara la consulta
-                  data:formDataRela3,
-                  dataType : 'json',
-                  //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
-                  success : function(json) {
-                    //alert('registro actualizado')
-
-                    }
-
-                });
-
-               }
-
-             }
-
-         })
-        }
-
+       alert('Actualizacion realizada correctamente');
 
     });
     //ormulario de actulizacion de profesionales
     $("#frm4").submit(function (event){
 
-        var aniojs = $('#lst_Anio').val().toString(); // obtener el año actual
+        var aniojs = $('#lst_Anio4').val().toString(); // obtener el año actual
         var formData;
 
         //alert(ano.toString());
         formData = {
           //se toman los dos años seleccionados
-          'cantc': parseInt($("#tc").val()),
-          'canhc': parseInt($("#hc").val()),
-          'canto': parseInt($("#to").val()),
+          'cantc': parseInt($("#tc4").val()),
+          'canhc': parseInt($("#hc4").val()),
+          'canto': parseInt($("#to4").val()),
           'c':1,
           'nom':'Profesional',
           'anio':aniojs
@@ -296,45 +198,12 @@ $(document).ready(function (){
            dataType : 'json',
            //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
            success : function(json) {
-             alert('Actualizacion realizada correctamente')
+             
 
            }
 
         });
-
-        // ajax para consultar si existe unregistro en la tabla relacion_docentes_kpi
-        $.ajax({
-
-           type: "POST", //el el tipo de peticion puede ser GET y POsT
-           url: "consulta_update_relacionTCHC", //la url del que realizara la consulta
-           data:formDataRela,
-           dataType : 'json',
-           //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
-           success : function(json) {
-
-
-             // si existen un registro de ese año en la tabla relacion_docentes_kpi
-             if(json.rows[0].conteo > 0){
-               // ajax para actualizar el registro con los datos de la tabla formacion_kpi
-               $.ajax({
-                type: "POST", //el el tipo de peticion puede ser GET y POsT
-                url: "consulta_update_relacionTCHC", //la url del que realizara la consulta
-                data:formDataRela3,
-                dataType : 'json',
-                //data:{c:1,tc:parseInt($("#doctor").val())},//datos para insertar
-                success : function(json) {
-                  //alert('registro actualizado')
-
-                }
-
-              });
-
-
-             }
-
-           }
-
-       })
+        alert('Actualizacion realizada correctamente');
 
     });
     

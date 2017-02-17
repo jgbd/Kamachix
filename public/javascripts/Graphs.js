@@ -478,10 +478,18 @@ function gaugesTwoAxesGraph(data1, data2, contentname, title){
 }
 
 //grafica de pastel
-function pieGraph(data, contentName, namePart, valuePart){
+function pieGraph(data, contentName, namePart, valuePart,title){
     var chart = AmCharts.makeChart( contentName, {
       "type": "pie",
       "theme": "chalk",
+      "titles":[{"text":title}],
+      "legend": {
+        "equalWidths": true,
+        "periodValueText": "[[value]]",
+        "position": "bottom",
+        "valueAlign": "left",
+        "valueWidth": 5
+      },
       "dataProvider": data,
       "valueField": valuePart,
       "titleField": namePart,
@@ -495,10 +503,18 @@ function pieGraph(data, contentName, namePart, valuePart){
     });
 }
 //grafica pastel 3d
-function pieGraph3D(data, contentName, namePart, valuePart){
+function pieGraph3D(data, contentName, namePart, valuePart,title){
     var chart = AmCharts.makeChart( contentName, {
       "type": "pie",
       "theme": "chalk",
+      "titles":[{"text":title}],
+      "legend": {
+        "equalWidths": true,
+        "periodValueText": "[[value]]",
+        "position": "bottom",
+        "valueAlign": "left",
+        "valueWidth": 5
+      },
       "innerRadius": "35%",
       "gradientRatio": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, 0, 0.1, 0.2, 0.1, 0, -0.2, -0.5],
       "dataProvider": data,

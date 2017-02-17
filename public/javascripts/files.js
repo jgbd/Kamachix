@@ -1,23 +1,4 @@
-$(document).ready(function(){
-  $('#uploadform').submit(function(event){
-    var cx = comprueba_extension($('#files').val());
-    $('#mesage').css('color','red');
-    if(cx===0) {
-      $('#mesage span').addClass('glyphicon glyphicon-alert');
-      $('#mesage p').html('Seleccione un archivo!!');
-    }
-    else if(cx===1) {
-      $('#mesage span').addClass('glyphicon glyphicon-alert');
-      $('#mesage p').html('Formato de archivo no valido!!');
-    }
-    else{
-      $('#mesage').css('color','green');
-      loadfile();
-    }
-    event.preventDefault();
-  });
-});
-
+//function que comprueba del lado cliente las extensiones de los archivos
 function comprueba_extension(archivo) {
    var extensiones_permitidas = new Array(".csv");
    if (!archivo) {
@@ -42,37 +23,43 @@ function comprueba_extension(archivo) {
    }
 }
 
-function loadfile(){
-
+//function para cargar los archivos con ayas a la que le enviamos la url del
+// router que tratara cada archivo
+function loadfile(url, name){
   $('#mesage span').removeClass('glyphicon glyphicon-alert')
   var formData = new FormData();
-  formData.append('file', $('#files')[0].files[0]);
+  formData.append('file', $('#'+name)[0].files[0]);
   $.ajax({
-     url : '/upload',
+     url : url,
      type : 'POST',
      data : formData,
      processData: false,  // tell jQuery not to process the data
      contentType: false,  // tell jQuery not to set contentType
      success : function(data) {
-       if(data==='0') {
-         $('#mesage').css('color','red');
+       alert(JSON.stringify(data));
+       if(data.upload==='0') {
          $('#mesage span').addClass('glyphicon glyphicon-alert')
          $('#mesage p').html('Seleccione un archivo!!');
        }
-       else if(data==='1'){
-         $('#mesage').css('color','red');
+       else if(data.upload==='1'){
          $('#mesage span').addClass('glyphicon glyphicon-alert')
          $('#mesage p').html('Formato de archivo no valido!!');
        }
-       else if(data==='2'){
-         $('#mesage').css('color','red');
+       else if(data.upload==='2'){
          $('#mesage span').addClass('glyphicon glyphicon-alert')
          $('#mesage p').html('Error!!');
        }
        else {
-         $('#mesage').css('color','green');
-         $('#mesage span').addClass('glyphicon glyphicon-ok')
-         $('#mesage p').html('Carga Exitosa!!');
+         if(data.count!='0'){
+           $('#mesage').css('color','green');
+           $('#mesage span').removeClass('glyphicon glyphicon-alert')
+           $('#mesage span').removeClass('glyphicon glyphicon-remove')
+           $('#mesage span').addClass('glyphicon glyphicon-ok')
+           $('#mesage p').html('Carga Exitosa!!');
+         }else{
+           $('#mesage span').addClass('glyphicon glyphicon-remove')
+           $('#mesage p').html('Error Cargar Datos!!');
+         }
        }
      }
   });

@@ -12,15 +12,248 @@ block scripts
   script(src="/javascripts/amcharts/gauge.js")
   script(src="/javascripts/amcharts/themes/light.js")
   script(type='text/javascript', src='/javascripts/Graphs.js')
-  script(type='text/javascript', src='http://canvg.github.io/canvg/rgbcolor.js')
-  script(type='text/javascript', src='http://canvg.github.io/canvg/StackBlur.js')
-  script(type='text/javascript', src='http://canvg.github.io/canvg/canvg.js')
-  script(type='text/javascript', src='/javascripts/jspdf.min.js')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js')
-  script(type='text/javascript', src='/javascripts/html2canvas.js')
+  //- script(type='text/javascript', src='http://canvg.github.io/canvg/rgbcolor.js')
+  //- script(type='text/javascript', src='http://canvg.github.io/canvg/StackBlur.js')
+  //- script(type='text/javascript', src='http://canvg.github.io/canvg/canvg.js')
+  //- script(type='text/javascript', src='/javascripts/jspdf.min.js')
+  //- script(src='https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js')
+  //- script(type='text/javascript', src='/javascripts/html2canvas.js')
+  script(type='text/javascript', src='/javascripts/files.js')
+  script(src='/javascripts/update_formacion_docentes.js')
   script(type='text/javascript', src='/javascripts/menu.js')
   block scriptpage
 block content
+  //modal para enviar reporte por correo 
+  #modaluploadreport.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Enviar Reporte.
+        #modal-body.modal-body
+          form(class='form-inline' ref='uploadformreport' id='uploadformreport' action='/uploadfilereport', method='POST', enctype='multipart/form-data')
+            .form-group
+              label Asunto:
+              input.file(type='text', name='txtsubject', id='txtsubject')
+              br
+              br
+              input.file(type='file', name='archivo', id='filesreport')
+            br
+            input(type='submit', value='Enviar' class='btn btn-primary')
+  //modaluploadperiodo
+  #modaluploadperiodo.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Carga Archivo Deserción por Periodo.
+        #modal-body.modal-body
+          form(class='form-inline' ref='uploadformperiodo' id='uploadformperiodo' action='/uploadfileperiodo', method='POST', enctype='multipart/form-data')
+            .form-group
+              input.file(type='file', name='archivo', id='filesperiodo')
+            input(type='submit', value='Subir' class='btn btn-primary')
+          br
+          div#mesage(style='color:red;')
+            span
+            p
+          a(href='download/Formato\ datos\ Deserción\ Periodo.csv' class='vinculoFormato') Descargar Formato
+  //modaluploadcohorte
+  #modaluploadcohorte.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Carga Archivo Deserción por Cohorte.
+        #modal-body.modal-body
+          form(class='form-inline' ref='uploadformcohorte' id='uploadformcohorte' action='/uploadfilecohorte', method='POST', enctype='multipart/form-data')
+            .form-group
+              input.file(type='file', name='archivo', id='filescohorte')
+            input(type='submit', value='Subir' class='btn btn-primary')
+          br
+          div#mesage(style='color:red;')
+            span
+            p
+          a(href='download/Formato\ datos\ Deserción\ Cohorte.csv' class='vinculoFormato') Descargar Formato
+  //modaluploadsatisfacion
+  #modaluploadsatisfaccion.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Carga Archivo Nivel de Satisfacción.
+        #modal-body.modal-body
+          form(class='form-inline' ref='uploadformsatisfaccion' id='uploadformsatisfaccion' action='/uploadfilesatisfaccion', method='POST', enctype='multipart/form-data')
+            .form-group
+              input.file(type='file', name='archivo', id='filesatisfaccion')
+            input(type='submit', value='Subir' class='btn btn-primary')
+          br
+          div#mesage(style='color:red;')
+            span
+            p
+          a(href='download/Formato\ datos\ Nivel\ de\ Satisfacción.csv' class='vinculoFormato') Descargar Formato
+  //modalupdateformacionDO
+  #modalupdateformacionDO.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Actualizacion de Datos Docentes con Titulo de Doctor.
+        #modal-body.modal-body
+          form(id="frm1")            
+              label
+                | Cantidad de profesores tiempo completo
+                br
+                input#tc.form-control(type='number', name='tc',max='99999')
+              br
+              br
+              label
+                | Cantidad de profesores hora catedra
+                br 
+                input#hc.form-control(type='number', name='hc',max='99999') 
+              br
+              br
+              label
+                | Cantidad de profesores tiempo ocasional 
+                br
+                input#to.form-control(type='number', name='to',max='99999') 
+              br
+              br
+              label
+                | Año       
+                select#lst_Anio.form-control
+                  p#filter!=dat 
+              p#dato  
+              br        
+              input(type='submit' value='Actualizar' class='btn btn-info' name="btncal1" id="btncal1")   
+          br
+          div#mesage(style='color:green;')
+            span
+            p
+  
+  //modalupdateformacionMA
+  #modalupdateformacionMA.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Actualizacion de Datos Docentes Con Titulo de Magister
+        #modal-body.modal-body
+          form(id="frm2")            
+              label
+                | Cantidad de profesores tiempo completo
+                br
+                input#tc2.form-control(type='number', name='tc2',max='99999')
+              br
+              br
+              label
+                | Cantidad de profesores hora catedra
+                br 
+                input#hc2.form-control(type='number', name='hc2',max='99999') 
+              br
+              br
+              label
+                | Cantidad de profesores tiempo ocasional 
+                br
+                input#to2.form-control(type='number', name='to2',max='99999') 
+              br
+              br 
+              label
+                | Año       
+                select#lst_Anio2.form-control
+                  p#filter!=dat 
+              p#dato
+              br              
+              input(type='submit' value='Actualizar' class='btn btn-info' name="btncal1" id="btncal1")      
+          br
+          div#mesage(style='color:green;')
+            span
+            p
+  
+  //modalupdateformacionES
+  #modalupdateformacionES.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Actualizacion de Datos Docentes Con Titulo de Especialista
+        #modal-body.modal-body
+          form(id="frm3")            
+              label
+                | Cantidad de profesores tiempo completo
+                br
+                input#tc3.form-control(type='number', name='tc3',max='99999')
+              br
+              br
+              label
+                | Cantidad de profesores hora catedra
+                br 
+                input#hc3.form-control(type='number', name='hc3',max='99999') 
+              br
+              br
+              label
+                | Cantidad de profesores tiempo ocasional 
+                br
+                input#to3.form-control(type='number', name='to3',max='99999') 
+              br
+              br 
+              label
+                | Año       
+                select#lst_Anio3.form-control
+                  p#filter!=dat 
+              p#dato
+              br              
+              input(type='submit' value='Actualizar' class='btn btn-info' name="btncal1" id="btncal1")      
+          br
+          div#mesage(style='color:green;')
+            span
+            p
+
+  //modalupdateformacionPR
+  #modalupdateformacionPR.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Actualizacion de Datos Docentes Con Titulo de Pregrado
+        #modal-body.modal-body
+          form(id="frm4")            
+              label
+                | Cantidad de profesores tiempo completo
+                br
+                input#tc4.form-control(type='number', name='tc4',max='99999')
+              br
+              br
+              label
+                | Cantidad de profesores hora catedra
+                br 
+                input#hc4.form-control(type='number', name='hc4',max='99999') 
+              br
+              br
+              label
+                | Cantidad de profesores tiempo ocasional 
+                br
+                input#to4.form-control(type='number', name='to4',max='99999') 
+              br
+              br 
+              label
+                | Año       
+                select#lst_Anio4.form-control
+                  p#filter!=dat 
+              p#dato
+              br              
+              input(type='submit' value='Actualizar' class='btn btn-info' name="btncal1" id="btncal1")      
+          br
+          div#mesage(style='color:green;')
+            span
+            p
   //contiene el head y el menu con los nombres de los indicadores 
   center.col-md-12
     .col-md-12
@@ -50,19 +283,19 @@ block content
                      | Carga y actualizacion de datos  
                    ul.dropdown-menu
                      li
-                       a(href='/upload') 
-                         | Encuesta Satisfacción.
+                       a(href='#' onclick='openmodaluploadsatisfaccion()') 
+                         | Nivel de Satisfacción.
                      li.divider
                      li.dropdown-submenu
                        a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                          | Datos Deserción 
                        ul.dropdown-menu
                          li
-                           a(href='#') 
+                           a(href='#' onclick='openmodaluploadcohorte()') 
                              | Deserción Cohorte.
                          li.divider
                          li
-                           a(href='#') 
+                           a(href='#' onclick='openmodaluploadperiodo()') 
                              | Deserción Periodo.
                      li.divider
                      li.dropdown-submenu
@@ -70,23 +303,31 @@ block content
                          | Actualizacion Nivel de Formacion Docentes 
                        ul.dropdown-menu
                          li
-                           a(href='update_formacionDO') 
+                           a(href='#' onclick='modalupdateformacionDO()') 
                              | Doctor.
                          li.divider
                          li
-                           a(href='update_formacionMA') 
+                           a(href='#' onclick='modalupdateformacionMA()') 
                              | Magister.
                          li.divider
                          li
-                           a(href='update_formacionES') 
+                           a(href='#' onclick='modalupdateformacionES()') 
                              | Especialista.
                          li.divider
                          li
-                           a(href='update_formacionPR') 
+                           a(href='#' onclick='modalupdateformacionPR()') 
                              | Profesional.        
-                 li
-                  a(href="javascript:getPDF()") 
-                    |Generar Reportes.
+                 li.dropdown-submenu
+                   a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                     | Reportes
+                   ul.dropdown-menu
+                     li
+                       a(href='#')
+                         | Descargar Formatos
+                     li.divider
+                     li
+                       a(href='#' onclick='openmodalsendreport()')
+                         | Enviar Reporte
              li.dropdown
                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')
                  | Indicadores Academicos 
@@ -96,9 +337,17 @@ block content
                    a(href='satisfacion')
                      | Satisfacción
                  li.divider
-                 li
-                   a(href='formacion')
-                     | Formacion docentes
+                 li.dropdown-submenu
+                   a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                     | Nivel de Formacion Docentes 
+                   ul.dropdown-menu
+                     li
+                      a(href='formacion')
+                        | KPI Formacion Docentes
+                     li.divider
+                     li
+                       a(href='#') 
+                         | Formacion Docentes por Programa
                  li.divider
                  li
                    a(href='relacion_docentes')

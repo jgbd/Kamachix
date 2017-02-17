@@ -15,7 +15,9 @@ router.get('/', function(req, res, next) {
   if(req.query.c == 1){
     var sql = 'SELECT sl."Programa", p.nombre From "Datawarehouse"."KPI_Satisfaction_level"  sl JOIN public.programas p ON p.snies=sl."Programa"';
     if(req.session.rol!=1)
-      sql=sql+' WHERE p.departamento='+"'"+req.session.codigo+"'"+' OR sl."Programa" = '+"'000000'"
+      sql=sql+' WHERE p.departamento='+"'"+req.session.codigo+"'"+' OR sl."Programa" = '+"'000000'"+' GROUP BY sl."Programa", p.nombre ORDER BY p.nombre';
+    else
+      sql=sql+' GROUP BY sl."Programa", p.nombre ORDER BY p.nombre';
   }else if (req.query.c == 2){
     var prog=[req.query.program];
     var sql = 'SELECT sl."Anho" FROM "Datawarehouse"."KPI_Satisfaction_level" sl WHERE sl."Programa" LIKE $1 GROUP BY sl."Anho" ORDER BY sl."Anho"';

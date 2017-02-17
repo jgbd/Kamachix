@@ -22,7 +22,7 @@ block resto
               .col-md-2
                 label(for='lstprog') Año:  
               .col-md-10
-                select#lst_Anio.form-control
+                select#lst_Anio5.form-control
                   p#filter!=dat                          
             .col-md-4                      
             input(type='submit' value='Filtrar' class='btn btn-info')
@@ -66,171 +66,169 @@ block resto
       #divsem2.col-md-6
       #divsem3.col-md-6
       #divsem4.col-md-6    
-  //canvas para sacar imagen svg para pdf toca tner segun la cantidad de imagens a sacar
-  canvas#canvas(style='display:none')
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
   //modal para los infomes 
-  #modalinfo.modal.fade.bd-example-modal-lg
-    #modalinfobody.modal-content
-      .modal-header
-        button.close(type='button', data-dismiss='modal', aria-label='Close')
-          span(aria-hidden='true') ×
-        h4#modal-title.modal-title Generación de Reportes.
-      #modal-bodyinfo.modal-body.table-responsive
-        input(type ='button' value='PDF' onclick='pdf()')
-        table#tabinfo.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-          tr
-            td
-              img.drap(src='/images/escudo.png')
-            td
-              center
-                h3 SISTEMA DE GESTIÓN DE CALIDAD
-                h3
-                  b Manual de Indicador- 
-            td
-              table.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-                tr
-                  td Código: SGC-FR-04
-                tr
-                  td Página: 1 de 2
-                tr
-                  td Versión: 3
-                tr
-                  td Vigente a partir de: 21/06/2010
-        br
-        table.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-          tr
-            td(colspan='2')
-              h5 DATOS DEL INDICADOR
-          tr
-            td 1. PROCESO:
-            td Formación Académica
-          tr
-            td 2. LÍDER:
-            td Vicerrector(a) Académico(a)
-          tr
-            td 3. OBJETIVO DEL PROCESO:
-            td
-              p
-                | Formar integralmente estudiantes
-                | a través de lo diferentes Programas,
-                | niveles y modalidades de
-                br
-                |  Educación Superior.
-          tr
-            td 4. NOMBRE DEL INDICADOR:
-            td Deserción Académica por cohorte
-          tr
-            td 5. ATRIBUTO A MEDIR:
-            td
-              | Nivel de deserción por cohorte
-              | dentro del servicio educativo de
-              | cada programa académico
-          tr
-            td 6. OBJETIVO DE CALIDAD AL CUAL CONTRIBUYE:
-            td
-              | Mejorar permanentemente la calidad
-              | en la docencia, investigación y
-              | proyección social de la
-              br
-              | Universidad.
-          tr
-            td 7. TIPO DE INDICADOR:
-            td Eficiencia
-          tr
-            td 8. FRECUENCIA:
-            td Anual
-          tr
-            td 9. PERIODO DE CALCULO:
-            td Último mes antes de finalizar el año
-          tr
-            td 10. TENDENCIA ESPERADA:
-            td Disminución
-          tr
-            td 11. META
-            td
-              | Opción 1: Disminución de la deserción a un 10% por cohorte. 
-              br
-              |     Opción 1: Disminución de la deserción a un 10% por cohorte.
-          tr
-            td 12. OBJETIVO DEL INDICADOR:
-            td
-              textarea(rows='6', cols='100')
-                | Medir la capacidad de retención del Proceso “Formación Académica” en el Departamento de Comercio Internacional y Mercadeo  transitorio y el programa nuevo de Comercio Internacional, de acuerdo a los resultados  obtenidos y tomar las acciones  de mejoramiento que se requieran.
-          tr
-            td 13. RANGO Y FORMA DE INTERPRETACIÓN:
-            td
-              b Por cohorte:
-              br
-              |       < 
-              input(type='text', value='10%', width='5')
-              |  Deserción Muy Adecuado
-              br
-              input(type='text', value='10 - 15%', width='5')
-              |   Deserción  Adecuada
-              br
-              |       > 
-              input(type='text', value='15%', width='5')
-              |  Deserción  Inadecuado
-          tr
-            td 14. FÓRMULA:
-            td
-              b Por cohorte:
-              br
-              |  (No.  de Estudiantes que se retiran en forma
-              |       definitiva del Proceso de Formación Académica 
-              br
-              | por cohorte/No. de
-              |       Estudiantes Matriculados por periodo en una cohorte)*100
-          tr
-            td 15. MANERA QUE PODÍA SER GRAFICADO:
-            td
-              | Diagrama de Bloque, señalando el
-              | porcentaje obtenido de deserción, frente a la meta.
-          tr
-            td 16. PUNTO DE REGISTRO:
-            td Estadísticas SPADIES  para cada cierre de año
-          tr
-            td 17. RESPONSABLE DEL CALCULO
-            td
-              | Director de Departamento 
-              br
-              |  Asesor de Información y
-              |       Estadística Oficina de Planeación y Desarrollo
-          tr
-            td 18. INSTRUCTIVO:
-            td
-              | Al finalizar cada año se aplica la fórmula y se confronta los resultados
-              | del año anterior con los del 
-              br
-              | año actual.
-        br
-        table.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-          tr
-            td(colspan='2')
-              h5 RESULTADOS Y EVOLUCIÓN DEL INDICADOR
-          tr
-            td 19. FECHA DE CALCULO:
-            td 22 de  noviembre  de 2015
-          tr
-            td 20. RESULTADO DEL INDICADOR:
-            td aqui se colocan las tablas 
-          tr
-            td 21. CALIFICACIÓN:
-            td
-              | 2015-2: 11,76%, el porcentaje de Deserción obtenido
-              | teniendo en cuenta
-              br
-              |  la meta del indicador es Adecuada.
-          tr
-            td 22. LECTURA DE LA EVOLUCIÓN DEL INDICADOR:
-            td
-              textarea(cols='100', rows='6')
-                | Si bien los resultados de deserción no son altos, el Departamento para minimizar los inconvenientes que se presentan en la deserción ha implementado, bajo criterios netamente académicos, la ampliación de  homologaciones y equivalencias de asignaturas en otros Programas, la matrícula académica de hasta siete (7) asignaturas bajo ciertas condiciones académicas, la ampliación de cupos en asignaturas de alta deserción como matemáticas, estadística y economía, acompañamiento a estudiantes con programas implementados por Bienestar Universitario, entre otros.
-          tr
-            td 23. EVOLUCIÓN GRÁFICA:
-            //td aqui se colocan las las graficas 
-            td 
-              #divg1
-              #divg2
+  //- #modalinfo.modal.fade.bd-example-modal-lg
+  //-   #modalinfobody.modal-content
+  //-     .modal-header
+  //-       button.close(type='button', data-dismiss='modal', aria-label='Close')
+  //-         span(aria-hidden='true') ×
+  //-       h4#modal-title.modal-title Generación de Reportes.
+  //-     #modal-bodyinfo.modal-body.table-responsive
+  //-       input(type ='button' value='PDF' onclick='pdf()')
+  //-       table#tabinfo.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
+  //-         tr
+  //-           td
+  //-             img.drap(src='/images/escudo.png')
+  //-           td
+  //-             center
+  //-               h3 SISTEMA DE GESTIÓN DE CALIDAD
+  //-               h3
+  //-                 b Manual de Indicador- 
+  //-           td
+  //-             table.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
+  //-               tr
+  //-                 td Código: SGC-FR-04
+  //-               tr
+  //-                 td Página: 1 de 2
+  //-               tr
+  //-                 td Versión: 3
+  //-               tr
+  //-                 td Vigente a partir de: 21/06/2010
+  //-       br
+  //-       table.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
+  //-         tr
+  //-           td(colspan='2')
+  //-             h5 DATOS DEL INDICADOR
+  //-         tr
+  //-           td 1. PROCESO:
+  //-           td Formación Académica
+  //-         tr
+  //-           td 2. LÍDER:
+  //-           td Vicerrector(a) Académico(a)
+  //-         tr
+  //-           td 3. OBJETIVO DEL PROCESO:
+  //-           td
+  //-             p
+  //-               | Formar integralmente estudiantes
+  //-               | a través de lo diferentes Programas,
+  //-               | niveles y modalidades de
+  //-               br
+  //-               |  Educación Superior.
+  //-         tr
+  //-           td 4. NOMBRE DEL INDICADOR:
+  //-           td Deserción Académica por cohorte
+  //-         tr
+  //-           td 5. ATRIBUTO A MEDIR:
+  //-           td
+  //-             | Nivel de deserción por cohorte
+  //-             | dentro del servicio educativo de
+  //-             | cada programa académico
+  //-         tr
+  //-           td 6. OBJETIVO DE CALIDAD AL CUAL CONTRIBUYE:
+  //-           td
+  //-             | Mejorar permanentemente la calidad
+  //-             | en la docencia, investigación y
+  //-             | proyección social de la
+  //-             br
+  //-             | Universidad.
+  //-         tr
+  //-           td 7. TIPO DE INDICADOR:
+  //-           td Eficiencia
+  //-         tr
+  //-           td 8. FRECUENCIA:
+  //-           td Anual
+  //-         tr
+  //-           td 9. PERIODO DE CALCULO:
+  //-           td Último mes antes de finalizar el año
+  //-         tr
+  //-           td 10. TENDENCIA ESPERADA:
+  //-           td Disminución
+  //-         tr
+  //-           td 11. META
+  //-           td
+  //-             | Opción 1: Disminución de la deserción a un 10% por cohorte. 
+  //-             br
+  //-             |     Opción 1: Disminución de la deserción a un 10% por cohorte.
+  //-         tr
+  //-           td 12. OBJETIVO DEL INDICADOR:
+  //-           td
+  //-             textarea(rows='6', cols='100')
+  //-               | Medir la capacidad de retención del Proceso “Formación Académica” en el Departamento de Comercio Internacional y Mercadeo  transitorio y el programa nuevo de Comercio Internacional, de acuerdo a los resultados  obtenidos y tomar las acciones  de mejoramiento que se requieran.
+  //-         tr
+  //-           td 13. RANGO Y FORMA DE INTERPRETACIÓN:
+  //-           td
+  //-             b Por cohorte:
+  //-             br
+  //-             |       < 
+  //-             input(type='text', value='10%', width='5')
+  //-             |  Deserción Muy Adecuado
+  //-             br
+  //-             input(type='text', value='10 - 15%', width='5')
+  //-             |   Deserción  Adecuada
+  //-             br
+  //-             |       > 
+  //-             input(type='text', value='15%', width='5')
+  //-             |  Deserción  Inadecuado
+  //-         tr
+  //-           td 14. FÓRMULA:
+  //-           td
+  //-             b Por cohorte:
+  //-             br
+  //-             |  (No.  de Estudiantes que se retiran en forma
+  //-             |       definitiva del Proceso de Formación Académica 
+  //-             br
+  //-             | por cohorte/No. de
+  //-             |       Estudiantes Matriculados por periodo en una cohorte)*100
+  //-         tr
+  //-           td 15. MANERA QUE PODÍA SER GRAFICADO:
+  //-           td
+  //-             | Diagrama de Bloque, señalando el
+  //-             | porcentaje obtenido de deserción, frente a la meta.
+  //-         tr
+  //-           td 16. PUNTO DE REGISTRO:
+  //-           td Estadísticas SPADIES  para cada cierre de año
+  //-         tr
+  //-           td 17. RESPONSABLE DEL CALCULO
+  //-           td
+  //-             | Director de Departamento 
+  //-             br
+  //-             |  Asesor de Información y
+  //-             |       Estadística Oficina de Planeación y Desarrollo
+  //-         tr
+  //-           td 18. INSTRUCTIVO:
+  //-           td
+  //-             | Al finalizar cada año se aplica la fórmula y se confronta los resultados
+  //-             | del año anterior con los del 
+  //-             br
+  //-             | año actual.
+  //-       br
+  //-       table.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
+  //-         tr
+  //-           td(colspan='2')
+  //-             h5 RESULTADOS Y EVOLUCIÓN DEL INDICADOR
+  //-         tr
+  //-           td 19. FECHA DE CALCULO:
+  //-           td 22 de  noviembre  de 2015
+  //-         tr
+  //-           td 20. RESULTADO DEL INDICADOR:
+  //-           td aqui se colocan las tablas 
+  //-         tr
+  //-           td 21. CALIFICACIÓN:
+  //-           td
+  //-             | 2015-2: 11,76%, el porcentaje de Deserción obtenido
+  //-             | teniendo en cuenta
+  //-             br
+  //-             |  la meta del indicador es Adecuada.
+  //-         tr
+  //-           td 22. LECTURA DE LA EVOLUCIÓN DEL INDICADOR:
+  //-           td
+  //-             textarea(cols='100', rows='6')
+  //-               | Si bien los resultados de deserción no son altos, el Departamento para minimizar los inconvenientes que se presentan en la deserción ha implementado, bajo criterios netamente académicos, la ampliación de  homologaciones y equivalencias de asignaturas en otros Programas, la matrícula académica de hasta siete (7) asignaturas bajo ciertas condiciones académicas, la ampliación de cupos en asignaturas de alta deserción como matemáticas, estadística y economía, acompañamiento a estudiantes con programas implementados por Bienestar Universitario, entre otros.
+  //-         tr
+  //-           td 23. EVOLUCIÓN GRÁFICA:
+  //-           //td aqui se colocan las las graficas 
+  //-           td 
+  //-             #divg1
+  //-             #divg2

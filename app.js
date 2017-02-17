@@ -19,16 +19,19 @@ var logout = require('./routes/logout'); //pagina de logout
 var satisfaction = require('./routes/satisfaccion'); //pagina del indicador de satisfaccion
 var filter = require('./routes/consultaFiltrosSatisfaccion'); //consulta filtros para satisfaccion
 var consultation = require('./routes/consultaSatisfaccion'); //consulta datos iniciales desatisfaccion por get y con filtros por POST
+var uploadfilesatisfaccion = require('./routes/uploadfilesatisfaccion') //maneja carga de archivo de datos satisfaccion
 
 //para controlar todo lo del KPI desercion periodo
 var consultationperiod = require('./routes/consultaperiodo'); //consulta los datos iniciales de desercion por periodo
 var filterperiod = require('./routes/consultafiltrosPeriodo');//para cargar las listas de filtros periodo
 var period = require('./routes/periodo'); //pagina inicial de desercion periodo
+var uploadfileperiod = require('./routes/uploadfileperiodo') //maneja carga de archivo cohorte
 
 //para controlar todo lo del KPI desercion por cohorte
 var cohorte = require('./routes/cohorte'); //pagina inicial de desercion cohorte
 var consultationcohorte = require('./routes/consultacohorte'); //consulta datos iniciales de desercion por cohorte
 var filtercohorte = require('./routes/consultafiltroscohorte'); //consulta de filtros para cohorte
+var uploadfilecohorte = require('./routes/uploadfilecohorte') //maneja datos de carga de archivo periodo
 
 //datos de stephen que colocar comentarios invocacionde routers
 var acreditacion = require('./routes/acreditacion');
@@ -43,21 +46,24 @@ var consultationstudentsperteacher = require('./routes/consultaDocentesTC');
 var insertionstudentsperteacher = require('./routes/actualizaDocentesTC');
 var updatekpistudentsperteacher = require('./routes/actualizaKPIDocentesTC');
 
-//datos oscar comentarios
+//para controlar todo lo del KPI del nivel de formacion docentes
 var formacion = require('./routes/formacion');
+var filterFormacionDocente = require('./routes/consultaFormacion');
+var consulta_update = require('./routes/consultas_update_formacion');
+
+//para controlar todo lo del KPI de relacion docentes tiempo completo respecto a hora catedra
 var relacionTCHC = require('./routes/relacion_docentes');
 var filterTCHC = require('./routes/consultaTCHC');
-var filterFormacionDocente = require('./routes/consultaFormacion');
-var update_formacionDO=require('./routes/update_formacionDO');
-var update_formacionMA=require('./routes/update_formacionMA');
-var update_formacionES=require('./routes/update_formacionES');
-var update_formacionPR=require('./routes/update_formacionPR');
-var consulta_update = require('./routes/consultas_update_formacion');
 var consulta_update_relacionTCHC = require('./routes/consulta_update_relacionTCHC');
 
 
-//upload file routes
-var upload = require('./routes/upload')
+/*var update_formacionDO=require('./routes/update_formacionDO');
+var update_formacionMA=require('./routes/update_formacionMA');
+var update_formacionES=require('./routes/update_formacionES');
+var update_formacionPR=require('./routes/update_formacionPR');*/
+
+
+
 //aqui se crea el framework de express
 var app = express();
 
@@ -120,19 +126,21 @@ app.use('/actualizaDocentesTC',insertionstudentsperteacher);
 app.use('/actualizaKPIDocentesTC',updatekpistudentsperteacher);
 
 //datos oscar
-app.use('/formacion',formacion);
-app.use('/relacion_docentes',relacionTCHC);
-app.use('/consultaTCHC',filterTCHC);
-app.use('/consultaFormacion',filterFormacionDocente);
-app.use('/update_formacionDO',update_formacionDO);
+app.use('/formacion',formacion); //visualizacion del KPI nivel de formacion
+app.use('/relacion_docentes',relacionTCHC);// visualizacion del KPI relacion docentes
+app.use('/consultaTCHC',filterTCHC);// consulta de filtro del KPI relacion docentes
+app.use('/consultaFormacion',filterFormacionDocente);// consulta filtros del KPI nivel de formacion docentes
+/*app.use('/update_formacionDO',update_formacionDO);
 app.use('/update_formacionMA',update_formacionMA);
 app.use('/update_formacionES',update_formacionES);
-app.use('/update_formacionPR',update_formacionPR);
-app.use('/consultas_update_formacion',consulta_update);
-app.use('/consulta_update_relacionTCHC',consulta_update_relacionTCHC);
+app.use('/update_formacionPR',update_formacionPR);*/
+app.use('/consultas_update_formacion',consulta_update);// consultas de actualizacion del KPI nivel de formacion docentes
+app.use('/consulta_update_relacionTCHC',consulta_update_relacionTCHC); // consultas de actualizacion del KPI relacion docentes
 
-//con/upload
-app.use('/upload',upload);
+//upload
+app.use('/uploadfilesatisfaccion',uploadfilesatisfaccion);
+app.use('/uploadfilecohorte',uploadfilecohorte);
+app.use('/uploadfileperiodo',uploadfileperiod);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
