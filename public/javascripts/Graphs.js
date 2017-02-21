@@ -508,6 +508,13 @@ function pieGraph3D(data, contentName, namePart, valuePart,title){
       "type": "pie",
       "theme": "chalk",
       "titles":[{"text":title}],
+      "legend": {
+        "equalWidths": true,
+        "periodValueText": "[[value]]",
+        "position": "bottom",
+        "valueAlign": "left",
+        "valueWidth": 5
+      },
       "innerRadius": "35%",
       "gradientRatio": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, 0, 0.1, 0.2, 0.1, 0, -0.2, -0.5],
       "dataProvider": data,
