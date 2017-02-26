@@ -1,0 +1,70 @@
+extends menu
+block title
+  title!=title
+block scriptpage
+  script(src='/javascripts/formacion_docentes_dep.js')
+block resto
+  .col-md-12(style='text-align:left')
+    input#btnfil.btn.btn-warning.btn-small(type='button' value='Filtros')
+    br
+  #divfilter.modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Filtros
+        .modal-body
+          form#frmformacion.form-horizontal(action="formacion" method="POST")
+            br
+            .col-md-2              
+            .col-md-6
+              .col-md-2
+                label(for='lstprog') Año:  
+              .col-md-10
+                select#lst_Anio5.form-control
+                  p#filter!=dat                          
+            .col-md-4                      
+            input(type='submit' value='Filtrar' class='btn btn-info')
+  .col-md-12     
+    h3#titulo
+    br
+    #divtable.col-md-6      
+      table.table.hover.tablestyle
+        thead
+          tr(align='center')
+            th.th(style='text-align:center;') Formacion
+            th.th(style='text-align:center;') Docentes tiempo completo             
+        tbody#datBody!= datos 
+    .col-md-6         
+      #divgraph1.col-md-12      
+      .col-md-12
+        select#graph1
+            option(selected='', value='1') Seleccione un tipo de gráfica
+            optgroup(label='Columnas')
+              option(value='1') 2D
+              option(value='2') 3D
+            optgroup(label='Barras')
+              option(value='5') 2D
+              option(value='6') 3D
+            optgroup(label='Tendencia')
+              option(value='3') Línea
+              option(value='4') Area
+    .col-md-6 
+      #divgraph2.col-md-12  
+      .col-md-12
+          select#graph2
+            option(selected='', value='1') Seleccione un tipo de gráfica
+            optgroup(label='Pastel')
+              option(value='1') 2D
+              option(value='2') 3D           
+      
+    #divgraph3.col-md-6
+      h4
+        |Indicador de Meta
+      #divsem1.col-md-6
+      #divsem2.col-md-6
+      #divsem3.col-md-6
+      #divsem4.col-md-6    
+  //campo oculto para manterne le json del contenido
+  input(id='txtjson' type="hidden")

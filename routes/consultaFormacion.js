@@ -18,6 +18,9 @@ router.get('/', function(req, res, next) {
   else if (req.query.c ==2){
     var sql='select DISTINCT anio from "Datawarehouse".formacion_kpi order by anio DESC';
   }
+  else if (req.query.c ==3){
+    var sql='select departamento,t_completo,t_ocasional,hora_catedra,anio,periodo,formacion from formacion_departamento where departamento="25" order by anio DESC limit 4';
+  }
   else return console.log("error");
   //aquui se crea la conexion a DB
   pool.connect(function(err, client, done) {
