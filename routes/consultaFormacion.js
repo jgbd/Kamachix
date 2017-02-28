@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
 
   if(req.query.c == 1){
-    var sql='select formacion,t_completo,anio from "Datawarehouse".formacion_kpi order by anio,formacion,t_completo';
+    var sql='select nom_formacion,t_completo,anio from "Datawarehouse".formacion_kpi join formacion on formacion=cod_formacion order by anio,formacion,t_completo';
   }
   else if (req.query.c ==2){
     var sql='select DISTINCT anio from "Datawarehouse".formacion_kpi order by anio DESC';
