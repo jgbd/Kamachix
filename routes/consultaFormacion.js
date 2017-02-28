@@ -79,7 +79,7 @@ router.post('/', function(req, res, next) {
       var pool = new pg.Pool(config);
 
       //esta variable es la que contien la consulta a realizarse en la DB
-      var sql='select formacion,t_completo,anio from "Datawarehouse".formacion_kpi where anio=$1 order by anio,formacion,t_completo';
+      var sql='select nom_formacion,t_completo,anio from "Datawarehouse".formacion_kpi join formacion on formacion=cod_formacion where anio=$1 order by anio,formacion,t_completo';
       //aquui se crea la conexion a DB
       pool.connect(function(err, client, done) {
         if(err) {

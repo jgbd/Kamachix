@@ -43,7 +43,7 @@ $(document).ready(function(){
        var conta=json.rowCount;
        //ciclo para llenar los datos en las filas en r
        for(var i = conta-4 ; i<conta; i++){
-         r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].formacion+
+         r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
          "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
        }
 
