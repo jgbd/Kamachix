@@ -45,16 +45,16 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
 
         //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
         if(json.rows[j].razon<=10)
-          $("#tableres").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[j].razon+'% de 20%)"></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[j].razon+'% de 20%)"></td>');
         else if(json.rows[j].razon>10 && json.rows[j].razon<=20)
           if(j>0 && json.rows[j-1].razon>20)
-            $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[j].razon+'% de 20%)"></td>');
+            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[j].razon+'% de 20%)"></td>');
           else if(j>0 && json.rows[j-1].razon>json.rows[j].razon)
-            $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos se ha alejado ('+json.rows[j].razon+'% de 20%)"></td>');
+            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos se ha alejado ('+json.rows[j].razon+'% de 20%)"></td>');
           else
-          $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está cerca a alcanzarse ('+json.rows[j].razon+'% de 20%)"></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está cerca a alcanzarse ('+json.rows[j].razon+'% de 20%)"></td>');
         else
-          $("#tableres").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[j].razon+'% de 20%)"></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[j].razon+'% de 20%)"></td>');
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         $("#tableres").append('</tr>');
