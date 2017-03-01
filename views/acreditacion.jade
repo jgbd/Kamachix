@@ -91,7 +91,7 @@ block resto
         br
     h3#lblper
     .col-md-6
-      #divgraph2.col-md-12
+      #divgraph3.col-md-12
       .col-md-12
         select#graph2
           option(selected='', value='1') Seleccione un tipo de gráfica
@@ -103,7 +103,7 @@ block resto
             option(value='5') 3D
           optgroup(label='Tendencia')
             option(value='3') Línea
-    #divgraph3.col-md-6
+    #divgraph2.col-md-6
     .col-md-6
         br
         br
@@ -137,158 +137,129 @@ block resto
   input(id='txtjson' type="hidden")
   // campo oculto para controlar rols
   //modal para los informes 
-  //- #modalinfo.modal.fade.bd-example-modal-lg
-  //-   #modalinfobody.modal-content
-  //-     #modal-bodyinfo.modal-body.table-responsive
-  //-       button.close(type='button', data-dismiss='modal', aria-label='Close')
-  //-         span(aria-hidden='true') ×
-  //-       input.btn.btn-info(type ='button' value='Imprimir' onclick='pdf()')
-  //-       br
-  //-       table#tabinfo.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-  //-         tr
-  //-           td
-  //-             img.drap(src='/images/escudo.png')
-  //-           td
-  //-             center
-  //-               h3 SISTEMA DE GESTIÓN DE CALIDAD
-  //-               h3
-  //-                 b Manual de Indicador- 
-  //-           td
-  //-             table.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-  //-               tr
-  //-                 td Código: SGC-FR-04
-  //-               tr
-  //-                 td Página: 1 de 2
-  //-               tr
-  //-                 td Versión: 3
-  //-               tr
-  //-                 td Vigente a partir de: 21/06/2010
-  //-       br
-  //-       table#tabind.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-  //-         tr
-  //-           td(colspan='2')
-  //-             h5(style='text-align:center') DATOS DEL INDICADOR
-  //-         tr
-  //-           td 1. PROCESO:
-  //-           td
-  //-             ul
-  //-               li
-  //-                 | Capacidad Directiva
-  //-               li
-  //-                 | Proyección Social
-  //-               li
-  //-                 | Universidad y Región
-  //-         tr
-  //-           td 2. LÍDER:
-  //-           td Vicerrector(a) Académico(a)
-  //-         tr
-  //-           td 3. OBJETIVO DEL PROCESO:
-  //-           td
-  //-             p
-  //-               | Establecer el porcentaje de programas 
-  //-               | académicos de pregrado acreditados en 
-  //-               | la Universidad de Nariño
-  //-         tr
-  //-           td 4. NOMBRE DEL INDICADOR:
-  //-           td
-  //-             | Programas Académicos de 
-  //-             | Pregrado con Acreditación de Alta Calidad.
-  //-         tr
-  //-           td 5. ATRIBUTO A MEDIR:
-  //-           td
-  //-             | Porcentaje de programas Académicos de 
-  //-             | Pregrado con Acreditación de Alta Calidad.
-  //-         tr
-  //-           td 6. OBJETIVO DE CALIDAD AL CUAL CONTRIBUYE:
-  //-           td
-  //-             ul
-  //-               li
-  //-                 | C D: Implementar una administración eficaz, eficiente, efectiva y transparente,
-  //-                 | a través de la descentralización de la función académica, la 
-  //-                 | administrativa y financiera, para el mejoramiento de todos los procesos con el 
-  //-                 | fin de cumplir la misión de docencia, investigación y proyección 
-  //-                 | social.
-  //-               li
-  //-                 | U Y R: Establecer la convivencia responsable de la Universidad con la región, 
-  //-                 | entendida como una cosmovisión compleja que se comprende, se reconoce y se 
-  //-                 | autorregula, que está en permanente cambio e interactúa con otros ámbitos de la realidad, 
-  //-                 | con seres humanos solidarios capaces de entender y respetar al otro 
-  //-                 | como igual y diferente y que genera condiciones de equidad y libertad.
-  //-         tr
-  //-           td 7. TIPO DE INDICADOR:
-  //-           td ESTRATÉGICO
-  //-         tr
-  //-           td 8. FRECUENCIA:
-  //-           td Anual
-  //-         tr
-  //-           td 9. PERIODO DE CALCULO:
-  //-           td Último mes antes de finalizar el año
-  //-         tr
-  //-           td 10. TENDENCIA ESPERADA:
-  //-           td Incremento
-  //-         tr
-  //-           td 11. META
-  //-           td
-  //-             | Acreditar  el 20% de los Programas Académicos 
-  //-             | ofrecidos por la Universidad.
-  //-         tr
-  //-           td 12. OBJETIVO DEL INDICADOR:
-  //-           td
-  //-             |Establecer el porcentaje de programas académicos de pregrado acreditados en la Universidad de Nariño
-  //-         tr
-  //-           td 13. RANGO Y FORMA DE INTERPRETACIÓN:
-  //-           td
-  //-             input.form-control(id='liminf' type='text', value='10%', width='5') 
-  //-         tr
-  //-           td 14. FÓRMULA:
-  //-           td
-  //-             b Por cohorte:
-  //-             br
-  //-             | (Número de programas Acreditados en Alta Calidad/Total de 
-  //-             | programas de Pregrado de  la Universidad de Nariño)*100
-  //-         tr
-  //-           td 15. MANERA QUE PODÍA SER GRAFICADO:
-  //-           td
-  //-             | Diagrama de Bloque, señalando el
-  //-             | porcentaje obtenido de deserción, frente a la meta.
-  //-         tr
-  //-           td 16. PUNTO DE REGISTRO:
-  //-           td  Estado de los Procesos de Acreditación en Alta Calidad según el Aplicativo   SACES.
-  //-         tr
-  //-           td 17. RESPONSABLE DEL CALCULO
-  //-           td
-  //-             | Vicerrectoría Académica 
-  //-             | Asesor de Desarrollo Académico de la Vicerrectoría Académica
-  //-         tr
-  //-           td 18. INSTRUCTIVO:
-  //-           td
-  //-             | Al finalizar cada año se aplica la fórmula y se confronta los resultados
-  //-             | del año anterior con los del 
-  //-             | año actual.
-  //-       br
-  //-       table#tabindres.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
-  //-         tr
-  //-           td(colspan='2')
-  //-             h5(style='text-align:center') RESULTADOS Y EVOLUCIÓN DEL INDICADOR
-  //-         tr
-  //-           td 19. FECHA DE CALCULO:
-  //-           td 22 de  noviembre  de 2015
-  //-         tr
-  //-           td 20. RESULTADO DEL INDICADOR:
-  //-           td 
-  //-             #divtab(style='width: 100%; height: 40%;')
-  //-         tr
-  //-           td 21. CALIFICACIÓN:
-  //-           td
-  //-             textarea#txtcal.form-control(cols='100', rows='3')
-  //-         tr
-  //-           td 22. LECTURA DE LA EVOLUCIÓN DEL INDICADOR:
-  //-           td
-  //-             textarea#txtlec.form-control(cols='100', rows='6')
-  //-         tr
-  //-           td 23. EVOLUCIÓN GRÁFICA:
-  //-           //td aqui se colocan las las graficas 
-  //-           td 
-  //-             #divg1
-  //-             #divg2
-  //-             #divg3
+  #modalinfo.modal.fade.bd-example-modal-lg
+    #modalinfobody.modal-content
+      #modal-bodyinfo.modal-body.table-responsive
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true') ×
+        input.btn.btn-info(type ='button' value='Imprimir' onclick='getPDF()')
+        br
+        table#tabind.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
+          tr
+            td(colspan='2')
+              h5(style='text-align:center') DATOS DEL INDICADOR
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 1. PROCESO:
+            td
+              input#atrinfo1.form-control.atrinfo(type='text' value='Capacidad Directiva, Proyección Social, Universidad y Región' readonly)
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 2. LÍDER:
+            td 
+              input#atrinfo2.form-control.atrinfo(type='text' value='Vicerrector(a) Académico(a)' readonly) 
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 3. OBJETIVO DEL PROCESO:
+            td
+              textarea#atrinfo3.form-control.atrinfo(cols='40', rows='2' readonly)
+                | Establecer el porcentaje de programas 
+                | académicos de pregrado acreditados en 
+                | la Universidad de Nariño
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 4. NOMBRE DEL INDICADOR:
+            td
+              input#atrinfo4.form-control.atrinfo(type='text' value='Programas Académicos de Pregrado con Acreditación de Alta Calidad.' readonly)
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 5. ATRIBUTO A MEDIR:
+            td
+              input#atrinfo5.form-control.atrinfo(type='text' value='Porcentaje de programas Académicos de Pregrado con Acreditación de Alta Calidad.' readonly) 
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 6. OBJETIVO DE CALIDAD AL CUAL CONTRIBUYE:
+            td
+              textarea#atrinfo6.form-control.atrinfo(cols='40', rows='2' readonly)
+                | C D: Implementar una administración eficaz, eficiente, efectiva y transparente,
+                | a través de la descentralización de la función académica, la 
+                | administrativa y financiera, para el mejoramiento de todos los procesos con el 
+                | fin de cumplir la misión de docencia, investigación y proyección 
+                | social.
+
+                | U Y R: Establecer la convivencia responsable de la Universidad con la región, 
+                | entendida como una cosmovisión compleja que se comprende, se reconoce y se 
+                | autorregula, que está en permanente cambio e interactúa con otros ámbitos de la realidad, 
+                | con seres humanos solidarios capaces de entender y respetar al otro 
+                | como igual y diferente y que genera condiciones de equidad y libertad.
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 7. TIPO DE INDICADOR:
+            td 
+              input#atrinfo7.form-control.atrinfo(type='text' value='Estratégico' readonly)  
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 8. FRECUENCIA:
+            td 
+              input#atrinfo8.form-control.atrinfo(type='text' value='Anual' readonly)
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 9. PERIODO DE CALCULO:
+            td
+              input#atrinfo9.form-control.atrinfo(type='text' value='Último mes antes de finalizar el año' readonly)
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 10. TENDENCIA ESPERADA:
+            td
+              input#atrinfo10.form-control.atrinfo(type='text' value='Incremento' readonly)
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 11. META
+            td
+              input#atrinfo11.form-control.atrinfo(type='text' value='Acreditar el 20% de los Programas Académicos ofrecidos por la Universidad.' readonly)  
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 12. OBJETIVO DEL INDICADOR:
+            td
+              textarea#atrinfo12.form-control.atrinfo(cols='40', rows='2' readonly)
+                | Establecer el porcentaje de programas académicos de pregrado acreditados en la Universidad de Nariño
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 13. RANGO Y FORMA DE INTERPRETACIÓN:
+            td
+              input#atrinfo13.form-control.atrinfo(type='text', value='10%')
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 14. FÓRMULA:
+            td
+              textarea#atrinfo14.form-control.atrinfo(cols='40', rows='2' readonly)
+                | (Número de programas Acreditados en Alta Calidad/Total de 
+                | programas de Pregrado de  la Universidad de Nariño)*100
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 15. MANERA QUE PODÍA SER GRAFICADO:
+            td
+              input#atrinfo15.form-control.atrinfo(type='text' value='Diagrama de Bloque, señalando el porcentaje obtenido de deserción, frente a la meta.' readonly)
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 16. PUNTO DE REGISTRO:
+            td
+              input#atrinfo16.form-control.atrinfo(type='text' value='Estado de los Procesos de Acreditación en Alta Calidad según el Aplicativo SACES.' readonly)  
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 17. RESPONSABLE DEL CALCULO
+            td
+              input#atrinfo17.form-control.atrinfo(type='text' value='Vicerrectoría Académica, Asesor de Desarrollo Académico de la Vicerrectoría Académica ' readonly)  
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 18. INSTRUCTIVO:
+            td
+              input#atrinfo18.form-control.atrinfo(type='text', value='Al finalizar cada año se aplica la fórmula y se confronta los resultados del año anterior con los del año actual.' readonly)
+        br
+        table#tabindres.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
+          tr
+            td(colspan='2')
+              h5(style='text-align:center') RESULTADOS Y EVOLUCIÓN DEL INDICADOR
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 19. FECHA DE CALCULO:
+            td 
+              label#fecha
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 20. RESULTADO DEL INDICADOR:
+            td 
+              #divtab(style='width: 100%; height: 40%;')
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 21. CALIFICACIÓN:
+            td
+              textarea#txtcal.form-control(cols='40', rows='3')
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 22. LECTURA DE LA EVOLUCIÓN DEL INDICADOR:
+            td
+              textarea#txtlec.form-control(cols='40', rows='6')
+          tr
+            td(style='font-size: 14px;width: 100px;text-align: left;') 23. EVOLUCIÓN GRÁFICA:
+            td 
+              #divg1
+              #divg2
