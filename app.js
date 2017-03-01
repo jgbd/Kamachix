@@ -46,10 +46,11 @@ var consultationstudentsperteacher = require('./routes/consultaDocentesTC');
 var insertionstudentsperteacher = require('./routes/actualizaDocentesTC');
 var updatekpistudentsperteacher = require('./routes/actualizaKPIDocentesTC');
 
-//para controlar todo lo del KPI del nivel de formacion docentes
+//para controlar todo lo del KPI del nivel de formacion docentes y vista de formacion docentes por departamento
 var formacion = require('./routes/formacion');
 var filterFormacionDocente = require('./routes/consultaFormacion');
 var consulta_update = require('./routes/consultas_update_formacion');
+var formacion_departamento = require('./routes/formacion_departamento');
 
 //para controlar todo lo del KPI de relacion docentes tiempo completo respecto a hora catedra
 var relacionTCHC = require('./routes/relacion_docentes');
@@ -136,6 +137,7 @@ app.use('/update_formacionES',update_formacionES);
 app.use('/update_formacionPR',update_formacionPR);*/
 app.use('/consultas_update_formacion',consulta_update);// consultas de actualizacion del KPI nivel de formacion docentes
 app.use('/consulta_update_relacionTCHC',consulta_update_relacionTCHC); // consultas de actualizacion del KPI relacion docentes
+app.use('/formacion_departamento',formacion_departamento);
 
 //upload
 app.use('/uploadfilesatisfaccion',uploadfilesatisfaccion);

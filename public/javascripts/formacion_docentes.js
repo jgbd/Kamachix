@@ -43,7 +43,7 @@ $(document).ready(function(){
        var conta=json.rowCount;
        //ciclo para llenar los datos en las filas en r
        for(var i = conta-4 ; i<conta; i++){
-         r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].formacion+
+         r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
          "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
        }
 
@@ -55,7 +55,7 @@ $(document).ready(function(){
 
        for(var i =conta-4; i<conta;i++){
          var programa = {
-           "nivel": json.rows[i].formacion,
+           "nivel": json.rows[i].nom_formacion,
            "cantidad": json.rows[i].t_completo,
            "color": colo3[i]
          }
@@ -67,10 +67,10 @@ $(document).ready(function(){
        var magist=((json.rows[conta-2].t_completo*100)/150).toFixed(2);
        var profes=json.rows[conta-1].t_completo;
 
-       var nomdoc=json.rows[conta-4].formacion;
-       var nomesp=json.rows[conta-3].formacion;
-       var nommag=json.rows[conta-2].formacion;
-       var nompro=json.rows[conta-1].formacion;
+       var nomdoc=json.rows[conta-4].nom_formacion;
+       var nomesp=json.rows[conta-3].nom_formacion;
+       var nommag=json.rows[conta-2].nom_formacion;
+       var nompro=json.rows[conta-1].nom_formacion;
 
        //cambio de graficas de barras
         $("#graph1").change(function () {
@@ -154,7 +154,8 @@ $(document).ready(function(){
     //se coloca los datos del form en el formato adecuado para enviar al server
     var formData = {
           //aqui se encriptan en MD5 antes de enviar
-          'anio': $('#lst_Anio5').val()
+          'anio': $('#lst_Anio5').val(),
+          'c':1
         };
     //el metodo ajax para consulta asyncronica
     $.ajax({
@@ -173,7 +174,7 @@ $(document).ready(function(){
        if(conta == 4){
          //ciclo para llenar los datos en las filas en r
           for(var i = conta-4 ; i<conta; i++){
-            r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].formacion+
+            r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
             "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
           }
 
@@ -185,7 +186,7 @@ $(document).ready(function(){
 
           for(var i =0; i<4;i++){
             var programa = {
-              "nivel": json.rows[i].formacion,
+              "nivel": json.rows[i].nom_formacion,
               "cantidad": json.rows[i].t_completo,
               "color": colo3[i]
             }
@@ -197,10 +198,10 @@ $(document).ready(function(){
           var magist=((json.rows[2].t_completo*100)/150).toFixed(2);
           var profes=json.rows[3].t_completo;
 
-          var nomdoc=json.rows[0].formacion;
-          var nomesp=json.rows[1].formacion;
-          var nommag=json.rows[2].formacion;
-          var nompro=json.rows[3].formacion;
+          var nomdoc=json.rows[0].nom_formacion;
+          var nomesp=json.rows[1].nom_formacion;
+          var nommag=json.rows[2].nom_formacion;
+          var nompro=json.rows[3].nom_formacion;
 
           //cambio de graficas de barras
             $("#graph1").change(function () {
