@@ -74,8 +74,8 @@ function getPDF(){
   atrind.push(tabres);
 
   //se saca la info de la calificacion y lectura del reporte
-  atrind.push($('#txtcal').val());
-  atrind.push($('#txtlec').val());
+  atrind.push($('#txtcal').val().replace(/\n/g,'<br>'));
+  atrind.push($('#txtlec').val().replace(/\n/g,'<br>'));
 
   //se obtine el svg de la grafica 1
   var $g1 = $('#divg1 div.amcharts-main-div div.amcharts-chart-div').html();
@@ -111,7 +111,7 @@ function getPDF(){
 
   atrind.push(imgData2);
 
-  alert(atrind[18]);
+  alert(atrind[22]);
 
   //se crea la variable que contiene todo las configuraciones para e reportes
   var request = {
