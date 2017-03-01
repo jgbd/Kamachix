@@ -114,11 +114,11 @@ function Load_Fist_time(){
         $("#tableres").append('<td>'+json.datos[j].Nivel+'</td>');
         $("#tableres").append('<td>'+json.datos[j].Anho+'</td>');
         if(json.datos[j].Nivel<=40)
-          $("#tableres").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Satisfacción esta muy bajo"></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Satisfacción esta muy bajo"></td>');
         else if(json.datos[j].Nivel>40 && json.datos[j].Nivel<=70)
-          $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Satisfacción esta bajando demasiado"></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Satisfacción esta bajando demasiado"></td>');
         else
-          $("#tableres").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Satisfacción es bueno "></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Satisfacción es bueno "></td>');
       $("#tableres").append('</tr>');
     }
 
@@ -175,11 +175,11 @@ function Load_Filter(){
              $("#tableres").append('<td>'+json.datos[j].Nivel+'</td>');
              $("#tableres").append('<td>'+json.datos[j].Anho+'</td>');
              if(json.datos[j].Nivel<=40)
-               $("#tableres").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Satisfacción esta muy bajo"></td>');
+               $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Satisfacción esta muy bajo"></td>');
              else if(json.datos[j].Nivel>40 && json.datos[j].Nivel<=70)
-               $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Satisfacción esta bajando demasiado"></td>');
+               $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Satisfacción esta bajando demasiado"></td>');
              else
-               $("#tableres").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Satisfacción es bueno "></td>');
+               $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Satisfacción es bueno "></td>');
            $("#tableres").append('</tr>');
          }
 

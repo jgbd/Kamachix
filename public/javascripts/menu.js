@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  //activa la opcion de submenu en el navbar
   $('[data-submenu]').submenupicker();
 
   //se ejecuta al submit de el boton para cargar el archivo de informacion satisfaccion
@@ -54,170 +55,166 @@ $(document).ready(function(){
 
 });
 
-// function getPDF(){
-//   $("#modalinfo").modal('show');
-//   $("#divtab").html($("#divtable").html());
-//   $("#divg1").html($("#divgraph1").html());
-//   $("#divg2").html($("#divgraph2").html());
-//
-//   // Todo esto se hace para poder generar un reporte con jsPDF
-//   // las primeras lineas son para guardar
-//   // las graficas en imagenes para agregar posteriormente al pdf
-//
-//   // var $con = $('#divgraph1 div.amcharts-main-div div.amcharts-chart-div').html();
-//   // var arr = $con.split('<a');
-//   //
-//   // var svg = arr[0];
-//   // //alert("hola\n"+arr[0]);
-//   // if(svg){
-//   //   svg = svg.replace(/\r?\n|\r/g, '').trim();
-//   // }
-//   // var canvase = document.getElementById("canvas");
-//   // var context = canvase.getContext("2d");
-//   //
-//   // context.clearRect(0, 0, canvase.width, canvase.height);
-//   // canvg(canvase, svg);
-//   //
-//   // var imgData = canvas.toDataURL('image/png');
-//   //
-//   // var json = JSON.parse($('#txtjson').val());
-//   //
-//   // var jbody = [json.fields];
-//   // var d=[];
-//   // for (var i = 0; i < json.count; i++) {
-//   //   var aux = [json.datos[i].Anho,json.datos[i].Nivel]
-//   //   d.push(aux);
-//   // }
-//   // jbody.push(d);
-//   // alert(JSON.stringify(jbody));
-//
-//   // aqui se inicializa un nuevo documento pdf y se agregan todo lo que va a contenre y sus propiedades
-//   // var doc = new jsPDF('p', 'pt', 'letter');
-//   //
-//   // doc.setFontSize(40);
-//   // doc.text(57, 85, 'Hello world!');
-//   // doc.addImage(imgData, 'PNG', 57, 142, 482, 283);
-//   // doc.autoTable(jbody[0], jbody[1], {
-//   //   styles: {fillColor: [0, 0, 204]},
-//   //   columnStyles: {
-//   //       id: {fillColor: 255}
-//   //   },
-//   //   margin: {top: 454 },
-//   //   lineColor: 200,
-//   //   lineWidth: 1,
-//   // });
-//   //
-//   //
-//   // doc.save('test.pdf');
-//
-//   // esto es para hacer capturas de pantalla desde js
-//
-//   // html2canvas($("#tabsat"), {
-//   //   onrendered: function(canvas) {
-// 	//     var img = canvas.toDataURL("image/png");
-//   //     alert(img);
-//   //
-// 	//     doc.addImage(img, 'PNG', 2 , 4, 17, 24);
-//   //     doc.save('test.pdf');
-//   //   }
-//   // });
-// }
-//
-// function pdf(){
-//   var doc = new jsPDF('p', 'cm', 'letter');
-//   doc.setFontSize(12);
-//
-//   /*
-//   En este fragmento es para poder crear un parrafo de un html para enviarselo a pdf
-//   */
-//
-//   var cad = $('#txtlec').val();
-//   var cou = 0;
-//   var cadaux = "";
-//   for (var i = 0; i < cad.length; i++) {
-//     var ch = cad.charAt(i);
-//     if(cou<85){
-//       cadaux = cadaux + ch;
-//       if(ch === '\n'){
-//         cou=0;
-//       }else {
-//         cou++;
-//       }
-//
-//     }else{
-//       if(ch === /\s/){
-//         alert("cv");
-//         cadaux = cadaux + ch + '\n';
-//       }else{
-//         var chback;
-//         if(i>0)
-//           chback = cad.charAt(i-1);
-//         if(chback === /\W/){
-//             alert('aaaaa');
-//             cadaux = cadaux + '-' + '\n' + ch;
-//           }
-//           else{
-//             cadaux = cadaux + '\n' + ch;
-//           }
-//       }
-//       cou=0;
-//     }
-//   }
-//   var ar = cadaux.split('\n');
-//   var c = 3;
-//   alert(ar[0])
-//   for (var i = 0; i < ar.length; i++) {
-//     doc.text(2, c, ar[i]);
-//     c+=0.5;
-//   }
-//   /*Hasta qui para pasar a una funcion*/
-//
-//   doc.save('test.pdf');
-//   // html2canvas($("#tabinfo"), {
-//   //   onrendered: function(canvas) {
-// 	//     var img = canvas.toDataURL("image/png");
-//   //     alert(img);
-//   //
-// 	//     doc.addImage(img, 'PNG', 2 , 3, 18, 2);
-//   //     doc.save('test.pdf');
-//   //   }
-//   // });
-// }
+//se invoca para generar el pedf del reporte
+function getPDF(){
 
+  //se inicia el servidor de reportes
+  jsreport.serverUrl = 'http://localhost:5488';
 
-function openmodalsendreport(){
-  $("#modaluploadreport").modal('show');
+  //areglo para contener todo lo que se envia a el reporte
+  var atrind=[];
+
+  //se saca la info basica del Indicador para el reporte
+  for (var i = 1; i < 19; i++) {
+    atrind.push($("#atrinfo"+i).val());
+  }
+
+  //se saca la tabla de resultados para el reporte
+  var tabres = $('#divtab').html().toString();
+  atrind.push(tabres);
+
+  //se saca la info de la calificacion y lectura del reporte
+  atrind.push($('#txtcal').val());
+  atrind.push($('#txtlec').val());
+
+  //se obtine el svg de la grafica 1
+  var $g1 = $('#divg1 div.amcharts-main-div div.amcharts-chart-div').html();
+  var arr1 = $g1.split('<a');
+  var svg1 = arr1[0];
+  if(svg1){
+    svg1 = svg1.replace(/\r?\n|\r/g, '').trim();
+  }
+
+  //se obtiene la img en base64 de grafica 1
+  var canvasg1 = document.createElement("canvas");
+  var contextg1 = canvasg1.getContext("2d");
+  contextg1.clearRect(0, 0, canvasg1.width, canvasg1.height);
+  canvg(canvasg1, svg1);
+  var imgData1 = canvasg1.toDataURL('image/png');
+
+  atrind.push(imgData1);
+
+  //se obtine el svg de la grafica 2
+  var $g2 = $('#divg2 div.amcharts-main-div div.amcharts-chart-div').html();
+  var arr2 = $g2.split('<a');
+  var svg2 = arr2[0];
+  if(svg2){
+    svg2 = svg2.replace(/\r?\n|\r/g, '').trim();
+  }
+
+  //se obtiene la img en base64 de grafica 1
+  var canvasg2 = document.createElement("canvas");
+  var contextg2 = canvasg1.getContext("2d");
+  contextg2.clearRect(0, 0, canvasg2.width, canvasg2.height);
+  canvg(canvasg2, svg2);
+  var imgData2 = canvasg2.toDataURL('image/png');
+
+  atrind.push(imgData2);
+
+  alert(atrind[18]);
+
+  //se crea la variable que contiene todo las configuraciones para e reportes
+  var request = {
+    template: {
+      "shortid":"B1E4W75Ke",
+      "engine ":"none",
+      "recipe" : "phantom-pdf"
+    },
+    data: {
+      "proceso":atrind[0],
+      "lider":atrind[1],
+      "objproceso":atrind[2],
+      "nombreindi":atrind[3],
+      "atrmedir":atrind[4],
+      "objcalidad":atrind[5],
+      "tipoindi":atrind[6],
+      "frecuencia":atrind[7],
+      "percalculo":atrind[8],
+      "tendencia":atrind[9],
+      "meta":atrind[10],
+      "objindicador":atrind[11],
+      "rango":atrind[12],
+      "formula":atrind[13],
+      "modografica":atrind[14],
+      "puntoregistro":atrind[15],
+      "responcalculo":atrind[16],
+      "instructivo":atrind[17],
+      "resultindi":atrind[18],
+      "calificacion":atrind[19],
+      "lectura":atrind[20],
+      "grafica1":atrind[21],
+      "grafica2":atrind[22]
+    },
+    options: {
+      preview:true,
+      "Content-Disposition": "filename=myreport.pdf"
+    }
+   };
+
+   jsreport.headers['Content-Type'] = "application/json " ;
+
+   jsreport.render('_blank', request);
 }
 
+//abre el modal de reportes
+function openmodalreport(){
+  try{
+    $("#modalinfo").modal('show');
+    var date = new Date();
+
+    var day = date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+
+    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
+    $("#fecha").html(""+day+" de "+meses[month]+" de "+year);
+    $("#divtab").html($("#divtable").html());
+    $("#divg1").html($("#divgraph1").html());
+    $("#divg2").html($("#divgraph2").html());
+  }
+  catch(err){
+    $("#modalinforeport").modal('show');
+  }
+}
+
+//abre modal de cargar datos satisfaccion
 function openmodaluploadsatisfaccion(){
   $("#modaluploadsatisfaccion").modal('show');
   $('#mesage').html("");
 }
 
+//abre modal cargar datos desercion por cohorte
 function openmodaluploadcohorte(){
   $("#modaluploadcohorte").modal('show');
   $('#mesage').html("");
 }
 
+//abre modal cargar datos desercion por periodo
 function openmodaluploadperiodo(){
   $("#modaluploadperiodo").modal('show');
   $('#mesage').html("");
 }
+
+//abre modal cargar daos doctores
 function modalupdateformacionDO(){
   $("#modalupdateformacionDO").modal('show');
   $('#mesage').html("");
 }
 
+//abre modal cargar daos magister
 function modalupdateformacionMA(){
   $("#modalupdateformacionMA").modal('show');
   $('#mesage').html("");
 }
 
+//abre modal cargar daos Especialista
 function modalupdateformacionES(){
   $("#modalupdateformacionES").modal('show');
   $('#mesage').html("");
 }
 
+//abre modal cargar daos profesionales
 function modalupdateformacionPR(){
   $("#modalupdateformacionPR").modal('show');
   $('#mesage').html("");

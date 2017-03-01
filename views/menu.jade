@@ -4,7 +4,11 @@ block scripts
   link(rel='stylesheet', href="/javascripts/amcharts/plugins/export/export.css")
   link(rel='stylesheet', href='/stylesheets/bootstrap-submenu.min.css')
   //scripts que se usan despues de login
+  
+  //script para crear el submenu en el navbar
   script(src='/javascripts/bootstrap-submenu.min.js', defer='')
+    
+  //script de las graficas
   script(src="/javascripts/amcharts/amcharts.js")
   script(src="/javascripts/amcharts/plugins/export/export.min.js")
   script(src="/javascripts/amcharts/serial.js")
@@ -12,35 +16,25 @@ block scripts
   script(src="/javascripts/amcharts/gauge.js")
   script(src="/javascripts/amcharts/themes/light.js")
   script(type='text/javascript', src='/javascripts/Graphs.js')
-  //- script(type='text/javascript', src='http://canvg.github.io/canvg/rgbcolor.js')
-  //- script(type='text/javascript', src='http://canvg.github.io/canvg/StackBlur.js')
-  //- script(type='text/javascript', src='http://canvg.github.io/canvg/canvg.js')
-  //- script(type='text/javascript', src='/javascripts/jspdf.min.js')
-  //- script(src='https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js')
-  //- script(type='text/javascript', src='/javascripts/html2canvas.js')
+    
+  //script para pasas grafica a img para infomes
+  script(type='text/javascript', src='/javascripts/rgbcolor.js')
+  script(type='text/javascript', src='/javascripts/StackBlur.js')
+  script(type='text/javascript', src='/javascripts/canvg.min.js')
+    
+  //script para validary cargar archivos al server
   script(type='text/javascript', src='/javascripts/files.js')
+    
+  //script de formacion Docentes
   script(src='/javascripts/update_formacion_docentes.js')
+  
+  script(type='text/javascript', src='/javascripts/jsreport.min.js')
+  //script general para controlar action a nivel global
   script(type='text/javascript', src='/javascripts/menu.js')
+  
+  //bloque para colocar los script propios de cada Indicador
   block scriptpage
 block content
-  //modal para enviar reporte por correo 
-  #modaluploadreport.modal.fade.bd-example-modal-lg
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button.close(type='button', data-dismiss='modal', aria-label='Close')
-            span(aria-hidden='true') ×
-          h4#modal-title.modal-title Enviar Reporte.
-        #modal-body.modal-body
-          form(class='form-inline' ref='uploadformreport' id='uploadformreport' action='/uploadfilereport', method='POST', enctype='multipart/form-data')
-            .form-group
-              label Asunto:
-              input.file(type='text', name='txtsubject', id='txtsubject')
-              br
-              br
-              input.file(type='file', name='archivo', id='filesreport')
-            br
-            input(type='submit', value='Enviar' class='btn btn-primary')
   //modaluploadperiodo
   #modaluploadperiodo.modal.fade.bd-example-modal-lg
     .modal-dialog
@@ -59,6 +53,7 @@ block content
             span
             p
           a(href='download/Formato\ datos\ Deserción\ Periodo.csv' class='vinculoFormato') Descargar Formato
+  
   //modaluploadcohorte
   #modaluploadcohorte.modal.fade.bd-example-modal-lg
     .modal-dialog
@@ -77,6 +72,7 @@ block content
             span
             p
           a(href='download/Formato\ datos\ Deserción\ Cohorte.csv' class='vinculoFormato') Descargar Formato
+  
   //modaluploadsatisfacion
   #modaluploadsatisfaccion.modal.fade.bd-example-modal-lg
     .modal-dialog
@@ -95,6 +91,7 @@ block content
             span
             p
           a(href='download/Formato\ datos\ Nivel\ de\ Satisfacción.csv' class='vinculoFormato') Descargar Formato
+  
   //modalupdateformacionDO
   #modalupdateformacionDO.modal.fade.bd-example-modal-lg
     .modal-dialog
@@ -254,12 +251,17 @@ block content
           div#mesage(style='color:green;')
             span
             p
+  
   //contiene el head y el menu con los nombres de los indicadores 
+  
+  //head del aplicativo 
   center.col-md-12
     .col-md-12
        h3.title.col-md-12 Kamachix
          br
-         small(style="color:black") Cuadro de Mando Integral
+         small(style="color:black") Visualizador de ndicadores
+  
+  //barra de menu
   .col-md-12
      nav.navbar.navbar-inverse.col-md-12
        .container-fluid
@@ -317,17 +319,9 @@ block content
                          li
                            a(href='#' onclick='modalupdateformacionPR()') 
                              | Profesional.        
-                 li.dropdown-submenu
-                   a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                     | Reportes
-                   ul.dropdown-menu
-                     li
-                       a(href='#')
-                         | Descargar Formatos
-                     li.divider
-                     li
-                       a(href='#' onclick='openmodalsendreport()')
-                         | Enviar Reporte
+                 li
+                   a(href='#' onclick='openmodalreport()')
+                     | Generar Reporte
              li.dropdown
                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')
                  | Indicadores Academicos 
@@ -374,4 +368,6 @@ block content
                          | Deserción por Periodo
            p.navbar-text.navbar-right 
              a.logout(href='logout') Salir  
+  
+  //bloque que contiene el contenido de cada pagina especifica
   block resto
