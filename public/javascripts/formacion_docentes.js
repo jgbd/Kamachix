@@ -154,7 +154,8 @@ $(document).ready(function(){
     //se coloca los datos del form en el formato adecuado para enviar al server
     var formData = {
           //aqui se encriptan en MD5 antes de enviar
-          'anio': $('#lst_Anio5').val()
+          'anio': $('#lst_Anio5').val(),
+          'c':1
         };
     //el metodo ajax para consulta asyncronica
     $.ajax({

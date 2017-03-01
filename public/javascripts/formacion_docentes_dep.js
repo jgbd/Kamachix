@@ -43,11 +43,11 @@ $(document).ready(function(){
        var conta=json.rowCount;
        //ciclo para llenar los datos en las filas en r
        for(var i = conta-4 ; i<conta; i++){
-         r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].formacion+
+         r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
          "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
        }
 
-       tittle="Formacion docentes del año: "+json.rows[conta-3].anio;
+       tittle="Formacion docentes del año: "+json.rows[conta-3].anio+"<br> Departamento de "+json.rows[conta-3].name+" Periodo: "+json.rows[conta-3].periodo;
        $("#datBody").append(r);
        $("#titulo").append(tittle);
 
@@ -55,7 +55,7 @@ $(document).ready(function(){
 
        for(var i =conta-4; i<conta;i++){
          var programa = {
-           "nivel": json.rows[i].formacion,
+           "nivel": json.rows[i].nom_formacion,
            "cantidad": json.rows[i].t_completo,
            "color": colo3[i]
          }
@@ -67,10 +67,10 @@ $(document).ready(function(){
        var magist=((json.rows[conta-2].t_completo*100)/150).toFixed(2);
        var profes=json.rows[conta-1].t_completo;
 
-       var nomdoc=json.rows[conta-4].formacion;
-       var nomesp=json.rows[conta-3].formacion;
-       var nommag=json.rows[conta-2].formacion;
-       var nompro=json.rows[conta-1].formacion;
+       var nomdoc=json.rows[conta-4].nom_formacion;
+       var nomesp=json.rows[conta-3].nom_formacion;
+       var nommag=json.rows[conta-2].nom_formacion;
+       var nompro=json.rows[conta-1].nom_formacion;
 
        //cambio de graficas de barras
         $("#graph1").change(function () {
@@ -136,25 +136,57 @@ $(document).ready(function(){
      type: "GET", //el el tipo de peticion puede ser GET y POsT
      url: "consultaFormacion", //la url del que realizara la consulta
      dataType : 'json',
-     data:{c:2},//Primera consulta
+     data:{c:4},//Primera consulta
      //se ejecutasi todo se realiza bien
      success : function(json) {
+       //llenado de lista de departamentos
        var r2="";
        for(var j = 0 ; j<json.rowCount; j++){
-         r2 = r2+"<option value='"+json.rows[j].anio+"'>"+ json.rows[j].anio+"</option> ";
+         r2 = r2+"<option value='"+json.rows[j].name+"'>"+ json.rows[j].name+"</option> ";
        }
-       $("#lst_Anio5").append(r2);
+       $("#lst_dep").append(r2);
+      
+       // llenado de lista de periodos
+        var r4="";
+       for(var j = 1 ; j<3; j++){
+         r4 = r4+"<option value='"+j+"'>"+j+"</option> ";
+       }
+       $("#lst_per").append(r4);
+
+      }
+   });
+
+  //ajax para llenar la lista de años
+  $.ajax({
+     type: "GET", //el el tipo de peticion puede ser GET y POsT
+     url: "consultaFormacion", //la url del que realizara la consulta
+     dataType : 'json',
+     data:{c:5},//Primera consulta
+     //se ejecutasi todo se realiza bien
+     success : function(json) {
+       
+       // llenado de lista de años
+        var r3="";
+       for(var i = 0 ; i<json.rowCount; i++){
+         r3 = r3+"<option value='"+json.rows[i].anio+"'>"+ json.rows[i].anio+"</option> ";
+       }
+       $("#lst_anio").append(r3);       
+        
+
       }
    });
   }
 
   // ajax para consulta de formacion docente por año
 
-  $('#frmformacion').submit(function(event) {
+  $('#frmDepartamento').submit(function(event) {
     //se coloca los datos del form en el formato adecuado para enviar al server
     var formData = {
           //aqui se encriptan en MD5 antes de enviar
-          'anio': $('#lst_Anio5').val()
+          'anio': $('#lst_Anio').val(),
+          'c':2,
+          'name':$("#lst_dep").val(),
+          'periodo':$("#lst_per").val()
         };
     //el metodo ajax para consulta asyncronica
     $.ajax({
@@ -173,11 +205,11 @@ $(document).ready(function(){
        if(conta == 4){
          //ciclo para llenar los datos en las filas en r
           for(var i = conta-4 ; i<conta; i++){
-            r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].formacion+
+            r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
             "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
           }
 
-          tittle="Formacion docentes del año: "+json.rows[conta-3].anio;
+          tittle="Formacion docentes del año: "+json.rows[conta-3].anio+"<br> Departamento de "+json.rows[conta-3].name+"  Periodo: "+json.rows[conta-3].periodo;
           $("#datBody").append(r);
           $("#titulo").append(tittle);
 
@@ -185,7 +217,7 @@ $(document).ready(function(){
 
           for(var i =0; i<4;i++){
             var programa = {
-              "nivel": json.rows[i].formacion,
+              "nivel": json.rows[i].nom_formacion,
               "cantidad": json.rows[i].t_completo,
               "color": colo3[i]
             }
@@ -197,10 +229,10 @@ $(document).ready(function(){
           var magist=((json.rows[2].t_completo*100)/150).toFixed(2);
           var profes=json.rows[3].t_completo;
 
-          var nomdoc=json.rows[0].formacion;
-          var nomesp=json.rows[1].formacion;
-          var nommag=json.rows[2].formacion;
-          var nompro=json.rows[3].formacion;
+          var nomdoc=json.rows[0].nom_formacion;
+          var nomesp=json.rows[1].nom_formacion;
+          var nommag=json.rows[2].nom_formacion;
+          var nompro=json.rows[3].nom_formacion;
 
           //cambio de graficas de barras
             $("#graph1").change(function () {

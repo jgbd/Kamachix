@@ -15,16 +15,22 @@ block resto
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Filtros
         .modal-body
-          form#frmformacion.form-horizontal(action="formacion" method="POST")
+          form#frmDepartamento.form-horizontal(action="formacion" method="POST")
             br
-            .col-md-2              
-            .col-md-6
-              .col-md-2
-                label(for='lstprog') Año:  
-              .col-md-10
-                select#lst_Anio5.form-control
-                  p#filter!=dat                          
-            .col-md-4                      
+            .col-md-4
+              label
+                |Año: 
+              select#lst_anio.form-control              
+            .col-md-5              
+              label
+                |Departamento:               
+              select#lst_dep.form-control                                                            
+            .col-md-3                
+              label
+                |periodo:              
+              select#lst_per.form-control 
+            br   
+            br             
             input(type='submit' value='Filtrar' class='btn btn-info')
   .col-md-12     
     h3#titulo
