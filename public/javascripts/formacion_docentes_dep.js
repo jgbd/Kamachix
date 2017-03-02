@@ -47,7 +47,7 @@ $(document).ready(function(){
          "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
        }
 
-       tittle="Formacion docentes del año: "+json.rows[conta-3].anio+"<br> Departamento de "+json.rows[conta-3].name+" Periodo: "+json.rows[conta-3].periodo;
+       tittle="Nivel de formación de docentes tiempo completo <br> año: "+json.rows[conta-3].anio+"  Periodo: "+json.rows[conta-3].periodo+"<br>  Departamento de  "+json.rows[conta-3].name;
        $("#datBody").append(r);
        $("#titulo").append(tittle);
 
@@ -61,16 +61,8 @@ $(document).ready(function(){
          }
          arra.push(programa);
 
-       }
-       var doctor=((json.rows[0].t_completo *100)/50).toFixed(2);
-       var especia=((json.rows[3].t_completo *100)/60).toFixed(2);
-       var magist=((json.rows[1].t_completo*100)/150).toFixed(2);
-       var profes=json.rows[2].t_completo;
-
-       var nomdoc=json.rows[conta-4].nom_formacion;
-       var nomesp=json.rows[conta-3].nom_formacion;
-       var nommag=json.rows[conta-2].nom_formacion;
-       var nompro=json.rows[conta-1].nom_formacion;
+       }      
+       
 
        //cambio de graficas de barras
         $("#graph1").change(function () {
@@ -105,28 +97,18 @@ $(document).ready(function(){
            pieGraph3D(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
         }
       });
+      //grafica de pastel por defecto
        pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
-       if(doctor>100){
-         doctor=100;
-         gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
-       }
-       else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');}
-       if(especia>100){
-         especia=100;
-         gaugesGraph(especia,divsem2,'r','y','g',30,60, 'Especialista', '%');
-       }
-       else{
-         gaugesGraph(especia,divsem2,'r','y','g',30,60, 'Especialista', '%');
-       }
-       if(magist>100){
-         magist=100;
-         gaugesGraph(magist,divsem3,'r','y','g',40,70, 'Magister', '%');
-       }
-       else{
-         gaugesGraph(magist,divsem3,'r','y','g',40,70, 'Magister', '%');
-       }
+       
+      var totalTC=0; 
+      for(l=0;l<json.rowCount;l++){
+        totalTC +=json.rows[l].t_completo ;      
+      }
+      
+       //grafica de acelerometro simple: total profesores tiempo completo
+       simpleGauge(totalTC, divgraph3, "Profesores Tiempo completo");
 
-       gaugesGraph(profes,divsem4,'g','y','r',40,70, 'Cantidad Profesionales', ' ');
+       
      }
   });
  }
@@ -224,7 +206,7 @@ $(document).ready(function(){
             "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
           }
 
-          tittle="Formacion docentes del año: "+json.rows[conta-3].anio+"<br> Departamento de "+json.rows[conta-3].name+"  Periodo: "+json.rows[conta-3].periodo;
+          tittle="Nivel de formación de docentes tiempo completo <br> año: "+json.rows[conta-3].anio+"  Periodo: "+json.rows[conta-3].periodo+"<br>  Departamento de  "+json.rows[conta-3].name;
           $("#datBody").append(r);
           $("#titulo").append(tittle);
 
@@ -239,15 +221,7 @@ $(document).ready(function(){
             arra.push(programa);
 
           }
-           var doctor=((json.rows[0].t_completo *100)/50).toFixed(2);
-          var especia=((json.rows[1].t_completo *100)/60).toFixed(2);
-          var magist=((json.rows[2].t_completo*100)/150).toFixed(2);
-          var profes=json.rows[3].t_completo;
-
-          var nomdoc=json.rows[0].nom_formacion;
-          var nomesp=json.rows[1].nom_formacion;
-          var nommag=json.rows[2].nom_formacion;
-          var nompro=json.rows[3].nom_formacion;
+           
 
           //cambio de graficas de barras
             $("#graph1").change(function () {
@@ -282,29 +256,17 @@ $(document).ready(function(){
               pieGraph3D(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
             }
           });
-
+          //grafica de pastel por defecto
           pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
 
-          if(doctor>100){
-            doctor=100;
-            gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
+          //ciclo para calcular el total de profesores tiempo completo
+          var totalTC=0; 
+          for(l=0;l<json.rowCount;l++){
+            totalTC +=json.rows[l].t_completo ;      
           }
-          else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');}
-          if(especia>100){
-            especia=100;
-            gaugesGraph(especia,divsem2,'r','y','g',30,60, 'Especialista', '%');
-          }
-          else{
-            gaugesGraph(especia,divsem2,'r','y','g',30,60, 'Especialista', '%');
-          }
-          if(magist>100){
-            magist=100;
-            gaugesGraph(magist,divsem3,'r','y','g',40,70, 'Magister', '%');
-          }
-          else{
-            gaugesGraph(magist,divsem3,'r','y','g',40,70, 'Magister', '%');
-          }
-          gaugesGraph(profes,divsem4,'g','y','r',40,70, 'Cantidad Profesionales', ' ');
+          
+          //grafica de acelerometro simple: total profesores tiempo completo
+          simpleGauge(totalTC, divgraph3, "Profesores tiempo completo");
 
        }
        else{
