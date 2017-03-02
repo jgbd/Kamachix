@@ -62,10 +62,10 @@ $(document).ready(function(){
          arra.push(programa);
 
        }
-       var doctor=((json.rows[conta-4].t_completo *100)/50).toFixed(2);
-       var especia=((json.rows[conta-3].t_completo *100)/60).toFixed(2);
-       var magist=((json.rows[conta-2].t_completo*100)/150).toFixed(2);
-       var profes=json.rows[conta-1].t_completo;
+       var doctor=((json.rows[0].t_completo *100)/50).toFixed(2);
+       var especia=((json.rows[3].t_completo *100)/60).toFixed(2);
+       var magist=((json.rows[1].t_completo*100)/150).toFixed(2);
+       var profes=json.rows[2].t_completo;
 
        var nomdoc=json.rows[conta-4].nom_formacion;
        var nomesp=json.rows[conta-3].nom_formacion;
@@ -144,14 +144,8 @@ $(document).ready(function(){
        for(var j = 0 ; j<json.rowCount; j++){
          r2 = r2+"<option value='"+json.rows[j].name+"'>"+ json.rows[j].name+"</option> ";
        }
-       $("#lst_dep").append(r2);
+       $("#lst_dep").append(r2);      
       
-       // llenado de lista de periodos
-        var r4="";
-       for(var j = 1 ; j<3; j++){
-         r4 = r4+"<option value='"+j+"'>"+j+"</option> ";
-       }
-       $("#lst_per").append(r4);
 
       }
    });
@@ -175,16 +169,37 @@ $(document).ready(function(){
 
       }
    });
+
+   //ajax para llenar la lista de periodos
+  $.ajax({
+     type: "GET", //el el tipo de peticion puede ser GET y POsT
+     url: "consultaFormacion", //la url del que realizara la consulta
+     dataType : 'json',
+     data:{c:6},//Primera consulta
+     //se ejecutasi todo se realiza bien
+     success : function(json) {
+       
+       // llenado de lista de años
+        var r4="";
+       for(var k = 0 ; k<json.rowCount; k++){
+         r4 = r4+"<option value='"+json.rows[k].periodo+"'>"+ json.rows[k].periodo+"</option> ";
+       }
+       $("#lst_per").append(r4);       
+        
+
+      }
+   });
   }
 
   // ajax para consulta de formacion docente por año
 
   $('#frmDepartamento').submit(function(event) {
     //se coloca los datos del form en el formato adecuado para enviar al server
+    
     var formData = {
           //aqui se encriptan en MD5 antes de enviar
-          'anio': $('#lst_Anio').val(),
-          'c':2,
+          'anio': $('#lst_anio').val(),
+          'c':7,
           'name':$("#lst_dep").val(),
           'periodo':$("#lst_per").val()
         };
@@ -224,7 +239,7 @@ $(document).ready(function(){
             arra.push(programa);
 
           }
-          var doctor=((json.rows[0].t_completo *100)/50).toFixed(2);
+           var doctor=((json.rows[0].t_completo *100)/50).toFixed(2);
           var especia=((json.rows[1].t_completo *100)/60).toFixed(2);
           var magist=((json.rows[2].t_completo*100)/150).toFixed(2);
           var profes=json.rows[3].t_completo;
@@ -294,6 +309,9 @@ $(document).ready(function(){
        }
        else{
          alert('el año seleccionado no tiene suficientes datos. Por favor llene todos los datos de formacion docentes correspondientes a este año ');
+          $("#lst_anio").html('');
+          $("#lst_dep").html('');
+          $("#lst_per").html('');
          Load_first_time();
          Load_yearfirst_time();
        }

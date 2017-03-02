@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
 
   if(req.query.c == 1){
-    var sql='select nom_formacion,t_completo,anio from "Datawarehouse".formacion_kpi join formacion on formacion=cod_formacion order by anio,formacion,t_completo';
+    var sql='select nom_formacion,t_completo,anio from "Datawarehouse".formacion_kpi join formacion on formacion=cod_formacion order by anio desc limit 4';
   }
   else if (req.query.c ==2){
     var sql='select DISTINCT anio from "Datawarehouse".formacion_kpi order by anio DESC';
@@ -26,6 +26,10 @@ router.get('/', function(req, res, next) {
   }
   else if (req.query.c ==5){
     var sql='select DISTINCT anio from formacion_departamento order by anio DESC';
+  }
+
+  else if (req.query.c ==6){
+    var sql='select DISTINCT periodo from formacion_departamento';
   }
   else return console.log("error");
   //aquui se crea la conexion a DB
@@ -72,9 +76,9 @@ router.post('/', function(req, res, next) {
     var sql='select nom_formacion,t_completo,anio from "Datawarehouse".formacion_kpi join formacion on formacion=cod_formacion where anio=$1 order by anio,formacion,t_completo';
     ani = [req.body.anio];
   }
-  else if (req.body.c ==2){
-    var sql='select departamento,name,t_completo,t_ocasional,hora_catedra,anio,periodo,nom_formacion from formacion_departamento join formacion on formacion=cod_formacion join users on departamento=codigo where departamento=$1 and anio=$2 and periodo=$3 order by anio,formacion,t_completo';
-    ani = [req.body.name,req.body.anio,req.body.periodo];
+  else if (req.body.c ==7){    
+    var sql='select departamento,name,t_completo,t_ocasional,hora_catedra,anio,periodo,nom_formacion from formacion_departamento join formacion on formacion=cod_formacion join users on departamento=codigo where name=$1 and anio=$2 and periodo=$3 order by anio,formacion,t_completo';
+    ani = [req.body.name,req.body.anio,req.body.periodo];    
   }
 
   
@@ -97,6 +101,7 @@ router.post('/', function(req, res, next) {
 
         // se envia el json con el resultado de la consulta
         res.json(result);
+        //console.log(result);
 
       });
     });
