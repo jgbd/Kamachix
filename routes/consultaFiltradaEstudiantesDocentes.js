@@ -14,7 +14,6 @@ router.post('/', function(req, res, next) {
     //arreglo que contine filtros
     var filters = [];
     //consulta basica sin condiciones
-    //var sql ='SELECT pe."anho", ROUND(pe."semestreA"/pd."semestreA",0) as razonA, ROUND(pe."semestreB"/pd."semestreB",0) as razonB, pd."tipo" FROM "poblacion_estudiantes" pe JOIN "poblacion_docentes" pd ON pe.anho=pd.anho WHERE pd."tipo"='+"'1'"+' AND ';
     var sql ='SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual FROM "Datawarehouse"."KPI_Students_per_Complete_Time_Teacher" spctt WHERE ';
 
     //concatena al sql los valores d elos filtros

@@ -26,8 +26,6 @@ function Load_Insert(){//Define si muestra o no el formulario
                       //de ingreso de datos tomando en cuenta la fecha de sistema y
                       //anterior entrada
   var anho=now.getFullYear();//formato string año actual
-  //var mes=now.getMonth()+1;
-  //var mes=7;
   if(mes<3){
     $.ajax({
       type: "get",
@@ -87,7 +85,6 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
         $("#tableres").append('</tr>');
        }
        //cambio
-      //$("input[name=graph1]").click(function () {
       $("#graph1").change(function () {
         if($(this).val() === '1'){
           columnGraph(json.rows,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
@@ -125,10 +122,8 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
      var now = new Date();
      var fin;
      $("#lblper").html("Indicador Estudiantes por Docente Tiempo Completo años: "+json.rows[0].Anho+" a "+now.getFullYear());
-     //$("#inicio").html("Indicador año: "+json.rows[0].Anho);
      if(mes<=6) fin = now.getFullYear()-1;
      else fin = now.getFullYear();
-     //$("input[name=graph3]").click(function () {
      $("#graph3").change(function () {
         if($(this).val() === '1'){
           columnTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
@@ -208,8 +203,6 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
       success : function(json) {
         var now = new Date();
         $("#lblper").html("<br> Indicador Estudiantes por Docente Tiempo Completo años: "+json.datos[0].Anho+" a "+json.datos[json.count-1].Anho);
-        //$("#inicio").html("Indicador año: "+json.datos[0].Anho);
-        //$("#fin").html("Indicador año: "+json.datos[json.count-1].Anho);
         $("#graph3").change(function () {
           if($(this).val() === '1'){
             columnTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0,"A","B");
@@ -227,13 +220,6 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
             barTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],40,30,"A","B");
           }
         });
-        /*$("input[name=graph3]").click(function () {
-          if($(this).val() === '1'){
-            columnTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2]);
-          }else{
-            lineTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2]);
-          }
-        });*/
         columnTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0,"A","B");
         lineTwoGraph(json.datos,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],"A","B");
         gaugesGraph(json.datos[0].razonanual,'divper1','g','y','r',35,45, 'Estudiantes por Docente año: '+json.datos[0].Anho, '%');
