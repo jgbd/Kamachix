@@ -55,7 +55,7 @@ $(document).ready(function(){
 
 });
 
-//se invoca para generar el pedf del reporte
+//se invoca para generar el pdf del reporte
 function getPDF(){
 
   //se inicia el servidor de reportes
@@ -165,6 +165,16 @@ function getPDF(){
      jsreport.download('myReport.pdf', request);
    }
 
+
+}
+
+//se invoca para editar los informes
+function editRepor(){
+  alert('La edicion solo es para este informe');
+  //se recorre los atribbutos del infomre y se quita el solo lectura
+  for (var i = 1; i < 19; i++) {
+    $("#atrinfo"+i).removeAttr('readonly');
+  }
 
 }
 
