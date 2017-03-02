@@ -171,7 +171,7 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
       });
      columnTwoGraph(datarray,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
      lineTwoGraph(datarray,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
-     gaugesGraph(json.rows[0].razonanual,'divper1','g','y','r',35,45, 'Estudiantes por Docente año:'+json.rows[0].Anho, '%');
+     gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','g','y','r',35,45, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '%');
      gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','g','y','r',35,45, 'Estudiantes por Docente año: '+ fin, '%');
    }
  });
