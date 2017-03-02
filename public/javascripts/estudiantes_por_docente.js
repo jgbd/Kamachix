@@ -72,16 +72,16 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
 
         //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
         if(json.rows[j].razonanual>=45)
-          $("#tableres").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[j].razonanual+' de 35)"></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[j].razonanual+' de 35)"></td>');
         else if(json.rows[j].razonanual<45 && json.rows[j].razonanual>=35)
           if(j>0 && json.rows[j-1].razonanual<35)
-              $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo está bajando ('+json.rows[j].razonanual+' de 35)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo está bajando ('+json.rows[j].razonanual+' de 35)"></td>');
           else if(j>0 && json.rows[j-1].razonanual<json.rows[j].razonanual)
-              $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[j].razonanual+' de 35)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[j].razonanual+' de 35)"></td>');
           else
-              $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo está cerca a alcanzarse ('+json.rows[j].razonanual+' de 35)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo está cerca a alcanzarse ('+json.rows[j].razonanual+' de 35)"></td>');
         else
-          $("#tableres").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Estudiantes por Docente Tiempo Completo alcanzada ('+json.rows[j].razonanual+' de 35)"></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Estudiantes por Docente Tiempo Completo alcanzada ('+json.rows[j].razonanual+' de 35)"></td>');
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         $("#tableres").append('</tr>');
