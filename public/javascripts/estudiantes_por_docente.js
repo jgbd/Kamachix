@@ -84,28 +84,42 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
 
         $("#tableres").append('</tr>');
        }
+
+       //--Filtra gráficas a 5 años-----------------------------
+       var datarray=[];
+        for (var i = json.rowCount-5; i < json.rowCount; i++) {
+            var d ={
+              "razona": json.rows[i].razona,
+              "razonb": json.rows[i].razonb,
+              "Anho": json.rows[i].Anho,
+              "razonanual": json.rows[i].razonanual
+            };
+            datarray.push(d);
+        }
+        //-------------------------------------------------------
+
        //cambio
       $("#graph1").change(function () {
         if($(this).val() === '1'){
-          columnGraph(json.rows,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
+          columnGraph(datarray,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
         }
         else if($(this).val() === '2'){
-          columnGraph(json.rows,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,40,30);
+          columnGraph(datarray,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,40,30);
         }
         else if($(this).val() === '3'){
-          lineGraph(json.rows,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name);
+          lineGraph(datarray,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name);
         }
         else if($(this).val() === '4'){
-          areaGraph(json.rows,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name);
+          areaGraph(datarray,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name);
         }
         else if($(this).val() === '5'){
-          barGraph(json.rows,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
+          barGraph(datarray,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
         }
         else if($(this).val() === '6'){
-          barGraph(json.rows,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,40,30);
+          barGraph(datarray,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,40,30);
         }
       });
-      columnGraph(json.rows,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
+      columnGraph(datarray,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
       if(mes<=6) gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph2','g','y','r',35,45,'Estudiantes por Docente', '%');
       else gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph2','g','y','r',35,45,'Estudiantes por Docente', '%');
    }
@@ -121,28 +135,42 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
    success : function(json) {
      var now = new Date();
      var fin;
-     $("#lblper").html("Indicador Estudiantes por Docente Tiempo Completo años: "+json.rows[0].Anho+" a "+now.getFullYear());
+     $("#lblper").html("Indicador Estudiantes por Docente Tiempo Completo años: "+json.rows[json.rowCount-5].Anho+" a "+now.getFullYear());
      if(mes<=6) fin = now.getFullYear()-1;
      else fin = now.getFullYear();
+
+     //--Filtra gráficas a 5 años-----------------------------
+       var datarray=[];
+        for (var i = json.rowCount-5; i < json.rowCount; i++) {
+            var d ={
+              "razona": json.rows[i].razona,
+              "razonb": json.rows[i].razonb,
+              "Anho": json.rows[i].Anho,
+              "razonanual": json.rows[i].razonanual
+            };
+            datarray.push(d);
+        }
+        //-------------------------------------------------------
+     
      $("#graph3").change(function () {
         if($(this).val() === '1'){
-          columnTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
+          columnTwoGraph(datarray,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
         }
         else if($(this).val() === '2'){
-          columnTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"A","B");
+          columnTwoGraph(datarray,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"A","B");
         }
         else if($(this).val() === '3'){
-          lineTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
+          lineTwoGraph(datarray,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
         }
         else if($(this).val() === '4'){
-          barTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
+          barTwoGraph(datarray,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
         }
         else if($(this).val() === '5'){
-          barTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"A","B");
+          barTwoGraph(datarray,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"A","B");
         }
       });
-     columnTwoGraph(json.rows,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
-     lineTwoGraph(json.rows,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
+     columnTwoGraph(datarray,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
+     lineTwoGraph(datarray,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
      gaugesGraph(json.rows[0].razonanual,'divper1','g','y','r',35,45, 'Estudiantes por Docente año:'+json.rows[0].Anho, '%');
      gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','g','y','r',35,45, 'Estudiantes por Docente año: '+ fin, '%');
    }
