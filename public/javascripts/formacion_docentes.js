@@ -62,15 +62,15 @@ $(document).ready(function(){
          arra.push(programa);
 
        }
-       var doctor=((json.rows[conta-4].t_completo *100)/50).toFixed(2);
+       var doctor=((json.rows[conta-1].t_completo *100)/50).toFixed(2);
        var especia=((json.rows[conta-3].t_completo *100)/60).toFixed(2);
-       var magist=((json.rows[conta-2].t_completo*100)/150).toFixed(2);
-       var profes=json.rows[conta-1].t_completo;
-
-       var nomdoc=json.rows[conta-4].nom_formacion;
+       var magist=((json.rows[conta-4].t_completo*100)/150).toFixed(2);
+       var profes=json.rows[conta-2].t_completo;
+       
+       /*var nomdoc=json.rows[conta-4].nom_formacion;
        var nomesp=json.rows[conta-3].nom_formacion;
        var nommag=json.rows[conta-2].nom_formacion;
-       var nompro=json.rows[conta-1].nom_formacion;
+       var nompro=json.rows[conta-1].nom_formacion;*/
 
        //cambio de graficas de barras
         $("#graph1").change(function () {
@@ -106,6 +106,7 @@ $(document).ready(function(){
         }
       });
        pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+       //semaforos
        if(doctor>100){
          doctor=100;
          gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
@@ -113,20 +114,20 @@ $(document).ready(function(){
        else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');}
        if(especia>100){
          especia=100;
-         gaugesGraph(especia,divsem2,'r','y','g',30,60, 'Especialista', '%');
+         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
        }
        else{
-         gaugesGraph(especia,divsem2,'r','y','g',30,60, 'Especialista', '%');
+         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
        }
        if(magist>100){
          magist=100;
-         gaugesGraph(magist,divsem3,'r','y','g',40,70, 'Magister', '%');
+         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '%');
        }
        else{
-         gaugesGraph(magist,divsem3,'r','y','g',40,70, 'Magister', '%');
+         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '%');
        }
 
-       gaugesGraph(profes,divsem4,'g','y','r',40,70, 'Cantidad Profesionales', ' ');
+       gaugesGraph(profes,divsem4,'g','y','r',25,50, 'Cantidad Profesionales', ' ');
      }
   });
  }
@@ -193,15 +194,15 @@ $(document).ready(function(){
             arra.push(programa);
 
           }
-          var doctor=((json.rows[0].t_completo *100)/50).toFixed(2);
+          var doctor=((json.rows[3].t_completo *100)/50).toFixed(2);
           var especia=((json.rows[1].t_completo *100)/60).toFixed(2);
-          var magist=((json.rows[2].t_completo*100)/150).toFixed(2);
-          var profes=json.rows[3].t_completo;
+          var magist=((json.rows[0].t_completo*100)/150).toFixed(2);
+          var profes=json.rows[2].t_completo;
 
-          var nomdoc=json.rows[0].nom_formacion;
+          /*var nomdoc=json.rows[0].nom_formacion;
           var nomesp=json.rows[1].nom_formacion;
           var nommag=json.rows[2].nom_formacion;
-          var nompro=json.rows[3].nom_formacion;
+          var nompro=json.rows[3].nom_formacion;*/
 
           //cambio de graficas de barras
             $("#graph1").change(function () {
@@ -263,6 +264,7 @@ $(document).ready(function(){
        }
        else{
          alert('el año seleccionado no tiene suficientes datos. Por favor llene todos los datos de formacion docentes correspondientes a este año ');
+         $("#lst_Anio5").html('');
          Load_first_time();
          Load_yearfirst_time();
        }
