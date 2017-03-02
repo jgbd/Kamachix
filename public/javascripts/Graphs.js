@@ -698,3 +698,52 @@ function areaGraph(data, contentname, title, namecolumn, namerows){
     "dataProvider": data
   } );
 }
+
+//funcion para grafica de acelerometro simple: indica solo una cantidad 
+function simpleGauge(data, contentname, title){
+  var chart = AmCharts.makeChart(contentname, {
+    "theme": "light",
+    "type": "gauge",
+    "titles": [{"text":title}],
+    "axes": [{
+      "topTextFontSize": 12,
+      "topTextYOffset": 50,
+      "axisColor": "#31d6ea",
+      "axisThickness": 1,
+      "endValue": 100,
+      "gridInside": true,
+      "inside": true,
+      "radius": "50%",
+      "valueInterval": 10,
+      "tickColor": "#67b7dc",
+      "startAngle": -90,
+      "endAngle": 90,      
+      "bandOutlineAlpha": 0,
+      "bands": [{
+        "color": "#0080ff",
+        "endValue": 100,
+        "innerRadius": "105%",
+        "radius": "170%",
+        "gradientRatio": [0.5, 0, -0.5],
+        "startValue": 0
+      }, {
+        "color": "#3cd3a3",
+        "endValue": data,
+        "innerRadius": "105%",
+        "radius": "170%",
+        "gradientRatio": [0.5, 0, -0.5],
+        "startValue": 0
+      }],
+      "topText": "Total Profesores: "+data,
+    }],
+    "arrows": [{
+      "alpha": 1,
+      "innerRadius": "35%",
+      "nailRadius": 0,
+      "radius": "170%",
+      "value":data
+    }]
+  });
+
+}
+  

@@ -46,13 +46,15 @@ $(document).ready(function(){
          r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
          "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
        }
-
-       tittle="Formacion docentes del año: "+json.rows[conta-3].anio;
+       /*var fecha = new Date();
+       var ano = fecha.getFullYear();
+       alert('El año actual es: '+ano);*/
+       tittle="Nivel de formación de docentes tiempo completo del año: "+json.rows[conta-3].anio;
        $("#datBody").append(r);
        $("#titulo").append(tittle);
 
        var arra=[];
-
+       //ciclo para llenar  el array llamado arra con los datos que vana contener las diferentes graficas 
        for(var i =conta-4; i<conta;i++){
          var programa = {
            "nivel": json.rows[i].nom_formacion,
@@ -62,9 +64,10 @@ $(document).ready(function(){
          arra.push(programa);
 
        }
-       var doctor=((json.rows[conta-1].t_completo *100)/50).toFixed(2);
-       var especia=((json.rows[conta-3].t_completo *100)/60).toFixed(2);
-       var magist=((json.rows[conta-4].t_completo*100)/150).toFixed(2);
+       // calculo de la meta del indicador para cada nivel de formacion en porcentajes 
+       var doctor=((json.rows[conta-1].t_completo *100)/50).toFixed(1);
+       var especia=((json.rows[conta-3].t_completo *100)/60).toFixed(1);
+       var magist=((json.rows[conta-4].t_completo*100)/150).toFixed(1);
        var profes=json.rows[conta-2].t_completo;
        
        /*var nomdoc=json.rows[conta-4].nom_formacion;
@@ -93,9 +96,9 @@ $(document).ready(function(){
             barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
           }
         });
-
-       //
+       //grafica que aparecera por defecto
        columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
+
         // Cambio de graficas de pastel
       $("#graph2").change(function () {
         if($(this).val() === '1'){
@@ -105,26 +108,28 @@ $(document).ready(function(){
            pieGraph3D(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
         }
       });
+        // grifica pie que aparece por defecto
        pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+
        //semaforos
        if(doctor>100){
          doctor=100;
-         gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
+         gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '% \n Meta: 50');
        }
-       else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');}
+       else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '% \n Meta: 50');}
        if(especia>100){
          especia=100;
-         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
+         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '% \n Meta: 60');
        }
        else{
-         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
+         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '% \n Meta: 60');
        }
        if(magist>100){
          magist=100;
-         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '%');
+         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% \n Meta: 150');
        }
        else{
-         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '%');
+         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% \n Meta: 150');
        }
 
        gaugesGraph(profes,divsem4,'g','y','r',25,50, 'Cantidad Profesionales', ' ');
@@ -179,7 +184,7 @@ $(document).ready(function(){
             "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
           }
 
-          tittle="Formacion docentes del año: "+json.rows[conta-3].anio;
+          tittle="Nivel de formación de docentes tiempo completo del año: "+json.rows[conta-3].anio;
           $("#datBody").append(r);
           $("#titulo").append(tittle);
 
@@ -240,11 +245,14 @@ $(document).ready(function(){
 
           pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
 
+          //graficas de acelerometro
+          //Doctor
           if(doctor>100){
             doctor=100;
             gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
           }
           else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');}
+          //Especialista
           if(especia>100){
             especia=100;
             gaugesGraph(especia,divsem2,'r','y','g',30,60, 'Especialista', '%');
@@ -252,6 +260,7 @@ $(document).ready(function(){
           else{
             gaugesGraph(especia,divsem2,'r','y','g',30,60, 'Especialista', '%');
           }
+          //Magister
           if(magist>100){
             magist=100;
             gaugesGraph(magist,divsem3,'r','y','g',40,70, 'Magister', '%');
@@ -259,7 +268,8 @@ $(document).ready(function(){
           else{
             gaugesGraph(magist,divsem3,'r','y','g',40,70, 'Magister', '%');
           }
-          gaugesGraph(profes,divsem4,'g','y','r',40,70, 'Cantidad Profesionales', ' ');
+          //Profesionales
+          gaugesGraph(profes,divsem4,'g','y','r',40,70, 'Cantidad Profesionales', ' ');     
 
        }
        else{
@@ -268,7 +278,6 @@ $(document).ready(function(){
          Load_first_time();
          Load_yearfirst_time();
        }
-
        
        
      }

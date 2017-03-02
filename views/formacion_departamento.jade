@@ -56,22 +56,18 @@ block resto
             optgroup(label='Tendencia')
               option(value='3') Línea
               option(value='4') Area
-    .col-md-6 
-      #divgraph2.col-md-12  
-      .col-md-12
-          select#graph2
-            option(selected='', value='1') Seleccione un tipo de gráfica
-            optgroup(label='Pastel')
-              option(value='1') 2D
-              option(value='2') 3D           
+  .col-md-12
+    .col-md-6
+      #divgraph2.col-md-12        
+        select#graph2
+          option(selected='', value='1') Seleccione un tipo de gráfica
+          optgroup(label='Pastel')
+            option(value='1') 2D
+            option(value='2') 3D           
       
-    #divgraph3.col-md-6
-      h4
-        |Indicador de Meta
-      #divsem1.col-md-6
-      #divsem2.col-md-6
-      #divsem3.col-md-6
-      #divsem4.col-md-6    
+    .col-md-6
+      #divgraph3.col-md-12
+          
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
   
