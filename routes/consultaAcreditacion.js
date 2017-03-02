@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
       return console.error('error fetching client from pool', err);
     }
     //Aqui es donde se realiza el query de la DB
-    //resive el sql, el arreglo siguiente contiene los parametros que van en el sql  preparado
+    //recibe el sql, el arreglo siguiente contiene los parametros que van en el sql  preparado
     //la funcion anonima recive la variable de err que controla el error  y la result
     //que es la que controla el resultado de la consulta el cual es un JSON
     client.query(sql, beforedata,function(err, result) {
