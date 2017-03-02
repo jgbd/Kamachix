@@ -107,11 +107,13 @@ function getPDF(){
   var contextg2 = canvasg1.getContext("2d");
   contextg2.clearRect(0, 0, canvasg2.width, canvasg2.height);
   canvg(canvasg2, svg2);
-  var imgData2 = canvasg2.toDataURL('image/png');
+  var imgData2 = canvasg2.toDataURL('image/jpg');
 
   atrind.push(imgData2);
 
-  alert(atrind[22]);
+  //
+  // alert(atrind[21]);
+  // alert(atrind[22]);
 
   //se crea la variable que contiene todo las configuraciones para e reportes
   var request = {
@@ -153,7 +155,17 @@ function getPDF(){
 
    jsreport.headers['Content-Type'] = "application/json " ;
 
-   jsreport.render('_blank', request);
+   var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+   if(!isOpera){
+    //  alert('hola')
+     jsreport.render('_blank', request);
+
+   }else{
+     jsreport.download('myReport.pdf', request);
+   }
+
+
 }
 
 //abre el modal de reportes
