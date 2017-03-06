@@ -13,14 +13,14 @@ var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
   if(req.query.c == 1){
-    var sql = 'SELECT cd.programa, p.nombre FROM "Datawarehouse"."KPI_Cohort_Dropout" cd JOIN public.programas p ON p.snies=cd.programa';
+    var sql = 'SELECT cd.programa, p.nombre FROM "Datawarehouse"."KPI_Desercion_Cohorte" cd JOIN public.programas p ON p.snies=cd.programa';
     if(req.session.rol!=1)
       sql=sql+' WHERE p.departamento='+"'"+req.session.codigo+"'"+' OR cd.programa = '+"'000000'"+' GROUP BY cd.programa, p.nombre ORDER BY p.nombre';
     else
       sql=sql+' GROUP BY cd.programa, p.nombre ORDER BY p.nombre';
   }else if (req.query.c ==2){
     var prog=[req.query.program];
-    var sql = 'SELECT chd.periodo FROM	"Datawarehouse"."KPI_Cohort_Dropout" chd WHERE chd."programa" LIKE $1 GROUP BY chd.periodo ORDER BY chd.periodo';
+    var sql = 'SELECT chd.periodo FROM	"Datawarehouse"."KPI_Desercion_Cohorte" chd WHERE chd."programa" LIKE $1 GROUP BY chd.periodo ORDER BY chd.periodo';
   }
   else return console.log("error");
   //aqui se crea la conexion a DB
