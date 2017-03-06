@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
+//libreria cargar archivos al servidor
 var fileUpload = require('express-fileupload');
 
 //Libreria para variables de session
