@@ -12,7 +12,7 @@ var pool = configdb.configdb();
 //next que es la siguiente function
 
 router.get('/', function(req, res, next) {
-  var sql ='SELECT p.abreviatura, sl."Nivel", sl."Anho" FROM "Datawarehouse"."KPI_Satisfaction_level" sl JOIN public.programas p ON p.snies=sl."Programa" WHERE sl."Programa" = '+"'000000'"+' ORDER BY p."abreviatura", sl."Anho"';
+  var sql ='SELECT p.abreviatura, sl."Nivel", sl."Anho" FROM "Datawarehouse"."KPI_Nivel_Satisfaccion" sl JOIN public.programas p ON p.snies=sl."Programa" WHERE sl."Programa" = '+"'000000'"+' ORDER BY p."abreviatura", sl."Anho"';
   //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
@@ -59,7 +59,7 @@ router.post('/', function(req, res, next) {
     //arreglo que contine filtros
     var filters=[req.body.program];
     //consulta basica sin condiciones
-    var sql ='SELECT p.abreviatura, sl."Nivel", sl."Anho" FROM "Datawarehouse"."KPI_Satisfaction_level" sl JOIN public.programas p ON p.snies=sl."Programa" WHERE ';
+    var sql ='SELECT p.abreviatura, sl."Nivel", sl."Anho" FROM "Datawarehouse"."KPI_Nivel_Satisfaccion" sl JOIN public.programas p ON p.snies=sl."Programa" WHERE ';
 
     //concatena al sql los valores d elos filtros
     sql=sql+'sl."Programa" = $1';

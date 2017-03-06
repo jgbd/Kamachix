@@ -34,19 +34,19 @@ router.post('/', function(req, res, next) {
  
   if(req.body.c == 1){
     
-    var sql='insert into "Datawarehouse".formacion_kpi values ($1,$2,$3,$4,$5)';
+    var sql='insert into "Datawarehouse".KPI_Formacion values ($1,$2,$3,$4,$5)';
     arre = [nom,canTC,canTO,canHC,anio];
   }
   else if (req.body.c == 2) {
 
-    var sql='select count(*) as conteo2 from "Datawarehouse".formacion_kpi where anio=$2 and formacion=$1';
+    var sql='select count(*) as conteo2 from "Datawarehouse".KPI_Formacion where anio=$2 and formacion=$1';
     arre = [nom,anio]
 
   }
 
   else if (req.body.c == 3) {
 
-    var sql='UPDATE "Datawarehouse".formacion_kpi SET t_completo = $2,t_ocasional = $3,hora_catedra=$4 where formacion=$1 and anio=$5';
+    var sql='UPDATE "Datawarehouse".KPI_Formacion SET t_completo = $2,t_ocasional = $3,hora_catedra=$4 where formacion=$1 and anio=$5';
     arre = [nom,canTC,canTO,canHC,anio];
 
   }

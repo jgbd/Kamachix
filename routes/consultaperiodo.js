@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
 
-  var sql ='SELECT p.abreviatura, pd."periodo", pd."graduados", pd."desertores", pd."desercion", pd."retencion" FROM "Datawarehouse"."KPI_Period_Dropout" pd JOIN public.programas p ON p.snies=pd.programa WHERE pd."programa" = '+"'000000'"+'ORDER BY pd."periodo" DESC LIMIT 5';
+  var sql ='SELECT p.abreviatura, pd."periodo", pd."graduados", pd."desertores", pd."desercion", pd."retencion" FROM "Datawarehouse"."KPI_Desercion_Periodo" pd JOIN public.programas p ON p.snies=pd.programa WHERE pd."programa" = '+"'000000'"+'ORDER BY pd."periodo" DESC LIMIT 5';
   //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
@@ -65,7 +65,7 @@ router.post('/',function(req, res, next){
   var periodfrom = req.body.periodfrom;
   var periodto = req.body.periodto;
 
-  var sql ='SELECT p.abreviatura, pd."periodo", pd."graduados", pd."desertores", pd."desercion", pd."retencion" FROM "Datawarehouse"."KPI_Period_Dropout" pd JOIN public.programas p ON p.snies=pd.programa WHERE ';
+  var sql ='SELECT p.abreviatura, pd."periodo", pd."graduados", pd."desertores", pd."desercion", pd."retencion" FROM "Datawarehouse"."KPI_Desercion_Periodo" pd JOIN public.programas p ON p.snies=pd.programa WHERE ';
 
   sql = sql+'pd.programa LIKE $1'
   if(periodfrom!=0){

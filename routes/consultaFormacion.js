@@ -73,7 +73,7 @@ router.post('/', function(req, res, next) {
   
   if(req.body.c == 1){
     //esta variable es la que contien la consulta a realizarse en la DB
-    var sql='select nom_formacion,t_completo,anio from "Datawarehouse".formacion_kpi join formacion on formacion=cod_formacion where anio=$1 order by anio,formacion,t_completo';
+    var sql='select nom_formacion,t_completo,anio from "Datawarehouse".KPI_Formacion join formacion on formacion=cod_formacion where anio=$1 order by anio,formacion,t_completo';
     ani = [req.body.anio];
   }
   else if (req.body.c ==7){    

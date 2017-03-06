@@ -27,7 +27,7 @@ router.post('/',function(req, res, next){
         arrdata.splice(0,1);
         arrdata.splice(arrdata.length-1,2);
         console.log(arrdata);
-        var sql = 'INSERT INTO "Datawarehouse"."KPI_Period_Dropout" VALUES ';
+        var sql = 'INSERT INTO "Datawarehouse"."KPI_Desercion_Periodo" VALUES ';
         for (var i = 0; i < arrdata.length; i++) {
           var cam = arrdata[i].split(',');
           console.log(arrdata[i].length);
