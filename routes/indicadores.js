@@ -8,13 +8,12 @@ router.get('/', function(req, res, next) {
     if(req.session.rol!=1){
       res.render('indicadores',{title:'Indicadores', rols:'display:none'});
     }else{
-      res.render('indicadores',{title:'Indicadores', rols:'display:block'});
+      res.render('indicadores',{title:'Indicadores', rols:'display:block', arch: 'display:block'});
     }
 
   }
   else {
-    res.send("No inicio Sesión Apropiadamente");
-    res.end();
+    res.render('indicadores',{title:'Indicadores', rols:'display:none', arch: 'display:none'});
   }
 });
 

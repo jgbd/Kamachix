@@ -4,8 +4,17 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
   //valida si esta creada la variable de sesion caso contrario envia mensaje de error
-  if(req.session.name!=null) res.render('formacion');
-  else res.send('No inicio sesion Apropiadamente');
+
+  if(req.session.name!=null) {
+    if(req.session.rol!=1){
+      res.render('formacion',{title:'formacion', rols:'display:none', arch: 'display:none'});
+    }else{
+      res.render('formacion',{title:'formacion', rols:'display:block', arch: 'display:block'});
+    }
+  }
+  else {
+    res.render('formacion',{title:'formacion', rols:'display:none', arch: 'display:none'});
+  }
 });
 
 

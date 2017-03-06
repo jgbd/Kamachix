@@ -6,14 +6,13 @@ router.get('/', function(req, res, next) {
   //valida si está creada la variable de sesion caso contrario envía mensaje de error
   if(req.session.name!=null) {
     if(req.session.rol!=1){
-      res.render('estudiantesDocente',{title:'Estudiantes Docente', rols:'display:none'});
+      res.render('estudiantesDocente',{title:'Estudiantes Docente', rols:'display:none', arch: 'display:none'});
     }else{
-      res.render('estudiantesDocente',{title:'Estudiantes Docente', rols:'display:block'});
+      res.render('estudiantesDocente',{title:'Estudiantes Docente', rols:'display:block', arch: 'display:block'});
     }
   }
   else {
-    res.send('Inicie Sesion Adecuadamente');
-    res.end();
+    res.render('estudiantesDocente',{title:'estudiantesDocente', rols:'display:none', arch: 'display:none'});
   }
 });
 

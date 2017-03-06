@@ -8,12 +8,11 @@ router.get('/', function(req, res, next) {
     if(req.session.rol!=1){
       res.render('periodo',{title:'Periodo', rols:'display:none'});
     }else{
-      res.render('periodo',{title:'Periodo', rols:'display:block'});
+      res.render('periodo',{title:'Periodo', rols:'display:block', arch: 'display:block'});
     }
   }
   else {
-    res.send("No inicio Sesión Apropiadamente");
-    res.end();
+    res.render('periodo',{title:'periodo', rols:'display:none', arch: 'display:none'});
   }
 });
 

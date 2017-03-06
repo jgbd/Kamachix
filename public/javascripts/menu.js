@@ -155,26 +155,15 @@ function getPDF(){
    jsreport.headers['Authorization'] = "Basic " + btoa("grias:griaskdd")
    jsreport.headers['Content-Type'] = "application/json " ;
 
-   jsreport.renderAsync(request).then(function(res) {
-  console.log(res);
+   var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
-  //open in new window
-  window.open(res.toDataURI())
+   if(!isOpera){
+    //  alert('hola')
+     jsreport.render('_blank', request);
 
-  //open download dialog
-  res.download('test.pdf')
-});
-
-
-  //  var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-   //
-  //  if(!isOpera){
-  //   //  alert('hola')
-  //    jsreport.render('_blank', request);
-   //
-  //  }else{
-  //    jsreport.download('myReport.pdf', request);
-  //  }
+   }else{
+     jsreport.download('myReport.pdf', request);
+   }
 
 
 }

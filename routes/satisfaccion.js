@@ -8,12 +8,11 @@ router.get('/', function(req, res, next) {
     if(req.session.rol!=1){
       res.render('satisfaccion',{title:'Satisfacción', rols:'display:none'});
     }else{
-      res.render('satisfaccion',{title:'Satisfacción', rols:'display:block'});
+      res.render('satisfaccion',{title:'Satisfacción', rols:'display:block', arch: 'display:block'});
     }
   }
   else {
-    res.send('No inicio sesion Apropiadamente');
-    res.end();
+    res.render('satisfaccion',{title:'satisfaccion', rols:'display:none', arch: 'display:none'});
   }
 });
 
