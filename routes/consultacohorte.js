@@ -62,7 +62,7 @@ router.post('/', function(req, res, next) {
   var periodfrom = req.body.periodfrom;
   var periodto = req.body.periodto;
 
-  var sql ='SELECT p.abreviatura, cd."periodo", cd."porcentaje" FROM "Datawarehouse"."KPI_Cohort_Dropout" cd JOIN public.programas p ON p.snies=cd."programa" WHERE ';
+  var sql ='SELECT p.abreviatura, cd."periodo", cd."porcentaje" FROM "Datawarehouse"."KPI_Desercion_Cohorte" cd JOIN public.programas p ON p.snies=cd."programa" WHERE ';
   //aqui se crea la conexion a DB
   //en este punto se colomcan los diferentes filtros que se aplicaran al sql de la DB
   sql = sql+'cd.programa LIKE $1'
