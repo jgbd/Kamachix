@@ -61,8 +61,8 @@ $(document).ready(function(){
          }
          arra.push(programa);
 
-       }      
-       
+       }
+
 
        //cambio de graficas de barras
         $("#graph1").change(function () {
@@ -89,7 +89,7 @@ $(document).ready(function(){
        //
        columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
         // Cambio de graficas de pastel
-      $("#graph2").change(function () {
+      $("#graph5").change(function () {
         if($(this).val() === '1'){
            pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
         }
@@ -99,16 +99,16 @@ $(document).ready(function(){
       });
       //grafica de pastel por defecto
        pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
-       
-      var totalTC=0; 
+
+      var totalTC=0;
       for(l=0;l<json.rowCount;l++){
-        totalTC +=json.rows[l].t_completo ;      
+        totalTC +=json.rows[l].t_completo ;
       }
-      
+
        //grafica de acelerometro simple: total profesores tiempo completo
        simpleGauge(totalTC, divgraph3, "Profesores Tiempo completo");
 
-       
+
      }
   });
  }
@@ -126,8 +126,8 @@ $(document).ready(function(){
        for(var j = 0 ; j<json.rowCount; j++){
          r2 = r2+"<option value='"+json.rows[j].name+"'>"+ json.rows[j].name+"</option> ";
        }
-       $("#lst_dep").append(r2);      
-      
+       $("#lst_dep").append(r2);
+
 
       }
    });
@@ -140,14 +140,14 @@ $(document).ready(function(){
      data:{c:5},//Primera consulta
      //se ejecutasi todo se realiza bien
      success : function(json) {
-       
+
        // llenado de lista de años
         var r3="";
        for(var i = 0 ; i<json.rowCount; i++){
          r3 = r3+"<option value='"+json.rows[i].anio+"'>"+ json.rows[i].anio+"</option> ";
        }
-       $("#lst_anio").append(r3);       
-        
+       $("#lst_anio").append(r3);
+
 
       }
    });
@@ -160,14 +160,14 @@ $(document).ready(function(){
      data:{c:6},//Primera consulta
      //se ejecutasi todo se realiza bien
      success : function(json) {
-       
+
        // llenado de lista de años
         var r4="";
        for(var k = 0 ; k<json.rowCount; k++){
          r4 = r4+"<option value='"+json.rows[k].periodo+"'>"+ json.rows[k].periodo+"</option> ";
        }
-       $("#lst_per").append(r4);       
-        
+       $("#lst_per").append(r4);
+
 
       }
    });
@@ -177,7 +177,7 @@ $(document).ready(function(){
 
   $('#frmDepartamento').submit(function(event) {
     //se coloca los datos del form en el formato adecuado para enviar al server
-    
+
     var formData = {
           //aqui se encriptan en MD5 antes de enviar
           'anio': $('#lst_anio').val(),
@@ -221,7 +221,7 @@ $(document).ready(function(){
             arra.push(programa);
 
           }
-           
+
 
           //cambio de graficas de barras
             $("#graph1").change(function () {
@@ -260,11 +260,11 @@ $(document).ready(function(){
           pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
 
           //ciclo para calcular el total de profesores tiempo completo
-          var totalTC=0; 
+          var totalTC=0;
           for(l=0;l<json.rowCount;l++){
-            totalTC +=json.rows[l].t_completo ;      
+            totalTC +=json.rows[l].t_completo ;
           }
-          
+
           //grafica de acelerometro simple: total profesores tiempo completo
           simpleGauge(totalTC, divgraph3, "Profesores tiempo completo");
 
@@ -278,8 +278,8 @@ $(document).ready(function(){
          Load_yearfirst_time();
        }
 
-       
-       
+
+
      }
    });
    closedivfilter();

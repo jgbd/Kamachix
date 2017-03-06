@@ -12,15 +12,8 @@
   todos los objetos en el json tienen un atributo color
 */
 
-//crear variable global a odas las funciones
+//crear variable global a todas las funciones
 
-// var menu_export = [ {
-//   "class": "export-main",
-//   "menu": [ {
-//     "label": "Guardar",
-//     "menu": [ "PNG", "JPG"]
-//   }]
-// }];
 
 var menu_export = [ {
   "class": "export-main",
@@ -498,10 +491,12 @@ function pieGraph(data, contentName, namePart, valuePart,title){
       },
       "fillColorsField": "color",
       "export": {
-        "enabled": true
+        "enabled": true,
+        "menu": menu_export
       }
     });
 }
+
 //grafica pastel 3d
 function pieGraph3D(data, contentName, namePart, valuePart,title){
     var chart = AmCharts.makeChart( contentName, {
@@ -525,7 +520,8 @@ function pieGraph3D(data, contentName, namePart, valuePart,title){
       },
       "fillColorsField": "color",
       "export": {
-        "enabled": true
+        "enabled": true,
+        "menu": menu_export
       }
     });
 }
@@ -699,7 +695,7 @@ function areaGraph(data, contentname, title, namecolumn, namerows){
   } );
 }
 
-//funcion para grafica de acelerometro simple: indica solo una cantidad 
+//funcion para grafica de acelerometro simple: indica solo una cantidad
 function simpleGauge(data, contentname, title){
   var chart = AmCharts.makeChart(contentname, {
     "theme": "light",
@@ -717,7 +713,7 @@ function simpleGauge(data, contentname, title){
       "valueInterval": 10,
       "tickColor": "#67b7dc",
       "startAngle": -90,
-      "endAngle": 90,      
+      "endAngle": 90,
       "bandOutlineAlpha": 0,
       "bands": [{
         "color": "#0080ff",
@@ -742,8 +738,11 @@ function simpleGauge(data, contentname, title){
       "nailRadius": 0,
       "radius": "170%",
       "value":data
-    }]
+    }],
+    "export": {
+      "enabled": true,
+      "menu": menu_export
+    }
   });
 
 }
-  

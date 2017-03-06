@@ -152,18 +152,29 @@ function getPDF(){
       "Content-Disposition": "filename=myreport.pdf"
     }
    };
-
+   jsreport.headers['Authorization'] = "Basic " + btoa("grias:griaskdd")
    jsreport.headers['Content-Type'] = "application/json " ;
 
-   var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+   jsreport.renderAsync(request).then(function(res) {
+  console.log(res);
 
-   if(!isOpera){
-    //  alert('hola')
-     jsreport.render('_blank', request);
+  //open in new window
+  window.open(res.toDataURI())
 
-   }else{
-     jsreport.download('myReport.pdf', request);
-   }
+  //open download dialog
+  res.download('test.pdf')
+});
+
+
+  //  var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+   //
+  //  if(!isOpera){
+  //   //  alert('hola')
+  //    jsreport.render('_blank', request);
+   //
+  //  }else{
+  //    jsreport.download('myReport.pdf', request);
+  //  }
 
 
 }
