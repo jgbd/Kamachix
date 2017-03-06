@@ -34,7 +34,7 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
     dataType : 'json',
     data:{c:1},//señala a consulta general de la tabla de acreditación en datawarehouse
     success : function(json) {
-      $("#lblper").html("Indicador Acreditación Alta Calidad años: "+json.rows[0].Anho+" a "+now.getFullYear());
+      $("#lblper").html("Indicador Acreditación Alta Calidad años: "+json.rows[json.rowCount-5].Anho+" a "+now.getFullYear());
       for (var j = json.rowCount-1; j >=0; j--) {
         $("#goal").html("Meta: "+20+"% (Acreditados/Total Programas)");
         $("#tableres").append('<tr>');
@@ -59,45 +59,59 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
 
         $("#tableres").append('</tr>');
       }
+
+      //--Filtra gráficas a 5 años-----------------------------
+      var datarray=[];
+      for (var i = json.rowCount-5; i < json.rowCount; i++) {
+        var d ={
+          "razon": json.rows[i].razon,
+          "Anho": json.rows[i].Anho,
+          "acreditados": json.rows[i].acreditados,
+          "programas": json.rows[i].programas
+        };
+        datarray.push(d);
+      }
+      //-------------------------------------------------------
+
       $("#graph1").change(function () {
         if($(this).val() === '1'){
-          columnGraph(json.rows,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,0,0);
+          columnGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,0,0);
         }
         if($(this).val() === '2'){
-          columnGraph(json.rows,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,40,30);
+          columnGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,40,30);
         }
         else if($(this).val() === '3'){
-          lineGraph(json.rows,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name);
+          lineGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name);
         }
         else if($(this).val() === '4'){
-          areaGraph(json.rows,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name);
+          areaGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name);
         }
         else if($(this).val() === '5'){
-          barGraph(json.rows,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,0,0);
+          barGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,0,0);
         }
         else if($(this).val() === '6'){
-          barGraph(json.rows,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,40,30);
+          barGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,40,30);
         }
       });
       $("#graph2").change(function () {
         if($(this).val() === '1'){
-          columnTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
+          columnTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
         }
         else if($(this).val() === '2'){
-          columnTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"Programas Acreditados","Total Programas");
+          columnTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"Programas Acreditados","Total Programas");
         }
         else if($(this).val() === '3'){
-          lineTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,"Programas Acreditados","Total Programas");
+          lineTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,"Programas Acreditados","Total Programas");
         }
         else if($(this).val() === '4'){
-          barTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
+          barTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
         }
         else if($(this).val() === '5'){
-          barTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"Programas Acreditados","Total Programas");
+          barTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"Programas Acreditados","Total Programas");
         }
       });
-      columnGraph(json.rows,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,0,0);
-      columnTwoGraph(json.rows,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
+      columnGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,0,0);
+      columnTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
       gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','r','y','g',10,20, 'Acreditación \n Alta Calidad', '%');
     }
   });
@@ -111,7 +125,6 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
     dataType : 'json',
     data:{c:2,flag:1},//señala a consulta general de programas acreditados activos en public
     success : function(json) {
-      //var now = new Date();
       $("#anhoactual").html('<h6>Programas Acreditados en Alta Calidad al año '+now.getFullYear()+'</h>');
       for (var j = json.rowCount-1; j >=0; j--) {
         $("#tableresprogram").append('<tr>');
@@ -265,7 +278,7 @@ function closedivfilter(){
 function Load_Update(){//carga datos obtenidos del formulario de ingreso de programa
   //se obtiene los valores de las input en variables
   var codigo = $("#cod1").val(), inicio= $("#ini1").val(), periodo = $("#per1").val();
-  Supr_Accreditation(codigo);//desactiva programa acreditado si este ya expiró
+  //Supr_Accreditation(codigo);//desactiva programa acreditado si este ya expiró
   //se coloca los datos del form en el formato adecuado para enviar al server
   var formData = {
     'codigo': codigo,

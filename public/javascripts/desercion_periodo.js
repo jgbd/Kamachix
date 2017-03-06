@@ -40,7 +40,6 @@ function load_start(){
    dataType : 'json',
    //se ejecutasi todo se realiza bien
    success : function(json) {
-     alert(JSON.stringify(json));
       $("#txtjson").val(JSON.stringify(json));
       $("#lblprog").html(json.programa);
        for (var j = json.count-1; j >=0; j--) {
@@ -53,11 +52,11 @@ function load_start(){
            $("#tableres").append('<td>'+json.datos[j].desercion+'%</td>');
            $("#tableres").append('<td>'+json.datos[j].retencion+'%</td>');
            if(json.datos[j].desercion<=40)
-             $("#tableres").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Deserción es bueno"></td>');
+             $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Deserción es bueno"></td>');
            else if(json.datos[j].desercion>40 && json.datos[j].desercion<=70)
-             $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Desercion esta subiendo demasiado"></td>');
+             $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Desercion esta subiendo demasiado"></td>');
            else
-             $("#tableres").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Desercion en malo "></td>');
+             $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Desercion en malo "></td>');
          $("#tableres").append('</tr>');
        }
       columnTwoGraph(json.datos,'divgraph1','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
@@ -168,11 +167,11 @@ function load_filters(){
               $("#tableres").append('<td>'+json.datos[j].desercion+'</td>');
               $("#tableres").append('<td>'+json.datos[j].retencion+'</td>');
               if(json.datos[j].desercion<=40)
-                $("#tableres").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Deserción es bueno"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Deserción es bueno"></td>');
               else if(json.datos[j].desercion>40 && json.datos[j].desercion<=70)
-                $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Desercion esta subiendo demasiado"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Desercion esta subiendo demasiado"></td>');
               else
-                $("#tableres").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Desercion en malo "></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Desercion en malo "></td>');
             $("#tableres").append('</tr>');
           }
           columnTwoGraph(json.datos,'divgraph1','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");

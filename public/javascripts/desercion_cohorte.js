@@ -65,11 +65,11 @@ function load_start(){
            $("#tableres").append('<td>'+json.datos[j].porcentaje+'</td>');
            json.datos[j].porcentaje=json.datos[j].porcentaje.replace("%","");
            if(json.datos[j].porcentaje<=40)
-             $("#tableres").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Deserción es bueno"></td>');
+             $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Deserción es bueno"></td>');
            else if(json.datos[j].porcentaje>40 && json.datos[j].porcentaje<=70)
-             $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Desercion esta subiendo demasiado"></td>');
+             $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Desercion esta subiendo demasiado"></td>');
            else
-             $("#tableres").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Desercion en malo "></td>');
+             $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Desercion en malo "></td>');
          $("#tableres").append('</tr>');
        }
       columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
@@ -194,11 +194,11 @@ function load_filters(){
               $("#tableres").append('<td>'+json.datos[j].porcentaje+'</td>');
               json.datos[j].porcentaje=json.datos[j].porcentaje.replace("%","");
               if(json.datos[j].porcentaje<=40)
-                $("#tableres").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Deserción es bueno"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Deserción es bueno"></td>');
               else if(json.datos[j].porcentaje>40 && json.datos[j].porcentaje<=70)
-                $("#tableres").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Desercion esta subiendo demasiado"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Desercion esta subiendo demasiado"></td>');
               else
-                $("#tableres").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Desercion en malo "></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Desercion en malo "></td>');
             $("#tableres").append('</tr>');
           }
          columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
