@@ -22,6 +22,10 @@ $(document).ready(function(){
   });
 });
 
+// function getPDF(){
+//   alert('jola')
+// }
+
 function Load_Insert(){//Define si muestra o no el formulario
                       //de ingreso de datos tomando en cuenta la fecha de sistema y
                       //anterior entrada
@@ -151,7 +155,7 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
             datarray.push(d);
         }
         //-------------------------------------------------------
-     
+
      $("#graph3").change(function () {
         if($(this).val() === '1'){
           columnTwoGraph(datarray,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
@@ -176,6 +180,7 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
    }
  });
 }
+
 function Load_Year_List(){//carga menú desplegable de años para el formulario de filtro
    $.ajax({
     type: "get", //el el tipo de peticion puede ser GET y POsT
@@ -383,7 +388,6 @@ function opendivupdate(year,month){//carga formulario de ingreso-actualizacion d
 function closedivupdate(){
   $("#divupdate").modal('hide');
 }
-
 
 function Search_Year_KPI(fec){//busca la existencia de otros registros de año en función de la
                          //fecha de inicio del programa recién acreditado en datawarehouse

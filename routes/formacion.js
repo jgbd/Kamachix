@@ -7,13 +7,13 @@ router.get('/', function(req, res, next) {
 
   if(req.session.name!=null) {
     if(req.session.rol!=1){
-      res.render('formacion',{title:'formacion', rols:'display:none', arch: 'display:none'});
+      res.render('formacion',{title:'formacion', rols:'display:none', arch: 'display:none', refe: 'logout', textmsg: 'Salir'});
     }else{
-      res.render('formacion',{title:'formacion', rols:'display:block', arch: 'display:block'});
+      res.render('formacion',{title:'formacion', rols:'display:block', arch: 'display:block', refe: 'logout', textmsg: 'Salir'});
     }
   }
   else {
-    res.render('formacion',{title:'formacion', rols:'display:none', arch: 'display:none'});
+    res.render('formacion',{title:'formacion', rols:'display:none', arch: 'display:none', refe: 'login', textmsg: 'Iniciar'});
   }
 });
 

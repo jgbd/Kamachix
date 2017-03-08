@@ -1,4 +1,4 @@
-$(document).ready(function(){
+git $(document).ready(function(){
   //activa la opcion de submenu en el navbar
   $('[data-submenu]').submenupicker();
 
@@ -145,8 +145,9 @@ function getPDF(){
       "Content-Disposition": "filename=myreport.pdf"
     }
    };
-   jsreport.headers['Authorization'] = "Basic " + btoa("grias:griaskdd")
+
    jsreport.headers['Content-Type'] = "application/json " ;
+   jsreport.headers['Authorization'] = "Basic " + btoa("admin:password");
 
    var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 

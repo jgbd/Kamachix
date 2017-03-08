@@ -367,7 +367,7 @@ block content
                        a(href='periodo') 
                          | Deserción por Periodo
            p.navbar-text.navbar-right 
-             a.logout(href='logout') Salir  
+             a.logout(href!=refe)!=textmsg  
   
   //bloque que contiene el contenido de cada pagina especifica
   block resto
