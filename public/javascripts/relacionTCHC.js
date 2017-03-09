@@ -45,7 +45,7 @@ $(document).ready(function(){
        var r2="";
        var conta = json.rowCount;
 
-       for(var i = 0 ; i<3; i++){
+       for(var i = 0 ; i<5; i++){
          r = r+"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
          "</label></td><td><label id='tc"+i+"'>"+json.rows[i].cant_docentes_tc+"</label>"+
          "</label></td><td><label id='hc"+i+"'>"+json.rows[i].cant_docentes_hc+"</label>"+
@@ -64,40 +64,39 @@ $(document).ready(function(){
        $("#datBody").append(r);
 
        // titulo
-       tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC de los ultimos 3 años";
+       tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC de los ultimos 5 años";
        $("#titulo").append(tittle);
 
        //arreglo para la grafica de la division 4 con la relacion de docentes
 
        var arra=[];
 
-       for(var i =0; i<3;i++){
+       for(var i =0; i<5;i++){
          var programa = {
            "anio": json.rows[i].anio,
-           "cantidad": json.rows[i].relacion_docentes,
-           "color": colo3[i]
+           "cantidad": json.rows[i].relacion_docentes
+           
          }
          arra.push(programa);
        }
 
        //arreglo para la grafica de la division 2 con docentes tiempo completo
        var arra2=[];
-       for(var i =0; i<3;i++){
+       for(var i =0; i<5;i++){
          var programa2 = {
            "anio": json.rows[i].anio,
-           "cantidad": json.rows[i].cant_docentes_tc,
-           "color": colo3[i]
+           "cantidad": json.rows[i].cant_docentes_tc           
          }
          arra2.push(programa2);
 
        }
        //arreglo para la grafica de la division 3 con docentes hora catedra
        var arra3=[];
-       for(var i =0; i<3;i++){
+       for(var i =0; i<5;i++){
          var programa3 = {
            "anio": json.rows[i].anio,
-           "cantidad": json.rows[i].cant_docentes_hc,
-           "color": colo3[i]
+           "cantidad": json.rows[i].cant_docentes_hc
+           
          }
          arra3.push(programa3);
 
@@ -242,8 +241,8 @@ $(document).ready(function(){
        for(var i =0; i<conta;i++){
          var programa = {
            "anio": json.rows[i].anio,
-           "cantidad": json.rows[i].relacion_docentes,
-           "color": colo3[i]
+           "cantidad": json.rows[i].relacion_docentes
+           
          }
          arra.push(programa);
 
@@ -254,8 +253,8 @@ $(document).ready(function(){
        for(var i =0; i<conta;i++){
          var programa2 = {
            "anio": json.rows[i].anio,
-           "cantidad": json.rows[i].cant_docentes_tc,
-           "color": colo3[i]
+           "cantidad": json.rows[i].cant_docentes_tc
+           
          }
          arra2.push(programa2);
 
@@ -266,8 +265,8 @@ $(document).ready(function(){
        for(var i =0; i<conta;i++){
          var programa3 = {
            "anio": json.rows[i].anio,
-           "cantidad": json.rows[i].cant_docentes_hc,
-           "color": colo3[i]
+           "cantidad": json.rows[i].cant_docentes_hc
+           
          }
          arra3.push(programa3);
 

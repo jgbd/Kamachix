@@ -33,7 +33,7 @@ router.post('/', function(req, res, next) {
 
   if(req.body.d == 1){
     console.log('entre aqui');
-    var sql='select count(*) as conteo from "Datawarehouse".KPI_Relacion_Docentes where anio=$1';
+    var sql='select count(*) as conteo from "Datawarehouse"."KPI_Relacion_Docentes" where anio=$1';
     arre = [anio];
     console.log(anio);
 

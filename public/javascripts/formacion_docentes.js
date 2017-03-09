@@ -58,8 +58,7 @@ $(document).ready(function(){
        for(var i =conta-4; i<conta;i++){
          var programa = {
            "nivel": json.rows[i].nom_formacion,
-           "cantidad": json.rows[i].t_completo,
-           "color": colo3[i]
+           "cantidad": json.rows[i].t_completo
          }
          arra.push(programa);
 
@@ -193,8 +192,7 @@ $(document).ready(function(){
           for(var i =0; i<4;i++){
             var programa = {
               "nivel": json.rows[i].nom_formacion,
-              "cantidad": json.rows[i].t_completo,
-              "color": colo3[i]
+              "cantidad": json.rows[i].t_completo
             }
             arra.push(programa);
 

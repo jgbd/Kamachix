@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
   //esta variable es la que contien la consulta a realizarse en la DB
   if(req.query.c == 1){
-    var sql='select anio,cant_docentes_tc,cant_docentes_hc,relacion_docentes from "Datawarehouse".KPI_Relacion_Docentes';
+    var sql='select anio,cant_docentes_tc,cant_docentes_hc,relacion_docentes from "Datawarehouse"."KPI_Relacion_Docentes"';
 
   }
   else return console.log("error");
@@ -73,7 +73,7 @@ router.post('/', function(req, res, next) {
   //esta variable es la que contien la consulta a realizarse en la DB
 
   //var sql='select anio,sum(t_completo) as tiempo_c,sum(hora_catedra) as hora_c,(sum(t_completo) *100) / sum(hora_catedra) as relacion_docentes from "Datawarehouse".formacion_kpi where anio BETWEEN $1 and $2 group by anio order by anio';
-  var sql='select anio,cant_docentes_tc,cant_docentes_hc,relacion_docentes from "Datawarehouse".KPI_Relacion_Docentes where anio BETWEEN $1 and $2';
+  var sql='select anio,cant_docentes_tc,cant_docentes_hc,relacion_docentes from "Datawarehouse"."KPI_Relacion_Docentes" where anio BETWEEN $1 and $2';
   //aquui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {

@@ -92,6 +92,25 @@ block content
             p
           a(href='download/Formato\ datos\ Nivel\ de\ Satisfacción.csv' class='vinculoFormato') Descargar Formato
   
+  //modaluploadformacion y relacion docentes
+  #modaluploadFormacion.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Carga Archivo Nivel de Formacion Docentes.
+        #modal-body.modal-body
+          form(class='form-inline' ref='uploadformacion' id='uploadformacion' action='/uploadfileformacion', method='POST', enctype='multipart/form-data')
+            .form-group
+              input.file(type='file', name='archivo', id='fileformacion')
+            input(type='submit', value='Subir' class='btn btn-primary')
+          br
+          div#mesage(style='color:red;')
+            span
+            p
+          a(href='download/Formato\ datos\ Formacion\ Docentes.csv' class='vinculoFormato') Descargar Formato
+  
   //modalupdateformacionDO
   #modalupdateformacionDO.modal.fade.bd-example-modal-lg
     .modal-dialog
@@ -300,25 +319,9 @@ block content
                            a(href='#' onclick='openmodaluploadperiodo()') 
                              | Deserción Periodo.
                      li.divider
-                     li.dropdown-submenu
-                       a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                         | Actualizacion Nivel de Formacion Docentes 
-                       ul.dropdown-menu
-                         li
-                           a(href='#' onclick='modalupdateformacionDO()') 
-                             | Doctor.
-                         li.divider
-                         li
-                           a(href='#' onclick='modalupdateformacionMA()') 
-                             | Magister.
-                         li.divider
-                         li
-                           a(href='#' onclick='modalupdateformacionES()') 
-                             | Especialista.
-                         li.divider
-                         li
-                           a(href='#' onclick='modalupdateformacionPR()') 
-                             | Profesional.        
+                     li
+                       a(href='#' onclick='openmodaluploadFormacion()') 
+                         | Nivel de Formacion Docentes.                         
                  li
                    a(href='#' onclick='openmodalreport()')
                      | Generar Reporte
