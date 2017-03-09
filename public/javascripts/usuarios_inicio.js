@@ -17,7 +17,7 @@ $(document).ready(function(){
      success : function(json) {
        //aqui comprobamos que si el resultado existe lo redirecciona al siguiente pagina
        if(json>0){
-         location.href="/indicadores"; //metodo de resireccionamiento
+         location.href="/"; //metodo de resireccionamiento
        }else{
          $("#respuesta").text("Error en nombre de usuario o contraseña \n Vuelva a Intentar" );
        }

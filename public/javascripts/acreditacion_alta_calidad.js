@@ -35,8 +35,8 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
     data:{c:1},//señala a consulta general de la tabla de acreditación en datawarehouse
     success : function(json) {
       $("#lblper").html("Indicador Acreditación Alta Calidad años: "+json.rows[json.rowCount-5].Anho+" a "+now.getFullYear());
-      for (var j = json.rowCount-1; j >=0; j--) {
-        $("#goal").html("Meta: "+20+"% (Acreditados/Total Programas)");
+      for (var j = json.rowCount-1; j >=json.rowCount-5; j--) {
+        $("#goal").html("Meta: "+15+"% (Acreditados/Total Programas)");
         $("#tableres").append('<tr>');
         $("#tableres").append('<td>'+json.rows[j].Anho+'</td>');
         $("#tableres").append('<td>'+json.rows[j].acreditados+'</td>');
@@ -45,16 +45,16 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
 
         //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
         if(json.rows[j].razon<=10)
-          $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[j].razon+'% de 20%)"></td>');
-        else if(json.rows[j].razon>10 && json.rows[j].razon<=20)
-          if(j>0 && json.rows[j-1].razon>20)
-            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[j].razon+'% de 20%)"></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[j].razon+'% de 15%)"></td>');
+        else if(json.rows[j].razon>10 && json.rows[j].razon<=15)
+          if(j>0 && json.rows[j-1].razon>15)
+            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[j].razon+'% de 15%)"></td>');
           else if(j>0 && json.rows[j-1].razon>json.rows[j].razon)
-            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos se ha alejado ('+json.rows[j].razon+'% de 20%)"></td>');
+            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos se ha alejado ('+json.rows[j].razon+'% de 15%)"></td>');
           else
-          $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está cerca a alcanzarse ('+json.rows[j].razon+'% de 20%)"></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está cerca a alcanzarse ('+json.rows[j].razon+'% de 15%)"></td>');
         else
-          $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[j].razon+'% de 20%)"></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[j].razon+'% de 15%)"></td>');
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         $("#tableres").append('</tr>');
@@ -112,7 +112,7 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
       });
       columnGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,0,0);
       columnTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
-      gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','r','y','g',10,20, 'Acreditación \n Alta Calidad', '%');
+      gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','r','y','g',10,15, 'Acreditación \n Alta Calidad', '%');
     }
   });
 }
@@ -259,7 +259,7 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI de acredi
           }
         });
         columnTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],0,0,"Programas Acreditados","Total Programas");
-        gaugesGraph(json.datos[json.count-1].razon,'divgraph3','r','y','g',10,20, 'Acreditación \n Alta Calidad', '%');
+        gaugesGraph(json.datos[json.count-1].razon,'divgraph3','r','y','g',10,15, 'Acreditación \n Alta Calidad', '%');
       }
     });
   }

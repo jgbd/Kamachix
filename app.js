@@ -94,9 +94,9 @@ app.use(fileUpload({
 }));
 
 //aqui se asocia cada enlace llamado con su respectiva JS en el server que lo controla
-app.use('/', routes);
+app.use('/', indicater);
 app.use('/consultaUsuario', users); //consults usuario en DB
-app.use('/indicadores',indicater); //pagina inicial
+app.use('/login',routes); //pagina inicial
 app.use('/logout',logout);//llamado a cerrar sesion y destruir variables de entorno
 
 app.use('/satisfacion',satisfaction); //todo la vsualizacion de el kpi de satisfaccion
