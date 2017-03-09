@@ -35,7 +35,7 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
     data:{c:1},//señala a consulta general de la tabla de acreditación en datawarehouse
     success : function(json) {
       $("#lblper").html("Indicador Acreditación Alta Calidad años: "+json.rows[json.rowCount-5].Anho+" a "+now.getFullYear());
-      for (var j = json.rowCount-1; j >=0; j--) {
+      for (var j = json.rowCount-1; j >=json.rowCount-5; j--) {
         $("#goal").html("Meta: "+20+"% (Acreditados/Total Programas)");
         $("#tableres").append('<tr>');
         $("#tableres").append('<td>'+json.rows[j].Anho+'</td>');

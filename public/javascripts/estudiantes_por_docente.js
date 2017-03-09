@@ -67,7 +67,7 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
    data:{c:1},//señala a la consulta general de indicador a lo largo de los años en datawarehouse
    success : function(json) {
      //alert(json.rowCount);
-       for (var j = json.rowCount-1; j >=0; j--) {
+       for (var j = json.rowCount-1; j >=json.rowCount-5; j--) {
         $("#tableres").append('<tr>');
         $("#tableres").append('<td>'+json.rows[j].Anho+'</td>');
         $("#tableres").append('<td>'+json.rows[j].razonanual+'</td>');
