@@ -14,7 +14,7 @@ router.post('/', function(req, res, next) {
     //arreglo que contine filtros
     var filters = [];
     //consulta basica sin condiciones
-    var sql ='SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual FROM "Datawarehouse"."KPI_Estudiantes_por_Profesores_TC" spctt WHERE ';
+    var sql ='SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt WHERE ';
 
     //concatena al sql los valores d elos filtros
     if(req.body.yearfrom!=0){
