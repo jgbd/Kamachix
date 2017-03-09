@@ -34,24 +34,30 @@ var consultationcohorte = require('./routes/consultacohorte'); //consulta datos 
 var filtercohorte = require('./routes/consultafiltroscohorte'); //consulta de filtros para cohorte
 var uploadfilecohorte = require('./routes/uploadfilecohorte') //maneja datos de carga de archivo periodo
 
-//datos de stephen que colocar comentarios invocacionde routers
-var acreditacion = require('./routes/acreditacion');
-var consultationaccreditation = require('./routes/consultaAcreditacion');
-var filtredconsultationaccreditation = require('./routes/consultaFiltradaAcreditacion');
-var filtredconsultationaccreditationstudentsperteacher = require('./routes/consultaFiltradaEstudiantesDocentes');
-var insertionaccreditation = require('./routes/actualizaAltaCalidad');
-var deactivateaccreditation = require('./routes/desactivaAltaCalidad');
-var updatekpiaccreditation = require('./routes/actualizaKPIAcreditacion');
-var studentsPerTeacher = require('./routes/estudiantesDocente');
-var consultationstudentsperteacher = require('./routes/consultaDocentesTC');
-var insertionstudentsperteacher = require('./routes/actualizaDocentesTC');
-var updatekpistudentsperteacher = require('./routes/actualizaKPIDocentesTC');
+//datos de stephen
+//para controlar todo lo del KPI acreditación alta calidad
+var acreditacion = require('./routes/acreditacion'); //pagina inicial de acreditación alta calidad
+var consultationaccreditation = require('./routes/consultaAcreditacion'); //consulta datos necesarios en public de
+                                                                          //acreditación de programas
+var filtredconsultationaccreditation = require('./routes/consultaFiltradaAcreditacion'); //consulta de filtros para acreditación alta calidad
+var insertionaccreditation = require('./routes/actualizaAltaCalidad'); //inserta nuevo programa acreditado
+var deactivateaccreditation = require('./routes/desactivaAltaCalidad'); //desactiva programa acreditado en caso de perdida de vigencia (update)
+var updatekpiaccreditation = require('./routes/actualizaKPIAcreditacion'); //actualiza kpi general de acreditación
+
+//para controlar todo lo del KPI estudiantes por docentes tiempo completo
+var filtredconsultationaccreditationstudentsperteacher = require('./routes/consultaFiltradaEstudiantesDocentes'); //consulta de filtros para estudiantes por docente tiempo completo
+var studentsPerTeacher = require('./routes/estudiantesDocente'); //pagina inicial de estudiantes por docente TC
+var consultationstudentsperteacher = require('./routes/consultaDocentesTC');//consulta datos necesarios en a tablas en public de
+                                                                          //estudiantes por docente
+var insertionstudentsperteacher = require('./routes/actualizaDocentesTC'); //actualiza poblacion de docentes o estudiantes en public
+var updatekpistudentsperteacher = require('./routes/actualizaKPIDocentesTC'); //actualiza kpi general de estudiantes por docente TC
 
 //para controlar todo lo del KPI del nivel de formacion docentes y vista de formacion docentes por departamento
 var formacion = require('./routes/formacion');
 var filterFormacionDocente = require('./routes/consultaFormacion');
 var consulta_update = require('./routes/consultas_update_formacion');
 var formacion_departamento = require('./routes/formacion_departamento');
+var uploadfileformacio = require('./routes/uploadfileformacion');
 
 //para controlar todo lo del KPI de relacion docentes tiempo completo respecto a hora catedra
 var relacionTCHC = require('./routes/relacion_docentes');
@@ -138,6 +144,7 @@ app.use('/update_formacionPR',update_formacionPR);*/
 app.use('/consultas_update_formacion',consulta_update);// consultas de actualizacion del KPI nivel de formacion docentes
 app.use('/consulta_update_relacionTCHC',consulta_update_relacionTCHC); // consultas de actualizacion del KPI relacion docentes
 app.use('/formacion_departamento',formacion_departamento);
+app.use('/uploadfileformacion',uploadfileformacio);
 
 //upload
 app.use('/uploadfilesatisfaccion',uploadfilesatisfaccion);

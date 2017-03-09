@@ -1,6 +1,6 @@
 var now = new Date();//Hora del sistema.
-var mes=now.getMonth()+1;//formato string mes actual
-//var mes=7;//formato string mes actual
+//var mes=now.getMonth()+1;//formato string mes actual
+var mes=7;//formato string mes actual
 
 $(document).ready(function(){
   Load_Insert();//Define si muestra o no el formulario
@@ -67,23 +67,23 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
    data:{c:1},//señala a la consulta general de indicador a lo largo de los años en datawarehouse
    success : function(json) {
      //alert(json.rowCount);
-       for (var j = json.rowCount-1; j >=0; j--) {
+       for (var j = json.rowCount-1; j >=json.rowCount-5; j--) {
         $("#tableres").append('<tr>');
         $("#tableres").append('<td>'+json.rows[j].Anho+'</td>');
         $("#tableres").append('<td>'+json.rows[j].razonanual+'</td>');
 
         //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
-        if(json.rows[j].razonanual>=45)
-          $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[j].razonanual+' de 35)"></td>');
-        else if(json.rows[j].razonanual<45 && json.rows[j].razonanual>=35)
+        if(json.rows[j].razonanual>=59)
+          $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[j].razonanual+' de 30)"></td>');
+        else if(json.rows[j].razonanual<59 && json.rows[j].razonanual>=35)
           if(j>0 && json.rows[j-1].razonanual<35)
-              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo está bajando ('+json.rows[j].razonanual+' de 35)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo está bajando ('+json.rows[j].razonanual+' de 30)"></td>');
           else if(j>0 && json.rows[j-1].razonanual<json.rows[j].razonanual)
-              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[j].razonanual+' de 35)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[j].razonanual+' de 30)"></td>');
           else
-              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo está cerca a alcanzarse ('+json.rows[j].razonanual+' de 35)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo está cerca a alcanzarse ('+json.rows[j].razonanual+' de 30)"></td>');
         else
-          $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Estudiantes por Docente Tiempo Completo alcanzada ('+json.rows[j].razonanual+' de 35)"></td>');
+          $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Estudiantes por Docente Tiempo Completo alcanzada ('+json.rows[j].razonanual+' de 30)"></td>');
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         $("#tableres").append('</tr>');
@@ -124,8 +124,8 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
         }
       });
       columnGraph(datarray,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
-      if(mes<=6) gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph2','g','y','r',35,45,'Estudiantes por Docente', '%');
-      else gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph2','g','y','r',35,45,'Estudiantes por Docente', '%');
+      if(mes<=6) gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph2','g','y','r',35,59,'Estudiantes por Docente', ' estudiantes');
+      else gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph2','g','y','r',35,59,'Estudiantes por Docente', ' estudiantes');
    }
  });
 }
@@ -175,8 +175,8 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
       });
      columnTwoGraph(datarray,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
      lineTwoGraph(datarray,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
-     gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','g','y','r',35,45, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '%');
-     gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','g','y','r',35,45, 'Estudiantes por Docente año: '+ fin, '%');
+     gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','g','y','r',35,59, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, ' estudiantes');
+     gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','g','y','r',35,59, 'Estudiantes por Docente año: '+ fin, ' estudiantes');
    }
  });
 }
@@ -255,8 +255,8 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
         });
         columnTwoGraph(json.datos,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0,"A","B");
         lineTwoGraph(json.datos,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],"A","B");
-        gaugesGraph(json.datos[0].razonanual,'divper1','g','y','r',35,45, 'Estudiantes por Docente año: '+json.datos[0].Anho, '%');
-        gaugesGraph(json.datos[json.count-1].razonanual,'divper2','g','y','r',35,45, 'Estudiantes por Docente año: '+json.datos[json.count-1].Anho, '%');
+        gaugesGraph(json.datos[0].razonanual,'divper1','g','y','r',35,59, 'Estudiantes por Docente año: '+json.datos[0].Anho, ' estudiantes');
+        gaugesGraph(json.datos[json.count-1].razonanual,'divper2','g','y','r',35,59, 'Estudiantes por Docente año: '+json.datos[json.count-1].Anho, ' estudiantes');
       }
     });
   }

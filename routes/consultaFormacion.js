@@ -13,10 +13,10 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
 
   if(req.query.c == 1){
-    var sql='select nom_formacion,t_completo,anio from "Datawarehouse".formacion_kpi join formacion on formacion=cod_formacion order by anio desc limit 4';
+    var sql='select nom_formacion,t_completo,anio from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion order by anio desc limit 4';
   }
   else if (req.query.c ==2){
-    var sql='select DISTINCT anio from "Datawarehouse".formacion_kpi order by anio DESC';
+    var sql='select DISTINCT anio from "Datawarehouse"."KPI_Formacion" order by anio DESC';
   }
   else if (req.query.c ==3){
     var sql="select name,t_completo,t_ocasional,hora_catedra,anio,periodo,nom_formacion from formacion_departamento join formacion on formacion=cod_formacion join users on departamento=codigo  where departamento='25' order by anio DESC limit 4";
@@ -73,7 +73,7 @@ router.post('/', function(req, res, next) {
   
   if(req.body.c == 1){
     //esta variable es la que contien la consulta a realizarse en la DB
-    var sql='select nom_formacion,t_completo,anio from "Datawarehouse".KPI_Formacion join formacion on formacion=cod_formacion where anio=$1 order by anio,formacion,t_completo';
+    var sql='select nom_formacion,t_completo,anio from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion where anio=$1 order by anio,formacion,t_completo';
     ani = [req.body.anio];
   }
   else if (req.body.c ==7){    
