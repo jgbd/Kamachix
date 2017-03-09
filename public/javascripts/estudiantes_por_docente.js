@@ -124,8 +124,8 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
         }
       });
       columnGraph(datarray,'divgraph1','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
-      if(mes<=6) gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph2','g','y','r',35,59,'Estudiantes por Docente', '%');
-      else gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph2','g','y','r',35,59,'Estudiantes por Docente', '%');
+      if(mes<=6) gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph2','g','y','r',35,59,'Estudiantes por Docente', ' estudiantes');
+      else gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph2','g','y','r',35,59,'Estudiantes por Docente', ' estudiantes');
    }
  });
 }
@@ -175,8 +175,8 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
       });
      columnTwoGraph(datarray,'divgraph3','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
      lineTwoGraph(datarray,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
-     gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','g','y','r',35,59, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '%');
-     gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','g','y','r',35,59, 'Estudiantes por Docente año: '+ fin, '%');
+     gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','g','y','r',35,59, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, ' estudiantes');
+     gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','g','y','r',35,59, 'Estudiantes por Docente año: '+ fin, ' estudiantes');
    }
  });
 }
