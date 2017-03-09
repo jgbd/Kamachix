@@ -15,7 +15,7 @@ que se van creando sea por clase por id o tipo */
 .body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
-  background-color: azure;
+  background-color: #ffffff;
   color:black;
 }
 
@@ -38,6 +38,9 @@ a {
   border: solid 2px green;
 }
 
+#btnlogin{
+  border-radius: 15px;
+}
 #btnlogin:hover{
   border: solid 2px blue;
 }
@@ -91,7 +94,7 @@ a {
 
 #escudo,#logo{
   margin-top: 60px;
-  height: 120px
+  height: 200px
 }
 
 .th, td{

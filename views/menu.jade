@@ -1,20 +1,36 @@
 extends layout
 block title
 block scripts
+  //css del boton de export de las graficas
   link(rel='stylesheet', href="/javascripts/amcharts/plugins/export/export.css")
+  
+  //css para controlar el submenu del navbar
   link(rel='stylesheet', href='/stylesheets/bootstrap-submenu.min.css')
+    
+  //script del login
+  script(src='/javascripts/usuarios_inicio.js')
+    
   //scripts que se usan despues de login
   
   //script para crear el submenu en el navbar
   script(src='/javascripts/bootstrap-submenu.min.js', defer='')
     
   //script de las graficas
-  script(src="/javascripts/amcharts/amcharts.js")
+  //script principal de la libreria de graficas
+  script(src="/javascripts/amcharts/amcharts.js") 
+  
+  //script para activar el export de las graficas 
   script(src="/javascripts/amcharts/plugins/export/export.min.js")
+    
+  //scripts de los diferentes tipos de graficas
   script(src="/javascripts/amcharts/serial.js")
   script(src="/javascripts/amcharts/pie.js")
   script(src="/javascripts/amcharts/gauge.js")
+    
+  //script del tema visual de las graficas
   script(src="/javascripts/amcharts/themes/light.js")
+    
+  //script que tienes todas las funciones de graficar
   script(type='text/javascript', src='/javascripts/Graphs.js')
     
   //script para pasas grafica a img para infomes
@@ -22,19 +38,45 @@ block scripts
   script(type='text/javascript', src='/javascripts/StackBlur.js')
   script(type='text/javascript', src='/javascripts/canvg.min.js')
     
-  //script para validary cargar archivos al server
+  //script para validar y cargar archivos al server
   script(type='text/javascript', src='/javascripts/files.js')
     
   //script de formacion Docentes
   script(src='/javascripts/update_formacion_docentes.js')
   
+  //script de conexion para sacar reportes del server
   script(type='text/javascript', src='/javascripts/jsreport.min.js')
+  
   //script general para controlar action a nivel global
   script(type='text/javascript', src='/javascripts/menu.js')
   
   //bloque para colocar los script propios de cada Indicador
   block scriptpage
 block content
+  //modallogin
+  #modallogin.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h3#modal-title.modal-title.title Iniciar Sesión.
+        #modal-body.modal-body
+          form#frmlogin.form-horizontal(action="consultaUsuario" method="POST")
+            .form-group
+              br
+              //aqui se resive la respuesta si existe el error de no autorización de ingreso 
+              p#respuesta
+              label.col-sm-3.control-label(for='txtuser') Usuario: 
+              .col-sm-9
+                input#txtuser.form-control(type='text', placeholder='Usuario' required)
+            .form-group
+              label.col-sm-3.control-label(for='txtpass') Contraseña: 
+              .col-sm-9
+                input#txtpass.form-control(type='password', placeholder='Contraseña' required)
+            #divbtn
+              button#btnlogin.btn.btn-info(type='submit') Ingresar   
+  
   //modaluploadperiodo
   #modaluploadperiodo.modal.fade.bd-example-modal-lg
     .modal-dialog
@@ -262,7 +304,8 @@ block content
          small(style="color:black") Visualizador de Indicadores Academicos
   
   //barra de menu
-  .col-md-12
+  .row
+    .col-md-12
      nav.navbar.navbar-inverse.col-md-12
        .container-fluid
          .navbar-header
@@ -271,7 +314,7 @@ block content
              span.icon-bar
              span.icon-bar
              span.icon-bar
-           a.navbar-brand(href='indicadores').active Home 
+           a.navbar-brand(href='/').active Home 
              span.glyphicon.glyphicon-home(aria-hidden='true')
          #bs-example-navbar-collapse-1.collapse.navbar-collapse
            ul.nav.navbar-nav

@@ -1,4 +1,4 @@
-git $(document).ready(function(){
+$(document).ready(function(){
   //activa la opcion de submenu en el navbar
   $('[data-submenu]').submenupicker();
 
@@ -256,4 +256,9 @@ function modalupdateformacionES(){
 function modalupdateformacionPR(){
   $("#modalupdateformacionPR").modal('show');
   $('#mesage').html("");
+}
+
+//abre modal para login de la aplicacion
+function openmodallogin(){
+  $("#modallogin").modal('show');
 }

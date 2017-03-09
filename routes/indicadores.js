@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 
   }
   else {
-    res.render('indicadores',{title:'Indicadores', rols:'display:none', arch: 'display:none', refe: 'login', textmsg: 'Iniciar'});
+    res.render('indicadores',{title:'Indicadores', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Iniciar'});
   }
 });
 

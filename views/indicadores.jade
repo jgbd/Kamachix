@@ -4,11 +4,8 @@ block title
 block scriptpage
 block resto
   //Contiene la pantalla de bienvenida a la aplicacion 
-  #divwelcom.col-md-12
-    h1 Bienvenid@ 
-    h2 Al sistema de Indicadores Academicos
-    br
-    br
-    img#escudo.drap(src='/images/escudo.png')
-    h3 Universidad de Nariño 
-    input(type='hidden' value!=rols)
+  .row
+    #divwelcom.col-md-4.col-md-offset-4
+      img#escudo.drap(src='/images/escudo.png')
+      h1.title Bienvenid@ 
+      h3.title Universidad de Nariño 
