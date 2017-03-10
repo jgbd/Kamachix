@@ -155,7 +155,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
           if (intervalo>0 && intervalo<=365){
             $("#tableresprogram").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Acreditación a punto de expirar en '+intervalo+' días"></td>');
             $("#tableresprogram").append('<td><span class="btn btn-warning btn-small">'+
-                                              '<a style=, onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+','+json.rows[j].periodo+')">'+'<img title="ReAcreditar" alt="ReAcreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
+                                              '<a style=, onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+','+json.rows[j].periodo+',1)">'+'<img title="ReAcreditar" alt="ReAcreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
           }
           else if(intervalo>365 && intervalo<=730)
             $("#tableresprogram").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Acreditado hasta dentro de '+intervalo+' días"></td>');
@@ -182,7 +182,7 @@ function Load_Not_Accredited(){//carga tabla-menú de programas no acreditados a
         $("#tableresprogram2").append('<tr>');
         var codigo=parseInt(json.rows[j].codigo);
         $("#tableresprogram2").append('<td>'+json.rows[j].abreviatura+'</td>');
-        $("#tableresprogram2").append('<td><span class="btn btn-warning btn-small"><a style!=rols onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
+        $("#tableresprogram2").append('<td><span class="btn btn-warning btn-small"><a style!=rols onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0,0)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
         $("#tableresprogram2").append('</tr>');
       }
    }
@@ -277,8 +277,9 @@ function closedivfilter(){
 
 function Load_Update(){//carga datos obtenidos del formulario de ingreso de programa
   //se obtiene los valores de las input en variables
-  var codigo = $("#cod1").val(), inicio= $("#ini1").val(), periodo = $("#per1").val();
-  //Supr_Accreditation(codigo);//desactiva programa acreditado si este ya expiró
+  var codigo = $("#cod1").val(), inicio= $("#ini1").val(), periodo = $("#per1").val(), reacredited = $("#flag1").val();
+  alert(reacredited);
+  if (reacredited==1) Supr_Accreditation(codigo);//desactiva programa acreditado si este ya expiró
   //se coloca los datos del form en el formato adecuado para enviar al server
   var formData = {
     'codigo': codigo,
@@ -298,10 +299,11 @@ function Load_Update(){//carga datos obtenidos del formulario de ingreso de prog
   closedivupdate();
 }
 
-function opendivupdate(cod,iniday,inimonth,iniyear,per){//carga formulario de ingreso-actualizacion de programa
+function opendivupdate(cod,iniday,inimonth,iniyear,per,flag){//carga formulario de ingreso-actualizacion de programa
   if(cod<100) cod='0'+cod;
   if(iniday<10) iniday='0'+iniday;
   if(inimonth<10) inimonth='0'+inimonth;
+  $("#flag").html('<input type="hidden" id="flag1" value='+flag+' class="form-control" readonly>');
   $("#cod").html('<input type="text" id="cod1" value='+cod+' class="form-control" readonly>');
   $("#ini").html('<td data-provide="datepicker" data-date-language="es" data-date-start-date='+iniday+'/'+inimonth+'/'+(iniyear+per)+'><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
   if(per==0)
