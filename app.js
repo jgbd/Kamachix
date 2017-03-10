@@ -12,7 +12,6 @@ var fileUpload = require('express-fileupload');
 var session = require('express-session');
 
 //son los archivo en el server lo controlara cada pagina
-var routes = require('./routes/index'); //pagina inicio
 var users = require('./routes/consultaUsuario'); //consulta el usuario
 var indicater = require('./routes/indicadores'); //pagina de bienvenida
 var logout = require('./routes/logout'); //pagina de logout
@@ -101,7 +100,6 @@ app.use(fileUpload({
 //aqui se asocia cada enlace llamado con su respectiva JS en el server que lo controla
 app.use('/', indicater);
 app.use('/consultaUsuario', users); //consults usuario en DB
-app.use('/login',routes); //pagina inicial
 app.use('/logout',logout);//llamado a cerrar sesion y destruir variables de entorno
 
 app.use('/satisfacion',satisfaction); //todo la vsualizacion de el kpi de satisfaccion
