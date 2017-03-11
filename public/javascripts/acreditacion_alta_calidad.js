@@ -278,8 +278,7 @@ function closedivfilter(){
 function Load_Update(){//carga datos obtenidos del formulario de ingreso de programa
   //se obtiene los valores de las input en variables
   var codigo = $("#cod1").val(), inicio= $("#ini1").val(), periodo = $("#per1").val(), reacredited = $("#flag1").val();
-  alert(reacredited);
-  if (reacredited==1) Supr_Accreditation(codigo);//desactiva programa acreditado si este ya expiró
+  if (reacredited) Supr_Accreditation(codigo);//desactiva programa acreditado si este ya expiró
   //se coloca los datos del form en el formato adecuado para enviar al server
   var formData = {
     'codigo': codigo,
