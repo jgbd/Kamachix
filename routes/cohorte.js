@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     if(req.session.rol!=1){
       res.render('cohorte',{title:'Cohorte', rols:'display:none', refe: 'logout', textmsg: 'Salir'});
     }else{
-      res.render('cohorte',{title:'Cohorte', rols:'display:block', arch: 'display:block', refe: 'logout', textmsg: 'Salir'});
+      res.render('cohorte',{title:'Cohorte', rols:'visibility: visible', arch: 'display:block', refe: 'logout', textmsg: 'Salir'});
     }
   }
   else {

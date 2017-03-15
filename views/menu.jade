@@ -3,9 +3,6 @@ block title
 block scripts
   //css del boton de export de las graficas
   link(rel='stylesheet', href="/javascripts/amcharts/plugins/export/export.css")
-  
-  //css para controlar el submenu del navbar
-  link(rel='stylesheet', href='/stylesheets/bootstrap-submenu.min.css')
     
   //script del login
   script(src='/javascripts/usuarios_inicio.js')
@@ -320,100 +317,99 @@ block content
     .col-md-12
        h3.title.col-md-12 Kamachix Dashboard
          br
-         small(style="color:black") Visualizador de Indicadores Academicos
+         small Visualizador de Indicadores Academicos
   
   //barra de menu
+
   .row
-    .col-md-12
-     nav.navbar.navbar-inverse.col-md-12
-       .container-fluid
-         .navbar-header
-           button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
-             span.sr-only Toggle navigation
-             span.icon-bar
-             span.icon-bar
-             span.icon-bar
-           a.navbar-brand(href='/').active Home 
-             span.glyphicon.glyphicon-home(aria-hidden='true')
-         #bs-example-navbar-collapse-1.collapse.navbar-collapse
-           ul.nav.navbar-nav
-             li.dropdown
-               a.dropdown-toggle(style!=arch, href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')
-                 | Archivo 
-                 span.caret
-               ul.dropdown-menu
-                 li.dropdown-submenu
-                   a.dropdown-toggle(style!=rols, href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                     | Carga y actualizacion de datos  
-                   ul.dropdown-menu
-                     li
-                       a(href='#' onclick='openmodaluploadsatisfaccion()') 
-                         | Nivel de Satisfacción.
-                     li.divider
-                     li.dropdown-submenu
-                       a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                         | Datos Deserción 
-                       ul.dropdown-menu
-                         li
-                           a(href='#' onclick='openmodaluploadcohorte()') 
-                             | Deserción Cohorte.
-                         li.divider
-                         li
-                           a(href='#' onclick='openmodaluploadperiodo()') 
-                             | Deserción Periodo.
-                     li.divider
-                     li
-                       a(href='#' onclick='openmodaluploadFormacion()') 
-                         | Nivel de Formacion Docentes.                         
-                 li
-                   a(href='#' onclick='openmodalreport()')
-                     | Generar Reporte
-             li.dropdown
-               a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')
-                 | Indicadores Academicos 
-                 span.caret
-               ul.dropdown-menu
-                 li
-                   a(href='satisfacion')
-                     | Satisfacción
-                 li.divider
-                 li.dropdown-submenu
-                   a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                     | Nivel de Formacion Docentes 
-                   ul.dropdown-menu
-                     li
-                      a(href='formacion')
-                        | KPI Formacion Docentes
-                     li.divider
-                     li
-                       a(href='formacion_departamento') 
-                         | Formacion Docentes por Departamento
-                 li.divider
-                 li
-                   a(href='relacion_docentes')
-                     | Relacion Docentes
-                 li.divider
-                 li
-                   a(href='acreditacion')
-                     | Acreditación en Alta Calidad
-                 li.divider
-                 li
-                   a(href='estudiantesDocente')
-                     | Estudiantes por Docente Tiempo Completo
-                 li.divider
-                 li.dropdown-submenu
-                   a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                     | Deserción 
-                   ul.dropdown-menu
-                     li
-                       a(href='cohorte') 
-                         | Deserción por Cohorte
-                     li.divider
-                     li
-                       a(href='periodo') 
-                         | Deserción por Periodo
-           p.navbar-text.navbar-right 
-             a.logout(href!=refe)!=textmsg  
-  
+    nav.navbar.navbar-inverse.col-md-12.col-lg-12(role="navigation")
+     .container-fluid.col-md-12.col-lg-12
+       .navbar-header
+         button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+           span.sr-only Toggle navigation
+           span.icon-bar
+           span.icon-bar
+           span.icon-bar
+         a.navbar-brand(href='/').active Home 
+           span.glyphicon.glyphicon-home(aria-hidden='true')
+       #bs-example-navbar-collapse-1.collapse.navbar-collapse
+         ul.nav.navbar-nav
+           li.dropdown
+             a.dropdown-toggle(style!=arch, href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')
+               | Archivo 
+               span.caret
+             ul.dropdown-menu
+               li.dropdown-submenu
+                 a.dropdown-toggle(style!=rols, href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                   | Carga y actualizacion de datos  
+                 ul.dropdown-menu
+                   li
+                     a(href='#' onclick='openmodaluploadsatisfaccion()') 
+                       | Nivel de Satisfacción.
+                   li.divider
+                   li.dropdown-submenu
+                     a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                       | Datos Deserción 
+                     ul.dropdown-menu
+                       li
+                         a(href='#' onclick='openmodaluploadcohorte()') 
+                           | Deserción Cohorte.
+                       li.divider
+                       li
+                         a(href='#' onclick='openmodaluploadperiodo()') 
+                           | Deserción Periodo.
+                   li.divider
+                   li
+                     a(href='#' onclick='openmodaluploadFormacion()') 
+                       | Nivel de Formacion Docentes.                         
+               li
+                 a(href='#' onclick='openmodalreport()')
+                   | Generar Reporte
+           li.dropdown
+             a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')
+               | Indicadores Academicos 
+               span.caret
+             ul.dropdown-menu
+               li
+                 a(href='satisfacion')
+                   | Satisfacción
+               li.divider
+               li.dropdown-submenu
+                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                   | Nivel de Formacion Docentes 
+                 ul.dropdown-menu
+                   li
+                    a(href='formacion')
+                      | KPI Formacion Docentes
+                   li.divider
+                   li
+                     a(href='formacion_departamento') 
+                       | Formacion Docentes por Departamento
+               li.divider
+               li
+                 a(href='relacion_docentes')
+                   | Relacion Docentes
+               li.divider
+               li
+                 a(href='acreditacion')
+                   | Acreditación en Alta Calidad
+               li.divider
+               li
+                 a(href='estudiantesDocente')
+                   | Estudiantes por Docente Tiempo Completo
+               li.divider
+               li.dropdown-submenu
+                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                   | Deserción 
+                 ul.dropdown-menu
+                   li
+                     a(href='cohorte') 
+                       | Deserción por Cohorte
+                   li.divider
+                   li
+                     a(href='periodo') 
+                       | Deserción por Periodo
+         p.navbar-text.navbar-right 
+           a.logout(href!=refe)!=textmsg  
   //bloque que contiene el contenido de cada pagina especifica
   block resto

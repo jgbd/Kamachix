@@ -3,20 +3,42 @@ que se van creando sea por clase por id o tipo */
 
 @font-face {
     font-family: titulo;
-    src:url("/fonts/GreatVibes-Regular.ttf");
+    src:url("/fonts/Oswald-Bold.ttf");
 }
+
+@font-face {
+    font-family: smalltitle;
+    src:url("/fonts/AnticSlab-Regular.ttf");
+}
+
 
 .title{
   font-family: titulo;
   font-size: 40px;
   font-weight: lighter bolder;
+  color:#e1f2e1;
+}
+
+.title > small{
+  font-family: smalltitle;
+  font-weight: lighter bolder;
+  color:#ffffff;
+}
+
+nav.navbar{
+  border-top: 1px solid #fff;
+  border-color: blue;
+}
+nav.navbar > .container-fluid {
+    background-color: #CC1414;
+
 }
 
 .body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
-  background-color: #ffffff;
-  color:black;
+  background-color: #828282;
+  color:#e1f2e1;
 }
 
 a {
@@ -63,7 +85,7 @@ a {
   text-align: right;
   font-family: titulo;
   font-size: 20px;
-  color: orange;
+  color: #ffffff;
 }
 
 .logout:hover{
@@ -77,12 +99,14 @@ a {
 
 .modal-content{
   background-color: 255;
+  color: black;
 }
 
 #divtable, #divtable2, #divtable3, #divgraph1, #divgraph2, #divgraph3, #divgraph4, #divgraph5 {
 	height		: 300px;
 	font-size	: 12px;
-	/*border: 2px dotted lightgreen;*/
+  background-color: #858785;
+	border: 2px dotted lightgreen;
 	overflow-y: scroll ;
 	/*border-radius: 15px;*/
 }
@@ -113,7 +137,7 @@ a {
 }
 
 thead{
-  background-color: lightblue;
+  background-color: #2c5131;
 }
 
 table{
