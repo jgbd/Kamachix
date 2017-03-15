@@ -75,7 +75,19 @@ block resto
         //| columnas
         //input#cgb2(type='radio', name='cgdiv1', value='2')
         //| Barras
-    #divgraph2.col-md-6
+    .col-md-6
+      #divgraph2.col-md-12
+      .col-md-12
+          select#cgdiv2
+            option(selected='', value='3') Seleccione un tipo de gráfica
+            optgroup(label='Columnas')
+              option(value='1') 2D
+              option(value='2') 3D
+            optgroup(label='Barras')
+              option(value='4') 2D
+              option(value='5') 3D
+            optgroup(label='Tendencia')
+              option(value='3') Línea
     #divgraph3.col-md-6
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")

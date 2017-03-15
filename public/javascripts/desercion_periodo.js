@@ -26,10 +26,28 @@ $(document).ready(function(){
       barTwoGraph(json.datos,'divgraph1','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
     }
   });
+  $("#cgdiv2").change(function () {
+    var json = JSON.parse($('#txtjson').val());
+    if($(this).val() === '1'){
+      columnTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
+    }
+    else if($(this).val() === '2'){
+      columnTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
+    }
+    else if($(this).val() === '3'){
+      lineTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],"Deserción","Retención");
+    }
+    else if($(this).val() === '4'){
+      barTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
+    }
+    else if($(this).val() === '5'){
+      barTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
+    }
+  });
 });
 
 function load_start(){
-  $("#cgc1").attr('checked',true);
+  //$("#cgc1").attr('checked',true);
   $("#tableres").html('');
   $("#divgraph1").html('');
   $("#divgraph2").html('');
