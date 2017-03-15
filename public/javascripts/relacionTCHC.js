@@ -49,7 +49,19 @@ $(document).ready(function(){
          r = r+"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
          "</label></td><td><label id='tc"+i+"'>"+json.rows[i].cant_docentes_tc+"</label>"+
          "</label></td><td><label id='hc"+i+"'>"+json.rows[i].cant_docentes_hc+"</label>"+
-         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes+"</label></td></tr>";
+         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes/1000+"</label></td>";
+         if(json.rows[i].relacion_docentes/1000<=1.3){
+           
+           r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy baja ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
+         }          
+         else if(json.rows[i].relacion_docentes/1000>1 && json.rows[i].relacion_docentes/1000<=1.8){
+           
+           r=r+'<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="la relacion docentes se  esta alejando de la meta"></td></tr>';
+         }          
+        else {
+          
+          r=r+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="la relacion docentes es buena "></td></tr>';
+        }
 
        }
 
@@ -207,13 +219,29 @@ $(document).ready(function(){
        $("#datBody").html('');
        $("#titulo").html('');
        var r="";
+       var final="";
        var conta = json.rowCount;
 
        for(var i = 0 ; i<conta; i++){
          r = r+"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
          "</label></td><td><label id='tc"+i+"'>"+json.rows[i].cant_docentes_tc+"</label>"+
          "</label></td><td><label id='hc"+i+"'>"+json.rows[i].cant_docentes_hc+"</label>"+
-         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes+"</label></td></tr>";
+         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes/1000+"</label></td>";
+         
+         if(json.rows[i].relacion_docentes/1000<=1){
+           
+           r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy baja ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
+         }          
+         else if(json.rows[i].relacion_docentes/1000>1 && json.rows[i].relacion_docentes/1000<=1.6){
+           
+           r=r+'<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="la relacion docentes se  esta alejando de la meta"></td></tr>';
+         }          
+        else {
+          
+          r=r+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="la relacion docentes es buena "></td></tr>';
+        }
+          
+         
 
        }
 
