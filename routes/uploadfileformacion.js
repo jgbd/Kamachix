@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/',function(req, res, next){
   //console.log(req.files.file.name);
-  var upload=fileupload.fileupload(req.files);
+  var upload=fileupload.fileupload(req.files);  
   if(upload==='-1'){
     var filename = req.files.file.name.replace(/\s/g, "");
     console.log(filename);
