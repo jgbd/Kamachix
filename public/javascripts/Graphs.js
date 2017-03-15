@@ -23,7 +23,7 @@ var menu_export = [ {
 function columnGraph(data, content_name, title, namecolumn, namerows, depth3D, angle){
   var chart = AmCharts.makeChart(content_name, {
     "type": "serial",
-    "theme": "dark",
+    "theme": "light",
     "marginRight": 70,
     "dataProvider": data,
     "valueAxes": [{
@@ -34,8 +34,7 @@ function columnGraph(data, content_name, title, namecolumn, namerows, depth3D, a
     "startDuration": 1,
     "graphs": [{
       "balloonText": "<b>[[category]]: [[value]]</b>",
-      "fillColorsField": "#36bdc4",
-      "color":"#36bdc4",
+      "fillColorsField": "color",
       "fillAlphas": 0.9,
       "lineAlpha": 0.2,
       "type": "column",
@@ -77,7 +76,7 @@ function columnTwoGraph(data, content_name, title, namecolumn, namerow1, namerow
   $("#"+content_name).empty();
   var chart = AmCharts.makeChart(content_name, {
     "type": "serial",
-    "theme": "dark",
+    "theme": "chalk",
     "marginRight": 70,
     "dataProvider": data,
     "legend": {
@@ -143,7 +142,7 @@ function columnTwoGraph(data, content_name, title, namecolumn, namerow1, namerow
 function lineGraph(data, contentname, title, namecolumn, namerows ){
     var chart = AmCharts.makeChart(contentname, {
     "type": "serial",
-    "theme": "dark",
+    "theme": "light",
     "titles":[{"text":title}],
     "marginRight": 40,
     "marginLeft": 40,
@@ -233,7 +232,7 @@ function lineTwoGraph(data, contentname, title, namecolumn, namerow1, namerow2, 
     $("#"+contentname).empty();
     var chart = AmCharts.makeChart(contentname, {
       "type": "serial",
-      "theme": "dark",
+      "theme": "chalk",
       "titles":[{"text":title}],
       "marginRight": 40,
       "marginLeft": 40,
@@ -369,7 +368,7 @@ function gaugesGraph(data,contentName, co1, co2, co3, soso, goal, title, symbol 
 
     var gaugeChart = AmCharts.makeChart( contentName, {
       "type": "gauge",
-      "theme": "dark",
+      "theme": "chalk",
       "titles": [{"text":title}],
       "axes": [ {
         "axisThickness": 1,
@@ -409,7 +408,7 @@ function gaugesGraph(data,contentName, co1, co2, co3, soso, goal, title, symbol 
 //Grafica de acelerometro doble
 function gaugesTwoAxesGraph(data1, data2, contentname, title){
   var chart = AmCharts.makeChart( contentname, {
-	  "theme": "dark",
+	  "theme": "chalk",
 	  "type": "gauge",
 	  "axes": [ {
 		 "axisThickness": 1,

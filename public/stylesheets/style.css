@@ -16,29 +16,28 @@ que se van creando sea por clase por id o tipo */
   font-family: titulo;
   font-size: 40px;
   font-weight: lighter bolder;
-  color:#e1f2e1;
+  color:#000;
 }
 
 .title > small{
   font-family: smalltitle;
   font-weight: lighter bolder;
-  color:#ffffff;
-}
-
-nav.navbar{
-  border-top: 1px solid #fff;
-  border-color: blue;
-}
-nav.navbar > .container-fluid {
-    background-color: #CC1414;
-
+  color:#000;
 }
 
 .body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
-  background-color: #828282;
-  color:#e1f2e1;
+  /*#828282  #e1f2e1*/
+  /*background-color: #ffffff;*/
+  color:#000;
+}
+
+#cabezera{
+  text-align: center;
+  background-image: url('/images/fondo.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 a {
@@ -105,7 +104,7 @@ a {
 #divtable, #divtable2, #divtable3, #divgraph1, #divgraph2, #divgraph3, #divgraph4, #divgraph5 {
 	height		: 300px;
 	font-size	: 12px;
-  background-color: #858785;
+  background-color: #fff;
 	border: 2px dotted lightgreen;
 	overflow-y: scroll ;
 	/*border-radius: 15px;*/
