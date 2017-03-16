@@ -67,7 +67,7 @@ $(document).ready(function(){
     else{
       loadfile('/uploadfileformacion','fileformacion');
     }
-    event.preventDefault();    
+    event.preventDefault();
   });
 
 });
@@ -244,7 +244,7 @@ function openmodaluploadsatisfaccion(){
 function openmodaluploadFormacion(){
   $("#modaluploadFormacion").modal('show');
   $('#mesage').html("");
-  
+
 }
 
 //abre modal cargar datos desercion por cohorte

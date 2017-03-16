@@ -80,17 +80,21 @@ a {
   height: 100px
 }
 
+#menu > a {
+  background-color: red;
+}
+
 .logout{
   text-align: right;
   font-family: titulo;
-  font-size: 20px;
-  color: #ffffff;
+  font-size: 18px;
+  color: #000;
 }
 
 .logout:hover{
   color: lightblue;
 }
-p
+
 #divfilter{
   font-size	: 12px;
   border: 2px dotted lightgreen;
@@ -167,17 +171,19 @@ img{
 }
 
  .dropdown-menu{
-   background-color: #222;
+   background-color: #fff;
  }
 
  .dropdown-menu li a{
-   color: gray;
+   background-color: #fff;
+   color: #000;
  }
 
  .dropdown-menu li:hover a:hover,
  .dropdown-menu li:focus a:focus,
  .dropdown-menu li.active{
-   color: black;
+   background-color: lightgreen;
+   color: green;
  }
 
  #modalinfobody{
