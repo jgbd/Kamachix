@@ -86,9 +86,11 @@ a {
 
 .logout{
   text-align: right;
-  font-family: titulo;
+  font-family: smalltitle;
   font-size: 18px;
-  color: #000;
+  color: #fff;
+  border-radius: 15 px;
+  border-color: green;
 }
 
 .logout:hover{

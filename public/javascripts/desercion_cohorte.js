@@ -58,7 +58,7 @@ function load_start(){
    //se ejecutasi todo se realiza bien
    success : function(json) {
       $("#txtjson").val(JSON.stringify(json));
-      $("#lblprog").html(json.Programa);
+      $("#programa").html(json.Programa);
        for (var j = json.count-1; j >=0; j--) {
          $("#tableres").append('<tr>');
            $("#tableres").append('<td>'+json.datos[j].periodo+'</td>');
@@ -181,12 +181,12 @@ function load_filters(){
           $("#txtjson").val(JSON.stringify(json));
           if(periodfrom!=0){
             if(periodto!=0){
-              $("#lblprog").html(json.Programa+"<br> Periodo: "+periodfrom+" A "+periodto);
+              $("#programa").html(json.Programa+"<br> Periodo: "+periodfrom+" A "+periodto);
             }else{
-              $("#lblprog").html(json.Programa+"<br> Periodo: "+periodfrom);
+              $("#programa").html(json.Programa+"<br> Periodo: "+periodfrom);
             }
           }else{
-            $("#lblprog").html(json.Programa);
+            $("#programa").html(json.Programa);
           }
           for (var j = json.count-1; j >=0; j--) {
             $("#tableres").append('<tr>');

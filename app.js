@@ -65,6 +65,10 @@ var filterTCHC = require('./routes/consultaTCHC');
 var consulta_update_relacionTCHC = require('./routes/consulta_update_relacionTCHC');
 
 
+//comtrola informacion manuales_indicadores
+
+var manual = require('./routes/manuales.js');
+
 /*var update_formacionDO=require('./routes/update_formacionDO');
 var update_formacionMA=require('./routes/update_formacionMA');
 var update_formacionES=require('./routes/update_formacionES');
@@ -150,6 +154,9 @@ app.use('/uploadfileformacion',uploadfileformacio);
 app.use('/uploadfilesatisfaccion',uploadfilesatisfaccion);
 app.use('/uploadfilecohorte',uploadfilecohorte);
 app.use('/uploadfileperiodo',uploadfileperiod);
+
+//manuales
+app.use('/manuales',manual);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

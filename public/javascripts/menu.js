@@ -214,24 +214,44 @@ function editRepor(){
 
 //abre el modal de reportes
 function openmodalreport(){
-  try{
-    $("#modalinfo").modal('show');
-    var date = new Date();
+  $("#modalinfo").modal('show');
 
-    var day = date.getDate();
-    var month = date.getMonth();
-    var year = date.getFullYear();
+  var date = new Date();
 
-    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
 
-    $("#fecha").html(""+day+" de "+meses[month]+" de "+year);
-    $("#divtab").html($("#divtable").html());
-    $("#divg1").html($("#divgraph1").html());
-    $("#divg2").html($("#divgraph2").html());
-  }
-  catch(err){
-    $("#modalinforeport").modal('show');
-  }
+  var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
+  uploadatareport($("#txtindser").val());
+
+  $("#fecha").html(""+day+" de "+meses[month]+" de "+year);
+  $("#divtab").html($("#divtable").html());
+  $("#divg1").html($("#divgraph1").html());
+  $("#divg2").html($("#divgraph2").html());
+
+
+}
+
+//llamado ajax para traer informacion de datos del inidcador
+function uploadatareport(serialindi){
+  $.ajax({
+   type: "GET", //el el tipo de peticion puede ser GET y POsT
+   url: "manuales", //la url del que realizara la consulta
+   dataType : 'json',
+   data:{c:serialindi},//Primera consulta
+   //se ejecutasi todo se realiza bien
+   success : function(json) {
+    //  alert(JSON.stringify(json));
+     for (var i = 0; i < 18; i++) {
+       if(i===3 && serialindi===1 || i===3 && serialindi===6 || i===3 && serialindi===7)
+          $("#atrinfo"+(i+1)).val(json[i]+" "+$("#programa").html());
+       else
+          $("#atrinfo"+(i+1)).val(json[i])
+     }
+   }
+ });
 }
 
 //abre modal de cargar datos satisfaccion

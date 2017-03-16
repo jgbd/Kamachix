@@ -4,29 +4,20 @@ var configdb = require("../config/dbConfig.js");
 //variable que controla el pool de conexiones
 var pool = configdb.configdb();
 
-//metodo que se llama despues de invocar por POST a la pagina
-//la funcion anonima que resive tiene tres parametros
-//req que es la peticion
-//res que esla respuesta
-//next que es la siguiente function
-router.post('/', function(req, res, next) {
-  //esta variable es la que contien la consulta a realizarse en la DB
-  var canTC=req.body.cantc;
-  var canHC=req.body.canhc;
-  //var anio=req.body.anio;
-  var anio=req.body.anio;
-  var rela=req.body.rela;
-  var arre;
+router.get('/',function(req, res, next){
 
-  if(req.body.d == 1){
-    console.log('entre aqui');
-    var sql='select count(*) as conteo from "Datawarehouse"."KPI_Relacion_Docentes" where anio=$1';
-    arre = [anio];
-    console.log(anio);
-  }
-  else return console.log("error");
-  
-  //aquui se crea la conexion a DB
+  var arre = [req.query.c];
+
+  var sql='SELECT ma.proceso, ma.lider, ma."objProceso", '+
+          'ma."nombreIndicador", ma."atriMedir",'+
+          ' ma."objCalidad", ma."tipoIndicador",'+
+          ' ma.frecuencia, ma."periodoCalculo", ma.tendencia,'+
+          ' ma.meta, ma."objIndicador", ma.rango, ma.formular,'+
+          ' ma."maneraGrafica", ma."puntoRegistro",'+
+          ' ma.resposable, ma.instructivo'+
+          ' FROM public.manuales_indicadores ma'+
+          ' WHERE ma.codigo = $1';
+
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -45,8 +36,30 @@ router.post('/', function(req, res, next) {
       //si es mayor a 0 se crea la variable de session con el resultado
       //y se devuelve el numero de resultados que en este caso siempre debe ser 1 si esta correcto
       //y es falso se devuelve el cero que sera para jusgar que realizar del lado Frond
-      //console.log(result);
-      res.json(result);
+      console.log(result.rows);
+
+      var arres = [
+        result.rows[0].proceso,
+        result.rows[0].lider,
+        result.rows[0].objProceso,
+        result.rows[0].nombreIndicador,
+        result.rows[0].atriMedir,
+        result.rows[0].objCalidad,
+        result.rows[0].tipoIndicador,
+        result.rows[0].frecuencia,
+        result.rows[0].periodoCalculo,
+        result.rows[0].tendencia,
+        result.rows[0].meta,
+        result.rows[0].objIndicador,
+        result.rows[0].rango,
+        result.rows[0].formular,
+        result.rows[0].maneraGrafica,
+        result.rows[0].puntoRegistro,
+        result.rows[0].resposable,
+        result.rows[0].instructivo
+      ];
+
+      res.json(arres);
 
     });
   });
@@ -54,7 +67,6 @@ router.post('/', function(req, res, next) {
   pool.on('error', function (err, client) {
     console.error('idle client error', err.message, err.stack)
   });
-
 });
 
 module.exports = router;

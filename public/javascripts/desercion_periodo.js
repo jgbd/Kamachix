@@ -59,7 +59,7 @@ function load_start(){
    //se ejecutasi todo se realiza bien
    success : function(json) {
       $("#txtjson").val(JSON.stringify(json));
-      $("#lblprog").html(json.programa);
+      $("#programa").html(json.programa);
        for (var j = json.count-1; j >=0; j--) {
          $("#tableres").append('<tr>');
            $("#tableres").append('<td>'+json.datos[j].periodo+'</td>');
@@ -174,7 +174,7 @@ function load_filters(){
          $('#myModal').modal('show');
        }else{
          $("#txtjson").val(JSON.stringify(json));
-         $("#lblprog").html(json.programa);
+         $("#programa").html(json.programa);
           for (var j = json.count-1; j >=0; j--) {
             $("#tableres").append('<tr>');
               $("#tableres").append('<td>'+json.datos[j].periodo+'</td>');
