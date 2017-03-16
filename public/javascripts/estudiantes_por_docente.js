@@ -1,6 +1,5 @@
 var now = new Date();//Hora del sistema.
-//var mes=now.getMonth()+1;//formato string mes actual
-var mes=7;//formato string mes actual
+var mes=now.getMonth()+1;//formato string mes actual
 
 $(document).ready(function(){
   Load_Insert();//Define si muestra o no el formulario

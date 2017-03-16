@@ -14,13 +14,13 @@ router.get('/', function(req, res, next) {
     //consulta basica sin condiciones
     if(req.query.c == 1){
         var beforedata=[req.query.anho,req.query.estudiantesa,req.query.docentesa,Math.round(req.query.estudiantesa/req.query.docentesa)];
-        var sql ='INSERT INTO "Datawarehouse"."KPI_Students_per_Complete_Time_Teacher" ("Anho",estudiantes,docentes,razonanual,razona) VALUES '+
+        var sql ='INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" ("Anho",estudiantes,docentes,razonanual,razona) VALUES '+
             '($1,$2,$3,$4,$4)';
     }
     else if (req.query.c == 2){
         var beforedata=[req.query.anho,req.query.estudiantesprom,req.query.docentesprom,Math.round(req.query.estudiantesb/req.query.docentesb)];
         console.log(beforedata);
-        var sql ='UPDATE "Datawarehouse"."KPI_Students_per_Complete_Time_Teacher" SET '+
+        var sql ='UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" SET '+
             'estudiantes=$2,docentes=$3,razonb=ROUND($4,0),razonanual=ROUND((razona+$4)/2,0) '+
             'WHERE "Anho"=$1';
     }
