@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     if(req.session.rol!=1){
       res.render('estudiantesDocente',{title:'Estudiantes Docente', rols:'display:none', arch: 'display:none', refe: 'logout', textmsg: 'Salir'});
     }else{
-      res.render('estudiantesDocente',{title:'Estudiantes Docente', rols:'display:block', arch: 'display:block', refe: 'logout', textmsg: 'Salir'});
+      res.render('estudiantesDocente',{title:'Estudiantes Docente', rols:'visibility: visible', arch: 'display:block', refe: 'logout', textmsg: 'Salir'});
     }
   }
   else {

@@ -3,20 +3,41 @@ que se van creando sea por clase por id o tipo */
 
 @font-face {
     font-family: titulo;
-    src:url("/fonts/GreatVibes-Regular.ttf");
+    src:url("/fonts/Oswald-Bold.ttf");
 }
+
+@font-face {
+    font-family: smalltitle;
+    src:url("/fonts/AnticSlab-Regular.ttf");
+}
+
 
 .title{
   font-family: titulo;
   font-size: 40px;
   font-weight: lighter bolder;
+  color:#000;
+}
+
+.title > small{
+  font-family: smalltitle;
+  font-weight: lighter bolder;
+  color:#000;
 }
 
 .body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
-  background-color: #ffffff;
-  color:black;
+  /*#828282  #e1f2e1*/
+  /*background-color: #ffffff;*/
+  color:#000;
+}
+
+#cabezera{
+  text-align: center;
+  background-image: url('/images/fondo.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 a {
@@ -63,13 +84,13 @@ a {
   text-align: right;
   font-family: titulo;
   font-size: 20px;
-  color: orange;
+  color: #ffffff;
 }
 
 .logout:hover{
   color: lightblue;
 }
-
+p
 #divfilter{
   font-size	: 12px;
   border: 2px dotted lightgreen;
@@ -77,12 +98,14 @@ a {
 
 .modal-content{
   background-color: 255;
+  color: black;
 }
 
 #divtable, #divtable2, #divtable3, #divgraph1, #divgraph2, #divgraph3, #divgraph4, #divgraph5 {
 	height		: 300px;
 	font-size	: 12px;
-	/*border: 2px dotted lightgreen;*/
+  background-color: #fff;
+	border: 2px dotted lightgreen;
 	overflow-y: scroll ;
 	/*border-radius: 15px;*/
 }
@@ -113,7 +136,7 @@ a {
 }
 
 thead{
-  background-color: lightblue;
+  background-color: lightgreen;
 }
 
 table{

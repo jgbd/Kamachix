@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="drawing.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.24748737"
+     inkscape:cx="-779.56196"
+     inkscape:cy="545.84796"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="741"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff"
+       id="rect3414"
+       width="784.24359"
+       height="1068.0812"
+       x="-4.0406098"
+       y="0.93363327" />
+    <g
+       id="g3448"
+       transform="translate(24.243661,-16.162441)">
+      <ellipse
+         transform="matrix(0.84479831,0.53508486,0.68900819,0.72475356,0,0)"
+         ry="609.57184"
+         rx="222.40617"
+         cy="-772.20959"
+         cx="1296.9126"
+         id="path3338"
+         style="fill:#ffff00" />
+      <ellipse
+         transform="matrix(0.84479831,0.53508486,0.68900819,0.72475356,0,0)"
+         ry="609.57184"
+         rx="222.40617"
+         cy="-1053.4832"
+         cx="1572.8201"
+         id="path3338-3"
+         style="fill:#ff0000" />
+      <ellipse
+         transform="matrix(0.84577375,0.53354172,0.6904698,0.72336122,0,0)"
+         ry="632.31964"
+         rx="230.92863"
+         cy="-1429.7312"
+         cx="1931.6482"
+         id="path3338-5"
+         style="fill:#00ff00" />
+    </g>
+  </g>
+</svg>
