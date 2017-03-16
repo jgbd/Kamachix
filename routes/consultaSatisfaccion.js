@@ -39,7 +39,8 @@ router.get('/', function(req, res, next) {
         if(re.Programa==result.rows[i].abreviatura){
           var d = {
             "Nivel":result.rows[i].Nivel,
-            "Anho":result.rows[i].Anho
+            "Anho":result.rows[i].Anho,
+            "color":"#62B7F2"
           };
           datalst.push(d);
         }
