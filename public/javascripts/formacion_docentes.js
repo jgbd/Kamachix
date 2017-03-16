@@ -44,7 +44,21 @@ $(document).ready(function(){
        //ciclo para llenar los datos en las filas en r
        for(var i = conta-4 ; i<conta; i++){
          r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
-         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
+         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
+         if(json.rows[i].nom_formacion =='Doctor'){
+
+           r=r+'<td><label>50</label></td></tr>';
+         }
+         else if(json.rows[i].nom_formacion =='Magister'){
+           r=r+'<td><label>150</label></td></tr>';
+         }
+         else if(json.rows[i].nom_formacion =='Especialista'){
+           r=r+'<td><label>60</label></td></tr>';
+         }
+         else{
+           r=r+'<td><label>-</label></td></tr>';
+         }
+
        }
        /*var fecha = new Date();
        var ano = fecha.getFullYear();
@@ -64,15 +78,12 @@ $(document).ready(function(){
 
        }
        // calculo de la meta del indicador para cada nivel de formacion en porcentajes 
-       var doctor=((json.rows[conta-1].t_completo *100)/50).toFixed(1);
-       var especia=((json.rows[conta-3].t_completo *100)/60).toFixed(1);
-       var magist=((json.rows[conta-4].t_completo*100)/150).toFixed(1);
-       var profes=json.rows[conta-2].t_completo;
+       var doctor=((json.rows[0].t_completo *100)/50).toFixed(1);
+       var especia=((json.rows[3].t_completo *100)/60).toFixed(1);
+       var magist=((json.rows[1].t_completo*100)/150).toFixed(1);
+       var profes=json.rows[2].t_completo;
        
-       /*var nomdoc=json.rows[conta-4].nom_formacion;
-       var nomesp=json.rows[conta-3].nom_formacion;
-       var nommag=json.rows[conta-2].nom_formacion;
-       var nompro=json.rows[conta-1].nom_formacion;*/
+       
 
        //cambio de graficas de barras
         $("#graph1").change(function () {
@@ -113,22 +124,22 @@ $(document).ready(function(){
        //semaforos
        if(doctor>100){
          doctor=100;
-         gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '% \n Meta: 50');
+         gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
        }
-       else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '% \n Meta: 50');}
+       else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');}
        if(especia>100){
          especia=100;
-         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '% \n Meta: 60');
+         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
        }
        else{
-         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '% \n Meta: 60');
+         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
        }
        if(magist>100){
          magist=100;
-         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% \n Meta: 150');
+         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% ');
        }
        else{
-         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% \n Meta: 150');
+         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% ');
        }
 
        gaugesGraph(profes,divsem4,'g','y','r',25,50, 'Cantidad Profesionales', ' ');
@@ -180,7 +191,20 @@ $(document).ready(function(){
          //ciclo para llenar los datos en las filas en r
           for(var i = conta-4 ; i<conta; i++){
             r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
-            "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
+            "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
+            if(json.rows[i].nom_formacion =='Doctor'){
+
+              r=r+'<td><label>50</label></td></tr>';
+            }
+            else if(json.rows[i].nom_formacion =='Magister'){
+              r=r+'<td><label>150</label></td></tr>';
+            }
+            else if(json.rows[i].nom_formacion =='Especialista'){
+              r=r+'<td><label>60</label></td></tr>';
+            }
+            else{
+              r=r+'<td><label>-</label></td></tr>';
+            }
           }
 
           tittle="Nivel de formación de docentes tiempo completo del año: "+json.rows[conta-3].anio;
@@ -197,10 +221,10 @@ $(document).ready(function(){
             arra.push(programa);
 
           }
-          var doctor=((json.rows[3].t_completo *100)/50).toFixed(2);
-          var especia=((json.rows[1].t_completo *100)/60).toFixed(2);
-          var magist=((json.rows[0].t_completo*100)/150).toFixed(2);
-          var profes=json.rows[2].t_completo;
+          var doctor=((json.rows[0].t_completo *100)/50).toFixed(2);
+          var especia=((json.rows[2].t_completo *100)/60).toFixed(2);
+          var magist=((json.rows[1].t_completo*100)/150).toFixed(2);
+          var profes=json.rows[3].t_completo;
 
           /*var nomdoc=json.rows[0].nom_formacion;
           var nomesp=json.rows[1].nom_formacion;
