@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
   //esta variable es la que contien la consulta a realizarse en la DB
   if(req.query.c == 1){
-    var sql='select anio,cant_docentes_tc,cant_docentes_hc,relacion_docentes from "Datawarehouse"."KPI_Relacion_Docentes"';
+    var sql='select anio,cant_docentes_tc,cant_docentes_hc,relacion_docentes from "Datawarehouse"."KPI_Relacion_Docentes" order by anio desc';
 
   }
   else return console.log("error");
