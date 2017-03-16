@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     }
   }
   else {
-    res.render('formacion_departamento',{title:'formacion_departamento', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Iniciar'});
+    res.render('formacion_departamento',{title:'formacion_departamento', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Ingresar'});
   }
 });
 

@@ -11,9 +11,8 @@ router.get('/', function(req, res, next) {
       res.render('acreditacion',{title:'acreditacion', rols:'visibility: visible' , arch: 'display:block', refe: 'logout', textmsg: 'Salir'});
     }
   }
-
   else {
-    res.render('acreditacion',{title:'acreditacion', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Iniciar'});
+    res.render('acreditacion',{title:'acreditacion', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Ingresar'});
   }
 });
 

@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     }
   }
   else {
-    res.render('cohorte',{title:'cohorte', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Iniciar'});
+    res.render('cohorte',{title:'cohorte', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Ingresar'});
   }
 });
 

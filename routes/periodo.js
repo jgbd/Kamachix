@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     }
   }
   else {
-    res.render('periodo',{title:'periodo', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Iniciar'});
+    res.render('periodo',{title:'periodo', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Ingresar'});
   }
 });
 
