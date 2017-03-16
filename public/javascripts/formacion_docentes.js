@@ -44,7 +44,21 @@ $(document).ready(function(){
        //ciclo para llenar los datos en las filas en r
        for(var i = conta-4 ; i<conta; i++){
          r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
-         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
+         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
+         if(json.rows[i].nom_formacion =='Doctor'){
+
+           r=r+'<td><label>50</label></td></tr>';
+         }
+         else if(json.rows[i].nom_formacion =='Magister'){
+           r=r+'<td><label>150</label></td></tr>';
+         }
+         else if(json.rows[i].nom_formacion =='Especialista'){
+           r=r+'<td><label>60</label></td></tr>';
+         }
+         else{
+           r=r+'<td><label>-</label></td></tr>';
+         }
+
        }
        /*var fecha = new Date();
        var ano = fecha.getFullYear();
@@ -113,22 +127,22 @@ $(document).ready(function(){
        //semaforos
        if(doctor>100){
          doctor=100;
-         gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '% \n Meta: 50');
+         gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
        }
-       else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '% \n Meta: 50');}
+       else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');}
        if(especia>100){
          especia=100;
-         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '% \n Meta: 60');
+         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
        }
        else{
-         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '% \n Meta: 60');
+         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
        }
        if(magist>100){
          magist=100;
-         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% \n Meta: 150');
+         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% ');
        }
        else{
-         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% \n Meta: 150');
+         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% ');
        }
 
        gaugesGraph(profes,divsem4,'g','y','r',25,50, 'Cantidad Profesionales', ' ');
@@ -180,7 +194,20 @@ $(document).ready(function(){
          //ciclo para llenar los datos en las filas en r
           for(var i = conta-4 ; i<conta; i++){
             r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
-            "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
+            "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
+            if(json.rows[i].nom_formacion =='Doctor'){
+
+              r=r+'<td><label>50</label></td></tr>';
+            }
+            else if(json.rows[i].nom_formacion =='Magister'){
+              r=r+'<td><label>150</label></td></tr>';
+            }
+            else if(json.rows[i].nom_formacion =='Especialista'){
+              r=r+'<td><label>60</label></td></tr>';
+            }
+            else{
+              r=r+'<td><label>-</label></td></tr>';
+            }
           }
 
           tittle="Nivel de formación de docentes tiempo completo del año: "+json.rows[conta-3].anio;
