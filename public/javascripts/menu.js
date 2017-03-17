@@ -177,6 +177,16 @@ function getPDF(){
      jsreport.download('myReport.pdf', request);
    }
 
+  // jsreport.renderAsync(request).then(function(res) {
+  //   console.log(res);
+  //
+  //   //open in new window
+  //   window.open(res.toDataURI())
+  //
+  //   //open download dialog
+  //   // res.download('test.pdf')
+  // });
+
 
 }
 
