@@ -1,5 +1,6 @@
 var now = new Date();//Hora del sistema.
-var mes=now.getMonth()+1;//formato string mes actual
+//var mes=now.getMonth()+1;//formato string mes actual
+var mes=7;//formato string mes actual
 
 $(document).ready(function(){
   Load_Insert();//Define si muestra o no el formulario
@@ -302,6 +303,7 @@ function hidenmodal(){
 function opendivupdate(year,month){//carga formulario de ingreso-actualizacion de indicador
   var year = year-1;
   $('#divupdate').html(
+    '<div class="modal-dialog">'+
       '<div class="modal-content">'+
         '<div class="modal-header">'+
           '<button type="button" data-dismiss="modal" aria-label="Close" class="close">'+
@@ -312,8 +314,6 @@ function opendivupdate(year,month){//carga formulario de ingreso-actualizacion d
         '</div>'+
         '<div class="modal-body">'+
           '<table class="table table-hover table-bordered table-responsed">'+
-            '<tbody class="col-sm-3"></tbody>'+
-            '<tbody class="col-sm-6">'+
               '<tr>'+
                 '<label for="sem"></label>'+
                 '<td colspan="2" id="sem"></td>'+
@@ -332,15 +332,14 @@ function opendivupdate(year,month){//carga formulario de ingreso-actualizacion d
               '</tr>'+
               '<tr>'+
                 '<td colspan="2">'+
-                  '<span class="btn btn-info">'+
+                  '<span class="btn btn-primary">'+
                     '<a onCLick="Load_Update()">'+'<img title="Ingresar" alt="Ingresar" /></a></span>'+
                 '</td>'+
               '</tr>'+
-            '</tbody>'+
-            '<tbody class="col-sm-3"></tbody>'+
           '</table>'+
         '</div>'+
-      '<div class="modal-footer"></div>'+
+        '<div class="modal-footer"></div>'+
+      '</div>'+
     '</div>');
   $('#titgral').html('Ingreso Estudiantes y Docentes para el Año ');
   $('#sem').html('SEMESTRE ');
