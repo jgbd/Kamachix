@@ -160,7 +160,10 @@ function getPDF(){
     },
     options: {
       preview:true,
-      "Content-Disposition": "filename=myreport.pdf"
+      "Content-Disposition": "filename=myreport.pdf",
+      "authorization": {
+        "grantEdit": true
+      }
     }
    };
 
