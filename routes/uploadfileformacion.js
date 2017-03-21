@@ -27,18 +27,18 @@ router.post('/',function(req, res, next){
         arrdata.splice(0,1);
         arrdata.splice(arrdata.length-1,2);
         console.log(arrdata);
-        var sql='select * from "Datawarehouse"."KPI_Relacion_Docentes"';
-        /*var sql = 'INSERT INTO "Datawarehouse"."KPI_Desercion_Periodo" VALUES ';
+        //var sql='select * from "Datawarehouse"."KPI_Relacion_Docentes"';
+        var sql = 'INSERT INTO formacion_departamento (departamento, t_completo, t_ocasional, hora_catedra, anio, periodo, formacion) VALUES ';
         for (var i = 0; i < arrdata.length; i++) {
           var cam = arrdata[i].split(',');
           console.log(arrdata[i].length);
           if(i===arrdata.length-1){
-            sql=sql+"('"+cam[0]+"','"+cam[1]+"','"+cam[2]+"','"+cam[3]+"','"+cam[4]+"','"+cam[5]+"')";
+            sql=sql+"('"+cam[0]+"','"+cam[1]+"','"+cam[2]+"','"+cam[3]+"','"+cam[4]+"','"+cam[5]+"','"+cam[6]+"')";
           }
           else{
-            sql=sql+"('"+cam[0]+"','"+cam[1]+"','"+cam[2]+"','"+cam[3]+"','"+cam[4]+"','"+cam[5]+"'),";
+            sql=sql+"('"+cam[0]+"','"+cam[1]+"','"+cam[2]+"','"+cam[3]+"','"+cam[4]+"','"+cam[5]+"','"+cam[6]+"'),";
           }
-        }*/
+        }
         console.log(sql);
         pool.connect(function(err, client, done) {
           if(err) {
@@ -61,7 +61,7 @@ router.post('/',function(req, res, next){
               "upload" : upload,
               "count" : count
             };
-            //res.json(re);
+            res.json(re);
           });
         });
         //se ejecuta si el usuario o password no son correctas y no se puede conectar al SGBD

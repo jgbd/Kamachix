@@ -69,10 +69,6 @@ var consulta_update_relacionTCHC = require('./routes/consulta_update_relacionTCH
 
 var manual = require('./routes/manuales.js');
 
-/*var update_formacionDO=require('./routes/update_formacionDO');
-var update_formacionMA=require('./routes/update_formacionMA');
-var update_formacionES=require('./routes/update_formacionES');
-var update_formacionPR=require('./routes/update_formacionPR');*/
 
 
 
@@ -141,10 +137,7 @@ app.use('/formacion',formacion); //visualizacion del KPI nivel de formacion
 app.use('/relacion_docentes',relacionTCHC);// visualizacion del KPI relacion docentes
 app.use('/consultaTCHC',filterTCHC);// consulta de filtro del KPI relacion docentes
 app.use('/consultaFormacion',filterFormacionDocente);// consulta filtros del KPI nivel de formacion docentes
-/*app.use('/update_formacionDO',update_formacionDO);
-app.use('/update_formacionMA',update_formacionMA);
-app.use('/update_formacionES',update_formacionES);
-app.use('/update_formacionPR',update_formacionPR);*/
+
 app.use('/consultas_update_formacion',consulta_update);// consultas de actualizacion del KPI nivel de formacion docentes
 app.use('/consulta_update_relacionTCHC',consulta_update_relacionTCHC); // consultas de actualizacion del KPI relacion docentes
 app.use('/formacion_departamento',formacion_departamento);

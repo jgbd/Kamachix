@@ -292,30 +292,6 @@ function openmodaluploadperiodo(){
   $('#mesage').html("");
 }
 
-//abre modal cargar daos doctores
-function modalupdateformacionDO(){
-  $("#modalupdateformacionDO").modal('show');
-  $('#mesage').html("");
-}
-
-//abre modal cargar daos magister
-function modalupdateformacionMA(){
-  $("#modalupdateformacionMA").modal('show');
-  $('#mesage').html("");
-}
-
-//abre modal cargar daos Especialista
-function modalupdateformacionES(){
-  $("#modalupdateformacionES").modal('show');
-  $('#mesage').html("");
-}
-
-//abre modal cargar daos profesionales
-function modalupdateformacionPR(){
-  $("#modalupdateformacionPR").modal('show');
-  $('#mesage').html("");
-}
-
 //abre modal para login de la aplicacion
 function openmodallogin(){
   $("#modallogin").modal('show');
