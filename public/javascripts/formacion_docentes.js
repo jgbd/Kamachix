@@ -41,108 +41,225 @@ $(document).ready(function(){
        $("#datBody").html('');
        var r="";//variable para llenar los datos y el html e cada una de las filas
        var conta=json.rowCount;
-       //ciclo para llenar los datos en las filas en r
-       for(var i = conta-4 ; i<conta; i++){
-         r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
-         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
-         if(json.rows[i].nom_formacion =='Doctor'){
+       // si los datos del indicador formacion docentes tienen datos para ser representados graficamente
+       if(json.rows[conta-3].t_completo != null){
+         //ciclo para llenar los datos en las filas en r
+        for(var i = conta-4 ; i<conta; i++){
+          r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
+          "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
+          if(json.rows[i].nom_formacion =='Doctor'){
 
-           r=r+'<td><label>50</label></td></tr>';
-         }
-         else if(json.rows[i].nom_formacion =='Magister'){
-           r=r+'<td><label>150</label></td></tr>';
-         }
-         else if(json.rows[i].nom_formacion =='Especialista'){
-           r=r+'<td><label>60</label></td></tr>';
-         }
-         else{
-           r=r+'<td><label>-</label></td></tr>';
-         }
+            r=r+'<td><label>50</label></td></tr>';
+          }
+          else if(json.rows[i].nom_formacion =='Magister'){
+            r=r+'<td><label>150</label></td></tr>';
+          }
+          else if(json.rows[i].nom_formacion =='Especialista'){
+            r=r+'<td><label>60</label></td></tr>';
+          }
+          else{
+            r=r+'<td><label>-</label></td></tr>';
+          }
 
-       }
-       /*var fecha = new Date();
-       var ano = fecha.getFullYear();
-       alert('El año actual es: '+ano);*/
-       tittle="Nivel de formación de docentes tiempo completo del año: "+json.rows[conta-3].anio;
-       $("#datBody").append(r);
-       $("#titulo").append(tittle);
+        }
+        /*var fecha = new Date();
+        var ano = fecha.getFullYear();
+        alert('El año actual es: '+ano);*/
+        tittle="Nivel de formación de docentes tiempo completo del año: "+json.rows[conta-3].anio;
+        $("#datBody").append(r);
+        $("#titulo").append(tittle);
 
-       var arra=[];
-       //ciclo para llenar  el array llamado arra con los datos que vana contener las diferentes graficas 
-       for(var i =conta-4; i<conta;i++){
-         var programa = {
-           "nivel": json.rows[i].nom_formacion,
-           "cantidad": json.rows[i].t_completo
-         }
-         arra.push(programa);
+        var arra=[];
+        //ciclo para llenar  el array llamado arra con los datos que vana contener las diferentes graficas 
+        for(var i =conta-4; i<conta;i++){
+          var programa = {
+            "nivel": json.rows[i].nom_formacion,
+            "cantidad": json.rows[i].t_completo
+          }
+          arra.push(programa);
 
-       }
-       // calculo de la meta del indicador para cada nivel de formacion en porcentajes 
-       var doctor=((json.rows[0].t_completo *100)/50).toFixed(1);
-       var especia=((json.rows[3].t_completo *100)/60).toFixed(1);
-       var magist=((json.rows[1].t_completo*100)/150).toFixed(1);
-       var profes=json.rows[2].t_completo;
-       
-       
+        }
+        // calculo de la meta del indicador para cada nivel de formacion en porcentajes 
+        var doctor=((json.rows[0].t_completo *100)/50).toFixed(1);
+        var especia=((json.rows[3].t_completo *100)/60).toFixed(1);
+        var magist=((json.rows[1].t_completo*100)/150).toFixed(1);
+        var profes=json.rows[2].t_completo;        
+        
 
-       //cambio de graficas de barras
-        $("#graph1").change(function () {
+        //cambio de graficas de barras
+          $("#graph1").change(function () {
+            if($(this).val() === '1'){
+              columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+            }
+            else if($(this).val() === '2'){
+              columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+            }
+            else if($(this).val() === '3'){
+              lineGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+            }
+            else if($(this).val() === '4'){
+              areaGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+            }
+            else if($(this).val() === '5'){
+              barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+            }
+            else if($(this).val() === '6'){
+              barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+            }
+          });
+        //grafica que aparecera por defecto
+        columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
+
+          // Cambio de graficas de pastel
+        $("#graph2").change(function () {
           if($(this).val() === '1'){
-            columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+            pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
           }
-          else if($(this).val() === '2'){
-            columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
-          }
-          else if($(this).val() === '3'){
-            lineGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
-          }
-          else if($(this).val() === '4'){
-            areaGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
-          }
-          else if($(this).val() === '5'){
-            barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
-          }
-          else if($(this).val() === '6'){
-            barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+          else{
+            pieGraph3D(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
           }
         });
-       //grafica que aparecera por defecto
-       columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
+          // grifica pie que aparece por defecto
+        pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
 
-        // Cambio de graficas de pastel
-      $("#graph2").change(function () {
-        if($(this).val() === '1'){
-           pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+        //semaforos
+        if(doctor>100){
+          doctor=100;
+          gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
+        }
+        else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');}
+        if(especia>100){
+          especia=100;
+          gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
         }
         else{
-           pieGraph3D(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+          gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
         }
-      });
-        // grifica pie que aparece por defecto
-       pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+        if(magist>100){
+          magist=100;
+          gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% ');
+        }
+        else{
+          gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% ');
+        }
 
-       //semaforos
-       if(doctor>100){
-         doctor=100;
-         gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
-       }
-       else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');}
-       if(especia>100){
-         especia=100;
-         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
-       }
-       else{
-         gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
-       }
-       if(magist>100){
-         magist=100;
-         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% ');
-       }
-       else{
-         gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% ');
-       }
+        gaugesGraph(profes,divsem4,'g','y','r',25,50, 'Cantidad Profesionales', ' ');
 
-       gaugesGraph(profes,divsem4,'g','y','r',25,50, 'Cantidad Profesionales', ' ');
+       }
+       // si los datos en el indicador de formacion docentes son iguales a null( solo estan los datos del periodo 1 del ultimo año)  se vizualiza el nivel de formacion anterior al solicitado 
+       else {
+        //ciclo para llenar los datos en las filas en r
+        for(var i = conta-8 ; i<conta; i++){
+          r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
+          "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
+          if(json.rows[i].nom_formacion =='Doctor'){
+
+            r=r+'<td><label>50</label></td></tr>';
+          }
+          else if(json.rows[i].nom_formacion =='Magister'){
+            r=r+'<td><label>150</label></td></tr>';
+          }
+          else if(json.rows[i].nom_formacion =='Especialista'){
+            r=r+'<td><label>60</label></td></tr>';
+          }
+          else{
+            r=r+'<td><label>-</label></td></tr>';
+          }
+
+        }
+        /*var fecha = new Date();
+        var ano = fecha.getFullYear();
+        alert('El año actual es: '+ano);*/
+        tittle="Nivel de formación de docentes tiempo completo del año: "+json.rows[conta-7].anio;
+        $("#datBody").append(r);
+        $("#titulo").append(tittle);
+
+        var arra=[];
+        //ciclo para llenar  el array llamado arra con los datos que vana contener las diferentes graficas 
+        for(var i =conta-8; i<conta;i++){
+          var programa = {
+            "nivel": json.rows[i].nom_formacion,
+            "cantidad": json.rows[i].t_completo
+          }
+          arra.push(programa);
+
+        }
+        // calculo de la meta del indicador para cada nivel de formacion en porcentajes
+        var especia=0;
+        for(var i =0; i<conta;i++){
+          if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Especialista'){
+            especia=((json.rows[i].t_completo *100)/60).toFixed(1);
+          }
+          
+        } 
+        
+        var doctor=((json.rows[4].t_completo *100)/50).toFixed(1);
+        //var especia=((json.rows[7].t_completo *100)/60).toFixed(1);
+        var magist=((json.rows[5].t_completo*100)/150).toFixed(1);
+        var profes=json.rows[6].t_completo;
+        
+        
+
+        //cambio de graficas de barras
+          $("#graph1").change(function () {
+            if($(this).val() === '1'){
+              columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+            }
+            else if($(this).val() === '2'){
+              columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+            }
+            else if($(this).val() === '3'){
+              lineGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+            }
+            else if($(this).val() === '4'){
+              areaGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+            }
+            else if($(this).val() === '5'){
+              barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+            }
+            else if($(this).val() === '6'){
+              barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+            }
+          });
+        //grafica que aparecera por defecto
+        columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
+
+          // Cambio de graficas de pastel
+        $("#graph2").change(function () {
+          if($(this).val() === '1'){
+            pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+          }
+          else{
+            pieGraph3D(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+          }
+        });
+          // grifica pie que aparece por defecto
+        pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+
+        //semaforos
+        if(doctor>100){
+          doctor=100;
+          gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
+        }
+        else {gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');}
+        if(especia>100){
+          especia=100;
+          gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
+        }
+        else{
+          gaugesGraph(especia,divsem2,'r','y','g',25,50, 'Especialista', '%');
+        }
+        if(magist>100){
+          magist=100;
+          gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% ');
+        }
+        else{
+          gaugesGraph(magist,divsem3,'r','y','g',25,50, 'Magister', '% ');
+        }
+
+        gaugesGraph(profes,divsem4,'g','y','r',25,50, 'Cantidad Profesionales', ' ');
+       }
+       
      }
   });
  }
@@ -187,7 +304,7 @@ $(document).ready(function(){
        var tittle="";
        var conta=json.rowCount;
        // condicion para verificar que los datos de todos los niveles de formacion del año seleccionado esten en la BD
-       if(conta == 4){
+       if(conta == 4 && json.rows[1].t_completo != null ){
          //ciclo para llenar los datos en las filas en r
           for(var i = conta-4 ; i<conta; i++){
             r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
