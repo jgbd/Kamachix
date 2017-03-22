@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
           var d = {
             "Nivel":result.rows[i].Nivel,
             "Anho":result.rows[i].Anho,
-            "color":"#62B7F2"
+            "color":"#9704f2"
           };
           datalst.push(d);
         }

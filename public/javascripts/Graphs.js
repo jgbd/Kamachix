@@ -20,26 +20,35 @@ var menu_export = [ {
   "menu": ["JPG"]
 }];
 
+// #62B7F2
 function columnGraph(data, content_name, title, namecolumn, namerows, depth3D, angle){
+  // alert(JSON.stringify(data));
   var chart = AmCharts.makeChart(content_name, {
     "type": "serial",
     "theme": "light",
     "marginRight": 70,
     "dataProvider": data,
+    "autoResize":false,
+    "backgroundAlpha":0.10, //se usa para decir la opasidad el fondo de la grafica
+    "backgroundColor":"#000000", //se define el color de fondo de la grafica
     "valueAxes": [{
       "axisAlpha": 0,
       "position": "left",
-      "title": title
+      "title": title,
+      "color":"#02f14e", //controla el color de las label del eje Y
+      "titleColor":"#02f14e", //contola el color del titulo de la grafica
+       "gridAlpha":0.40, //opasidad de las lineas horizontales
+       "gridColor":"#de05f2", //color de las lineas horizontales
     }],
     "startDuration": 1,
     "graphs": [{
       "balloonText": "<b>[[category]]: [[value]]</b>",
-      "fillColorsField": "color",
+      "fillColors": "#de75f2", //controla el colorr de fondo de cad columna delas graficas
       "fillAlphas": 0.9,
       "lineAlpha": 0.2,
       "type": "column",
       "topRadius":1,
-      "valueField": namerows
+      "valueField": namerows,
     }],
     "depth3D": depth3D,
     "angle": angle,
@@ -51,9 +60,11 @@ function columnGraph(data, content_name, title, namecolumn, namerows, depth3D, a
     "categoryField": namecolumn,
     "categoryAxis": {
       "gridPosition": "start",
-      "labelRotation": 45
+      "labelRotation": 45,
+      "color":"#de05f2",
+      "gridAlpha": 0.40,
+      "gridColor": "#de05f2",
     },
-
     "export": {
       "enabled": true,
       "menu": menu_export
