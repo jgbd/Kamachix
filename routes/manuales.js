@@ -12,7 +12,7 @@ router.get('/',function(req, res, next){
           'ma."nombreIndicador", ma."atriMedir",'+
           ' ma."objCalidad", ma."tipoIndicador",'+
           ' ma.frecuencia, ma."periodoCalculo", ma.tendencia,'+
-          ' ma.meta, ma."objIndicador", ma.rango, ma.formular,'+
+          ' ma.meta, ma."objIndicador", ma.rango, ma.formula,'+
           ' ma."maneraGrafica", ma."puntoRegistro",'+
           ' ma.resposable, ma.instructivo'+
           ' FROM public.manuales_indicadores ma'+
@@ -36,8 +36,6 @@ router.get('/',function(req, res, next){
       //si es mayor a 0 se crea la variable de session con el resultado
       //y se devuelve el numero de resultados que en este caso siempre debe ser 1 si esta correcto
       //y es falso se devuelve el cero que sera para jusgar que realizar del lado Frond
-      console.log(result.rows);
-
       var arres = [
         result.rows[0].proceso,
         result.rows[0].lider,
@@ -69,4 +67,8 @@ router.get('/',function(req, res, next){
   });
 });
 
+
+router.post('/',function(req, res, next){
+  console.log(req.body);
+});
 module.exports = router;

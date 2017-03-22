@@ -217,17 +217,50 @@ function svgtoimg(svgdiv){
 
 //se invoca para editar los informes
 function editRepor(){
-  alert('La edicion solo es para este informe');
+
+  //se oculta y visibilkiza los botones del formulario
+  $("#btnsave").css('visibility','visible');
+  $("#btnedit").css('visibility','hidden');
+  $("#btnpdf").css('visibility','hidden');
+
   //se recorre los atribbutos del infomre y se quita el solo lectura
+
   for (var i = 1; i < 19; i++) {
     $("#atrinfo"+i).removeAttr('readonly');
   }
+}
 
+//funcion para guardar cambios de los reportes por parte del susuario administrador
+function saveReport(){
+  var formData = {};
+  for (var i = 1; i < 19; i++) {
+    formData['atr'+i]=$("#atrinfo"+i).val();
+  }
+
+  $.ajax({
+   type: "POST", //el el tipo de peticion puede ser GET y POsT
+   url: "manuales", //la url a la  que se realizara la consulta
+   data : formData,
+   dataType : 'json',
+   success : function(json) {
+
+   }
+  })
 }
 
 //abre el modal de reportes
 function openmodalreport(){
   $("#modalinfo").modal('show');
+
+  //se oculta y visibiliza los botones del formulario
+  $("#btnsave").css('visibility','hidden');
+  $("#btnedit").css('visibility','visible');
+  $("#btnpdf").css('visibility','visible');
+
+  for (var i = 1; i < 19; i++) {
+    if(!$("#atrinfo"+i).attr('readonly'))
+      $("#atrinfo"+i).attr('readonly','readonly');
+  }
 
   var date = new Date();
 
@@ -236,7 +269,6 @@ function openmodalreport(){
   var year = date.getFullYear();
 
   var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-
   uploadatareport($("#txtindser").val());
 
   $("#fecha").html(""+day+" de "+meses[month]+" de "+year);
@@ -256,14 +288,16 @@ function uploadatareport(serialindi){
    data:{c:serialindi},//Primera consulta
    //se ejecutasi todo se realiza bien
    success : function(json) {
-    //  alert(JSON.stringify(json));
      for (var i = 0; i < 18; i++) {
        if(i===3 && serialindi===1 || i===3 && serialindi===6 || i===3 && serialindi===7)
           $("#atrinfo"+(i+1)).val(json[i]+" "+$("#programa").html());
        else
           $("#atrinfo"+(i+1)).val(json[i])
      }
-   }
+   },
+   error : function(xhr, status) {
+        alert('Disculpe, existió un problema');
+    },
  });
 }
 

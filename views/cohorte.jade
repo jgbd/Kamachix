@@ -76,16 +76,16 @@ block resto
               option(value='1') Línea
               option(value='2') Area
     #divgraph3.col-md-6
-  //campo oculto para manterne le json del contenido
-  input(id='txtjson' type="hidden")
   //modal para los infomes 
   #modalinfo.modal.fade.bd-example-modal-lg
     #modalinfobody.modal-content
       #modal-bodyinfo.modal-body.table-responsive
+        input(id='txtindser' type="hidden" value='6')
         button.close(type='button', data-dismiss='modal', aria-label='Close')
           span(aria-hidden='true') ×
         input.btn.btn-info(type ='button' value='PDF' onclick='getPDF()')
         input.btn.btn-warning(type ='button' value='Editar' style!=rols onclick='editRepor()')
+        br
         table#tabind.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
           tr
             td(colspan='2')
@@ -93,90 +93,75 @@ block resto
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 1. PROCESO:
             td 
-              input#atrinfo1.form-control.atrinfo(type='text' value='Bienestar Concertado' readonly)
+              input#atrinfo1.form-control.atrinfo(type='text' readonly)
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 2. LÍDER:
             td
-              input#atrinfo2.form-control.atrinfo(type='text' value=' Dirección de Planeación y Desarrollo' readonly)
+              input#atrinfo2.form-control.atrinfo(type='text'  readonly) 
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 3. OBJETIVO DEL PROCESO:
             td
               textarea#atrinfo3.form-control.atrinfo(cols='40', rows='2' readonly)
-                | Establecer el porcentaje de estudiantes que no 
-                | renuevan matricula en la institución semestralmente
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 4. NOMBRE DEL INDICADOR:
-            td
-              input#atrinfo4.form-control.atrinfo(type='text' value='Deserción Académica por Cohorte' readonly)  
+            td 
+              input#atrinfo4.form-control.atrinfo(type='text'  readonly) 
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 5. ATRIBUTO A MEDIR:
             td
-              input#atrinfo5.form-control.atrinfo(type='text' value='Nivel de Deserción de la Universidad por Cohorte' readonly) 
+              input#atrinfo5.form-control.atrinfo(type='text'  readonly) 
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 6. OBJETIVO DE CALIDAD AL CUAL CONTRIBUYE:
             td
               textarea#atrinfo6.form-control.atrinfo(cols='40', rows='2' readonly)
-                | * Propiciar espacios de Bienestar a la comunidad 
-                | Universitaria tendientes a potenciar la capacidad y 
-                | dignidad del ser humano en todas sus dimensiones, 
-                | respetando y reconociendo la presencia e interacción 
-                | de la multiculturalidad y de distintas 
-                | formas de expresión política.
-                | Llevar políticas, programas y proyectos de bienestar
-                | universitario hacia las extensiones, comprometiendo a 
-                | los entes territoriales y otras instancias del Estado.
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 7. TIPO DE INDICADOR:
             td
-              input#atrinfo7.form-control.atrinfo(type='text' value='Proceso' readonly)   
+              input#atrinfo7.form-control.atrinfo(type='text'  readonly)  
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 8. FRECUENCIA:
-            td
-              input#atrinfo8.form-control.atrinfo(type='text' value='Semestral' readonly)   
+            td 
+              input#atrinfo8.form-control.atrinfo(type='text'  readonly)  
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 9. PERIODO DE CALCULO:
             td
-              input#atrinfo9.form-control.atrinfo(type='text' value='Último mes antes de finalizar el semestre' readonly)   
+               input#atrinfo9.form-control.atrinfo(type='text'  readonly)  
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 10. TENDENCIA ESPERADA:
-            td
-              input#atrinfo10.form-control.atrinfo(type='text' value='Disminución' readonly) 
+            td 
+              input#atrinfo10.form-control.atrinfo(type='text'  readonly)  
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 11. META
             td
-              input#atrinfo11.form-control.atrinfo(type='text' value='Disminuir la deserción al 24% ' readonly)
+              input#atrinfo11.form-control.atrinfo(type='text'  readonly)  
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 12. OBJETIVO DEL INDICADOR:
             td
               textarea#atrinfo12.form-control.atrinfo(cols='40', rows='2' readonly)
-                |Establecer el porcentaje de estudiantes que no renuevan matricula en la institución semestralmente
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 13. RANGO Y FORMA DE INTERPRETACIÓN:
             td
-              input#atrinfo13.form-control.atrinfo(type='text', value='10%', width='5')
+              input#atrinfo13.form-control.atrinfo(type='text')
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 14. FÓRMULA:
             td
               textarea#atrinfo14.form-control.atrinfo(cols='40', rows='2' readonly)
-                | (No. de Estudiantes que se retiran en forma definitiva
-                | del Proceso de Formación Académica por cohorte/Total  de 
-                | Estudiantes Matriculados por Periodo en una cohorte)*100
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 15. MANERA QUE PODÍA SER GRAFICADO:
             td
-              input#atrinfo15.form-control.atrinfo(type='text' value='Diagrama de Bloque, señalando el porcentaje obtenido de deserción, frente a la meta.' readonly)
+              input#atrinfo15.form-control.atrinfo(type='text' readonly)  
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 16. PUNTO DE REGISTRO:
             td
-              input#atrinfo16.form-control.atrinfo(type='text' value='Aplicativo SPADIES, el cual es respaldado por el MEN.' readonly) 
+              input#atrinfo16.form-control.atrinfo(type='text'  readonly)  
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 17. RESPONSABLE DEL CALCULO
             td
-              input#atrinfo17.form-control.atrinfo(type='text' value='Directores de Departamento' readonly)  
+              input#atrinfo17.form-control.atrinfo(type='text'  readonly)  
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 18. INSTRUCTIVO:
             td
-              input#atrinfo18.form-control.atrinfo(type='text', value='Al finalizar cada semestre se aplica la fórmula y se confronta los resultados del semestre anterior con los del semestre actual.' readonly)
+              input#atrinfo18.form-control.atrinfo(type='text' readonly)
         br
         table#tabindres.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
           tr
@@ -184,20 +169,20 @@ block resto
               h5(style='text-align:center') RESULTADOS Y EVOLUCIÓN DEL INDICADOR
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 19. FECHA DE CALCULO:
-            td
+            td 
               label#fecha
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 20. RESULTADO DEL INDICADOR:
             td 
-              #divtab(style='width: 100%; height: 40%;')
+              #divtab(style=' height: 40%;')
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 21. CALIFICACIÓN:
             td
-              textarea#txtcal.form-control(cols='100', rows='3')
+              textarea#txtcal.form-control(cols='40', rows='3')
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 22. LECTURA DE LA EVOLUCIÓN DEL INDICADOR:
             td
-              textarea#txtlec.form-control(cols='100', rows='6')
+              textarea#txtlec.form-control(cols='40', rows='6')
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 23. EVOLUCIÓN GRÁFICA:
             td 

@@ -7,7 +7,7 @@
 
 
   //click para cargar los filtros aqui hice cambios
-// otro cambio
+  // otro cambio
   $("#frmfilter").submit(function(event){
     load_filters();
     event.preventDefault();
@@ -15,7 +15,6 @@
 
   // al hacer click para cambiar grafica del primer div
   // se puede obtar por de columna o de barras horizontales
-  //$("input[name=cgdiv1]").click(function () {
   $("#cgdiv1").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
@@ -33,7 +32,6 @@
 
   // cambia grafica del segundo div
   // se puede tener o de linea o de area
-  //$("input[name=cgdiv2]").click(function () {
   $("#cgdiv2").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
