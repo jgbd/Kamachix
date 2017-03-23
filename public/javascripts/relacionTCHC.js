@@ -44,74 +44,153 @@ $(document).ready(function(){
        var r="";
        var r2="";
        var conta = json.rowCount;
+       if(json.rows[0].relacion_docentes==null){
+        for(var i = 1 ; i<6; i++){
+          r = r+"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
+          "</label></td><td><label id='tc"+i+"'>"+json.rows[i].cant_docentes_tc+"</label>"+
+          "</label></td><td><label id='hc"+i+"'>"+json.rows[i].cant_docentes_hc+"</label>"+
+          "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes+"</label></td>";
+          if(json.rows[i].relacion_docentes<=1){
+            
+            r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy baja ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
+          }          
+          else if(json.rows[i].relacion_docentes>1.4 && json.rows[i].relacion_docentes<=1.8 || json.rows[i].relacion_docentes>2.2 && json.rows[i].relacion_docentes<=2.6 ){
+            
+            r=r+'<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="la relacion docentes se  esta alejando de la meta"></td></tr>';
+          } 
+          else if(json.rows[i].relacion_docentes>=2.6){
+              r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy alta ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
+          }
+              
+          else {
+            
+            r=r+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="la relacion docentes es buena "></td></tr>';
+          }
 
-       for(var i = 0 ; i<5; i++){
-         r = r+"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
-         "</label></td><td><label id='tc"+i+"'>"+json.rows[i].cant_docentes_tc+"</label>"+
-         "</label></td><td><label id='hc"+i+"'>"+json.rows[i].cant_docentes_hc+"</label>"+
-         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes/1000+"</label></td>";
-         if(json.rows[i].relacion_docentes/1000<=1.3){
-           
-           r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy baja ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
-         }          
-         else if(json.rows[i].relacion_docentes/1000>1 && json.rows[i].relacion_docentes/1000<=1.8){
-           
-           r=r+'<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="la relacion docentes se  esta alejando de la meta"></td></tr>';
-         }          
-        else {
-          
-          r=r+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="la relacion docentes es buena "></td></tr>';
         }
 
+        //datos para el filtro
+        for(var j = 1 ; j<conta; j++){
+          r2 = r2+"<option value='"+ json.rows[j].anio +"' >"+ json.rows[j].anio+"</option>";
+        }
+        // se llena los Filtros
+        $("#lstfilter1").append(r2);
+        $("#lstfilter2").append(r2);
+        //se llena la tabla
+        $("#datBody").append(r);
+
+        // titulo
+        tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC de los ultimos 5 años";
+        $("#titulo").append(tittle);
+
+        //arreglo para la grafica de la division 4 con la relacion de docentes
+
+        var arra=[];
+
+        for(var i =1; i<6;i++){
+          var programa = {
+            "anio": json.rows[i].anio,
+            "cantidad": json.rows[i].relacion_docentes
+            
+          }
+          arra.push(programa);
+        }
+
+        //arreglo para la grafica de la division 2 con docentes tiempo completo
+        var arra2=[];
+        for(var i =1; i<6;i++){
+          var programa2 = {
+            "anio": json.rows[i].anio,
+            "cantidad": json.rows[i].cant_docentes_tc           
+          }
+          arra2.push(programa2);
+
+        }
+        //arreglo para la grafica de la division 3 con docentes hora catedra
+        var arra3=[];
+        for(var i =1; i<6;i++){
+          var programa3 = {
+            "anio": json.rows[i].anio,
+            "cantidad": json.rows[i].cant_docentes_hc
+            
+          }
+          arra3.push(programa3);
+
+        }
        }
+       else{
+         for(var i = 0 ; i<5; i++){
+          r = r+"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
+          "</label></td><td><label id='tc"+i+"'>"+json.rows[i].cant_docentes_tc+"</label>"+
+          "</label></td><td><label id='hc"+i+"'>"+json.rows[i].cant_docentes_hc+"</label>"+
+          "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes+"</label></td>";
+          if(json.rows[i].relacion_docentes<=1){
+            
+            r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy baja ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
+          }          
+          else if(json.rows[i].relacion_docentes>1.4 && json.rows[i].relacion_docentes<=1.8 || json.rows[i].relacion_docentes>2.2 && json.rows[i].relacion_docentes<=2.6 ){
+            
+            r=r+'<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="la relacion docentes se  esta alejando de la meta"></td></tr>';
+          } 
+          else if(json.rows[i].relacion_docentes>=2.6){
+              r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy alta ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
+          }
+              
+          else {
+            
+            r=r+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="la relacion docentes es buena "></td></tr>';
+          }
 
-       //datos para el filtro
-       for(var j = 0 ; j<conta; j++){
-         r2 = r2+"<option value='"+ json.rows[j].anio +"' >"+ json.rows[j].anio+"</option>";
-       }
-       // se llena los Filtros
-       $("#lstfilter1").append(r2);
-       $("#lstfilter2").append(r2);
-       //se llena la tabla
-       $("#datBody").append(r);
+        }
 
-       // titulo
-       tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC de los ultimos 5 años";
-       $("#titulo").append(tittle);
+        //datos para el filtro
+        for(var j = 0 ; j<conta; j++){
+          r2 = r2+"<option value='"+ json.rows[j].anio +"' >"+ json.rows[j].anio+"</option>";
+        }
+        // se llena los Filtros
+        $("#lstfilter1").append(r2);
+        $("#lstfilter2").append(r2);
+        //se llena la tabla
+        $("#datBody").append(r);
 
-       //arreglo para la grafica de la division 4 con la relacion de docentes
+        // titulo
+        tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC de los ultimos 5 años";
+        $("#titulo").append(tittle);
 
-       var arra=[];
+        //arreglo para la grafica de la division 4 con la relacion de docentes
 
-       for(var i =0; i<5;i++){
-         var programa = {
-           "anio": json.rows[i].anio,
-           "cantidad": json.rows[i].relacion_docentes
-           
-         }
-         arra.push(programa);
-       }
+        var arra=[];
 
-       //arreglo para la grafica de la division 2 con docentes tiempo completo
-       var arra2=[];
-       for(var i =0; i<5;i++){
-         var programa2 = {
-           "anio": json.rows[i].anio,
-           "cantidad": json.rows[i].cant_docentes_tc           
-         }
-         arra2.push(programa2);
+        for(var i =0; i<5;i++){
+          var programa = {
+            "anio": json.rows[i].anio,
+            "cantidad": json.rows[i].relacion_docentes
+            
+          }
+          arra.push(programa);
+        }
 
-       }
-       //arreglo para la grafica de la division 3 con docentes hora catedra
-       var arra3=[];
-       for(var i =0; i<5;i++){
-         var programa3 = {
-           "anio": json.rows[i].anio,
-           "cantidad": json.rows[i].cant_docentes_hc
-           
-         }
-         arra3.push(programa3);
+        //arreglo para la grafica de la division 2 con docentes tiempo completo
+        var arra2=[];
+        for(var i =0; i<5;i++){
+          var programa2 = {
+            "anio": json.rows[i].anio,
+            "cantidad": json.rows[i].cant_docentes_tc           
+          }
+          arra2.push(programa2);
 
+        }
+        //arreglo para la grafica de la division 3 con docentes hora catedra
+        var arra3=[];
+        for(var i =0; i<5;i++){
+          var programa3 = {
+            "anio": json.rows[i].anio,
+            "cantidad": json.rows[i].cant_docentes_hc
+            
+          }
+          arra3.push(programa3);
+
+        }
        }
        //cambio de graficas de barras docentes tiempo completo
         $("#graph1").change(function () {
@@ -226,16 +305,20 @@ $(document).ready(function(){
          r = r+"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
          "</label></td><td><label id='tc"+i+"'>"+json.rows[i].cant_docentes_tc+"</label>"+
          "</label></td><td><label id='hc"+i+"'>"+json.rows[i].cant_docentes_hc+"</label>"+
-         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes/1000+"</label></td>";
+         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes+"</label></td>";
          
-         if(json.rows[i].relacion_docentes/1000<=1){
+         if(json.rows[i].relacion_docentes<=1){
            
            r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy baja ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
          }          
-         else if(json.rows[i].relacion_docentes/1000>1 && json.rows[i].relacion_docentes/1000<=1.6){
+         else if(json.rows[i].relacion_docentes>1.4 && json.rows[i].relacion_docentes<=1.8 || json.rows[i].relacion_docentes>2.2 && json.rows[i].relacion_docentes<=2.6 ){
            
            r=r+'<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="la relacion docentes se  esta alejando de la meta"></td></tr>';
-         }          
+         } 
+         else if(json.rows[i].relacion_docentes>=2.6){
+            r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy alta ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
+         }
+             
         else {
           
           r=r+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="la relacion docentes es buena "></td></tr>';
