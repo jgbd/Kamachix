@@ -180,17 +180,6 @@ function getPDF(){
      jsreport.download('myReport.pdf', request);
    }
 
-  // jsreport.renderAsync(request).then(function(res) {
-  //   console.log(res);
-  //
-  //   //open in new window
-  //   window.open(res.toDataURI())
-  //
-  //   //open download dialog
-  //   // res.download('test.pdf')
-  // });
-
-
 }
 
 //funcion para sacar el svg y convertirlo en imagen
@@ -218,12 +207,12 @@ function svgtoimg(svgdiv){
 //se invoca para editar los informes
 function editRepor(){
 
-  //se oculta y visibilkiza los botones del formulario
+  //se oculta y visibiliza los botones del formulario
   $("#btnsave").css('visibility','visible');
   $("#btnedit").css('visibility','hidden');
   $("#btnpdf").css('visibility','hidden');
 
-  //se recorre los atribbutos del infomre y se quita el solo lectura
+  //se recorre los atributos del infomre y se quita el solo lectura
 
   for (var i = 1; i < 19; i++) {
     $("#atrinfo"+i).removeAttr('readonly');
@@ -236,6 +225,7 @@ function saveReport(){
   for (var i = 1; i < 19; i++) {
     formData['atr'+i]=$("#atrinfo"+i).val();
   }
+  formData['indser']=$("#txtindser").val();
 
   $.ajax({
    type: "POST", //el el tipo de peticion puede ser GET y POsT
@@ -243,7 +233,22 @@ function saveReport(){
    data : formData,
    dataType : 'json',
    success : function(json) {
+     //se oculta y visibiliza los botones del formulario
+     $("#btnsave").css('visibility','hidden');
+     $("#btnedit").css('visibility','visible');
+     $("#btnpdf").css('visibility','visible');
 
+     for (var i = 1; i < 19; i++) {
+       if(!$("#atrinfo"+i).attr('readonly'))
+         $("#atrinfo"+i).attr('readonly','readonly');
+     }
+
+     if(json>0){
+       $("#lblupdreport").html('Actualización Correcta.');
+       setTimeout(function(){
+         $("#lblupdreport").html('');
+       },1000);
+     }
    }
   })
 }

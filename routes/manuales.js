@@ -69,6 +69,67 @@ router.get('/',function(req, res, next){
 
 
 router.post('/',function(req, res, next){
-  console.log(req.body);
+
+  var ar = [
+    req.body.atr1,
+    req.body.atr2,
+    req.body.atr3,
+    req.body.atr4,
+    req.body.atr5,
+    req.body.atr6,
+    req.body.atr7,
+    req.body.atr8,
+    req.body.atr9,
+    req.body.atr10,
+    req.body.atr11,
+    req.body.atr12,
+    req.body.atr13,
+    req.body.atr14,
+    req.body.atr15,
+    req.body.atr16,
+    req.body.atr17,
+    req.body.atr18,
+    req.body.indser
+  ];
+
+  var sql="UPDATE public.manuales_indicadores "+
+          "SET proceso =$1, lider =$2, "
+          +'"objProceso" =$3, "nombreIndicador" =$4, '+
+          '"atriMedir" =$5, "objCalidad" =$6, '+
+          '"tipoIndicador" =$7, '+"frecuencia =$8, "+
+          '"periodoCalculo" =$9, '+"tendencia =$10, "+
+          "meta =$11, "+'"objIndicador" =$12, '+
+          "rango =$13, formula =$14, "+'"maneraGrafica" =$15, '+
+          '"puntoRegistro" =$16, '+"resposable =$17, instructivo =$18"+
+          'WHERE codigo =$19';
+
+  pool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    //Aqui es donde serealiza el query de la DB
+    //resive el sql, el arreglo siguiente contine los parametros que van en el sql  preparado
+    //la funcion anonima recive la variable de err que controla el error  y la result
+    //que es la que controla el resultado de la consulta el cual es un JSON
+    client.query(sql,ar,function(err, result) {
+      //console.log(sql);
+      done();
+      if(err) {
+        return console.error('error running query', err);
+      }
+      //se conprueba si existe resultado
+      //si es mayor a 0 se crea la variable de session con el resultado
+      //y se devuelve el numero de resultados que en este caso siempre debe ser 1 si esta correcto
+      //y es falso se devuelve el cero que sera para jusgar que realizar del lado Frond
+      res.json(result.rowCount);
+
+    });
+  });
+
+  pool.on('error', function (err, client) {
+    console.error('idle client error', err.message, err.stack)
+  });
 });
+
+
 module.exports = router;
