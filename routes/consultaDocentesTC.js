@@ -26,8 +26,9 @@ router.get('/', function(req, res, next) {
     var sql = 'SELECT * FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt WHERE "Anho"=$1 and razonb=0';
   }
   else if (req.query.c == 5){
-    var beforedata=[req.query.anho,1];
-    var sql = 'SELECT poblacion_estudiantes."semestreA" AS estudiantesa,poblacion_estudiantes."semestreB" AS estudiantesb,poblacion_estudiantes.promedio AS estudiantesprom,poblacion_docentes."semestreA" AS docentesa, poblacion_docentes."semestreB" AS docentesb,poblacion_docentes.promedio AS docentesprom, tipo FROM poblacion_docentes JOIN poblacion_estudiantes ON poblacion_docentes.anho=poblacion_estudiantes.anho WHERE poblacion_estudiantes.anho=$1 AND tipo=$2';
+    var beforedata=[req.query.anho,1,2];
+    //var sql = 'SELECT poblacion_estudiantes."semestreA" AS estudiantesa,poblacion_estudiantes."semestreB" AS estudiantesb,poblacion_estudiantes.promedio AS estudiantesprom,poblacion_docentes."semestreA" AS docentesa, poblacion_docentes."semestreB" AS docentesb,poblacion_docentes.promedio AS docentesprom, tipo FROM poblacion_docentes JOIN poblacion_estudiantes ON poblacion_docentes.anho=poblacion_estudiantes.anho WHERE poblacion_estudiantes.anho=$1 AND tipo=$2';
+    var sql = 'SELECT poblacion_estudiantes."semestreA" AS estudiantesa,poblacion_estudiantes."semestreB" AS estudiantesb,poblacion_estudiantes.promedio AS estudiantesprom,poblacion_docentes."semestreA" AS docentesa, (SELECT sum(t_completo) FROM formacion_departamento WHERE anio=$1 AND periodo=$3) AS docentesb,poblacion_docentes.promedio AS docentesprom, tipo FROM poblacion_docentes JOIN poblacion_estudiantes ON poblacion_docentes.anho=poblacion_estudiantes.anho WHERE poblacion_estudiantes.anho=$1 AND tipo=$2';
   }
   else return console.log("error");
   //aqui se crea la conexion a DB

@@ -1,6 +1,6 @@
 var now = new Date();//Hora del sistema.
-//var mes=now.getMonth()+1;//formato string mes actual
-var mes=7;//formato string mes actual
+var mes=now.getMonth()+1;//formato string mes actual
+//var mes=7;//formato string mes actual
 
 $(document).ready(function(){
   Load_Insert();//Define si muestra o no el formulario
@@ -30,6 +30,7 @@ function Load_Insert(){//Define si muestra o no el formulario
                       //de ingreso de datos tomando en cuenta la fecha de sistema y
                       //anterior entrada
   var anho=now.getFullYear();//formato string año actual
+  //var anho=2014;
   if(mes<3){
     $.ajax({
       type: "get",
@@ -265,12 +266,13 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
 
 function Load_Update(){//carga datos obtenidos del formulario de ingreso de estudiantes-docentes
   //se obtiene los valores de las input en variables
-  var anho = $("#year1").val(), estudiantes = $("#est1").val(), docentes= $("#doctc1").val(), semestre= $("#sem1").val();
+  //var anho = $("#year1").val(), estudiantes = $("#est1").val(), docentes= $("#doctc1").val(), semestre= $("#sem1").val();
+  var anho = $("#year1").val(), estudiantes = $("#est1").val(), semestre= $("#sem1").val();
   //se coloca los datos del form en el formato adecuado para enviar al server
   var formData = {
     'anho': anho,
     'estudiantes': estudiantes,
-    'docentes': docentes,
+    //'docentes': docentes,
     'semestre': semestre
   };
   $.ajax({
@@ -357,7 +359,7 @@ function opendivupdate(year,month){//carga formulario de ingreso-actualizacion d
           $('#sem2').html('<input type="hidden" id="sem1" value="B">');
           $('#year2').html('<input type="hidden" id="year1" value='+year+'>');
           $('#est').html('<input type="number" pattern="[0-9]" id="est1" value='+json.rows[0].estudiantesa+' min='+json.rows[0].estudiantesa+' max="99999" class="form-control" required>');
-          $('#doctc').html('<input type="number" pattern="[0-9]" id="doctc1" value='+json.rows[0].docentesa+' min='+json.rows[0].docentesa+' max="999" class="form-control" required>');
+          $('#doctc').html('<input type="number" pattern="[0-9]" id="doctc1" value='+json.rows[0].docentesa+' min='+json.rows[0].docentesa+' max="999" class="form-control" readonly>');
         }
       }
     });
@@ -375,7 +377,7 @@ function opendivupdate(year,month){//carga formulario de ingreso-actualizacion d
           $('#sem2').html('<input type="hidden" id="sem1" value="A">');
           $('#year2').html('<input type="hidden" id="year1" value='+(year+1)+'>');
           $('#est').html('<input type="number" pattern="[0-9]" id="est1" value='+json.rows[0].estudiantes+' min='+json.rows[0].estudiantes+' max="99999" class="form-control" required>');
-          $('#doctc').html('<input type="number" pattern="[0-9]" id="doctc1" value='+json.rows[0].docentes+' min='+json.rows[0].docentes+' max="999" class="form-control" required>');
+          $('#doctc').html('<input type="number" pattern="[0-9]" id="doctc1" value='+json.rows[0].docentes+' min='+json.rows[0].docentes+' max="999" class="form-control" readonly>');
         }
       }
     });
