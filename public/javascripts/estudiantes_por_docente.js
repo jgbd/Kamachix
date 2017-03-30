@@ -176,8 +176,8 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
       });
      columnTwoGraph(datarray,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
      lineTwoGraph(datarray,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
-     gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','g','y','r',35,59, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, ' estudiantes');
-     gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','g','y','r',35,59, 'Estudiantes por Docente año: '+ fin, ' estudiantes');
+     gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','g','y','r',35,59, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '');
+     gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','g','y','r',35,59, 'Estudiantes por Docente año: '+ fin, '');
    }
  });
 }
@@ -256,8 +256,8 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
         });
         columnTwoGraph(json.datos,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0,"A","B");
         lineTwoGraph(json.datos,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],"A","B");
-        gaugesGraph(json.datos[0].razonanual,'divper1','g','y','r',35,59, 'Estudiantes por Docente año: '+json.datos[0].Anho, ' estudiantes');
-        gaugesGraph(json.datos[json.count-1].razonanual,'divper2','g','y','r',35,59, 'Estudiantes por Docente año: '+json.datos[json.count-1].Anho, ' estudiantes');
+        gaugesGraph(json.datos[0].razonanual,'divper1','g','y','r',35,59, 'Estudiantes por Docente año: '+json.datos[0].Anho, '');
+        gaugesGraph(json.datos[json.count-1].razonanual,'divper2','g','y','r',35,59, 'Estudiantes por Docente año: '+json.datos[json.count-1].Anho, '');
       }
     });
   }

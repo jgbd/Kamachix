@@ -13,18 +13,18 @@ var pool = configdb.configdb();
 router.post('/', function(req, res, next) {
     var beforedata=[req.body.anho,req.body.estudiantes]
     //var beforedata2=[req.body.anho,req.body.docentes,1]
-    var beforedata2=[req.body.anho,1,2]
+    //var beforedata2=[req.body.anho,1,2]
     if(req.body.semestre=="B"){
         var sql ='UPDATE poblacion_estudiantes SET "semestreB"=$2, promedio=ROUND(("semestreA"+$2)/2,0) WHERE anho=$1';
         //var sql2 ='UPDATE poblacion_docentes SET "semestreB"=$2, promedio=ROUND(("semestreA"+$2)/2,0) WHERE anho=$1 AND tipo=$3';
-        var sql2 ='UPDATE poblacion_docentes SET "semestreB"=(SELECT sum(t_completo) FROM formacion_departamento WHERE anio=$1 AND periodo=$3), promedio=ROUND(("semestreA"+(SELECT sum(t_completo) FROM formacion_departamento WHERE anio=$1 AND periodo=$3))/2,0) WHERE anho=$1 AND tipo=$2';
+        //var sql2 ='UPDATE poblacion_docentes SET "semestreB"=(SELECT sum(t_completo) FROM formacion_departamento WHERE anio=$1 AND periodo=$3), promedio=ROUND(("semestreA"+(SELECT sum(t_completo) FROM formacion_departamento WHERE anio=$1 AND periodo=$3))/2,0) WHERE anho=$1 AND tipo=$2';
     }
     else{
         console.log(beforedata);
-        console.log(beforedata2);
+        //console.log(beforedata2);
         var sql ='INSERT INTO poblacion_estudiantes (anho,"semestreA",promedio) VALUES ($1,'+req.body.estudiantes+',$2)';
         //var sql2 ='INSERT INTO poblacion_docentes (anho,tipo,"semestreA",promedio) VALUES ($1,$3,'+req.body.docentes+',$2)';
-        var sql2 ='INSERT INTO poblacion_docentes (anho,tipo,"semestreA",promedio) VALUES ($1,$2,(SELECT sum(t_completo) FROM formacion_departamento WHERE anio=$1 AND periodo=$2),(SELECT sum(t_completo) FROM formacion_departamento WHERE anio=$1 AND periodo=$2))';
+        //var sql2 ='INSERT INTO poblacion_docentes (anho,tipo,"semestreA",promedio) VALUES ($1,$2,(SELECT sum(t_completo) FROM formacion_departamento WHERE anio=$1 AND periodo=$2),(SELECT sum(t_completo) FROM formacion_departamento WHERE anio=$1 AND periodo=$2))';
     }
   //consulta basica sin condiciones
   
@@ -38,12 +38,12 @@ router.post('/', function(req, res, next) {
                 return console.error('error running query1', err);
             }
         });
-        client.query(sql2,beforedata2,function(err, result) {
+        /*client.query(sql2,beforedata2,function(err, result) {
             done();
             if(err) {
                 return console.error('error running query2', err);
             }
-        });
+        });*/
     });
     //se ejecuta si el usuario o password no son correctas y no se puede conectar al SGBD
     pool.on('error', function (err, client) {
