@@ -31,6 +31,7 @@ block resto
               input(type='submit' value='Filtrar' class='btn btn-info' )
         .modal-footer
   #divupdate.modal.fade.bd-example-modal-lg
+    .modal-dialog
       .modal-content
         .modal-header
           button.close(type='button', data-dismiss='modal', aria-label='Close')
@@ -40,25 +41,22 @@ block resto
           form#frmupdate(method='POST' action='actualizaAltaCalidad')
             br
             table.table.table-hover.table-bordered.table-responsed
-              tbody.col-sm-3
-              tbody.col-sm-6
-                #flag
-                tr
-                  label(for='programa')
-                  td Codigo del programa:
-                  td#cod
-                tr
-                  label(for='fechaini') 
-                  td Fecha de Inicio de Acreditación:
-                  td#ini
-                tr  
-                  label(for='periodo') 
-                  td Periodo:
-                  td#per
-                tr  
-                  td(colspan="2")
-                    input(type='submit' value='Acreditar' class='btn btn-info' )
-              tbody.col-sm-3
+              #flag
+              tr
+                label(for='programa')
+                td Codigo del programa:
+                td#cod
+              tr
+                label(for='fechaini') 
+                td Fecha de Inicio de Acreditación:
+                td#ini
+              tr  
+                label(for='periodo') 
+                td Periodo:
+                td#per
+              tr  
+                td(colspan="2")
+                  input(type='submit' value='Acreditar' class='btn btn-info' )
         .modal-footer
   .col-md-12
     h3 Panorama General Programas Acreditados en Alta Calidad
