@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     if(req.session.rol!=1){
       res.render('formacion_departamento',{title:'formacion_departamento', rols:'display:none', arch: 'display:none', refe: 'logout', textmsg: 'Salir'});
     }else{
-      res.render('formacion_departamento',{title:'formacion_departamento', rols:'visibility: visible', arch: 'display:block', refe: 'logout', textmsg: 'Salir'});
+      res.render('formacion_departamento',{title:'formacion_departamento', rols:'visibility: visible', rep:'display:none', arch: 'display:block', refe: 'logout', textmsg: 'Salir'});
     }
   }
   else {
