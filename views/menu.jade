@@ -56,7 +56,7 @@ block content
       .modal-content
         .modal-header
           button.close(type='button', data-dismiss='modal', aria-label='Close')
-            span(aria-hidden='true') ×
+            span(aria-hidden='false') ×
           h3#modal-title.modal-title.title Iniciar Sesión.
         #modal-body.modal-body
           form#frmlogin.form-horizontal(action="consultaUsuario" method="POST")
@@ -73,7 +73,27 @@ block content
                 input#txtpass.form-control(type='password', placeholder='Contraseña' required)
             #divbtn
               button#btnlogin.btn.btn-info(type='submit') Ingresar   
+          a(href='#' class='vinculoFormato' onclick='openmodalrestart()') Olvido la Contraseña.
   
+  //modal para recuperar contraseña
+  #modalrestart.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', onclick='openmodallogin()', aria-label='Close')
+            span(aria-hidden='true') ×
+          h3#modal-title.modal-title.title Recuperar Contraseña.
+        #modal-body.modal-body
+          form#frmlogin.form-horizontal(action="consultaUsuario" method="POST")
+            .form-group
+              br
+              //aqui se resive la respuesta si existe el error de no autorización de ingreso 
+              p#respuesta
+              label.col-sm-3.control-label(for='txtuser') Usuario: 
+              .col-sm-9
+                input#txtuser.form-control(type='text', placeholder='Usuario' required)
+            #divbtn
+              button#btnlogin.btn.btn-info(type='submit') Enviar   
   //modaluploadperiodo
   #modaluploadperiodo.modal.fade.bd-example-modal-lg
     .modal-dialog
@@ -150,8 +170,6 @@ block content
             p
           a(href='download/Formato\ datos\ Formacion\ Docentes.xls' class='vinculoFormato') Descargar Formato
   
- 
-  
   //contiene el head y el menu con los nombres de los indicadores 
   
   //head del aplicativo 
@@ -162,7 +180,6 @@ block content
          small Visualizador de Indicadores Academicos
   
   //barra de menu
-
   .row
     nav#menu.navbar.navbar-inverse.col-md-12.col-lg-12(role="navigation")
      .container-fluid.col-md-12.col-lg-12
@@ -253,5 +270,6 @@ block content
                        | Deserción por Periodo
          p.navbar-text.navbar-right 
            a.logout(href!=refe)!=textmsg  
+
   //bloque que contiene el contenido de cada pagina especifica
   block resto
