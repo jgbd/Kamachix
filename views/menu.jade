@@ -84,16 +84,17 @@ block content
             span(aria-hidden='true') ×
           h3#modal-title.modal-title.title Recuperar Contraseña.
         #modal-body.modal-body
-          form#frmlogin.form-horizontal(action="consultaUsuario" method="POST")
+          form#frmrecover.form-horizontal(action="validarestart" method="POST")
             .form-group
               br
               //aqui se resive la respuesta si existe el error de no autorización de ingreso 
-              p#respuesta
+              p#resrecover
               label.col-sm-3.control-label(for='txtuser') Usuario: 
               .col-sm-9
-                input#txtuser.form-control(type='text', placeholder='Usuario' required)
+                input#txtreuser.form-control(type='text', placeholder='Usuario' required)
             #divbtn
-              button#btnlogin.btn.btn-info(type='submit') Enviar   
+              button#btnrest.btn.btn-info(type='submit') Enviar   
+  
   //modaluploadperiodo
   #modaluploadperiodo.modal.fade.bd-example-modal-lg
     .modal-dialog
@@ -173,11 +174,14 @@ block content
   //contiene el head y el menu con los nombres de los indicadores 
   
   //head del aplicativo 
-  #cabezera.col-md-12
-    .col-md-12
-       h3.title.col-md-12 Kamachix Dashboard
-         br
-         small Visualizador de Indicadores Academicos
+  .row
+    #cabezera.col-md-12
+      .col-md-12.col-lg-12
+        .col-md-2
+          img(src='images/logo2.png' alt='logo' style='width:100%; height:100%; margin-top:20%;')
+         h3.title.col-md-9 Kamachix Dashboard
+           br
+           small Visualizador de Indicadores Academicos
   
   //barra de menu
   .row

@@ -22,7 +22,7 @@ $(document).ready(function(){
          $("#respuesta").text("Error en nombre de usuario o contraseña \n Vuelva a Intentar" );
        }
      }
-   });
-  event.preventDefault();
+    });
+    event.preventDefault();
   });
 });

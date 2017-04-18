@@ -70,6 +70,28 @@ $(document).ready(function(){
     event.preventDefault();
   });
 
+  //se ejecuta al dar click para recuperar contraseña
+  $('#frmrecover').submit(function(event){
+    var formData = {
+          'user': $('#txtreuser').val(),
+        };
+    $.ajax({
+     type: "POST", //el el tipo de peticion puede ser GET y POsT
+     url: "validarestart", //la url del que realizara la consulta
+     data: formData, //los datos que seran enviados al server
+     dataType : 'json', //el formato de datos enviados y devueltos del server
+     //se ejecutasi todo se realiza bien
+     success : function(json) {
+       //aqui comprobamos que si el resultado existe lo redirecciona al siguiente pagina
+       if(json>0){
+         $("#resrecover").text("Por favor reviza tu bandeja de entrada." );
+       }else{
+         $("#resrecover").text("EL usuario no existe, vuelve a intentar." );
+       }
+     }
+    });
+    event.preventDefault();
+  });
 });
 
 
