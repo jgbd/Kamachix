@@ -70,6 +70,28 @@ $(document).ready(function(){
     event.preventDefault();
   });
 
+  //se ejecuta al dar click para recuperar contraseña
+  $('#frmrecover').submit(function(event){
+    var formData = {
+          'user': $('#txtreuser').val(),
+        };
+    $.ajax({
+     type: "POST", //el el tipo de peticion puede ser GET y POsT
+     url: "validarestart", //la url del que realizara la consulta
+     data: formData, //los datos que seran enviados al server
+     dataType : 'json', //el formato de datos enviados y devueltos del server
+     //se ejecutasi todo se realiza bien
+     success : function(json) {
+       //aqui comprobamos que si el resultado existe lo redirecciona al siguiente pagina
+       if(json>0){
+         $("#resrecover").text("Por favor reviza tu bandeja de entrada." );
+       }else{
+         $("#resrecover").text("EL usuario no existe, vuelve a intentar." );
+       }
+     }
+    });
+    event.preventDefault();
+  });
 });
 
 
@@ -77,7 +99,7 @@ $(document).ready(function(){
 function getPDF(){
 
   //se inicia el servidor de reportes
-  jsreport.serverUrl = 'http://localhost:5488';
+  jsreport.serverUrl = 'https://localhost:5489';
 
   //areglo para contener todo lo que se envia a el reporte
   var atrind=[];
@@ -168,8 +190,18 @@ function getPDF(){
    };
 
    jsreport.headers['Content-Type'] = "application/json " ;
-   jsreport.headers['Authorization'] = "Basic " + btoa("admin:password");
+   jsreport.headers['Authorization'] = "Basic " + btoa("report:123");
 
+
+  //  jsreport.renderAsync(request).then(function(res) {
+  //    console.log(res);
+   //
+  //    //open in new window
+  //    window.open(res.toDataURI())
+   //
+  //    //open download dialog
+  //    res.download('test.pdf')
+  //  });
    var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
    if(!isOpera){
@@ -333,5 +365,12 @@ function openmodaluploadperiodo(){
 
 //abre modal para login de la aplicacion
 function openmodallogin(){
+  $("#modalrestart").modal('hide');
   $("#modallogin").modal('show');
+}
+
+//abre modal cambio contraseña
+function openmodalrestart(){
+  $("#modallogin").modal('hide');
+  $("#modalrestart").modal('show');
 }

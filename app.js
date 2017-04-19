@@ -13,7 +13,9 @@ var session = require('express-session');
 
 //son los archivo en el server lo controlara cada pagina
 var users = require('./routes/consultaUsuario'); //consulta el usuario
+var validar = require('./routes/validarestart'); //validar el usuario para recuperar contraseña
 var indicater = require('./routes/indicadores'); //pagina de bienvenida
+var recover = require('./routes/recover'); //para recuperar contraseña
 var logout = require('./routes/logout'); //pagina de logout
 
 //para controlar todo lo del KPI satisfaccion
@@ -100,7 +102,10 @@ app.use(fileUpload({
 //aqui se asocia cada enlace llamado con su respectiva JS en el server que lo controla
 app.use('/', indicater);
 app.use('/consultaUsuario', users); //consults usuario en DB
+app.use('/validarestart',validar); //validar usuario recuperar contraseña
+app.use('/recover',recover);
 app.use('/logout',logout);//llamado a cerrar sesion y destruir variables de entorno
+
 
 app.use('/satisfacion',satisfaction); //todo la vsualizacion de el kpi de satisfaccion
 app.use('/consultaFiltros',filter); //consulta filtros de satisfacccion
