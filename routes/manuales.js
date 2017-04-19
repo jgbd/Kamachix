@@ -8,15 +8,13 @@ router.get('/',function(req, res, next){
 
   var arre = [req.query.c];
 
-  var sql='SELECT ma.proceso, ma.lider, ma."objProceso", '+
-          'ma."nombreIndicador", ma."atriMedir",'+
-          ' ma."objCalidad", ma."tipoIndicador",'+
-          ' ma.frecuencia, ma."periodoCalculo", ma.tendencia,'+
-          ' ma.meta, ma."objIndicador", ma.rango, ma.formula,'+
-          ' ma."maneraGrafica", ma."puntoRegistro",'+
-          ' ma.resposable, ma.instructivo'+
-          ' FROM public.manuales_indicadores ma'+
-          ' WHERE ma.codigo = $1';
+  var sql='SELECT ma.proceso, ma.lider, ma."objProceso",ma."nombreIndicador",'+
+  'ma."atriMedir",ma."objCalidad", ma."tipoIndicador",ma.frecuencia,'+
+  ' ma."periodoCalculo", ma.tendencia,ma.meta, ma."objIndicador", ma."sim_Rango_MA",'+
+  ' ma.formula,ma."maneraGrafica", ma."puntoRegistro",ma.resposable,'+
+  ' ma.instructivo,ma."num_Rango_MA",ma."sim_Rango_A",'+
+  ' ma."num_Rango_A",ma."sim_Rango_I",ma."num_Rango_I" '+
+  'FROM public.manuales_indicadores ma WHERE ma.codigo = $1';
 
   pool.connect(function(err, client, done) {
     if(err) {
@@ -48,13 +46,18 @@ router.get('/',function(req, res, next){
         result.rows[0].periodoCalculo,
         result.rows[0].tendencia,
         result.rows[0].meta,
-        result.rows[0].objIndicador,
-        result.rows[0].rango,
+        result.rows[0].objIndicador,        
         result.rows[0].formular,
         result.rows[0].maneraGrafica,
         result.rows[0].puntoRegistro,
         result.rows[0].resposable,
-        result.rows[0].instructivo
+        result.rows[0].instructivo,
+        result.rows[0].sim_Rango_MA,       
+        result.rows[0].num_Rango_MA,
+        result.rows[0].sim_Rango_A,
+        result.rows[0].num_Rango_A,
+        result.rows[0].sim_Rango_I,
+        result.rows[0].num_Rango_I
       ];
 
       res.json(arres);
@@ -89,6 +92,11 @@ router.post('/',function(req, res, next){
     req.body.atr16,
     req.body.atr17,
     req.body.atr18,
+    req.body.atr19,
+    req.body.atr20,
+    req.body.atr21,
+    req.body.atr22,
+    req.body.atr23,
     req.body.indser
   ];
 
@@ -96,12 +104,12 @@ router.post('/',function(req, res, next){
           "SET proceso =$1, lider =$2, "
           +'"objProceso" =$3, "nombreIndicador" =$4, '+
           '"atriMedir" =$5, "objCalidad" =$6, '+
-          '"tipoIndicador" =$7, '+"frecuencia =$8, "+
-          '"periodoCalculo" =$9, '+"tendencia =$10, "+
-          "meta =$11, "+'"objIndicador" =$12, '+
-          "rango =$13, formula =$14, "+'"maneraGrafica" =$15, '+
-          '"puntoRegistro" =$16, '+"resposable =$17, instructivo =$18"+
-          'WHERE codigo =$19';
+          '"tipoIndicador" =$7, '+'frecuencia =$8,'+
+          '"periodoCalculo" =$9, '+'"tendencia" =$10,'+
+          'meta =$11,'+'"objIndicador" =$12, '+
+          'formula =$13, '+'"maneraGrafica" =$14, '+
+          '"puntoRegistro" =$15, '+'resposable =$16, instructivo =$17,"sim_Rango_MA" =$18,"num_Rango_MA"=$19,"sim_Rango_A" =$20,"num_Rango_A"=$21,"sim_Rango_I" =$22,"num_Rango_I"=$23 '+
+          'WHERE codigo =$24';
 
   pool.connect(function(err, client, done) {
     if(err) {

@@ -214,7 +214,7 @@ function editRepor(){
 
   //se recorre los atributos del infomre y se quita el solo lectura
 
-  for (var i = 1; i < 19; i++) {
+  for (var i = 1; i < 24; i++) {
     $("#atrinfo"+i).removeAttr('readonly');
   }
 }
@@ -222,7 +222,7 @@ function editRepor(){
 //funcion para guardar cambios de los reportes por parte del susuario administrador
 function saveReport(){
   var formData = {};
-  for (var i = 1; i < 19; i++) {
+  for (var i = 1; i < 24; i++) {
     formData['atr'+i]=$("#atrinfo"+i).val();
   }
   formData['indser']=$("#txtindser").val();
@@ -262,7 +262,7 @@ function openmodalreport(){
   $("#btnedit").css('visibility','visible');
   $("#btnpdf").css('visibility','visible');
 
-  for (var i = 1; i < 19; i++) {
+  for (var i = 1; i < 24; i++) {
     if(!$("#atrinfo"+i).attr('readonly'))
       $("#atrinfo"+i).attr('readonly','readonly');
   }
@@ -293,7 +293,7 @@ function uploadatareport(serialindi){
    data:{c:serialindi},//Primera consulta
    //se ejecutasi todo se realiza bien
    success : function(json) {
-     for (var i = 0; i < 18; i++) {
+     for (var i = 0; i < 23; i++) {
        if(i===3 && serialindi===1 || i===3 && serialindi===6 || i===3 && serialindi===7)
           $("#atrinfo"+(i+1)).val(json[i]+" "+$("#programa").html());
        else
