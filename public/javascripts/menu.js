@@ -270,7 +270,7 @@ function saveReport(){
      $("#btnedit").css('visibility','visible');
      $("#btnpdf").css('visibility','visible');
 
-     for (var i = 1; i < 19; i++) {
+     for (var i = 1; i < 24; i++) {
        if(!$("#atrinfo"+i).attr('readonly'))
          $("#atrinfo"+i).attr('readonly','readonly');
      }
