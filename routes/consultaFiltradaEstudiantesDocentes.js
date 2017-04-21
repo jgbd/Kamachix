@@ -28,6 +28,17 @@ router.post('/', function(req, res, next) {
         sql=sql+' AND $1';
       }
     }
+    else{
+      filters.push(req.body.yearto);
+      sql=sql+'spctt."Anho" BETWEEN $1';
+      if(req.body.yearfrom!=0){
+        filters.push(req.body.yearfrom);
+        sql=sql+' AND $2';
+      }
+      else {
+        sql=sql+' AND $1';
+      }
+    }
 
     //al final se concatena al sql un ORDER BY por programa y año
     sql = sql+' ORDER BY spctt."Anho"';
