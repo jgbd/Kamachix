@@ -138,15 +138,12 @@ function Load_Filter(){
   //se obtiene los valores de las input en variables
   var program = $('#lstprog').val(), yearfrom = $("#lstanho1").val(), yearto = $("#lstanho2").val();
 
-  if(yearfrom==yearto  && yearfrom!=0 && yearto!=0){
-    ban=false;
-    $("#messageError").html("No seleccione el mismo periodo");
-    $('#myModal').modal('show');
-  }
   if(yearfrom>yearto && yearto!=0){
     var aux = yearfrom;
     yearfrom=yearto;
     yearto=aux;
+  }else if(yearto>yearfrom && yearfrom == 0){
+    yearfrom=yearto;
   }
 
   //se coloca los datos del form en el formato adecuado para enviar al server
@@ -169,7 +166,15 @@ function Load_Filter(){
        }else{
          $("#txtjson").val(JSON.stringify(json));
          //recorre el json y se coloca el resultado en la tabla correspondiente
-         $("#programa").html(json.Programa);
+         if(yearfrom!=0){
+           if(yearto!=0 && yearfrom!=yearto){
+             $("#programa").html(json.Programa+"<br> Periodo: "+yearfrom+" A "+yearto);
+           }else{
+             $("#programa").html(json.Programa+"<br> Periodo: "+yearfrom);
+           }
+         }else{
+           $("#programa").html(json.Programa);
+         }
          for (var j = 0; j <json.count; j++) {
            $("#tableres").append('<tr>');
              $("#tableres").append('<td>'+json.datos[j].Nivel+'</td>');

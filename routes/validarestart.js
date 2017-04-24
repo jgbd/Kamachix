@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var configdb = require("../config/dbConfig.js");
+var AES = require("crypto-js/aes");
+var SHA256 = require("crypto-js/sha256");
 'use strict';
 const nodemailer = require('nodemailer');
 
@@ -8,6 +10,9 @@ const nodemailer = require('nodemailer');
 var pool = configdb.configdb();
 
 router.post('/', function(req, res, next) {
+  var date = new Date();
+  var enc = ""+date.getDate()+date.getMonth()+date.getFullYear();
+  var fec = SHA256(enc).toString();
   var sql = 'SELECT u.codigo, u.encriptado FROM public.users u WHERE u.user LIKE MD5($1)';  //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
@@ -39,7 +44,7 @@ router.post('/', function(req, res, next) {
             from: '"Juan Bastidas" <juanbasdel@udenar.edu.co>', // sender address
             to: 'juanbasdel@gmail.com', // list of receivers
             subject: 'Recuperar contraseña kamachix ✔', // Subject line
-            text: 'http://10.42.0.1:3000/recover?clave='+result.rows[0].encriptado, // plain text body
+            text: 'http://10.42.0.1:3000/recover/'+result.rows[0].encriptado+'/'+fec, // plain text body
         };
 
         // send mail with defined transport object

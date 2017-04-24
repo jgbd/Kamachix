@@ -4,6 +4,7 @@ block title
 block scriptpage
   script(src='/javascripts/desercion_cohorte.js')
 block resto
+  //modal para sacar mensajes 
   #myModal.modal.fade
     .modal-dialog
       .modal-content
@@ -15,6 +16,7 @@ block resto
           p#messageError
         .modal-footer
           button.btn.btn-primary(type='button', onclick='hidenmodal()') Aceptar
+  //modal para los filtros 
   #modalfilter.modal.fade.bd-example-modal-lg
     .modal-content
       .modal-header
@@ -43,8 +45,10 @@ block resto
           .col-md-1  
             input(type='submit' value='Filtrar' class='btn btn-info' )
       .modal-footer      
+  //dicion para el boton de abrir filtros
   .col-md-12(style='text-align:left')
     button#btnfilter.btn.btn-warning(onclick='opendivfilter()') Filtros
+  //divicion que contiene todo el contenido de la pagina
   .col-md-12
     h4 Nivel de Desercion por Cohorte de:
     h4#programa
