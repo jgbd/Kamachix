@@ -144,15 +144,12 @@ function load_filters(){
   //se obtiene los valores de las input en variables
   var program=$("#lstprog").val(), periodfrom = $("#lstperiod1").val(), periodto = $("#lstperiod2").val();
 
-  if(periodfrom==periodto  && periodfrom!=0 && periodto!=0){
-    ban=false;
-    $("#messageError").html("No seleccione el mismo periodo");
-    $('#myModal').modal('show');
-  }
   if(periodfrom>periodto && periodto!=0){
     var aux = periodfrom;
     periodfrom=periodto;
     periodto=aux;
+  }else if(periodto>periodfrom && periodfrom == 0){
+    periodfrom=periodto;
   }
 
   //se coloca los datos del form en el formato adecuado para enviar al server
@@ -174,7 +171,15 @@ function load_filters(){
          $('#myModal').modal('show');
        }else{
          $("#txtjson").val(JSON.stringify(json));
-         $("#programa").html(json.programa);
+         if(periodfrom!=0){
+           if(periodto!=0 && periodfrom!=periodto){
+             $("#programa").html(json.programa+"<br> Periodo: "+periodfrom+" A "+periodto);
+           }else{
+             $("#programa").html(json.programa+"<br> Periodo: "+periodfrom);
+           }
+         }else{
+           $("#programa").html(json.programa);
+         }
           for (var j = json.count-1; j >=0; j--) {
             $("#tableres").append('<tr>');
               $("#tableres").append('<td>'+json.datos[j].periodo+'</td>');

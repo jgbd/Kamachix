@@ -1,14 +1,31 @@
 var express = require('express');
 var router = express.Router();
 var configdb = require("../config/dbConfig.js");
+var AES = require("crypto-js/aes");
+var SHA256 = require("crypto-js/sha256");
 
 //variable que controla el pool de conexiones
 var pool = configdb.configdb();
 
-router.get('/', function(req, res, next) {
+router.get('/:clave/:fecha', function(req, res, next) {
+  //para verificar la fecha del vinculo y dejar que solo sea usable el dia que lo genero
+  var date = new Date();
+  var day = ""+date.getDate()+date.getMonth()+date.getFullYear();
+  var fec = SHA256(day).toString();
+  var ban = true;
+  var ar = [req.params.clave];
 
-  var sql = 'SELECT u.codigo FROM public.users u WHERE u.encriptado LIKE $1';
-  //aquui se crea la conexion a DB
+  if(fec==req.params.fecha){
+    var sql = 'SELECT u.codigo FROM public.users u WHERE u.encriptado LIKE $1';
+  }else {
+    var enc = ""+date.getDate()+date.getMonth()+date.getFullYear()+
+              date.getHours()+date.getMinutes()+date.getSeconds()+Math.random();
+    ar.push(enc);
+    var sql = 'UPDATE public.users SET encriptado = md5($2) WHERE encriptado = $1';
+    ban = false;
+  }
+
+  //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -17,7 +34,7 @@ router.get('/', function(req, res, next) {
     //resive el sql, el arreglo siguiente contine los parametros que van en el sql  preparado
     //la funcion anonima recive la variable de err que controla el error  y la result
     //que es la que controla el resultado de la consulta el cual es un JSON
-    client.query(sql,[req.query.clave], function(err, result) {
+    client.query(sql,ar, function(err, result) {
       //console.log(sql);
       done();
       if(err) {
@@ -27,11 +44,12 @@ router.get('/', function(req, res, next) {
       //si es mayor a 0 se crea la variable de session con el resultado
       //y se devuelve el numero de resultados que en este caso siempre debe ser 1 si esta correcto
       //y es falso se devuelve el cero que sera para jusgar que realizar del lado Frond
-      if(result.rowCount>0){
+      if(result.rowCount>0 && ban){
         req.session.codigo = result.rows[0].codigo;
         res.render('recover',{title:'Recuperar Contraseña', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Ingresar'});
       }else{
-        res.send('clave no valida');
+        res.send('<center style= "color:red"><h1>Este Enlace ya no es valido.</h1><br>+'
+                  '<h2>Vuelva a intentar recuperar la Contraseña</h2></center>');
       }
     });
   });
