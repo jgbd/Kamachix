@@ -11,11 +11,11 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="210mm"
    height="297mm"
-   viewBox="0 0 744.09448819 1052.3622047"
+   viewBox="0 0 744.09449 1052.3622"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="drawing.svg">
+   sodipodi:docname="fondo.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -26,10 +26,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.24748737"
-     inkscape:cx="-779.56196"
-     inkscape:cy="545.84796"
+     inkscape:cx="-850.27264"
+     inkscape:cy="537.76674"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g3448"
      showgrid="false"
      inkscape:window-width="1366"
      inkscape:window-height="741"
@@ -44,39 +44,40 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:label="Capa 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(0,-5.984252e-5)">
     <g
        id="g3448"
        transform="translate(24.243661,-16.162441)">
       <ellipse
-         transform="matrix(0.84479831,0.53508486,0.68900819,0.72475356,0,0)"
-         ry="609.57184"
-         rx="222.40617"
-         cy="-772.20959"
-         cx="1296.9126"
+         transform="matrix(0.84958971,0.52744415,0.69622876,0.71781997,0,0)"
          id="path3338"
-         style="fill:#ffff00" />
+         style="fill:#ffff00"
+         ry="1074.7393"
+         rx="394.00018"
+         cy="-1451.3855"
+         cx="2019.1965" />
       <ellipse
-         transform="matrix(0.84479831,0.53508486,0.68900819,0.72475356,0,0)"
-         ry="609.57184"
-         rx="222.40617"
-         cy="-1053.4832"
-         cx="1572.8201"
+         transform="matrix(0.87831095,0.47808982,0.74182526,0.67059323,0,0)"
+         ry="996.25006"
+         rx="376.41965"
+         cy="-1236.1345"
+         cx="2091.5613"
          id="path3338-3"
          style="fill:#ff0000" />
       <ellipse
-         transform="matrix(0.84577375,0.53354172,0.6904698,0.72336122,0,0)"
-         ry="632.31964"
-         rx="230.92863"
-         cy="-1429.7312"
-         cx="1931.6482"
+         transform="matrix(0.85179084,0.52388202,0.69958079,0.71455351,0,0)"
+         ry="940.41949"
+         rx="345.52316"
+         cy="-1778.7692"
+         cx="2234.1936"
          id="path3338-5"
          style="fill:#00ff00" />
     </g>

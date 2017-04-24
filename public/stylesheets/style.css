@@ -38,6 +38,7 @@ que se van creando sea por clase por id o tipo */
   background-image: url('/images/fondo.svg');
   background-repeat: no-repeat;
   background-size: cover;
+  height: 20%;
 }
 
 a {

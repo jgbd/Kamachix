@@ -99,7 +99,7 @@ $(document).ready(function(){
 function getPDF(){
 
   //se inicia el servidor de reportes
-  jsreport.serverUrl = 'https://localhost:5489';
+  jsreport.serverUrl = 'http://localhost:5488';
 
   //areglo para contener todo lo que se envia a el reporte
   var atrind=[];

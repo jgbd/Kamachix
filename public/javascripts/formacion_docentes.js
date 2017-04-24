@@ -43,7 +43,7 @@ $(document).ready(function(){
        var conta=json.rowCount;
        if(json.rows[0].anio==json.rows[1].anio && json.rows[2].anio==json.rows[1].anio && json.rows[0].anio==json.rows[3].anio){
          if(json.rows[4].anio==json.rows[5].anio && json.rows[4].anio==json.rows[6].anio && json.rows[4].anio==json.rows[7].anio){
-            // si los datos en el indicador de formacion docentes son iguales a null( solo estan los datos del periodo 1 del ultimo año)  se vizualiza el nivel de formacion anterior al solicitado 
+            // si los datos en el indicador de formacion docentes son iguales a null( solo estan los datos del periodo 1 del ultimo año)  se vizualiza el nivel de formacion anterior al solicitado
             if(json.rows[1].t_completo == null){
               //ciclo para llenar los datos en las filas en r
               for(var i = conta-4 ; i<conta; i++){
@@ -51,16 +51,16 @@ $(document).ready(function(){
                 "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
                 if(json.rows[i].nom_formacion =='Doctor'){
 
-                  r=r+'<td><label>50</label></td></tr>';
+                  r=r+'<td class="est"><label>50</label></td></tr>';
                 }
                 else if(json.rows[i].nom_formacion =='Magister'){
-                  r=r+'<td><label>150</label></td></tr>';
+                  r=r+'<td class="est"><label>150</label></td></tr>';
                 }
                 else if(json.rows[i].nom_formacion =='Especialista'){
-                  r=r+'<td><label>60</label></td></tr>';
+                  r=r+'<td class="est"><label>60</label></td></tr>';
                 }
                 else{
-                  r=r+'<td><label>-</label></td></tr>';
+                  r=r+'<td class="est"><label>-</label></td></tr>';
                 }
 
               }
@@ -72,7 +72,7 @@ $(document).ready(function(){
               $("#titulo").append(tittle);
 
               var arra=[];
-              //ciclo para llenar  el array llamado arra con los datos que vana contener las diferentes graficas 
+              //ciclo para llenar  el array llamado arra con los datos que vana contener las diferentes graficas
               for(var i =conta-4; i<conta;i++){
                 var programa = {
                   "nivel": json.rows[i].nom_formacion,
@@ -90,9 +90,9 @@ $(document).ready(function(){
               for(var i =0; i<conta;i++){
                 if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Especialista'){
                   especia +=((json.rows[i].t_completo *100)/60).toFixed(1);
-                  
+
                 }
-                
+
                 else if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Doctor'){
                   doctor +=((json.rows[i].t_completo *100)/50).toFixed(1);
                 }
@@ -104,8 +104,8 @@ $(document).ready(function(){
                 else if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Profesional'){
                   profes+=json.rows[i].t_completo;
                 }
-              }     
-              
+              }
+
 
               //cambio de graficas de barras
                 $("#graph1").change(function () {
@@ -165,7 +165,7 @@ $(document).ready(function(){
               }
 
               gaugesGraph(profes,divsem4,'g','y','r',25,50, 'Cantidad Profesionales', ' ');
-            
+
 
             }
             // si los datos del indicador formacion docentes tienen datos para ser representados graficamente
@@ -176,16 +176,16 @@ $(document).ready(function(){
                 "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
                 if(json.rows[i].nom_formacion =='Doctor'){
 
-                  r=r+'<td><label>50</label></td></tr>';
+                  r=r+'<td class="est"><label>50</label></td></tr>';
                 }
                 else if(json.rows[i].nom_formacion =='Magister'){
-                  r=r+'<td><label>150</label></td></tr>';
+                  r=r+'<td class="est"><label>150</label></td></tr>';
                 }
                 else if(json.rows[i].nom_formacion =='Especialista'){
-                  r=r+'<td><label>60</label></td></tr>';
+                  r=r+'<td class="est"><label>60</label></td></tr>';
                 }
                 else{
-                  r=r+'<td><label>-</label></td></tr>';
+                  r=r+'<td class="est"><label>-</label></td></tr>';
                 }
 
               }
@@ -197,7 +197,7 @@ $(document).ready(function(){
               $("#titulo").append(tittle);
 
               var arra=[];
-              //ciclo para llenar  el array llamado arra con los datos que vana contener las diferentes graficas 
+              //ciclo para llenar  el array llamado arra con los datos que vana contener las diferentes graficas
               for(var i =0; i<conta-4;i++){
                 var programa = {
                   "nivel": json.rows[i].nom_formacion,
@@ -215,9 +215,9 @@ $(document).ready(function(){
               for(var i =0; i<conta-4;i++){
                 if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Especialista'){
                   especia +=((json.rows[i].t_completo *100)/60).toFixed(1);
-                  
+
                 }
-                
+
                 else if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Doctor'){
                   doctor +=((json.rows[i].t_completo *100)/50).toFixed(1);
                 }
@@ -229,9 +229,9 @@ $(document).ready(function(){
                 else if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Profesional'){
                   profes+=json.rows[i].t_completo;
                 }
-              } 
-              
-              
+              }
+
+
               //cambio de graficas de barras
                 $("#graph1").change(function () {
                   if($(this).val() === '1'){
@@ -290,19 +290,19 @@ $(document).ready(function(){
               }
 
               gaugesGraph(profes,divsem4,'g','y','r',25,50, 'Cantidad Profesionales', ' ');
-              
+
             }
-         }         
+         }
 
        }
       else{
         $("#datBody").html('');
         alert('el ultimo año no tiene suficientes datos para ser vizualizado. Por favor llene todos los datos de formacion docentes correspondientes al año: '+ json.rows[0].anio);
-        
+
          $("#lst_Anio5").html('');
         location.href="/"; //metodo de resireccionamiento
-      }      
-       
+      }
+
      }
   });
  }
@@ -354,16 +354,16 @@ $(document).ready(function(){
             "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
             if(json.rows[i].nom_formacion =='Doctor'){
 
-              r=r+'<td><label>50</label></td></tr>';
+              r=r+'<td class="est"><label>50</label></td></tr>';
             }
             else if(json.rows[i].nom_formacion =='Magister'){
-              r=r+'<td><label>150</label></td></tr>';
+              r=r+'<td class="est"><label>150</label></td></tr>';
             }
             else if(json.rows[i].nom_formacion =='Especialista'){
-              r=r+'<td><label>60</label></td></tr>';
+              r=r+'<td class="est"><label>60</label></td></tr>';
             }
             else{
-              r=r+'<td><label>-</label></td></tr>';
+              r=r+'<td class="est"><label>-</label></td></tr>';
             }
           }
 
@@ -390,9 +390,9 @@ $(document).ready(function(){
         for(var i =0; i<4;i++){
           if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Especialista'){
             especia +=((json.rows[i].t_completo *100)/60).toFixed(1);
-            
+
           }
-          
+
           else if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Doctor'){
             doctor +=((json.rows[i].t_completo *100)/50).toFixed(1);
           }
@@ -406,7 +406,7 @@ $(document).ready(function(){
           }
         }
 
-          
+
 
           //cambio de graficas de barras
             $("#graph1").change(function () {
@@ -468,7 +468,7 @@ $(document).ready(function(){
             gaugesGraph(magist,divsem3,'r','y','g',40,70, 'Magister', '%');
           }
           //Profesionales
-          gaugesGraph(profes,divsem4,'g','y','r',40,70, 'Cantidad Profesionales', ' ');     
+          gaugesGraph(profes,divsem4,'g','y','r',40,70, 'Cantidad Profesionales', ' ');
 
        }
        else{
@@ -477,8 +477,8 @@ $(document).ready(function(){
          Load_first_time();
          Load_yearfirst_time();
        }
-       
-       
+
+
      }
    });
    closedivfilter();
