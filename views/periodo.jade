@@ -159,27 +159,49 @@ block resto
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 13. RANGO Y FORMA DE INTERPRETACIÓN:
             td
-              input#atrinfo13.form-control.atrinfo(type='text')
+              .col-md-5
+                table
+                  tbody#datBo
+                    tr
+                      td
+                        input#atrinfo18.form-control(type='text',required="required")
+                      td
+                        input#atrinfo19.form-control(type='number',required="required")
+                      td  Muy Adecuado
+                    tr
+                      td
+                        input#atrinfo20.form-control(type='text',required="required")
+                      td
+                        input#atrinfo21.form-control(type='number',required="required")
+                      td  Adecuado
+                    tr
+                      td
+                        input#atrinfo22.form-control(type='text',required="required")
+                      td
+                        input#atrinfo23.form-control(type='number',required="required")
+                      td  Inadecuado 
+              .col-md-7                
+              
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 14. FÓRMULA:
             td
-              textarea#atrinfo14.form-control.atrinfo(cols='40', rows='2' readonly)
+              textarea#atrinfo13.form-control.atrinfo(cols='40', rows='2' readonly)
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 15. MANERA QUE PODÍA SER GRAFICADO:
             td
-              input#atrinfo15.form-control.atrinfo(type='text' readonly)  
+              input#atrinfo14.form-control.atrinfo(type='text'  readonly)  
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 16. PUNTO DE REGISTRO:
             td
-              input#atrinfo16.form-control.atrinfo(type='text'  readonly)  
+              input#atrinfo15.form-control.atrinfo(type='text'  readonly)  
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 17. RESPONSABLE DEL CALCULO
             td
-              input#atrinfo17.form-control.atrinfo(type='text'  readonly)  
+              input#atrinfo16.form-control.atrinfo(type='text'  readonly)  
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 18. INSTRUCTIVO:
             td
-              input#atrinfo18.form-control.atrinfo(type='text' readonly)
+              input#atrinfo17.form-control.atrinfo(type='text' readonly)
         br
         table#tabindres.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
           tr
@@ -192,7 +214,7 @@ block resto
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 20. RESULTADO DEL INDICADOR:
             td 
-              #divtab(style=' height: 40%;')
+              #divtab(style='width: 100%; height: 40%;')
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 21. CALIFICACIÓN:
             td
