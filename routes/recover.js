@@ -48,7 +48,7 @@ router.get('/:clave/:fecha', function(req, res, next) {
         req.session.codigo = result.rows[0].codigo;
         res.render('recover',{title:'Recuperar Contraseña', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Ingresar'});
       }else{
-        res.send('<center style= "color:red"><h1>Este Enlace ya no es valido.</h1><br>+'
+        res.send('<center style= "color:red"><h1>Este Enlace ya no es valido.</h1><br>'+
                   '<h2>Vuelva a intentar recuperar la Contraseña</h2></center>');
       }
     });
