@@ -48,20 +48,7 @@ $(document).ready(function(){
               //ciclo para llenar los datos en las filas en r
               for(var i = conta-4 ; i<conta; i++){
                 r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
-                "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
-                if(json.rows[i].nom_formacion =='Doctor'){
-
-                  r=r+'<td class="est"><label>50</label></td></tr>';
-                }
-                else if(json.rows[i].nom_formacion =='Magister'){
-                  r=r+'<td class="est"><label>150</label></td></tr>';
-                }
-                else if(json.rows[i].nom_formacion =='Especialista'){
-                  r=r+'<td class="est"><label>60</label></td></tr>';
-                }
-                else{
-                  r=r+'<td class="est"><label>-</label></td></tr>';
-                }
+                "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";                
 
               }
               /*var fecha = new Date();
@@ -82,12 +69,15 @@ $(document).ready(function(){
 
               }
               // calculo de la meta del indicador para cada nivel de formacion en porcentajes
-              var especia=0;
+             /*var especia=0;
               var doctor=0;
               var magist=0;
-              var profes=0;
+              var profes=0;*/
+              var sumaDocMaes=0;
+              var sumatotal=0;
+              var total=0;
 
-              for(var i =0; i<conta;i++){
+              /*for(var i =0; i<conta;i++){
                 if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Especialista'){
                   especia +=((json.rows[i].t_completo *100)/60).toFixed(1);
 
@@ -104,7 +94,19 @@ $(document).ready(function(){
                 else if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Profesional'){
                   profes+=json.rows[i].t_completo;
                 }
+              }*/
+
+              for(var i =0; i<conta;i++){
+                sumatotal+=json.rows[i].nom_formacion;
+                if(json.rows[i].nom_formacion == 'Doctor'){
+                  sumaDocMaes=json.rows[i].t_completo;
+                }
+                else if(json.rows[i].nom_formacion == 'Magister'){
+                  sumaDocMaes+=json.rows[i].t_completo;
+                }              
               }
+              total=(sumaDocMaes/sumatotal)*100;
+              
 
 
               //cambio de graficas de barras
@@ -131,6 +133,9 @@ $(document).ready(function(){
               //grafica que aparecera por defecto
               columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
 
+              //semaforo divgraph4              
+              gaugesGraph(total,divgraph4,'g','y','r',25,50, 'Indicador de Meta', '%');
+
                 // Cambio de graficas de pastel
               $("#graph2").change(function () {
                 if($(this).val() === '1'){
@@ -143,8 +148,9 @@ $(document).ready(function(){
                 // grifica pie que aparece por defecto
               pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
 
-              //semaforos
-              if(doctor>100){
+
+              //semaforos divsem1
+             /* if(doctor>100){
                 doctor=100;
                 gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
               }
@@ -165,7 +171,7 @@ $(document).ready(function(){
               }
 
               gaugesGraph(profes,divsem4,'g','y','r',25,50, 'Cantidad Profesionales', ' ');
-
+              */
 
             }
             // si los datos del indicador formacion docentes tienen datos para ser representados graficamente
@@ -173,20 +179,8 @@ $(document).ready(function(){
               //ciclo para llenar los datos en las filas en r
               for(var i = 0 ; i<conta-4; i++){
                 r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
-                "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td>";
-                if(json.rows[i].nom_formacion =='Doctor'){
-
-                  r=r+'<td class="est"><label>50</label></td></tr>';
-                }
-                else if(json.rows[i].nom_formacion =='Magister'){
-                  r=r+'<td class="est"><label>150</label></td></tr>';
-                }
-                else if(json.rows[i].nom_formacion =='Especialista'){
-                  r=r+'<td class="est"><label>60</label></td></tr>';
-                }
-                else{
-                  r=r+'<td class="est"><label>-</label></td></tr>';
-                }
+                "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
+               
 
               }
               /*var fecha = new Date();
@@ -207,12 +201,15 @@ $(document).ready(function(){
 
               }
               // calculo de la meta del indicador para cada nivel de formacion en porcentajes
-              var especia=0;
+             /* var especia=0;
               var doctor=0;
               var magist=0;
-              var profes=0;
+              var profes=0;*/
+              var sumaDocMaes=0;
+              var sumatotal=0;
+              var total=0;
 
-              for(var i =0; i<conta-4;i++){
+             /* for(var i =0; i<conta-4;i++){
                 if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Especialista'){
                   especia +=((json.rows[i].t_completo *100)/60).toFixed(1);
 
@@ -229,9 +226,20 @@ $(document).ready(function(){
                 else if(json.rows[i].t_completo != null && json.rows[i].nom_formacion == 'Profesional'){
                   profes+=json.rows[i].t_completo;
                 }
+              }*/
+
+              for(var i =0; i<conta;i++){
+                sumatotal+=json.rows[i].t_completo;
+                if(json.rows[i].nom_formacion == 'Doctor'){
+                  sumaDocMaes=json.rows[i].t_completo;
+                }
+                else if(json.rows[i].nom_formacion == 'Magister'){
+                  sumaDocMaes+=json.rows[i].t_completo;
+                }              
               }
-
-
+              total=(sumaDocMaes/sumatotal)*100;
+              total=total.toFixed(2);
+            
               //cambio de graficas de barras
                 $("#graph1").change(function () {
                   if($(this).val() === '1'){
@@ -256,6 +264,9 @@ $(document).ready(function(){
               //grafica que aparecera por defecto
               columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
 
+              //semaforo divgraph4              
+              gaugesGraph(total,divgraph4,'g','y','r',25,50, 'Indicador de Meta', '%');
+
                 // Cambio de graficas de pastel
               $("#graph2").change(function () {
                 if($(this).val() === '1'){
@@ -265,11 +276,11 @@ $(document).ready(function(){
                   pieGraph3D(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
                 }
               });
-                // grifica pie que aparece por defecto
+                // grafica pie que aparece por defecto
               pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
 
               //semaforos
-              if(doctor>100){
+             /* if(doctor>100){
                 doctor=100;
                 gaugesGraph(doctor,divsem1,'r','y','g',25,50, 'Doctor', '%');
               }
@@ -290,7 +301,7 @@ $(document).ready(function(){
               }
 
               gaugesGraph(profes,divsem4,'g','y','r',25,50, 'Cantidad Profesionales', ' ');
-
+              */
             }
          }
 

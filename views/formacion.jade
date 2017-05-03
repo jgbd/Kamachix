@@ -30,15 +30,14 @@ block resto
   .col-md-12     
     h3#titulo
     br
-    #divtable.col-md-6      
+    #divtable.col-md-4   
       table(border='1').table.hover.tablestyle
         thead
           tr(align='center')
             th.th(style='text-align:center;') Formacion
-            th.th(style='text-align:center;') Docentes tiempo completo  
-            th.th.est(style='text-align:center;') Meta           
+            th.th(style='text-align:center;') Docentes tiempo completo                         
         tbody#datBody!= datos 
-    .col-md-6         
+    .col-md-5    
       #divgraph1.col-md-12      
       .col-md-12
         select#graph1
@@ -52,7 +51,12 @@ block resto
             optgroup(label='Tendencia')
               option(value='3') Línea
               option(value='4') Area
-    .col-md-6 
+    #divgraph4.col-md-3 
+         
+    .col-md-12
+      h4
+        |Panorama general del nivel de formacion de los ultimos 5 años 
+    .col-md-6  
       #divgraph2.col-md-12  
       .col-md-12
           select#graph2
@@ -60,7 +64,8 @@ block resto
             optgroup(label='Pastel')
               option(value='1') 2D
               option(value='2') 3D           
-      
+    
+    
     #divgraph3.col-md-6
       h4
         |Indicador de Meta
