@@ -45,7 +45,7 @@ $(document).ready(function(){
          if(json.rows[4].anio==json.rows[5].anio && json.rows[4].anio==json.rows[6].anio && json.rows[4].anio==json.rows[7].anio){
             // si los datos en el indicador de formacion docentes son iguales a null( solo estan los datos del periodo 1 del ultimo año)  se vizualiza el nivel de formacion anterior al solicitado
             if(json.rows[1].t_completo == null){
-              //ciclo para llenar los datos en las filas en r
+              //ciclo para llenar los datos en las filas en r 
               for(var i = conta-4 ; i<conta; i++){
                 r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
                 "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";                
