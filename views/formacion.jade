@@ -56,23 +56,24 @@ block resto
     .col-md-12
       h4
         |Panorama general del nivel de formacion de los ultimos 5 años 
-    .col-md-6  
-      #divgraph2.col-md-12  
+    #divgraph2.col-md-6 
+      table(border='1').table.hover.tablestyle
+        thead
+          tr(align='center')
+            th.th(style='text-align:center;') Año
+            th.th(style='text-align:center;') Estado Meta   
+            th.th(style='text-align:center;') Cantidad docentes TC                      
+        tbody#datBody2!= datos2                
+    
+    .col-md-6
+      #divgraph3.col-md-12
       .col-md-12
-          select#graph2
+          select#graph3
             option(selected='', value='1') Seleccione un tipo de gráfica
             optgroup(label='Pastel')
               option(value='1') 2D
-              option(value='2') 3D           
-    
-    
-    #divgraph3.col-md-6
-      h4
-        |Indicador de Meta
-      #divsem1.col-md-6
-      #divsem2.col-md-6
-      #divsem3.col-md-6
-      #divsem4.col-md-6    
+              option(value='2') 3D 
+          
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
   //modal para los infomes 

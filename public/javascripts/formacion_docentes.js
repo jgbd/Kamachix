@@ -268,7 +268,7 @@ $(document).ready(function(){
               gaugesGraph(total,divgraph4,'g','y','r',25,50, 'Indicador de Meta', '%');
 
                 // Cambio de graficas de pastel
-              $("#graph2").change(function () {
+              /*$("#graph2").change(function () {
                 if($(this).val() === '1'){
                   pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
                 }
@@ -277,7 +277,7 @@ $(document).ready(function(){
                 }
               });
                 // grafica pie que aparece por defecto
-              pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+              pieGraph(arra, "divgraph2", "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");*/
 
               //semaforos
              /* if(doctor>100){
@@ -316,6 +316,24 @@ $(document).ready(function(){
 
      }
   });
+
+  $.ajax({
+     type: "GET", //el el tipo de peticion puede ser GET y POsT
+     url: "consultaFormacion", //la url del que realizara la consulta
+     dataType : 'json',
+     data:{c:8},
+     //se ejecutasi todo se realiza bien
+     success : function(json) {
+       var conta=json.rowCount;
+       var tabla2;
+       for(i=0;i<=conta;i++){
+           tabla2 = tabla2+"<tr><td><label id='año"+i+"' name='año"+i+"'>"+json.rows[i].nom_formacion+
+                "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
+       }
+     }
+
+  });   
+
  }
 
   function Load_yearfirst_time(){

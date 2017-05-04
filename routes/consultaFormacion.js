@@ -31,6 +31,9 @@ router.get('/', function(req, res, next) {
   else if (req.query.c ==6){
     var sql='select DISTINCT periodo from formacion_departamento';
   }
+  else if(req.query.c ==8){
+    var sql='select t_completo,anio,estado_meta from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion where nom_formacion="Profesional" order by anio desc limit 5';
+  }
   else return console.log("error");
   //aquui se crea la conexion a DB
   pool.connect(function(err, client, done) {
