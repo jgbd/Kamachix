@@ -237,11 +237,17 @@ $(document).ready(function(){
               else if($(this).val() === '4'){
                 areaGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
               }
-              if($(this).val() === '5'){
+              else if($(this).val() === '5'){
                 barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
               }
               else if($(this).val() === '6'){
                 barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+              }
+              else if($(this).val() === '7'){
+                pieGraph(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+              }
+              else if($(this).val() === '8'){
+                pieGraph3D(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
               }
             });
 
@@ -250,10 +256,28 @@ $(document).ready(function(){
           // Cambio de graficas de pastel
           $("#graph2").change(function () {
             if($(this).val() === '1'){
-              pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+              columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
             }
-            else{
-              pieGraph3D(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+            else if($(this).val() === '2'){
+              columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+            }
+            else if($(this).val() === '3'){
+              lineGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+            }
+            else if($(this).val() === '4'){
+              areaGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+            }
+            else if($(this).val() === '5'){
+              barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+            }
+            else if($(this).val() === '6'){
+              barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+            }
+            else if($(this).val() === '7'){
+              pieGraph(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+            }
+            else if($(this).val() === '8'){
+              pieGraph3D(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
             }
           });
           //grafica de pastel por defecto

@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
     var sql='select DISTINCT periodo from formacion_departamento';
   }
   else if(req.query.c ==8){
-    var sql='select t_completo,anio,estado_meta from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion where nom_formacion="Profesional" order by anio desc limit 5';
+    var sql='select sum(t_completo) as completo,anio,estado_meta from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion  group by anio,estado_meta order by anio desc limit 5';
   }
   else return console.log("error");
   //aquui se crea la conexion a DB

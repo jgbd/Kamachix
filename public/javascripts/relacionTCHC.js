@@ -212,6 +212,12 @@ $(document).ready(function(){
           else if($(this).val() === '6'){
             barGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',40,30);
           }
+           else if($(this).val() === '7'){
+            pieGraph(arra2, divgraph1, "anio", "cantidad","Docentes tiempo completo");
+          }
+          else if($(this).val() === '8'){
+            pieGraph3D(arra2, divgraph1, "anio", "cantidad","Docentes tiempo completo");
+          }
         });
 
        //   
@@ -237,6 +243,12 @@ $(document).ready(function(){
           else if($(this).val() === '6'){
             barGraph(arra3,divgraph2,'Docentes hora catedra','anio','cantidad',40,30);
           }
+          else if($(this).val() === '7'){
+            pieGraph(arra3, divgraph2, "anio", "cantidad","Docentes hora catedra");
+          }
+          else if($(this).val() === '8'){
+            pieGraph3D(arra3, divgraph2, "anio", "cantidad","Docentes hora catedra");
+          }
         });
 
        //   
@@ -245,17 +257,30 @@ $(document).ready(function(){
        $("#graph3").change(function () {
 
           if($(this).val() === '1'){
-            pieGraph(arra, divgraph3, "nivel", "cantidad","Relacion docentes");
+            columnGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',0,0);
           }
           else if($(this).val() === '2'){
-            pieGraph3D(arra, divgraph3, "nivel", "cantidad","Relacion docentes");
-          }      
+            columnGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',40,30);
+          }
           else if($(this).val() === '3'){
             lineGraph(arra,divgraph3," Relacion docentes","anio","cantidad");
           }
           else if($(this).val() === '4'){
             areaGraph(arra,divgraph3," Relacion docentes","anio","cantidad");
+          } 
+          else if($(this).val() === '5'){
+            barGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',0,0);
           }
+          else if($(this).val() === '6'){
+            barGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',40,30);
+          }
+          else if($(this).val() === '7'){
+            pieGraph(arra, divgraph3, "anio", "cantidad","Relacion docentes");
+          }
+          else if($(this).val() === '8'){
+            pieGraph3D(arra, divgraph3, "anio", "cantidad","Relacion docentes");
+          }
+
       });
        lineGraph(arra,divgraph3," Relacion docentes","anio","cantidad");
      }
@@ -402,6 +427,12 @@ $(document).ready(function(){
           else if($(this).val() === '6'){
             barGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',40,30);
           }
+           else if($(this).val() === '7'){
+            pieGraph(arra2, divgraph1, "anio", "cantidad","Docentes tiempo completo");
+          }
+          else if($(this).val() === '8'){
+            pieGraph3D(arra2, divgraph1, "anio", "cantidad","Docentes tiempo completo");
+          }
         });
 
        //   
@@ -426,6 +457,12 @@ $(document).ready(function(){
           else if($(this).val() === '6'){
             barGraph(arra3,divgraph2,'Docentes hora catedra','anio','cantidad',40,30);
           }
+          else if($(this).val() === '7'){
+            pieGraph(arra3, divgraph2, "anio", "cantidad","Docentes hora catedra");
+          }
+          else if($(this).val() === '8'){
+            pieGraph3D(arra3, divgraph2, "anio", "cantidad","Docentes hora catedra");
+          }
         });
 
        //   
@@ -434,16 +471,28 @@ $(document).ready(function(){
        $("#graph3").change(function () {
 
           if($(this).val() === '1'){
-            pieGraph(arra, divgraph3, "nivel", "cantidad","Relacion docentes");
+            columnGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',0,0);
           }
           else if($(this).val() === '2'){
-            pieGraph3D(arra, divgraph3, "nivel", "cantidad","Relacion docentes");
-          }      
+            columnGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',40,30);
+          }
           else if($(this).val() === '3'){
-            lineGraph(arra,divgraph3,"Relacion docentes","anio","cantidad");
+            lineGraph(arra,divgraph3," Relacion docentes","anio","cantidad");
           }
           else if($(this).val() === '4'){
-            areaGraph(arra,divgraph3,"Relacion docentes","anio","cantidad");
+            areaGraph(arra,divgraph3," Relacion docentes","anio","cantidad");
+          } 
+          else if($(this).val() === '5'){
+            barGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',0,0);
+          }
+          else if($(this).val() === '6'){
+            barGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',40,30);
+          }
+          else if($(this).val() === '7'){
+            pieGraph(arra, divgraph3, "anio", "cantidad","Relacion docentes");
+          }
+          else if($(this).val() === '8'){
+            pieGraph3D(arra, divgraph3, "anio", "cantidad","Relacion docentes");
           }
       });
        lineGraph(arra,divgraph3,"Relacion docentes","anio","cantidad");
