@@ -33,18 +33,19 @@ block resto
   .col-md-12  
     h3#titulo
     br
-    #divtable.col-md-6      
-      table(border='1').table.hover.tablestyle
-        thead
-          tr(align='center')
-            th.th(style='text-align:center;') Año
-            th.th(style='text-align:center;') Docentes tiempo completo             
-            th.th(style='text-align:center;') Docentes hora catedra
-            th.th(style='text-align:center;') Relacion Docentes
-            th.th.est(style='text-align:center;') Estado
-        tbody#datBody!= datos  
+    .col-md-6      
+      #divtable
+        table(border='1').table.hover.tablestyle
+          thead
+            tr(align='center')
+              th.th(style='text-align:center;') Año
+              th.th(style='text-align:center;') Docentes tiempo completo             
+              th.th(style='text-align:center;') Docentes hora catedra
+              th.th(style='text-align:center;') Relacion Docentes
+              th.th.est(style='text-align:center;') Estado
+          tbody#datBody!= datos  
     .col-md-6
-      #divgraph1.col-md-12 
+      #divgraph1 
       .col-md-12
         select#graph1
             option(selected='', value='1') Seleccione un tipo de gráfica
@@ -61,7 +62,7 @@ block resto
               option(value='7') 2D
               option(value='8') 3D 
     .col-md-6
-      #divgraph2.col-md-12
+      #divgraph2
       .col-md-12
         select#graph2
             option(selected='', value='1') Seleccione un tipo de gráfica
@@ -78,7 +79,7 @@ block resto
               option(value='7') 2D
               option(value='8') 3D 
     .col-md-6
-      #divgraph3.col-md-12
+      #divgraph3
       .col-md-12
         select#graph3
             option(selected='', value='1') Seleccione un tipo de gráfica

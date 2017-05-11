@@ -31,15 +31,16 @@ block resto
     h3#titulo
   .col-md-12 
     br   
-    #divtable.col-md-4   
-      table(border='1').table.hover.tablestyle
-        thead
-          tr(align='center')
-            th.th(style='text-align:center;') Formacion
-            th.th(style='text-align:center;') Docentes tiempo completo                         
-        tbody#datBody!= datos 
+    .col-md-4   
+      #divtable
+        table(border='1').table.hover.tablestyle
+          thead
+            tr(align='center')
+              th.th(style='text-align:center;') Formacion
+              th.th(style='text-align:center;') Docentes tiempo completo                         
+          tbody#datBody!= datos 
     .col-md-5    
-      #divgraph1.col-md-12      
+      #divgraph1      
       .col-md-12
         select#graph1
             option(selected='', value='1') Seleccione un tipo de gráfica
@@ -61,17 +62,17 @@ block resto
     .col-md-12
       h4
         |Panorama general del nivel de formacion de los ultimos 5 años 
-    #divgraph2.col-md-6 
-      table(border='1').table.hover.tablestyle
-        thead
-          tr(align='center')
-            th.th(style='text-align:center;') Año
-            th.th(style='text-align:center;') Cantidad docentes TC 
-            th.th(style='text-align:center;') Estado Meta                        
-        tbody#datBody2!= datos2                
-    
+    .col-md-6 
+      #divgraph2
+        table(border='1').table.hover.tablestyle
+          thead
+            tr(align='center')
+              th.th(style='text-align:center;') Año
+              th.th(style='text-align:center;') Cantidad docentes TC 
+              th.th(style='text-align:center;') Estado Meta                        
+          tbody#datBody2!= datos2                
     .col-md-6
-      #divgraph3.col-md-12
+      #divgraph3
       .col-md-12
         select#graph2
             option(selected='', value='1') Seleccione un tipo de gráfica
