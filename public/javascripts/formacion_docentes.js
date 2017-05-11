@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   Load_first_time();
   Load_yearfirst_time();
-
+  
 
   function aleatorio(inferior,superior){
     numPosibilidades = superior - inferior
@@ -68,26 +68,7 @@ $(document).ready(function(){
                 arra.push(programa);
 
               }
-              // calculo de la meta del indicador
-             
-              var sumaDocMaes=0;
-              var sumatotal=0;
-              var total=0;
-
               
-              for(var i =0; i<conta;i++){
-                sumatotal+=json.rows[i].nom_formacion;
-                if(json.rows[i].nom_formacion == 'Doctor'){
-                  sumaDocMaes=json.rows[i].t_completo;
-                }
-                else if(json.rows[i].nom_formacion == 'Magister'){
-                  sumaDocMaes+=json.rows[i].t_completo;
-                }              
-              }
-              total=(sumaDocMaes/sumatotal)*100;
-              
-
-
               //cambio de graficas de barras
                 $("#graph1").change(function () {
                   if($(this).val() === '1'){
@@ -118,9 +99,33 @@ $(document).ready(function(){
               //grafica que aparecera por defecto
               columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
 
-              //semaforo divgraph4              
-              gaugesGraph(total,divgraph4,'r','y','g',25,50, 'Indicador de Meta', '%');
+              //semaforo divgraph4 
+              //toma los datos de los manuales del indicador para graficar el acelerometro           
+               
+              if(json.rows[conta-2].sim_Rango_MA === '> ' && json.rows[conta-2].sim_Rango_I == '< ' ){    
+                           
+                gaugesGraph(json.rows[conta-2].estado_meta,divgraph4,'r','y','g',json.rows[conta-2].num_Rango_I,json.rows[conta-2].num_Rango_MA, 'Indicador de Meta', '%');
+                
 
+              }
+              else if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){
+                
+                gaugesGraph(json.rows[conta-2].estado_meta,divgraph4,'g','y','r',json.rows[conta-2].num_Rango_MA,json.rows[2].sim_Rango_I, 'Indicador de Meta', '%');
+                
+              }
+              else if(json.rows[conta-2].sim_Rango_MA === '< ' && json.rows[conta-2].sim_Rango_I == '< ' ){    
+                           
+                gaugesGraph(json.rows[conta-2].estado_meta,divgraph4,'r','y','g',json.rows[conta-2].num_Rango_I,json.rows[conta-2].num_Rango_MA, 'Indicador de Meta', '%');
+                
+
+              }
+
+              else if(json.rows[conta-2].sim_Rango_MA === '> ' && json.rows[conta-2].sim_Rango_I == '> ' ){    
+                           
+                gaugesGraph(json.rows[conta-2].estado_meta,divgraph4,'r','y','g',json.rows[conta-2].num_Rango_I,json.rows[conta-2].num_Rango_MA, 'Indicador de Meta', '%');
+                
+
+              }
                
 
               
@@ -134,9 +139,7 @@ $(document).ready(function(){
                
 
               }
-              /*var fecha = new Date();
-              var ano = fecha.getFullYear();
-              alert('El año actual es: '+ano);*/
+              
               tittle="Nivel de formación de docentes tiempo completo del año: "+json.rows[2].anio;
               $("#datBody").append(r);
               $("#titulo").append(tittle);
@@ -151,25 +154,7 @@ $(document).ready(function(){
                 arra.push(programa);
 
               }
-              // calculo de la meta del indicador para cada nivel de formacion en porcentajes
-            
-              var sumaDocMaes=0;
-              var sumatotal=0;
-              var total=0;
-
              
-
-              for(var i =0; i<conta;i++){
-                sumatotal+=json.rows[i].t_completo;
-                if(json.rows[i].nom_formacion == 'Doctor'){
-                  sumaDocMaes=json.rows[i].t_completo;
-                }
-                else if(json.rows[i].nom_formacion == 'Magister'){
-                  sumaDocMaes+=json.rows[i].t_completo;
-                }              
-              }
-              total=(sumaDocMaes/sumatotal)*100;
-              total=total.toFixed(2);
             
               //cambio de graficas de barras
                 $("#graph1").change(function () {
@@ -201,8 +186,37 @@ $(document).ready(function(){
               //grafica que aparecera por defecto
               columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
 
-              //semaforo divgraph4              
-              gaugesGraph(total,divgraph4,'r','y','g',25,50, 'Indicador de Meta', '%');
+
+              //semaforo divgraph4 
+              //toma los datos de los manuales del indicador para graficar el acelerometro           
+               
+              if(json.rows[2].sim_Rango_MA === '> ' && json.rows[2].sim_Rango_I == '< ' ){    
+                           
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%');
+                
+
+              }
+              else if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){
+                
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].sim_Rango_I, 'Indicador de Meta', '%');
+                
+              } 
+
+              else if(json.rows[conta-2].sim_Rango_MA === '< ' && json.rows[conta-2].sim_Rango_I == '< ' ){    
+                           
+                gaugesGraph(json.rows[conta-2].estado_meta,divgraph4,'r','y','g',json.rows[conta-2].num_Rango_I,json.rows[conta-2].num_Rango_MA, 'Indicador de Meta', '%');
+                
+
+              }
+
+              else if(json.rows[conta-2].sim_Rango_MA === '> ' && json.rows[conta-2].sim_Rango_I == '> ' ){    
+                           
+                gaugesGraph(json.rows[conta-2].estado_meta,divgraph4,'r','y','g',json.rows[conta-2].num_Rango_I,json.rows[conta-2].num_Rango_MA, 'Indicador de Meta', '%');
+                
+
+              }
+                               
+             
 
                
             }
@@ -229,56 +243,119 @@ $(document).ready(function(){
      success : function(json) {
        var conta=json.rowCount;
        var tabla2;
-      
+
+             
        for(i=0;i<conta;i++){
            tabla2 = tabla2+"<tr><td><label id='año"+i+"' name='año"+i+"'>"+json.rows[i].anio+"</label></td><td><label id='tot"+i+"'>"+json.rows[i].completo+"</label></td>"+
-                "</td><td><label id='est"+i+"'>"+json.rows[i].estado_meta+"</label></td><tr>";
+                "</label></td><td><label id='nivel"+i+"'>"+json.rows[i].estado_meta+"</label></td>";
+          // condiciones para insertartar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
+          //en caso de que el simbolo del rango adecuado sea '= '
+          if(json.rows[i].sim_Rango_A === '= '){
+            if(json.rows[i].estado_meta == json.rows[i].num_Rango_A){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="El nivel de formacion docentes es adecuado: '+json.rows[i].num_Rango_A+'%"></td></tr>';
+            }
+            else if(json.rows[i].sim_Rango_MA === '> '){
+              if(json.rows[i].estado_meta > json.rows[i].num_Rango_MA){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="El nivel de formacion docentes es muy adecuado: '+json.rows[i].num_Rango_MA+'%"></td></tr>';
+
+              }
+              else{
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="El nivel de formacion docentes es inadecuado: '+json.rows[i].num_Rango_I+'%"></td></tr>';
+
+              }
+
+            }
+            else if(json.rows[i].sim_Rango_MA === '< '){
+              if(json.rows[i].estado_meta < json.rows[i].num_Rango_MA){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="El nivel de formacion docentes es muy adecuado: '+json.rows[i].num_Rango_MA+'%"></td></tr>';
+              }
+              else{
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="El nivel de formacion docentes es inadecuado: '+json.rows[i].num_Rango_I+'%"></td></tr>';
+
+              }
+
+            }
+          }
+
+          //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
+          else if(json.rows[i].sim_Rango_MA === '> '){
+            if(json.rows[i].estado_meta >= json.rows[i].num_Rango_MA){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="El nivel de formacion docentes es muy adecuado: '+json.rows[i].num_Rango_MA+'%"></td></tr>';
+            }
+            else if(json.rows[i].sim_Rango_A === '> '){
+              if(json.rows[i].estado_meta >= json.rows[i].num_Rango_A){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="El nivel de formacion docentes es adecuado: '+json.rows[i].num_Rango_A+'%"></td></tr>';
+              }
+              else{                
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="El nivel de formacion docentes es inadecuado: '+json.rows[i].num_Rango_I+'%"></td></tr>';
+
+              } 
+            }
+            else if(json.rows[i].sim_Rango_A === '< ' && json.rows[i].sim_Rango_I === '< ' ){
+              if(json.rows[i].estado_meta <= json.rows[i].num_Rango_A && json.rows[i].estado_meta > json.rows[i].num_Rango_I){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="El nivel de formacion docentes es adecuado: '+json.rows[i].num_Rango_A+'%"></td></tr>';
+              }
+              else if(json.rows[i].estado_meta <= json.rows[i].num_Rango_I){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="El nivel de formacion docentes es inadecuado: '+json.rows[i].num_Rango_I+'%"></td></tr>';
+              }
+
+            }       
+          }
+          //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+          else if(json.rows[i].sim_Rango_MA === '< '){
+            if(json.rows[i].estado_meta <= json.rows[i].num_Rango_MA && json.rows[i].estado_meta > json.rows[i].num_Rango_A ){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="El nivel de formacion docentes es muy adecuado: '+json.rows[i].num_Rango_MA+'%"></td></tr>';
+            }
+            if(json.rows[i].estado_meta <= json.rows[i].num_Rango_A && json.rows[i].estado_meta > json.rows[i].num_Rango_I ){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="El nivel de formacion docentes es adecuado: '+json.rows[i].num_Rango_A+'%"></td></tr>';
+            }    
+
+            else if(json.rows[i].estado_meta <= json.rows[i].num_Rango_I){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="El nivel de formacion docentes es inadecuado: '+json.rows[i].num_Rango_I+'%"></td></tr>';
+            }
+          }
+         
        }       
 
        $("#datBody2").append(tabla2);
 
        var arra2=[];
         //ciclo para llenar  el array llamado arra con los datos que vana contener las diferentes graficas
-       for(var i =0; i<conta;i++){
+       for(var i =conta-1; i>=conta-5;i--){
          var programa = {
             "anio": json.rows[i].anio,
-            "cantidad": json.rows[i].completo
+            "cantidad": json.rows[i].estado_meta
          }
          arra2.push(programa);
 
-       }
+       }       
        //cambio de graficas de barras
       $("#graph2").change(function () {
         if($(this).val() === '1'){
-          columnGraph(arra2,divgraph3,'Cantidad Docentes tiempo completo','anio','cantidad',0,0);
+          columnGraph(arra2,divgraph2,'Nivel de Formacion Docentes','anio','cantidad',0,0);
         }
         else if($(this).val() === '2'){
-          columnGraph(arra2,divgraph3,'Cantidad Docentes tiempo completo','anio','cantidad',40,30);
+          columnGraph(arra2,divgraph2,'Nivel de Formacion Docentes','anio','cantidad',40,30);
         }
         else if($(this).val() === '3'){
-          barGraph(arra2,divgraph3,'Cantidad Docentes tiempo completo','anio','cantidad',0,0);
+          barGraph(arra2,divgraph2,'Nivel de Formacion Docentes','anio','cantidad',0,0);
          
         }
         else if($(this).val() === '4'){
-          barGraph(arra2,divgraph3,'Cantidad Docentes tiempo completo','anio','cantidad',40,30);
+          barGraph(arra2,divgraph2,'Nivel de Formacion Docentes','anio','cantidad',40,30);
           
         }
         else if($(this).val() === '5'){
-           lineGraph(arra2,divgraph3,'Cantidad Docentes tiempo completo','anio','cantidad');
+           lineGraph(arra2,divgraph2,'Nivel de Formacion Docentes','anio','cantidad');
         }
         else if($(this).val() === '6'){
-          areaGraph(arra2,divgraph3,'Cantidad Docentes tiempo completo','anio','cantidad');
+          areaGraph(arra2,divgraph2,'Nivel de Formacion Docentes','anio','cantidad');
         }
-        else if($(this).val() === '7'){
-          pieGraph(arra2, divgraph3, "anio", "cantidad","Cantidad Docentes Tiempo Completo");
-        }
-        else if($(this).val() === '8'){
-         pieGraph3D(arra2, divgraph3, "anio", "cantidad","Cantidad Docentes Tiempo Completo");
-        }
+        
         
         
       });
-      columnGraph(arra2,divgraph3,'Cantidad Docentes tiempo completo','anio','cantidad',0,0);
+      columnGraph(arra2,divgraph2,'Nivel de Formacion Docentes','anio','cantidad',0,0);
      }
 
   });   
@@ -394,8 +471,24 @@ $(document).ready(function(){
               }
             });
 
-          //
+          //grafica por defecto
           columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+
+          //semaforo divgraph4 
+          //toma los datos de los manuales del indicador para graficar el acelerometro           
+            
+          if(json.rows[2].sim_Rango_MA === '> ' && json.rows[2].sim_Rango_I == '< ' ){    
+                        
+            gaugesGraph(total,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%');
+            
+
+          }
+          else if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){
+            
+            gaugesGraph(total,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].sim_Rango_I, 'Indicador de Meta', '%');
+            
+          } 
+          
                 
 
        }

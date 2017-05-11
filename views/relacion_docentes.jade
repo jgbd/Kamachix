@@ -4,7 +4,7 @@ block title
 block scriptpage 
   script(src='/javascripts/relacionTCHC.js')
 block resto
-  .col-md-12(style='text-align:left')
+  .col-md-2(style='text-align:left')
     input#btnfil.btn.btn-warning.btn-small(type='button' value='Filtros')
     br
   #divfilter.modal.fade.bd-example-modal-lg
@@ -30,9 +30,10 @@ block resto
                   p#filter2!=dat2          
             .col-md-2
             input(type='submit' value='Filtrar' class='btn btn-info')                
-  .col-md-12  
+  .col-md-10 
     h3#titulo
     br
+  .col-md-12 
     #divtable.col-md-6      
       table(border='1').table.hover.tablestyle
         thead
@@ -57,11 +58,9 @@ block resto
             optgroup(label='Tendencia')
               option(value='3') Línea
               option(value='4') Area
-            optgroup(label='Pastel')
-              option(value='7') 2D
-              option(value='8') 3D 
+            
     .col-md-6
-      #divgraph2.col-md-12
+      #divgraph3.col-md-12
       .col-md-12
         select#graph2
             option(selected='', value='1') Seleccione un tipo de gráfica
@@ -74,11 +73,9 @@ block resto
             optgroup(label='Tendencia')
               option(value='3') Línea
               option(value='4') Area
-            optgroup(label='Pastel')
-              option(value='7') 2D
-              option(value='8') 3D 
+            
     .col-md-6
-      #divgraph3.col-md-12
+      #divgraph2.col-md-12
       .col-md-12
         select#graph3
             option(selected='', value='1') Seleccione un tipo de gráfica
@@ -91,9 +88,7 @@ block resto
             optgroup(label='Tendencia')
               option(value='3') Línea
               option(value='4') Area
-            optgroup(label='Pastel')
-              option(value='7') 2D
-              option(value='8') 3D 
+             
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
   //modal para los infomes 
