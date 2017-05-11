@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
 
   if(req.query.c == 1){
-    var sql='select nom_formacion,t_completo,anio from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion order by anio desc limit 8';
+    var sql='select nom_formacion,t_completo,anio,estado_meta,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion join manuales_indicadores on "manual_Formacion"=codigo order by anio desc limit 8';
   }
   else if (req.query.c ==2){
     var sql='select DISTINCT anio from "Datawarehouse"."KPI_Formacion" order by anio DESC';
@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
     var sql='select DISTINCT periodo from formacion_departamento';
   }
   else if(req.query.c ==8){
-    var sql='select sum(t_completo) as completo,anio,estado_meta from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion  group by anio,estado_meta order by anio desc limit 5';
+    var sql='select sum(t_completo) as completo,anio,estado_meta,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion join manuales_indicadores on "manual_Formacion"=codigo  group by anio,estado_meta,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" order by anio desc limit 5';
   }
   else return console.log("error");
   //aquui se crea la conexion a DB
@@ -76,7 +76,7 @@ router.post('/', function(req, res, next) {
   
   if(req.body.c == 1){
     //esta variable es la que contien la consulta a realizarse en la DB
-    var sql='select nom_formacion,t_completo,anio from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion where anio=$1 order by anio,formacion,t_completo';
+    var sql='select nom_formacion,t_completo,anio,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion join manuales_indicadores on "manual_Formacion"=codigo where anio=$1 order by anio,formacion,t_completo';
     ani = [req.body.anio];
   }
   else if (req.body.c ==7){    

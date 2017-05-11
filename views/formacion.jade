@@ -27,8 +27,37 @@ block resto
                                          
             .col-md-4                      
             input(type='submit' value='Filtrar' class='btn btn-info')
+    
   .col-md-10
-    h3#titulo
+      h3
+        |Panorama General del Nivel de Formacion Docentes de los Ultimos 5 Años 
+      br
+    #divgraph3.col-md-6 
+      table(border='1').table.hover.tablestyle
+        thead
+          tr(align='center')
+            th.th(style='text-align:center;') Año
+            th.th(style='text-align:center;') Cantidad Docentes TC 
+            th.th(style='text-align:center;') Nivel de Formacion Docentes
+            th.th.est(style='text-align:center;') Estado Meta                        
+        tbody#datBody2!= datos2                
+    
+    .col-md-6
+      #divgraph2.col-md-12
+      .col-md-12
+        select#graph2
+            option(selected='', value='1') Seleccione un tipo de gráfica
+            optgroup(label='Columnas')
+              option(value='1') 2D
+              option(value='2') 3D
+            optgroup(label='Barras')
+              option(value='3') 2D
+              option(value='4') 3D
+            optgroup(label='Tendencia')
+              option(value='5') Línea
+              option(value='6') Area 
+  .col-md-12
+    h4#titulo
   .col-md-12 
     br   
     .col-md-4   
@@ -59,6 +88,9 @@ block resto
     .col-md-3 
       #divgraph4
          
+<<<<<<< HEAD
+             
+=======
     .col-md-12
       h4
         |Panorama general del nivel de formacion de los ultimos 5 años 
@@ -88,6 +120,7 @@ block resto
             optgroup(label='Pastel')
               option(value='7') 2D
               option(value='8') 3D 
+>>>>>>> origin/master
           
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
