@@ -35,15 +35,16 @@ block resto
   .col-md-12     
     h3#titulo
     br
-    #divtable.col-md-6      
-      table.table.hover.tablestyle
-        thead
-          tr(align='center')
-            th.th(style='text-align:center;') Formacion
-            th.th(style='text-align:center;') Docentes tiempo completo             
-        tbody#datBody!= datos 
+    .col-md-6      
+      #divtable
+        table.table.hover.tablestyle
+          thead
+            tr(align='center')
+              th.th(style='text-align:center;') Formacion
+              th.th(style='text-align:center;') Docentes tiempo completo             
+          tbody#datBody!= datos 
     .col-md-6         
-      #divgraph1.col-md-12      
+      #divgraph1      
       .col-md-12
         select#graph1
             option(selected='', value='1') Seleccione un tipo de gráfica
@@ -61,7 +62,7 @@ block resto
               option(value='8') 3D 
   .col-md-12
     .col-md-6
-      #divgraph2.col-md-12        
+      #divgraph2        
         select#graph10
           option(selected='', value='1') Seleccione un tipo de gráfica
           optgroup(label='Columnas')
@@ -78,7 +79,7 @@ block resto
               option(value='8') 3D           
       
     .col-md-6
-      #divgraph3.col-md-12
+      #divgraph3
           
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")

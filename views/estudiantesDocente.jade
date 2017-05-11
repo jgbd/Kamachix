@@ -33,7 +33,7 @@ block resto
   .col-md-12
     h3 Panorama General Estudiantes por Docente
     .col-md-5
-      #divgraph2.col-md-12
+      #divgraph2
       .col-md-12
         select#graph1
           option(selected='', value='1') Seleccione un tipo de gráfica
@@ -46,21 +46,22 @@ block resto
           optgroup(label='Tendencia')
             option(value='3') Línea
             option(value='4') Area
-    #divtable.col-md-3
-      h6 Meta: menor a 35 (Estudiantes/Docente)
-      table.table.table-hover.table-bordered.table-responsed(border='1')
-        thead 
-          tr
-            th.th Año
-            th.th Razón
-            th.th.est Estado
-        tbody#tableres
+    .col-md-3
+      #divtable
+        h6 Meta: menor a 35 (Estudiantes/Docente)
+        table.table.table-hover.table-bordered.table-responsed(border='1')
+          thead 
+            tr
+              th.th Año
+              th.th Razón
+              th.th.est Estado
+          tbody#tableres
     .col-md-4
       #divgraph3
       h6 Indicador Actual
     h3#lblper
     .col-md-6
-      #divgraph1.col-md-12
+      #divgraph1
       .col-md-12
         select#graph3
           option(selected='', value='1') Seleccione un tipo de gráfica
@@ -72,9 +73,10 @@ block resto
             option(value='5') 3D
           optgroup(label='Tendencia')
             option(value='3') Línea
-    #divgraph5.col-md-6
-      #divper1.col-md-6
-      #divper2.col-md-6
+    .col-md-6
+      #divgraph5
+        #divper1
+        #divper2
   #myModal.modal.fade
       .modal-dialog
         .modal-content

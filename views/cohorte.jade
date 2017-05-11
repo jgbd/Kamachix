@@ -52,16 +52,17 @@ block resto
   .col-md-12
     h4 Nivel de Desercion por Cohorte de:
     h4#programa
-    #divtable.col-md-6
-      table.table.table-hover.table-bordered.table-responsed.table-striped(border='1' width="100%" cellspacing="0")
-        thead 
-          tr
-            th.th Periodo
-            th.th Porcentaje de Deserción
-            th.th.est Estado
-        tbody#tableres
     .col-md-6
-      #divgraph1.col-md-12
+      #divtable
+        table.table.table-hover.table-bordered.table-responsed.table-striped(border='1' width="100%" cellspacing="0")
+          thead 
+            tr
+              th.th Periodo
+              th.th Porcentaje de Deserción
+              th.th.est Estado
+          tbody#tableres
+    .col-md-6
+      #divgraph1
       .col-md-12
         select#cgdiv1
           option(selected='selected', value='0') Seleccione un tipo de gráfica
@@ -71,15 +72,15 @@ block resto
           optgroup(label='Barras')
             option(value='3') 2D
             option(value='4') 3D
-    col-md-12
-      .col-md-6
-        #divgraph2.col-md-12
-        .col-md-12
-          select#cgdiv2
-            option(selected='selected', value='0') Seleccione un tipo de gráfica
-              option(value='1') Línea
-              option(value='2') Area
-    #divgraph3.col-md-6
+    .col-md-6
+      #divgraph2
+      .col-md-12
+        select#cgdiv2
+          option(selected='selected', value='0') Seleccione un tipo de gráfica
+          option(value='1') Línea
+          option(value='2') Area
+    .col-md-6
+      #divgraph3
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
   //modal para los infomes 
