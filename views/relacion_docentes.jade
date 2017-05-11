@@ -12,14 +12,14 @@ block resto
       .modal-content
         .modal-header
           button.close(type='button', data-dismiss='modal', aria-label='Close')
-            span(aria-hidden='true') ×
+            span(aria-hidden='true') Ã—
           h4#modal-title.modal-title Filtros
         .modal-body
           form#frmRelacion.form-horizontal(action="relacion_docentes" method="POST")
             br
             .col-md-8
               .col-md-1
-                label Año:  
+                label AÃ±o:  
               .col-md-5
                 select#lstfilter1.form-control
                   p#filter!=dat
@@ -33,36 +33,22 @@ block resto
   .col-md-10 
     h3#titulo
     br
-<<<<<<< HEAD
   .col-md-12 
     #divtable.col-md-6      
       table(border='1').table.hover.tablestyle
         thead
           tr(align='center')
-            th.th(style='text-align:center;') Año
+            th.th(style='text-align:center;') AÃ±o
             th.th(style='text-align:center;') Docentes tiempo completo             
             th.th(style='text-align:center;') Docentes hora catedra
             th.th(style='text-align:center;') Relacion Docentes
             th.th.est(style='text-align:center;') Estado
         tbody#datBody!= datos  
-=======
-    .col-md-6      
-      #divtable
-        table(border='1').table.hover.tablestyle
-          thead
-            tr(align='center')
-              th.th(style='text-align:center;') Año
-              th.th(style='text-align:center;') Docentes tiempo completo             
-              th.th(style='text-align:center;') Docentes hora catedra
-              th.th(style='text-align:center;') Relacion Docentes
-              th.th.est(style='text-align:center;') Estado
-          tbody#datBody!= datos  
->>>>>>> origin/master
     .col-md-6
-      #divgraph1 
+      #divgraph1.col-md-12 
       .col-md-12
         select#graph1
-            option(selected='', value='1') Seleccione un tipo de gráfica
+            option(selected='', value='1') Seleccione un tipo de grÃ¡fica
             optgroup(label='Columnas')
               option(value='1') 2D
               option(value='2') 3D
@@ -70,18 +56,14 @@ block resto
               option(value='5') 2D
               option(value='6') 3D
             optgroup(label='Tendencia')
-              option(value='3') Línea
+              option(value='3') LÃ­nea
               option(value='4') Area
             
     .col-md-6
-<<<<<<< HEAD
       #divgraph3.col-md-12
-=======
-      #divgraph2
->>>>>>> origin/master
       .col-md-12
         select#graph2
-            option(selected='', value='1') Seleccione un tipo de gráfica
+            option(selected='', value='1') Seleccione un tipo de grÃ¡fica
             optgroup(label='Columnas')
               option(value='1') 2D
               option(value='2') 3D
@@ -89,18 +71,14 @@ block resto
               option(value='5') 2D
               option(value='6') 3D
             optgroup(label='Tendencia')
-              option(value='3') Línea
+              option(value='3') LÃ­nea
               option(value='4') Area
             
     .col-md-6
-<<<<<<< HEAD
       #divgraph2.col-md-12
-=======
-      #divgraph3
->>>>>>> origin/master
       .col-md-12
         select#graph3
-            option(selected='', value='1') Seleccione un tipo de gráfica
+            option(selected='', value='1') Seleccione un tipo de grÃ¡fica
             optgroup(label='Columnas')
               option(value='1') 2D
               option(value='2') 3D
@@ -108,7 +86,7 @@ block resto
               option(value='5') 2D
               option(value='6') 3D
             optgroup(label='Tendencia')
-              option(value='3') Línea
+              option(value='3') LÃ­nea
               option(value='4') Area
              
   //campo oculto para manterne le json del contenido
@@ -119,7 +97,7 @@ block resto
       #modal-bodyinfo.modal-body.table-responsive
         input(id='txtindser' type="hidden" value='3')
         button.close(type='button', data-dismiss='modal', aria-label='Close')
-          span(aria-hidden='true') ×
+          span(aria-hidden='true') Ã—
         span(style='text-align:left')
           input#btnsave.btn.btn-danger( type ='button' value='Guardar' onclick='saveReport()' style='visibility:hidden')
         input#btnpdf.btn.btn-info(type ='button' value='PDF' onclick='getPDF()')
@@ -135,7 +113,7 @@ block resto
             td 
               input#atrinfo1.form-control.atrinfo(type='text'  readonly)
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 2. LÍDER:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 2. LÃDER:
             td
               input#atrinfo2.form-control.atrinfo(type='text'  readonly) 
           tr
@@ -179,7 +157,7 @@ block resto
             td
               textarea#atrinfo12.form-control.atrinfo(cols='40', rows='2' readonly)
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 13. RANGO Y FORMA DE INTERPRETACIÓN:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 13. RANGO Y FORMA DE INTERPRETACIÃ“N:
             td
               .col-md-8
                 table
@@ -205,11 +183,11 @@ block resto
               .col-md-4              
               
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 14. FÓRMULA:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 14. FÃ“RMULA:
             td
               textarea#atrinfo13.form-control.atrinfo(cols='40', rows='2' readonly)
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 15. MANERA QUE PODÍA SER GRAFICADO:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 15. MANERA QUE PODÃA SER GRAFICADO:
             td
               input#atrinfo14.form-control.atrinfo(type='text'  readonly)  
           tr
@@ -228,7 +206,7 @@ block resto
         table#tabindres.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
           tr
             td(colspan='2')
-              h5(style='text-align:center') RESULTADOS Y EVOLUCIÓN DEL INDICADOR
+              h5(style='text-align:center') RESULTADOS Y EVOLUCIÃ“N DEL INDICADOR
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 19. FECHA DE CALCULO:
             td 
@@ -238,15 +216,15 @@ block resto
             td 
               #divtab(style='width: 100%; height: 40%;')
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 21. CALIFICACIÓN:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 21. CALIFICACIÃ“N:
             td
               textarea#txtcal.form-control(cols='40', rows='3')
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 22. LECTURA DE LA EVOLUCIÓN DEL INDICADOR:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 22. LECTURA DE LA EVOLUCIÃ“N DEL INDICADOR:
             td
               textarea#txtlec.form-control(cols='40', rows='6')
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 23. EVOLUCIÓN GRÁFICA:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 23. EVOLUCIÃ“N GRÃFICA:
             td 
               #divg1
               #divg2

@@ -12,7 +12,7 @@ block resto
       .modal-content
         .modal-header
           button.close(type='button', data-dismiss='modal', aria-label='Close')
-            span(aria-hidden='true') ×
+            span(aria-hidden='true') Ã—
           h4#modal-title.modal-title Filtros
         .modal-body
           form#frmformacion.form-horizontal(action="formacion" method="POST")
@@ -21,7 +21,7 @@ block resto
             .col-md-6
               .col-md-2
                 label
-                  |Año:  
+                  |AÃ±o:  
               .col-md-10
                 select#lst_Anio5.form-control
                                          
@@ -30,13 +30,13 @@ block resto
     
   .col-md-10
       h3
-        |Panorama General del Nivel de Formacion Docentes de los Ultimos 5 Años 
+        |Panorama General del Nivel de Formacion Docentes de los Ultimos 5 AÃ±os 
       br
     #divgraph3.col-md-6 
       table(border='1').table.hover.tablestyle
         thead
           tr(align='center')
-            th.th(style='text-align:center;') Año
+            th.th(style='text-align:center;') AÃ±o
             th.th(style='text-align:center;') Cantidad Docentes TC 
             th.th(style='text-align:center;') Nivel de Formacion Docentes
             th.th.est(style='text-align:center;') Estado Meta                        
@@ -46,7 +46,7 @@ block resto
       #divgraph2.col-md-12
       .col-md-12
         select#graph2
-            option(selected='', value='1') Seleccione un tipo de gráfica
+            option(selected='', value='1') Seleccione un tipo de grÃ¡fica
             optgroup(label='Columnas')
               option(value='1') 2D
               option(value='2') 3D
@@ -54,25 +54,24 @@ block resto
               option(value='3') 2D
               option(value='4') 3D
             optgroup(label='Tendencia')
-              option(value='5') Línea
+              option(value='5') LÃ­nea
               option(value='6') Area 
   .col-md-12
     h4#titulo
   .col-md-12 
     br   
-    .col-md-4   
-      #divtable
-        table(border='1').table.hover.tablestyle
-          thead
-            tr(align='center')
-              th.th(style='text-align:center;') Formacion
-              th.th(style='text-align:center;') Docentes tiempo completo                         
-          tbody#datBody!= datos 
+    #divtable.col-md-4   
+      table(border='1').table.hover.tablestyle
+        thead
+          tr(align='center')
+            th.th(style='text-align:center;') Formacion
+            th.th(style='text-align:center;') Docentes tiempo completo                         
+        tbody#datBody!= datos 
     .col-md-5    
-      #divgraph1      
+      #divgraph1.col-md-12      
       .col-md-12
         select#graph1
-            option(selected='', value='1') Seleccione un tipo de gráfica
+            option(selected='', value='1') Seleccione un tipo de grÃ¡fica
             optgroup(label='Columnas')
               option(value='1') 2D
               option(value='2') 3D
@@ -80,47 +79,14 @@ block resto
               option(value='5') 2D
               option(value='6') 3D
             optgroup(label='Tendencia')
-              option(value='3') Línea
+              option(value='3') LÃ­nea
               option(value='4') Area
             optgroup(label='Pastel')
               option(value='7') 2D
               option(value='8') 3D 
-    .col-md-3 
-      #divgraph4
+    #divgraph4.col-md-3 
          
-<<<<<<< HEAD
              
-=======
-    .col-md-12
-      h4
-        |Panorama general del nivel de formacion de los ultimos 5 años 
-    .col-md-6 
-      #divgraph2
-        table(border='1').table.hover.tablestyle
-          thead
-            tr(align='center')
-              th.th(style='text-align:center;') Año
-              th.th(style='text-align:center;') Cantidad docentes TC 
-              th.th(style='text-align:center;') Estado Meta                        
-          tbody#datBody2!= datos2                
-    .col-md-6
-      #divgraph3
-      .col-md-12
-        select#graph2
-            option(selected='', value='1') Seleccione un tipo de gráfica
-            optgroup(label='Columnas')
-              option(value='1') 2D
-              option(value='2') 3D
-            optgroup(label='Barras')
-              option(value='3') 2D
-              option(value='4') 3D
-            optgroup(label='Tendencia')
-              option(value='5') Línea
-              option(value='6') Area           
-            optgroup(label='Pastel')
-              option(value='7') 2D
-              option(value='8') 3D 
->>>>>>> origin/master
           
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
@@ -130,7 +96,7 @@ block resto
       #modal-bodyinfo.modal-body.table-responsive
         input(id='txtindser' type="hidden" value='2')
         button.close(type='button', data-dismiss='modal', aria-label='Close')
-          span(aria-hidden='true') ×
+          span(aria-hidden='true') Ã—
         span(style='text-align:left')
           input#btnsave.btn.btn-danger( type ='button' value='Guardar' onclick='saveReport()' style='visibility:hidden')
         input#btnpdf.btn.btn-info(type ='button' value='PDF' onclick='getPDF()')
@@ -146,7 +112,7 @@ block resto
             td 
               input#atrinfo1.form-control.atrinfo(type='text'  readonly)
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 2. LÍDER:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 2. LÃDER:
             td
               input#atrinfo2.form-control.atrinfo(type='text'  readonly) 
           tr
@@ -190,7 +156,7 @@ block resto
             td
               textarea#atrinfo12.form-control.atrinfo(cols='40', rows='2' readonly)
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 13. RANGO Y FORMA DE INTERPRETACIÓN:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 13. RANGO Y FORMA DE INTERPRETACIÃ“N:
             td
               .col-md-5
                 table
@@ -216,11 +182,11 @@ block resto
               .col-md-7                
               
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 14. FÓRMULA:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 14. FÃ“RMULA:
             td
               textarea#atrinfo13.form-control.atrinfo(cols='40', rows='2' readonly)
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 15. MANERA QUE PODÍA SER GRAFICADO:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 15. MANERA QUE PODÃA SER GRAFICADO:
             td
               input#atrinfo14.form-control.atrinfo(type='text'  readonly)  
           tr
@@ -239,7 +205,7 @@ block resto
         table#tabindres.table.table-condensed.table-striped.table-hover.table-bordered.table-responsed(border='1')
           tr
             td(colspan='2')
-              h5(style='text-align:center') RESULTADOS Y EVOLUCIÓN DEL INDICADOR
+              h5(style='text-align:center') RESULTADOS Y EVOLUCIÃ“N DEL INDICADOR
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 19. FECHA DE CALCULO:
             td 
@@ -249,15 +215,15 @@ block resto
             td 
               #divtab(style='width: 100%; height: 40%;')
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 21. CALIFICACIÓN:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 21. CALIFICACIÃ“N:
             td
               textarea#txtcal.form-control(cols='40', rows='3')
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 22. LECTURA DE LA EVOLUCIÓN DEL INDICADOR:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 22. LECTURA DE LA EVOLUCIÃ“N DEL INDICADOR:
             td
               textarea#txtlec.form-control(cols='40', rows='6')
           tr
-            td(style='font-size: 14px;width: 15%;text-align: left;') 23. EVOLUCIÓN GRÁFICA:
+            td(style='font-size: 14px;width: 15%;text-align: left;') 23. EVOLUCIÃ“N GRÃFICA:
             td 
               #divg1
               #divg2
