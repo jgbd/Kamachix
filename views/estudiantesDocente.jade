@@ -46,15 +46,16 @@ block resto
           optgroup(label='Tendencia')
             option(value='3') Línea
             option(value='4') Area
-    #divtable.col-md-3
-      h6 Meta: menor a 35 (Estudiantes/Docente)
-      table.table.table-hover.table-bordered.table-responsed(border='1')
-        thead 
-          tr
-            th.th Año
-            th.th Razón
-            th.th.est Estado
-        tbody#tableres
+    .col-md-3
+      #divtable
+        h6 Meta: menor a 35 (Estudiantes/Docente)
+        table.table.table-hover.table-bordered.table-responsed(border='1')
+          thead 
+            tr
+              th.th Año
+              th.th Razón
+              th.th.est Estado
+          tbody#tableres
     .col-md-4
       #divgraph3
       h6 Indicador Actual
