@@ -46,12 +46,15 @@ block resto
             input(type='submit' value='Filtrar' class='btn btn-info' )
       .modal-footer      
   //dicion para el boton de abrir filtros
-  .col-md-12(style='text-align:left')
-    button#btnfilter.btn.btn-warning(onclick='opendivfilter()') Filtros
+  .col-md-2(style='text-align:left')
+    button#btnfilter.btn.btn-success.btn-small(onclick='opendivfilter()') Filtros
   //divicion que contiene todo el contenido de la pagina
+  .col-md-8
+    h3 Nivel de Desercion por Cohorte de:
+    h3#programa
+    br
+  .col-md-2
   .col-md-12
-    h4 Nivel de Desercion por Cohorte de:
-    h4#programa
     .col-md-6
       #divtable
         table.table.table-hover.table-bordered.table-responsed.table-striped(border='1' width="100%" cellspacing="0")
@@ -63,8 +66,9 @@ block resto
           tbody#tableres
     .col-md-6
       #divgraph1
-      .col-md-12
-        select#cgdiv1
+      .col-md-3
+      .col-md-6
+        select#cgdiv1.form-control(style="background-color:#898585; color:#F2EEEE")        
           option(selected='selected', value='0') Seleccione un tipo de gráfica
           optgroup(label='Columnas')
             option(value='1') 2D
@@ -72,13 +76,16 @@ block resto
           optgroup(label='Barras')
             option(value='3') 2D
             option(value='4') 3D
+      .col-md-3
     .col-md-6
       #divgraph2
-      .col-md-12
-        select#cgdiv2
+      .col-md-3
+      .col-md-6
+        select#cgdiv2.form-control(style="background-color:#898585; color:#F2EEEE") 
           option(selected='selected', value='0') Seleccione un tipo de gráfica
           option(value='1') Línea
           option(value='2') Area
+      .col-md-3
     .col-md-6
       #divgraph3
   //campo oculto para manterne le json del contenido

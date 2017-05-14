@@ -4,8 +4,8 @@ block title
 block scriptpage
   script(src='/javascripts/formacion_docentes_dep.js')
 block resto
-  .col-md-12(style='text-align:left')
-    input#btnfil.btn.btn-warning.btn-small(type='button' value='Filtros')
+  .col-md-2(style='text-align:left')
+    input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros')
     br
   #divfilter.modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
     .modal-dialog.modal-lg
@@ -32,9 +32,11 @@ block resto
             br   
             br             
             input(type='submit' value='Filtrar' class='btn btn-info')
-  .col-md-12     
+  .col-md-8    
     h3#titulo
     br
+  .col-md-2
+  .col-md-12
     .col-md-6      
       #divtable
         table.table.hover.tablestyle
@@ -45,8 +47,9 @@ block resto
           tbody#datBody!= datos 
     .col-md-6         
       #divgraph1      
-      .col-md-12
-        select#graph1
+      .col-md-3
+      .col-md-6
+        select#graph1.form-control(style="background-color:#898585; color:#F2EEEE") 
             option(selected='', value='1') Seleccione un tipo de gráfica
             optgroup(label='Columnas')
               option(value='1') 2D
@@ -56,28 +59,19 @@ block resto
               option(value='6') 3D
             optgroup(label='Tendencia')
               option(value='3') Línea
-              option(value='4') Area
-            optgroup(label='Pastel')
-              option(value='7') 2D
-              option(value='8') 3D 
+              option(value='4') Area  
+      .col-md-3          
   .col-md-12
     .col-md-6
-      #divgraph2        
-        select#graph10
+      #divgraph2  
+      .col-md-3
+      .col-md-6
+        select#graph10.form-control(style="background-color:#898585; color:#F2EEEE") 
           option(selected='', value='1') Seleccione un tipo de gráfica
-          optgroup(label='Columnas')
-              option(value='1') 2D
-              option(value='2') 3D
-            optgroup(label='Barras')
-              option(value='5') 2D
-              option(value='6') 3D
-            optgroup(label='Tendencia')
-              option(value='3') Línea
-              option(value='4') Area
-            optgroup(label='Pastel')
-              option(value='7') 2D
-              option(value='8') 3D           
-      
+          optgroup(label='Pastel')
+            option(value='1') 2D
+            option(value='2') 3D  
+      .col-md-3     
     .col-md-6
       #divgraph3
           

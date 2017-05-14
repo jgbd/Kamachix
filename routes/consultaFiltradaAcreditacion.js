@@ -14,7 +14,7 @@ router.post('/', function(req, res, next) {
     //arreglo que contine filtros
     var filters = [];
     //consulta basica sin condiciones
-    var sql ='SELECT al."Anho", al."acreditados", al."programas", al."razon" FROM "Datawarehouse"."KPI_Acreditacion" al WHERE ';
+    var sql ='SELECT al."Anho", al."acreditados", al."programas", al."razon", "sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Acreditacion" al join manuales_indicadores on "manual_Acredita"=codigo WHERE ';
     //concatena al sql los valores d elos filtros
     if(req.body.yearfrom!=0){
       filters.push(req.body.yearfrom);

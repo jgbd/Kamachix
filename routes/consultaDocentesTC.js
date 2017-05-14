@@ -12,10 +12,10 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
   if(req.query.c == 1)
     //var sql ='SELECT spctt."Anho", spctt."estudiantes", spctt."docentes", ROUND(spctt."estudiantes"/spctt."docentes",0) AS razon FROM "Datawarehouse"."KPI_Students_per_Complete_Time_Teacher" spctt ORDER BY spctt."Anho"';
-    var sql ='SELECT spctt."Anho", spctt.razonanual FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt ORDER BY spctt."Anho"';
+    var sql ='SELECT spctt."Anho", spctt.razonanual,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt join manuales_indicadores on "manual_Estu_Docente"=codigo ORDER BY spctt."Anho"';
   else if (req.query.c == 2)
     //var sql = 'SELECT pe."anho", pd."tipo", ROUND(pe."semestreA"/pd."semestreA",0) as razonA, ROUND(pe."semestreB"/pd."semestreB",0) as razonB FROM "poblacion_estudiantes" pe JOIN "poblacion_docentes" pd ON pe.anho=pd.anho WHERE pd."tipo"='+"'1'"+'ORDER BY pe."anho"';
-    var sql = 'SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt ORDER BY spctt."Anho"';
+    var sql = 'SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt join manuales_indicadores on "manual_Estu_Docente"=codigo ORDER BY spctt."Anho"';
   else if (req.query.c == 3){
     var beforedata=[req.query.anho];
     var sql = 'SELECT * FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt WHERE "Anho"=$1';

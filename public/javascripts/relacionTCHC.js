@@ -41,7 +41,7 @@ $(document).ready(function(){
      success : function(json) {
        $("#txtjson").val(JSON.stringify(json));
        $("#datBody").html('');
-       var r="";
+       var tabla2="";
        var r2="";
        var conta = json.rowCount;
        if(json.rows[0].relacion_docentes==null){
@@ -50,22 +50,114 @@ $(document).ready(function(){
           "</label></td><td><label id='tc"+i+"'>"+json.rows[i].cant_docentes_tc+"</label>"+
           "</label></td><td><label id='hc"+i+"'>"+json.rows[i].cant_docentes_hc+"</label>"+
           "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes+"</label></td>";
-          if(json.rows[i].relacion_docentes<=1){
-            
-            r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy baja ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
-          }          
-          else if(json.rows[i].relacion_docentes>1.4 && json.rows[i].relacion_docentes<=1.8 || json.rows[i].relacion_docentes>2.2 && json.rows[i].relacion_docentes<=2.6 ){
-            
-            r=r+'<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="la relacion docentes se  esta alejando de la meta"></td></tr>';
-          } 
-          else if(json.rows[i].relacion_docentes>=2.6){
-              r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy alta ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
+          // condiciones para insertartar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
+          //en caso de que el simbolo del rango adecuado sea '= '
+          if(json.rows[i].sim_Rango_A === '= '){
+            if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_A){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            else if(json.rows[i].sim_Rango_MA === '> '){
+              if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_MA){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+              else{
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+
+            }
+            else if(json.rows[i].sim_Rango_MA === '< '){
+              if(json.rows[i].relacion_docentes < json.rows[i].num_Rango_MA){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+              else{
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+
+            }
           }
-              
-          else {
-            
-            r=r+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="la relacion docentes es buena "></td></tr>';
+
+          //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
+          else if(json.rows[i].sim_Rango_MA === '> '){ 
+            if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_MA){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            else if(json.rows[i].sim_Rango_A === '> '){
+              if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_A){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+              else{                
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              } 
+            }
+            else if(json.rows[i].sim_Rango_A === '< ' && json.rows[i].sim_Rango_I === '< ' ){
+              if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+              else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+
+            }       
           }
+          //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+          else if(json.rows[i].sim_Rango_MA === '< '){
+            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_MA && json.rows[i].relacion_docentes > json.rows[i].num_Rango_A ){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I ){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }    
+
+            else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+          }
+          
+          //en caso de que el simbolo del rango muy adecuado sea '= '
+          if(json.rows[i].sim_Rango_MA === '= '){
+            if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_MA){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            else if(json.rows[i].sim_Rango_A === '> '){
+              if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_A){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                
+
+              }
+              else{
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+
+            }
+            else if(json.rows[i].sim_Rango_A === '< '){
+              if(json.rows[i].sim_Rango_I === '< '){
+                if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                }
+                else{
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+                }
+              }
+
+              if(json.rows[i].sim_Rango_I === '> '){
+                if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A ){
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                }
+                else{
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+                }
+              }
+
+            }
+          }
+
 
         }
 
@@ -77,7 +169,7 @@ $(document).ready(function(){
         $("#lstfilter1").append(r2);
         $("#lstfilter2").append(r2);
         //se llena la tabla
-        $("#datBody").append(r);
+        $("#datBody").append(tabla2);
 
         // titulo
         tittle="Porcentaje de Docentes TC con relación a los  Docentes HC de los ultimos 5 años";
@@ -120,26 +212,118 @@ $(document).ready(function(){
        }
        else{
          for(var i = 0 ; i<5; i++){
-          r = r+"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
+          tabla2 = tabla2+"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
           "</label></td><td><label id='tc"+i+"'>"+json.rows[i].cant_docentes_tc+"</label>"+
           "</label></td><td><label id='hc"+i+"'>"+json.rows[i].cant_docentes_hc+"</label>"+
           "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes+"</label></td>";
-          if(json.rows[i].relacion_docentes<=1){
-            
-            r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy baja ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
-          }          
-          else if(json.rows[i].relacion_docentes>1.4 && json.rows[i].relacion_docentes<=1.8 || json.rows[i].relacion_docentes>2.2 && json.rows[i].relacion_docentes<=2.6 ){
-            
-            r=r+'<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="la relacion docentes se  esta alejando de la meta"></td></tr>';
-          } 
-          else if(json.rows[i].relacion_docentes>=2.6){
-              r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy alta ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
+         // condiciones para insertartar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
+          //en caso de que el simbolo del rango adecuado sea '= '
+          if(json.rows[i].sim_Rango_A === '= '){
+            if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_A){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            else if(json.rows[i].sim_Rango_MA === '> '){
+              if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_MA){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+              else{
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+
+            }
+            else if(json.rows[i].sim_Rango_MA === '< '){
+              if(json.rows[i].relacion_docentes < json.rows[i].num_Rango_MA){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+              else{
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+
+            }
           }
-              
-          else {
-            
-            r=r+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="la relacion docentes es buena "></td></tr>';
+
+          //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
+          else if(json.rows[i].sim_Rango_MA === '> '){ 
+            if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_MA){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            else if(json.rows[i].sim_Rango_A === '> '){
+              if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_A){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+              else{                
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              } 
+            }
+            else if(json.rows[i].sim_Rango_A === '< ' && json.rows[i].sim_Rango_I === '< ' ){
+              if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+              else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+
+            }       
           }
+          //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+          else if(json.rows[i].sim_Rango_MA === '< '){
+            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_MA && json.rows[i].relacion_docentes > json.rows[i].num_Rango_A ){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I ){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }    
+
+            else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+          }
+          
+          //en caso de que el simbolo del rango muy adecuado sea '= '
+          if(json.rows[i].sim_Rango_MA === '= '){
+            if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_MA){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            else if(json.rows[i].sim_Rango_A === '> '){
+              if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_A){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                
+
+              }
+              else{
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+
+            }
+            else if(json.rows[i].sim_Rango_A === '< '){
+              if(json.rows[i].sim_Rango_I === '< '){
+                if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                }
+                else{
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+                }
+              }
+
+              if(json.rows[i].sim_Rango_I === '> '){
+                if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A ){
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                }
+                else{
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+                }
+              }
+
+            }
+          }
+
 
         }
 
@@ -151,10 +335,10 @@ $(document).ready(function(){
         $("#lstfilter1").append(r2);
         $("#lstfilter2").append(r2);
         //se llena la tabla
-        $("#datBody").append(r);
+        $("#datBody").append(tabla2);
 
         // titulo
-        tittle="Porcentaje de Docentes TC con relación a los  Docentes HC de los ultimos 5 años";
+        tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes <br> Hora Catedra de los ultimos 5 años";
         $("#titulo").append(tittle);
 
         //arreglo para la grafica de la division 4 con la relacion de docentes
@@ -268,11 +452,13 @@ $(document).ready(function(){
 
       });
        lineGraph(arra,divgraph2," Relacion docentes","anio","cantidad");
+
+            
      }
    });
  }
 
-  //gaugesGraph(profes,divgraph3,);
+  
 
   // ajax para consulta de formacion docente por año
 
@@ -307,32 +493,124 @@ $(document).ready(function(){
      success : function(json) {
        $("#datBody").html('');
        $("#titulo").html('');
-       var r="";
+       var tabla2;
        var final="";
        var conta = json.rowCount;
 
        for(var i = 0 ; i<conta; i++){
-         r = r+"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
+         tabla2 = tabla2 +"<tr><td><label id='anio"+i+"' name='anio"+i+"'>"+json.rows[i].anio+
          "</label></td><td><label id='tc"+i+"'>"+json.rows[i].cant_docentes_tc+"</label>"+
          "</label></td><td><label id='hc"+i+"'>"+json.rows[i].cant_docentes_hc+"</label>"+
          "</label></td><td><label id='tot"+i+"'>"+json.rows[i].relacion_docentes+"</label></td>";
          
-         if(json.rows[i].relacion_docentes<=1){
-           
-           r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy baja ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
-         }          
-         else if(json.rows[i].relacion_docentes>1.4 && json.rows[i].relacion_docentes<=1.8 || json.rows[i].relacion_docentes>2.2 && json.rows[i].relacion_docentes<=2.6 ){
-           
-           r=r+'<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="la relacion docentes se  esta alejando de la meta"></td></tr>';
-         } 
-         else if(json.rows[i].relacion_docentes>=2.6){
-            r=r+'<td><img id="est" src="/images/red.PNG" alt="RED" title="la relacion docentes TC frente a docentes HC es muy alta ('+json.rows[i].relacion_docentes/1000+'de 2)"></td></tr>';
-         }
-             
-        else {
+        // condiciones para insertartar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
+          //en caso de que el simbolo del rango adecuado sea '= '
+          if(json.rows[i].sim_Rango_A === '= '){
+            if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_A){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            else if(json.rows[i].sim_Rango_MA === '> '){
+              if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_MA){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+              else{
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+
+            }
+            else if(json.rows[i].sim_Rango_MA === '< '){
+              if(json.rows[i].relacion_docentes < json.rows[i].num_Rango_MA){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+              else{
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+
+            }
+          }
+
+          //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
+          else if(json.rows[i].sim_Rango_MA === '> '){ 
+            if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_MA){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            else if(json.rows[i].sim_Rango_A === '> '){
+              if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_A){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+              else{                
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              } 
+            }
+            else if(json.rows[i].sim_Rango_A === '< ' && json.rows[i].sim_Rango_I === '< ' ){
+              if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+              else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }
+
+            }       
+          }
+          //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+          else if(json.rows[i].sim_Rango_MA === '< '){
+            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_MA && json.rows[i].relacion_docentes > json.rows[i].num_Rango_A ){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I ){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }    
+
+            else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+          }
           
-          r=r+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="la relacion docentes es buena "></td></tr>';
-        }
+          //en caso de que el simbolo del rango muy adecuado sea '= '
+          if(json.rows[i].sim_Rango_MA === '= '){
+            if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_MA){
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            }
+            else if(json.rows[i].sim_Rango_A === '> '){
+              if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_A){
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                
+
+              }
+              else{
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+              }
+
+            }
+            else if(json.rows[i].sim_Rango_A === '< '){
+              if(json.rows[i].sim_Rango_I === '< '){
+                if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                }
+                else{
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+                }
+              }
+
+              if(json.rows[i].sim_Rango_I === '> '){
+                if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A ){
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                }
+                else{
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+
+                }
+              }
+
+            }
+          }
+
           
          
 
@@ -341,19 +619,19 @@ $(document).ready(function(){
        // condiciones para el titulo de las graficas
        // si en los filtros se escogio que el primer año sea mayor al segundo
        if($('#lstfilter1').val() > $('#lstfilter2').val()){
-         tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC <br> del Año "+$('#lstfilter2').val()+" al Año "+$('#lstfilter1').val();
+         tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes Hora Catedra <br> del Año "+$('#lstfilter2').val()+" al Año "+$('#lstfilter1').val();
        }
        // si se scogio el mismo año en los dos filtros
        else if($('#lstfilter1').val() == $('#lstfilter2').val()){
-         tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC <br> del Año "+$('#lstfilter1').val();
+         tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes Hora Catedra <br> del Año "+$('#lstfilter1').val();
        }
        // si se escogio que el primer año sea menor al segundo año
        else {
-         tittle="Porcentaje de Docentes de  TC con relación a los  Docentes HC <br> del Año "+$('#lstfilter1').val()+" al Año "+$('#lstfilter2').val();
+         tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes Hora Catedra <br> del Año "+$('#lstfilter1').val()+" al Año "+$('#lstfilter2').val();
        }
 
        // se llena la tabla
-       $("#datBody").append(r);
+       $("#datBody").append(tabla2);
        //se coloca el titulo
        $("#titulo").append(tittle);
 
@@ -420,53 +698,53 @@ $(document).ready(function(){
        //cambio de graficas de barras hora catedra
         $("#graph2").change(function () {
           if($(this).val() === '1'){
-            columnGraph(arra3,divgraph2,'Docentes hora catedra','anio','cantidad',0,0);
+            columnGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
           }
           else if($(this).val() === '2'){
-            columnGraph(arra3,divgraph2,'Docentes hora catedra','anio','cantidad',40,30);
+            columnGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',40,30);
           }
           else if($(this).val() === '3'){
-            lineGraph(arra3,divgraph2,'Docentes hora catedra','anio','cantidad');
+            lineGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad');
           }
           else if($(this).val() === '4'){
-            areaGraph(arra3,divgraph2,'Docentes hora catedra','anio','cantidad');
+            areaGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad');
           }
           else if($(this).val() === '5'){
-            barGraph(arra3,divgraph2,'Docentes hora catedra','anio','cantidad',0,0);
+            barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
           }
           else if($(this).val() === '6'){
-            barGraph(arra3,divgraph2,'Docentes hora catedra','anio','cantidad',40,30);
+            barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',40,30);
           }
           
         });
 
        //   
-       barGraph(arra3,divgraph2,'Docentes hora catedra','anio','cantidad',0,0);
+       barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
        // cambio de grafica de tendencia relacion docentes
        $("#graph3").change(function () {
 
           if($(this).val() === '1'){
-            columnGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',0,0);
+            columnGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',0,0);
           }
           else if($(this).val() === '2'){
-            columnGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',40,30);
+            columnGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',40,30);
           }
           else if($(this).val() === '3'){
-            lineGraph(arra,divgraph3," Relacion docentes","anio","cantidad");
+            lineGraph(arra,divgraph2," Relacion docentes","anio","cantidad");
           }
           else if($(this).val() === '4'){
-            areaGraph(arra,divgraph3," Relacion docentes","anio","cantidad");
+            areaGraph(arra,divgraph2," Relacion docentes","anio","cantidad");
           } 
           else if($(this).val() === '5'){
-            barGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',0,0);
+            barGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',0,0);
           }
           else if($(this).val() === '6'){
-            barGraph(arra,divgraph3,'Relacion docentes','anio','cantidad',40,30);
+            barGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',40,30);
           }
           
       });
-       lineGraph(arra,divgraph3,"Relacion docentes","anio","cantidad");
-
+       lineGraph(arra,divgraph2,"Relacion docentes","anio","cantidad");
+      
      }
    });
    closedivfilter();

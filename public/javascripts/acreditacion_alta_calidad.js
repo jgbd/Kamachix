@@ -112,7 +112,30 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
       });
       columnGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,0,0);
       columnTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
-      gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','r','y','g',10,15, 'Acreditación \n Alta Calidad', '%');
+      //semaforo divgraph3
+      //toma los datos de los manuales del indicador para graficar el acelerometro           
+        
+      if(json.rows[json.rowCount-1].sim_Rango_MA == '< ' && json.rows[json.rowCount-1].sim_Rango_I == '> '){
+        
+        gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].sim_Rango_I, 'Acreditación \n Alta Calidad', '%');
+        
+      }        
+      else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '> ' ){    
+                    
+        gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','y','g','r',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Acreditación \n Alta Calidad', '%');
+        
+      }        
+
+      else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' ){
+        
+        alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+        
+      }
+      else {  
+                    
+        gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA,'Acreditación \n Alta Calidad', '%');
+        
+      }      
     }
   });
 }
@@ -259,7 +282,30 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI de acredi
           }
         });
         columnTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],0,0,"Programas Acreditados","Total Programas");
-        gaugesGraph(json.datos[json.count-1].razon,'divgraph3','r','y','g',10,15, 'Acreditación \n Alta Calidad', '%');
+        //semaforo divgraph3
+        //toma los datos de los manuales del indicador para graficar el acelerometro           
+          
+        if(json.rows[json.rowCount-1].sim_Rango_MA == '< ' && json.rows[json.rowCount-1].sim_Rango_I == '> '){
+          
+          gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].sim_Rango_I, 'Acreditación \n Alta Calidad', '%');
+          
+        }        
+        else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '> ' ){    
+                      
+          gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','y','g','r',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Acreditación \n Alta Calidad', '%');
+          
+        }        
+
+        else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' ){
+          
+          alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          
+        }
+        else {  
+                      
+          gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA,'Acreditación \n Alta Calidad', '%');
+          
+        }      
       }
     });
   }

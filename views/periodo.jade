@@ -43,11 +43,13 @@ block resto
           .col-md-1  
             input(type='submit' value='Filtrar' class='btn btn-info' )
       .modal-footer    
-  .col-md-12(style='text-align:left')
-    button#btnfilter.btn.btn-warning(onclick='opendivfilter()') Filtros
-  .col-md-12(style='text-align:center')
-    h4 Nivel de Desercion por Periodo de :
-    h4#programa
+  .col-md-2(style='text-align:left')
+    button#btnfilter.btn.btn-success.btn-small(onclick='opendivfilter()') Filtros
+  
+  .col-md-8(style='text-align:center')
+    h3 Nivel de Desercion por Periodo de :
+    h3#programa
+  .col-md-2  
   .col-md-12
     .col-md-6
       #divtable
@@ -63,8 +65,9 @@ block resto
           tbody#tableres
     .col-md-6
       #divgraph1
-      .col-md-12
-        select#cgdiv1
+      .col-md-3
+      .col-md-6
+        select#cgdiv1.form-control(style="background-color:#898585; color:#F2EEEE")         
           option(selected='', value='1') Seleccione un tipo de gráfica
           optgroup(label='Columnas')
             option(value='1') 2D
@@ -76,10 +79,12 @@ block resto
         //| columnas
         //input#cgb2(type='radio', name='cgdiv1', value='2')
         //| Barras
+      .col-md-3
     .col-md-6
       #divgraph2
-      .col-md-12
-          select#cgdiv2
+      .col-md-3
+      .col-md-6
+        select#cgdiv2.form-control(style="background-color:#898585; color:#F2EEEE")    
             option(selected='', value='3') Seleccione un tipo de gráfica
             optgroup(label='Columnas')
               option(value='1') 2D
@@ -89,6 +94,7 @@ block resto
               option(value='5') 3D
             optgroup(label='Tendencia')
               option(value='3') Línea
+      .col-md-3
     .col-md-6
       #divgraph3
   //campo oculto para manterne le json del contenido

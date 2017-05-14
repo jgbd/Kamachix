@@ -31,6 +31,8 @@ que se van creando sea por clase por id o tipo */
   /*#828282  #e1f2e1*/
   /*background-color: #ffffff;*/
   color:#000;
+  background-color:#EEEEEE;
+  
 }
 
 #cabezera{
@@ -39,6 +41,8 @@ que se van creando sea por clase por id o tipo */
   background-repeat: no-repeat;
   background-size: cover;
   height: 20%;
+  background-color:#898585;
+  
 }
 
 a {
@@ -174,19 +178,31 @@ img{
 }
 
  .dropdown-menu{
-   background-color: #fff;
+   background-color: #4A4747;
+ }
+ .dropdown-list{
+    width: 250px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #4A4747;
+    height: 29px;
+    background-color:#898585;
+    border-radius: 10px;
+    border-color: #fff;
+    text-align: center;    
+    
  }
 
  .dropdown-menu li a{
-   background-color: #fff;
-   color: #000;
+   background-color: #4A4747;
+   color: #fff;
  }
 
  .dropdown-menu li:hover a:hover,
  .dropdown-menu li:focus a:focus,
  .dropdown-menu li.active{
    background-color: lightgreen;
-   color: green;
+   color: #000;
  }
 
  #modalinfobody{

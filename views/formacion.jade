@@ -5,7 +5,7 @@ block scriptpage
   script(src='/javascripts/formacion_docentes.js')
 block resto
   .col-md-2(style='text-align:left')
-    input#btnfil.btn.btn-warning.btn-small(type='button' value='Filtros')
+    input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros')
     br
   #divfilter.modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
     .modal-dialog.modal-lg
@@ -28,10 +28,12 @@ block resto
             .col-md-4                      
             input(type='submit' value='Filtrar' class='btn btn-info')
     
-  .col-md-12
+  .col-md-8
       h3
         |Panorama General del Nivel de Formacion Docentes de los Ultimos 5 Años 
       br
+  .col-md-2
+  .col-md-12
     .col-md-6 
       #divgraph3
         table(border='1').table.hover.tablestyle
@@ -44,8 +46,9 @@ block resto
           tbody#datBody2!= datos2                
     .col-md-6
       #divgraph2
-      .col-md-12
-        select#graph2
+      .col-md-3
+      .col-md-6
+        select#graph2.form-control(style="background-color:#898585; color:#F2EEEE")
           option(selected='', value='1') Seleccione un tipo de gráfica
           optgroup(label='Columnas')
             option(value='1') 2D
@@ -56,10 +59,10 @@ block resto
             optgroup(label='Tendencia')
             option(value='5') Lí­nea
             option(value='6') Area 
+      .col-md-3
   .col-md-12
     h4#titulo
-  .col-md-12 
-    br   
+  .col-md-12     
     .col-md-4   
       #divtable
         table(border='1').table.hover.tablestyle
@@ -67,11 +70,12 @@ block resto
             tr(align='center')
             th.th(style='text-align:center;') Formacion
             th.th(style='text-align:center;') Docentes tiempo completo                         
-          tbody#datBody!= datos 
+          tbody#datBody!= datos     
     .col-md-5    
       #divgraph1
-      .col-md-12
-        select#graph1
+      .col-md-3
+      .col-md-6
+        select#graph1.form-control(style="background-color:#898585; color:#F2EEEE")
           option(selected='', value='1') Seleccione un tipo de gráfica
           optgroup(label='Columnas')
             option(value='1') 2D
@@ -85,6 +89,7 @@ block resto
           optgroup(label='Pastel')
             option(value='7') 2D
             option(value='8') 3D 
+      .col-md-3
     .col-md-3 
       #divgraph4
   //campo oculto para manterne le json del contenido

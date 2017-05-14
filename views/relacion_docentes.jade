@@ -5,7 +5,7 @@ block scriptpage
   script(src='/javascripts/relacionTCHC.js')
 block resto
   .col-md-2(style='text-align:left')
-    input#btnfil.btn.btn-warning.btn-small(type='button' value='Filtros')
+    input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros')
     br
   #divfilter.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
@@ -30,9 +30,10 @@ block resto
                   p#filter2!=dat2          
             .col-md-2
             input(type='submit' value='Filtrar' class='btn btn-info')                
-  .col-md-12 
+  .col-md-8
     h3#titulo
     br
+  .col-md-2
   .col-md-12 
     .col-md-6      
       #divtable
@@ -43,12 +44,13 @@ block resto
               th.th(style='text-align:center;') Docentes tiempo completo             
               th.th(style='text-align:center;') Docentes hora catedra
               th.th(style='text-align:center;') Relacion Docentes
-              th.th.est(style='text-align:center;') Estado
+              th.th.est(style='text-align:center;') Estado %
           tbody#datBody!= datos  
     .col-md-6
       #divgraph1
-      .col-md-12
-        select#graph1
+      .col-md-3
+      .col-md-6
+        select#graph1.form-control(style="background-color:#898585; color:#F2EEEE")           
             option(selected='', value='1') Seleccione un tipo de gráfica
             optgroup(label='Columnas')
               option(value='1') 2D
@@ -59,10 +61,12 @@ block resto
             optgroup(label='Tendencia')
               option(value='3') Lí­nea
               option(value='4') Area
+      .col-md-3    
     .col-md-6
       #divgraph3
-      .col-md-12
-        select#graph2
+      .col-md-3
+      .col-md-6
+        select#graph2.form-control(style="background-color:#898585; color:#F2EEEE")    
             option(selected='', value='1') Seleccione un tipo de gráfica
             optgroup(label='Columnas')
               option(value='1') 2D
@@ -73,11 +77,13 @@ block resto
             optgroup(label='Tendencia')
               option(value='3') Lí­nea
               option(value='4') Area
+      .col-md-3
             
     .col-md-6
       #divgraph2
-      .col-md-12
-        select#graph3
+      .col-md-3
+      .col-md-6
+        select#graph3.form-control(style="background-color:#898585; color:#F2EEEE")    
             option(selected='', value='1') Seleccione un tipo de gráfica
             optgroup(label='Columnas')
               option(value='1') 2D
@@ -88,6 +94,7 @@ block resto
             optgroup(label='Tendencia')
               option(value='3') Lí­nea
               option(value='4') Area
+      .col-md-3
              
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")

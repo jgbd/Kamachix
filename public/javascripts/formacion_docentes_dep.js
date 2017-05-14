@@ -89,11 +89,11 @@ $(document).ready(function(){
        //
        columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
         // Cambio de graficas de pastel
-      $("#graph5").change(function () {
+      $("#graph10").change(function () {
         if($(this).val() === '1'){
            pieGraph(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
         }
-        else{
+        else if ($(this).val() === '2'){
            pieGraph3D(arra, divgraph2, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
         }
       });

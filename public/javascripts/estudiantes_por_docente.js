@@ -125,8 +125,63 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
         }
       });
       columnGraph(datarray,'divgraph2','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
-      if(mes<=6) gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph3','g','y','r',35,59,'Estudiantes por Docente', ' estudiantes');
-      else gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph3','g','y','r',35,59,'Estudiantes por Docente', ' estudiantes');
+
+      if(mes<=6){
+        //semaforo divgraph3
+        //toma los datos de los manuales del indicador para graficar el acelerometro           
+          
+        if(json.rows[json.rowCount-1].sim_Rango_MA == '< ' && json.rows[json.rowCount-1].sim_Rango_I == '> '){
+          
+          gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph3','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente', ' estudiantes');
+          
+        }        
+        else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '> ' ){    
+                      
+          gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph3','r','g','y',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Estudiantes por Docente', ' estudiantes');
+          
+        }        
+
+        else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' ){
+          
+          alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          
+        }
+        else {  
+                      
+          gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].num_Rango_I,'Estudiantes por Docente', ' estudiantes');
+          
+        }
+
+      } 
+      else{
+        //semaforo divgraph3 
+        //toma los datos de los manuales del indicador para graficar el acelerometro           
+          
+        if(json.rows[json.rowCount-2].sim_Rango_MA == '< ' && json.rows[json.rowCount-2].sim_Rango_I == '> '){
+          
+          gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph3','r','y','g',json.rows[json.rowCount-2].num_Rango_I,json.rows[json.rowCount-2].sim_Rango_MA, 'Estudiantes por Docente', ' estudiantes');
+          
+        }   
+
+        
+        else if(json.rows[json.rowCount-2].sim_Rango_MA === '= ' && json.rows[json.rowCount-2].sim_Rango_A == '< ' && json.rows[json.rowCount-2].sim_Rango_A == '> ' ){    
+                      
+          gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph3','r','g','y',json.rows[json.rowCount-2].num_Rango_I,json.rows[json.rowCount-2].num_Rango_MA,'Estudiantes por Docente', ' estudiantes');
+          
+        }
+        
+
+        else if(json.rows[json.rowCount-2].sim_Rango_MA === '= ' && json.rows[json.rowCount-2].sim_Rango_A == '< ' && json.rows[json.rowCount-2].sim_Rango_A == '< ' ){
+          
+          alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          
+        }
+        else {                         
+          gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-2].num_Rango_I, 'Estudiantes por Docente', ' estudiantes');
+          
+        }
+        
+      } 
    }
  });
 }
@@ -176,8 +231,31 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
       });
      columnTwoGraph(datarray,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
      lineTwoGraph(datarray,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
-     gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','g','y','r',35,59, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '');
-     gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','g','y','r',35,59, 'Estudiantes por Docente año: '+ fin, '');
+          
+     //semaforo divper2 y divper1     
+      if(json.rows[json.rowCount-1].sim_Rango_MA == '< ' && json.rows[json.rowCount-1].sim_Rango_I == '> '){
+        gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '');
+        gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente año: '+ fin, '');            
+        
+        
+      }      
+      else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '> ' ){    
+        gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','r','g','y',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '');
+        gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','r','g','y',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente año: '+ fin, '');                        
+        
+      }     
+
+      else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' ){
+        alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+         
+      }
+      else {                      
+        gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','g','y','r',json.rows[json.rowCount-5].num_Rango_MA,json.rows[json.rowCount-5].num_Rango_I, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '');
+        gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].num_Rango_I, 'Estudiantes por Docente año: '+ fin, '');            
+        
+      }
+      
+     
    }
  });
 }

@@ -4,8 +4,8 @@ block title
 block scriptpage
   script(src='/javascripts/acreditacion_alta_calidad.js')
 block resto
-  .col-md-12(style='text-align:left')
-      input#btnfil.btn.btn-warning.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
+  .col-md-2(style='text-align:left')
+      input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
       br
   #divfilter.modal.fade.bd-example-modal-lg
       .modal-content
@@ -58,12 +58,16 @@ block resto
                 td(colspan="2")
                   input(type='submit' value='Acreditar' class='btn btn-info' )
         .modal-footer
-  .col-md-12
+  .col-md-8
     h3 Panorama General Programas Acreditados en Alta Calidad
+    br
+  .col-md-2
+  .col-md-12
     .col-md-6
       #divgraph1
-      .col-md-12
-        select#graph1
+      .col-md-3
+      .col-md-6
+        select#graph1.form-control(style="background-color:#898585; color:#F2EEEE")
           option(selected='', value='1') Seleccione un tipo de gráfica
           optgroup(label='Columnas')
             option(value='1') 2D
@@ -74,6 +78,7 @@ block resto
           optgroup(label='Tendencia')
             option(value='3') Línea
             option(value='4') Area
+      .col-md-3
     .col-md-6
       #divtable
         h6#goal
@@ -86,14 +91,13 @@ block resto
               th.th Indicador(%)
               th.th.est Estado
           tbody#tableres
-    .col-md-6
-        br
-        br
-    h3#lblper
+    .col-md-12        
+      h3#lblper
     .col-md-6
       #divgraph2
-      .col-md-12
-        select#graph2
+      .col-md-3
+      .col-md-6
+        select#graph2.form-control(style="background-color:#898585; color:#F2EEEE")
           option(selected='', value='1') Seleccione un tipo de gráfica
           optgroup(label='Columnas')
             option(value='1') 2D
@@ -103,6 +107,7 @@ block resto
             option(value='5') 3D
           optgroup(label='Tendencia')
             option(value='3') Línea
+      .col-md-3
     .col-md-6
       #divgraph3
     .col-md-6

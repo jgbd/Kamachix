@@ -6,8 +6,8 @@ block title
 block scriptpage
   script(src='/javascripts/nivel_satisfaccion.js')
 block resto
-  .col-md-12(style='text-align:left')
-    input#btnfil.btn.btn-warning.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
+  .col-md-2(style='text-align:left')
+    input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
     br
   #divfilter.modal.fade.bd-example-modal-lg
     .modal-content
@@ -37,9 +37,12 @@ block resto
           .col-md-1  
             input(type='submit' value='Filtrar' class='btn btn-info' )
       .modal-footer
+  .col-md-8
+    h3 Nivel de Satisfacción de:
+    h3#programa
+    br
+  .col-md-2
   .col-md-12
-    h4 Nivel de Satisfacción de:
-    h4#programa
     .col-md-6
       #divtable
         table#tabsat.table.table-hover.table-bordered.table-responsed(border='1')
@@ -51,8 +54,9 @@ block resto
           tbody#tableres
     .col-md-6
       #divgraph1
-      .col-md-12
-        select#cgdiv1
+      .col-md-3
+      .col-md-6
+        select#cgdiv1.form-control(style="background-color:#898585; color:#F2EEEE")          
           option(selected='', value='1') Seleccione un tipo de gráfica
           optgroup(label='Columnas')
             option(value='1') 2D
@@ -60,13 +64,16 @@ block resto
           optgroup(label='Barras')
             option(value='3') 2D
             option(value='4') 3D
+      .col-md-3
     .col-md-6
       #divgraph2
-      .col-md-12
-        select#cgdiv2
+      .col-md-3
+      .col-md-6
+        select#cgdiv2.form-control(style="background-color:#898585; color:#F2EEEE") 
           option(selected='', value='1') Seleccione un tipo de gráfica
           option(value='1') Línea
           option(value='2') Area
+      .col-md-3
     .col-md-6
       #divgraph3
   #myModal.modal.fade

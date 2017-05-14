@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
   if(req.query.c == 1)
-    var sql ='SELECT al."Anho", al."acreditados", al."programas", al."razon" FROM "Datawarehouse"."KPI_Acreditacion" al ORDER BY al."Anho"';
+    var sql ='SELECT al."Anho", al."acreditados", al."programas", al."razon","sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Acreditacion" al join manuales_indicadores on "manual_Acredita"=codigo ORDER BY al."Anho"';
   else if (req.query.c == 2){
     var beforedata=[req.query.flag];
     var sql = 'SELECT DISTINCT p.abreviatura,aac.inicioacreditacion,aac.periodo,(aac.inicioacreditacion+aac.periodo*365) as finacreditacion, aac.programa FROM programas p JOIN acreditacion_alta_calidad aac ON codigo=programa WHERE aac.activo=true AND p.nivel=$1 AND p.estado=true ORDER BY finacreditacion DESC';
