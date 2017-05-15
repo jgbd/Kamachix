@@ -94,6 +94,7 @@ app.use(cookieParser());
 app.use(compression());
 //minifica js y css
 app.use(minify());
+app.use(minify({cache: __dirname + 'cache'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //aqui se inicia la sesion para el server
