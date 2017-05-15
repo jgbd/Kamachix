@@ -1,5 +1,6 @@
 var express = require('express');
 var compression = require('compression');
+var expiry = require('static-expiry');
 var minify = require('express-minify');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -73,9 +74,6 @@ var consulta_update_relacionTCHC = require('./routes/consulta_update_relacionTCH
 
 var manual = require('./routes/manuales.js');
 
-
-
-
 //aqui se crea el framework de express
 var app = express();
 
@@ -93,8 +91,9 @@ app.use(cookieParser());
 //habilita la compresion gzip
 app.use(compression());
 //minifica js y css
-app.use(minify());
-app.use(minify({cache: __dirname + 'cache'}));
+app.use(minify({cache:__dirname + 'cache'}));
+app.use(expiry(app, { dir: path.join(__dirname, 'public') }));
+//app.use(express.static(dir));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //aqui se inicia la sesion para el server
