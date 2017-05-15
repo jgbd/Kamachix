@@ -19,16 +19,16 @@ $(document).ready(function(){
   $("#cgdiv1").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
-      columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],0,0);
+      columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
     }
     else if($(this).val() === '2'){
-      columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],40,30);
+      columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],40,30);
     }
     else if($(this).val() === '3'){
-      barGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],0,0);
+      barGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
     }
     else if($(this).val() === '4'){
-      barGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],40,30);
+      barGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],40,30);
     }
   });
 
@@ -39,9 +39,9 @@ $(document).ready(function(){
   $("#cgdiv2").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
-      lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1]);
+      lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
     }else{
-      areaGraph(json.datos,'divgraph2','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1]);
+      areaGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
     }
   });
 });
@@ -122,9 +122,9 @@ function Load_Fist_time(){
       $("#tableres").append('</tr>');
     }
 
-    columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],0,0);
-    lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1]);
-    var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"<br>"+ json.Programa
+    columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
+    lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
+    var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"\n"+ json.Programa
     gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');
    }
   });
@@ -189,9 +189,9 @@ function Load_Filter(){
          }
 
         //se envia los datos a las diferentes graficasque se realizan
-        columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],0,0);
-        lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1]);
-        var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"<br>"+ json.Programa
+        columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
+        lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
+        var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"\n"+ json.Programa
         gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');
        }
       }
