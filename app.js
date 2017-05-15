@@ -2,6 +2,7 @@ var express = require('express');
 var compression = require('compression');
 var expiry = require('static-expiry');
 var minify = require('express-minify');
+var minifyHTML = require('express-minify-html');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -92,8 +93,21 @@ app.use(cookieParser());
 app.use(compression());
 //minifica js y css
 app.use(minify({cache:__dirname + 'cache'}));
+
+app.use(minifyHTML({
+    override:      true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments:            true,
+        collapseWhitespace:        true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes:     true,
+        removeEmptyAttributes:     true,
+        minifyJS:                  true
+    }
+}));
 app.use(expiry(app, { dir: path.join(__dirname, 'public') }));
-//app.use(express.static(dir));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 //aqui se inicia la sesion para el server
