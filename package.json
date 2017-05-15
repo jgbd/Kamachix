@@ -13,6 +13,7 @@
     "debug": "~2.2.0",
     "express": "~4.13.4",
     "express-fileupload": "^0.0.5",
+    "express-minify": "^0.2.0",
     "express-session": "^1.14.1",
     "jade": "~1.11.0",
     "morgan": "~1.7.0",

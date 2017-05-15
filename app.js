@@ -1,5 +1,6 @@
 var express = require('express');
-var compression = require('compression')
+var compression = require('compression');
+var minify = require('express-minify');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -72,9 +73,6 @@ var consulta_update_relacionTCHC = require('./routes/consulta_update_relacionTCH
 
 var manual = require('./routes/manuales.js');
 
-
-
-
 //aqui se crea el framework de express
 var app = express();
 
@@ -92,6 +90,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //habilita la compresion gzip
 app.use(compression());
+//minifica js y css
+app.use(minify());
 //aqui se inicia la sesion para el server
 app.use(session({secret: '123456', resave: true, saveUninitialized: true}));
 
