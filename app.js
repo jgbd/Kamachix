@@ -73,6 +73,9 @@ var consulta_update_relacionTCHC = require('./routes/consulta_update_relacionTCH
 
 var manual = require('./routes/manuales.js');
 
+
+
+
 //aqui se crea el framework de express
 var app = express();
 
@@ -87,11 +90,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 //habilita la compresion gzip
 app.use(compression());
 //minifica js y css
 app.use(minify());
+app.use(express.static(path.join(__dirname, 'public')));
+
 //aqui se inicia la sesion para el server
 app.use(session({secret: '123456', resave: true, saveUninitialized: true}));
 
