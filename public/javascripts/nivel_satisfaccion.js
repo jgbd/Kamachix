@@ -125,6 +125,7 @@ function Load_Fist_time(){
     columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
     lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
     var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"\n"+ json.Programa
+
      //semaforo divgraph3
       //toma los datos de los manuales del indicador para graficar el acelerometro           
         
@@ -150,6 +151,7 @@ function Load_Fist_time(){
         
       }
     //gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');
+
    }
   });
 }
@@ -216,6 +218,7 @@ function Load_Filter(){
         columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
         lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
         var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"\n"+ json.Programa
+
         //semaforo divgraph3
         //toma los datos de los manuales del indicador para graficar el acelerometro           
           
@@ -241,6 +244,7 @@ function Load_Filter(){
           
         }
         //gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');
+
        }
       }
     });

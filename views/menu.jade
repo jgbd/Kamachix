@@ -1,54 +1,8 @@
 extends layout
 block title
-block scripts
+block css
   //css del boton de export de las graficas
   link(rel='stylesheet', href="/javascripts/amcharts/plugins/export/export.css")
-    
-  //script del login
-  script(src='/javascripts/usuarios_inicio.js')
-    
-  //scripts que se usan despues de login
-  
-  //script para crear el submenu en el navbar
-  script(src='/javascripts/bootstrap-submenu.min.js', defer='')
-    
-  //script de las graficas
-  //script principal de la libreria de graficas
-  script(src="/javascripts/amcharts/amcharts.js") 
-  
-  //script para activar el export de las graficas 
-  script(src="/javascripts/amcharts/plugins/export/export.min.js")
-    
-  //scripts de los diferentes tipos de graficas
-  script(src="/javascripts/amcharts/serial.js")
-  script(src="/javascripts/amcharts/pie.js")
-  script(src="/javascripts/amcharts/gauge.js")
-    
-  //script del tema visual de las graficas
-  script(src="/javascripts/amcharts/themes/light.js")
-    
-  //script que tienes todas las funciones de graficar
-  script(type='text/javascript', src='/javascripts/Graphs.js')
-    
-  //script para pasas grafica a img para infomes
-  script(type='text/javascript', src='/javascripts/rgbcolor.js')
-  script(type='text/javascript', src='/javascripts/StackBlur.js')
-  script(type='text/javascript', src='/javascripts/canvg.min.js')
-    
-  //script para validar y cargar archivos al server
-  script(type='text/javascript', src='/javascripts/files.js')
-    
-  //script de formacion Docentes
-  script(src='/javascripts/update_formacion_docentes.js')
-  
-  //script de conexion para sacar reportes del server
-  script(type='text/javascript', src='/javascripts/jsreport.min.js')
-  
-  //script general para controlar action a nivel global
-  script(type='text/javascript', src='/javascripts/menu.js')
-  
-  //bloque para colocar los script propios de cada Indicador
-  block scriptpage
 block content
   //modallogin
   #modallogin.modal.fade.bd-example-modal-lg
@@ -280,3 +234,50 @@ block content
 
   //bloque que contiene el contenido de cada pagina especifica
   block resto
+block scripts
+    
+  //script del login
+  script( src='/javascripts/usuarios_inicio.js')
+    
+  //scripts que se usan despues de login
+  
+  //script para crear el submenu en el navbar
+  script( src='/javascripts/bootstrap-submenu.min.js', defer='')
+    
+  //script de las graficas
+  //script principal de la libreria de graficas
+  script(src="/javascripts/amcharts/amcharts.js") 
+  
+  //script para activar el export de las graficas 
+  script( src="/javascripts/amcharts/plugins/export/export.min.js")
+    
+  //scripts de los diferentes tipos de graficas
+  script(src="/javascripts/amcharts/serial.js")
+  script(src="/javascripts/amcharts/pie.js")
+  script(src="/javascripts/amcharts/gauge.js")
+    
+  //script del tema visual de las graficas
+  script(src="/javascripts/amcharts/themes/light.js")
+    
+  //script que tienes todas las funciones de graficar
+  script(type='text/javascript', src='/javascripts/Graphs.js')
+    
+  //script para pasas grafica a img para infomes
+  script( type='text/javascript', src='/javascripts/rgbcolor.js')
+  script( type='text/javascript', src='/javascripts/StackBlur.js')
+  script( type='text/javascript', src='/javascripts/canvg.min.js')
+    
+  //script para validar y cargar archivos al server
+  script( type='text/javascript', src='/javascripts/files.js')
+    
+  //script de formacion Docentes
+  script( src='/javascripts/update_formacion_docentes.js')
+  
+  //script de conexion para sacar reportes del server
+  script( type='text/javascript', src='/javascripts/jsreport.min.js')
+  
+  //script general para controlar action a nivel global
+  script( type='text/javascript', src='/javascripts/menu.js')
+  
+  //bloque para colocar los script propios de cada Indicador
+  block scriptpage

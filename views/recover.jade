@@ -1,8 +1,6 @@
 extends menu
 block title
   title!=title
-block scriptpage
-  script(src='/javascripts/restaurar.js')
 block resto
   .row
     .col-md-4.col-md-offset-3
@@ -21,3 +19,5 @@ block resto
             input#txtpass2.form-control(type='password', placeholder='Verificar contraseña' required)
           br
           button#btnrec.btn.btn-info(type='submit') Guardar 
+block scriptpage
+  script( src='/javascripts/restaurar.js')

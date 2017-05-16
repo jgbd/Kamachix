@@ -1,8 +1,6 @@
 extends menu
 block title
   title!=title
-block scriptpage
-  script(src='/javascripts/formacion_docentes_dep.js')
 block resto
   .col-md-2(style='text-align:left')
     input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros')
@@ -77,4 +75,5 @@ block resto
           
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
-  
+block scriptpage
+  script( src='/javascripts/formacion_docentes_dep.js')  
