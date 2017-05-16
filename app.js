@@ -90,12 +90,13 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cache('5 minutes'));
+app.use(cache('1 minutes'));
 app.use(cookieParser());
 //habilita la compresion gzip
 app.use(compression());
 //minifica js y css
-app.use(minify({cache: path.join(__dirname, 'public', 'cache')}));
+app.use(minify());
+//app.use(minify({cache: path.join(__dirname, 'public', 'cache')}));
 
 app.use(minifyHTML({
     override:      true,
