@@ -11,12 +11,12 @@ html
     //los css bootstrap pertenecen a estas librerias de ayuda grafica y control
     //export.css referencia a la posibilidad de descargar en diferentes formatos 
     //las graficas de los indicadores EJ: JPG, PDF, etc. 
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-datepicker.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css' media="none" onload="if(media!='all')media='all'")
+    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css' media="none" onload="if(media!='all')media='all'")
+    link(rel='stylesheet', href='/stylesheets/bootstrap-datepicker.min.css' media="none" onload="if(media!='all')media='all'")
     //css para controlar el submenu del navbar
-    link(rel='stylesheet', href='/stylesheets/bootstrap-submenu.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css') 
+    link(rel='stylesheet', href='/stylesheets/bootstrap-submenu.min.css' media="none" onload="if(media!='all')media='all'")
+    link(rel='stylesheet', href='/stylesheets/style.css' media="none" onload="if(media!='all')media='all'") 
     block css
   body.body
     //este bloque es el que contiene todo lo que pertenece a las diferentes paginas 
