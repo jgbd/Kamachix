@@ -36,7 +36,7 @@ function loadfile(url, name){
      processData: false,  // tell jQuery not to process the data
      contentType: false,  // tell jQuery not to set contentType
      success : function(data) {
-       alert(JSON.stringify(data));
+       // alert(JSON.stringify(data));
        if(data.upload==='0') {
          $('#mesage span').addClass('glyphicon glyphicon-alert')
          $('#mesage p').html('Seleccione un archivo!!');

@@ -97,7 +97,7 @@ $(document).ready(function(){
                   }
                 });
               //grafica que aparecera por defecto
-              columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
+              columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
 
                //semaforo divgraph4 
               //toma los datos de los manuales del indicador para graficar el acelerometro           
@@ -182,7 +182,7 @@ $(document).ready(function(){
                   }
                 });
               //grafica que aparecera por defecto
-              columnGraph(arra, "divgraph1", "Docentes tiempo completo", "nivel", "cantidad",0,0);
+              columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
 
 
               //semaforo divgraph4 
@@ -386,7 +386,7 @@ $(document).ready(function(){
         
         
       });
-      columnGraph(arra2,divgraph2,'Nivel de Formacion Docentes','anio','cantidad',0,0);
+      columnGraph(arra2,divgraph2,'Nivel de Formacion Docentes','anio','cantidad',40,30);
      }
 
   });   
@@ -503,7 +503,7 @@ $(document).ready(function(){
             });
 
           //grafica por defecto
-          columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+          columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
 
            //semaforo divgraph4 
             //toma los datos de los manuales del indicador para graficar el acelerometro           
