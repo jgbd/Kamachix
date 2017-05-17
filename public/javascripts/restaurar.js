@@ -41,7 +41,7 @@ function actualizarcontrasena(){
     //  aqui comprobamos que si el resultado existe lo redirecciona al siguiente pagina
      if(json>0){
        $("#resrec").text("La contraseña se cambio con exito." );
-       location.href="/";
+       setTimeout(location.href="/",5000);
      }else{
        $("#resrecover").text("La contraseña no se pudo cambiar, vuelve a intentar." );
      }

@@ -5,7 +5,7 @@ function configdb(){
   var config = {
     user: 'postgres', //env var: PGUSER
     database: 'datos_indicadores', //env var: PGDATABASE
-    password: '123', //env var: PGPASSWORD
+    password: 'kamachix', //env var: PGPASSWORD
     host: 'localhost', // Server hosting the postgres database
     port: 5432, //env var: PGPORT
     max: 10, // max number of clients in the pool

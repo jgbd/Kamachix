@@ -11,7 +11,7 @@ router.get('/',function(req, res, next){
   var sql='SELECT ma.proceso, ma.lider, ma."objProceso",ma."nombreIndicador",'+
   'ma."atriMedir",ma."objCalidad", ma."tipoIndicador",ma.frecuencia,'+
   ' ma."periodoCalculo", ma.tendencia,ma.meta, ma."objIndicador", ma."sim_Rango_MA",'+
-  ' ma.formula,ma."maneraGrafica", ma."puntoRegistro",ma.resposable,'+
+  ' ma.formula, ma."maneraGrafica", ma."puntoRegistro",ma.resposable,'+
   ' ma.instructivo,ma."num_Rango_MA",ma."sim_Rango_A",'+
   ' ma."num_Rango_A",ma."sim_Rango_I",ma."num_Rango_I" '+
   'FROM public.manuales_indicadores ma WHERE ma.codigo = $1';
@@ -46,13 +46,13 @@ router.get('/',function(req, res, next){
         result.rows[0].periodoCalculo,
         result.rows[0].tendencia,
         result.rows[0].meta,
-        result.rows[0].objIndicador,        
-        result.rows[0].formular,
+        result.rows[0].objIndicador,
+        result.rows[0].formula,
         result.rows[0].maneraGrafica,
         result.rows[0].puntoRegistro,
         result.rows[0].resposable,
         result.rows[0].instructivo,
-        result.rows[0].sim_Rango_MA,       
+        result.rows[0].sim_Rango_MA,
         result.rows[0].num_Rango_MA,
         result.rows[0].sim_Rango_A,
         result.rows[0].num_Rango_A,
