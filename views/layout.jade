@@ -11,21 +11,22 @@ html
     //los css bootstrap pertenecen a estas librerias de ayuda grafica y control
     //export.css referencia a la posibilidad de descargar en diferentes formatos 
     //las graficas de los indicadores EJ: JPG, PDF, etc. 
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css' )
-    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css' )
-    link(rel='stylesheet', href='/stylesheets/bootstrap-datepicker.min.css' )
+    //- link(rel='stylesheet', href='/stylesheets/bootstrap.min.css' )
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css' )
     //css para controlar el submenu del navbar
-    link(rel='stylesheet', href='/stylesheets/bootstrap-submenu.min.css' )
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-submenu/2.0.4/css/bootstrap-submenu.min.css' )
     link(rel='stylesheet', href='/stylesheets/style.css' ) 
     block css
   body.body
     //este bloque es el que contiene todo lo que pertenece a las diferentes paginas 
     block content
     //JS generales del proyecto
-    script(src='/javascripts/jquery.js')
-    script( type='text/javascript',src='/javascripts/bootstrap.min.js')
-    script( type='text/javascript',src='/javascripts/bootstrap-datepicker.min.js')
-    script( type='text/javascript',src='/javascripts/bootstrap-datepicker.es.min.js')
+    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous")
+    //- script( type='text/javascript',src='/javascripts/bootstrap.min.js')
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
+    script( type='text/javascript',src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js')
+    script( type='text/javascript',src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.es.min.js')
     //En este bloque se permite colocar los scripts que no son comunes a todo el proyecto y solo 
     //pertenecen a una pagina en especifico  
     block scripts
