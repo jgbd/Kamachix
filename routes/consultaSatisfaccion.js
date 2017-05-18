@@ -12,7 +12,7 @@ var pool = configdb.configdb();
 //next que es la siguiente function
 
 router.get('/', function(req, res, next) {
-  var sql ='SELECT p.abreviatura, sl."Nivel", sl."Anho" FROM "Datawarehouse"."KPI_Nivel_Satisfaccion" sl JOIN public.programas p ON p.snies=sl."Programa" WHERE sl."Programa" = '+"'000000'"+' ORDER BY p."abreviatura", sl."Anho"';
+  var sql ='SELECT p.abreviatura, sl."Nivel", sl. "Anho","sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Nivel_Satisfaccion" sl JOIN public.programas p ON p.snies=sl."Programa" join manuales_indicadores on manual=manuales_indicadores.codigo WHERE sl."Programa" = '+"'000000'"+' ORDER BY p."abreviatura", sl."Anho"';
   //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
@@ -40,6 +40,12 @@ router.get('/', function(req, res, next) {
           var d = {
             "Nivel":result.rows[i].Nivel,
             "Anho":result.rows[i].Anho,
+            "num_Rango_I":result.rows[i].num_Rango_I,
+            "num_Rango_A":result.rows[i].num_Rango_A,
+            "num_Rango_MA":result.rows[i].num_Rango_MA,
+            "sim_Rango_I":result.rows[i].sim_Rango_I,
+            "sim_Rango_A":result.rows[i].sim_Rango_A,
+            "sim_Rango_MA":result.rows[i].sim_Rango_MA,
             "color":"#9704f2"
           };
           datalst.push(d);
@@ -60,7 +66,7 @@ router.post('/', function(req, res, next) {
     //arreglo que contine filtros
     var filters=[req.body.program];
     //consulta basica sin condiciones
-    var sql ='SELECT p.abreviatura, sl."Nivel", sl."Anho" FROM "Datawarehouse"."KPI_Nivel_Satisfaccion" sl JOIN public.programas p ON p.snies=sl."Programa" WHERE ';
+    var sql ='SELECT p.abreviatura, sl."Nivel", sl."Anho","sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Nivel_Satisfaccion" sl JOIN public.programas p ON p.snies=sl."Programa" join manuales_indicadores on manual=manuales_indicadores.codigo WHERE ';
 
     //concatena al sql los valores d elos filtros
     sql=sql+'sl."Programa" = $1';
@@ -105,6 +111,12 @@ router.post('/', function(req, res, next) {
             if(re.Programa==result.rows[i].abreviatura){
               var d ={
                 "Nivel":result.rows[i].Nivel,
+                "num_Rango_I":result.rows[i].num_Rango_I,
+                "num_Rango_A":result.rows[i].num_Rango_A,
+                "num_Rango_MA":result.rows[i].num_Rango_MA,
+                "sim_Rango_I":result.rows[i].sim_Rango_I,
+                "sim_Rango_A":result.rows[i].sim_Rango_A,
+                "sim_Rango_MA":result.rows[i].sim_Rango_MA,
                 "Anho": result.rows[i].Anho
               };
               datarray.push(d);

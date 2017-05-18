@@ -11,21 +11,21 @@ html
     //los css bootstrap pertenecen a estas librerias de ayuda grafica y control
     //export.css referencia a la posibilidad de descargar en diferentes formatos 
     //las graficas de los indicadores EJ: JPG, PDF, etc. 
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-datepicker.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css' )
+    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css' )
+    link(rel='stylesheet', href='/stylesheets/bootstrap-datepicker.min.css' )
     //css para controlar el submenu del navbar
-    link(rel='stylesheet', href='/stylesheets/bootstrap-submenu.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css') 
-    
-    //JS generales del proyecto
-    script(src='/javascripts/jquery.js')
-    script(type='text/javascript',src='/javascripts/bootstrap.min.js')
-    script(type='text/javascript',src='/javascripts/bootstrap-datepicker.min.js')
-    script(type='text/javascript',src='/javascripts/bootstrap-datepicker.es.min.js')
-    //En este bloque se permite colocar los scripts que no son comunes a todo el proyecto y solo 
-    //pertenecen a una pagina en especifico  
-    block scripts
+    link(rel='stylesheet', href='/stylesheets/bootstrap-submenu.min.css' )
+    link(rel='stylesheet', href='/stylesheets/style.css' ) 
+    block css
   body.body
     //este bloque es el que contiene todo lo que pertenece a las diferentes paginas 
     block content
+    //JS generales del proyecto
+    script(src='/javascripts/jquery.js')
+    script( type='text/javascript',src='/javascripts/bootstrap.min.js')
+    script( type='text/javascript',src='/javascripts/bootstrap-datepicker.min.js')
+    script( type='text/javascript',src='/javascripts/bootstrap-datepicker.es.min.js')
+    //En este bloque se permite colocar los scripts que no son comunes a todo el proyecto y solo 
+    //pertenecen a una pagina en especifico  
+    block scripts

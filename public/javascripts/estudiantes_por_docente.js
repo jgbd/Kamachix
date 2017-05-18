@@ -68,25 +68,117 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
    data:{c:1},//señala a la consulta general de indicador a lo largo de los años en datawarehouse
    success : function(json) {
      //alert(json.rowCount);
-       for (var j = json.rowCount-1; j >=json.rowCount-5; j--) {
+       for (var i = json.rowCount-1; i >=json.rowCount-5; i--) {
         $("#tableres").append('<tr>');
-        $("#tableres").append('<td>'+json.rows[j].Anho+'</td>');
-        $("#tableres").append('<td>'+json.rows[j].razonanual+'</td>');
-
+        $("#tableres").append('<td>'+json.rows[i].Anho+'</td>');
+        $("#tableres").append('<td>'+json.rows[i].razonanual+'</td>');
+        
         //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
-        if(json.rows[j].razonanual>=59)
-          $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[j].razonanual+' de 30)"></td>');
-        else if(json.rows[j].razonanual<59 && json.rows[j].razonanual>=35)
-          if(j>0 && json.rows[j-1].razonanual<35)
-              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo está bajando ('+json.rows[j].razonanual+' de 30)"></td>');
-          else if(j>0 && json.rows[j-1].razonanual<json.rows[j].razonanual)
-              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[j].razonanual+' de 30)"></td>');
-          else
-              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo está cerca a alcanzarse ('+json.rows[j].razonanual+' de 30)"></td>');
-        else
-          $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Estudiantes por Docente Tiempo Completo alcanzada ('+json.rows[j].razonanual+' de 30)"></td>');
-        //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        // condiciones para insertar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
+        //en caso de que el simbolo del rango adecuado sea '= '
+        if(json.rows[i].sim_Rango_A === '= '){
+          if(json.rows[i].razonanual == json.rows[i].num_Rango_A){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+          }
+          else if(json.rows[i].sim_Rango_MA === '> '){
+            if(json.rows[i].razonanual > json.rows[i].num_Rango_MA){                
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Estudiantes por Docente Tiempo Completo alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+            }
+            else{                
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+            }
 
+          }
+          else if(json.rows[i].sim_Rango_MA === '< '){
+            if(json.rows[i].razonanual < json.rows[i].num_Rango_MA){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Estudiantes por Docente Tiempo Completo alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+            }
+            else{
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+
+            }
+
+          }
+        }
+
+        //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
+        else if(json.rows[i].sim_Rango_MA === '> '){ 
+          if(json.rows[i].razonanual >= json.rows[i].num_Rango_MA){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Estudiantes por Docente Tiempo Completo alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+          }
+          else if(json.rows[i].sim_Rango_A === '> '){
+            if(json.rows[i].razonanual >= json.rows[i].num_Rango_A){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+            }
+            else{                
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+
+            } 
+          }
+          else if(json.rows[i].sim_Rango_A === '< ' && json.rows[i].sim_Rango_I === '< ' ){
+            if(json.rows[i].razonanual <= json.rows[i].num_Rango_A && json.rows[i].razonanual > json.rows[i].num_Rango_I){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[j].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+            }
+            else if(json.rows[i].razonanual <= json.rows[i].num_Rango_I){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+            }
+
+          }       
+        }
+        //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+        else if(json.rows[i].sim_Rango_MA === '< '){
+          if(json.rows[i].razonanual <= json.rows[i].num_Rango_MA && json.rows[i].razonanual > json.rows[i].num_Rango_A ){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Estudiantes por Docente Tiempo Completo alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+          }
+          if(json.rows[i].razonanual <= json.rows[i].num_Rango_A && json.rows[i].razonanual > json.rows[i].num_Rango_I ){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+          }    
+
+          else if(json.rows[i].razonanual <= json.rows[i].num_Rango_I){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+          }
+        }
+        
+        //en caso de que el simbolo del rango muy adecuado sea '= '
+        if(json.rows[i].sim_Rango_MA === '= '){
+          if(json.rows[i].razonanual == json.rows[i].num_Rango_MA){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Estudiantes por Docente Tiempo Completo alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+          }
+          else if(json.rows[i].sim_Rango_A === '> '){
+            if(json.rows[i].razonanual > json.rows[i].num_Rango_A){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              
+            }
+            else{
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+
+            }
+
+          }
+          else if(json.rows[i].sim_Rango_A === '< '){
+            if(json.rows[i].sim_Rango_I === '< '){
+              if(json.rows[i].razonanual <= json.rows[i].num_Rango_A && json.rows[i].razonanual > json.rows[i].num_Rango_I){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              }
+              else{
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+
+              }
+            }
+
+            if(json.rows[i].sim_Rango_I === '> '){
+              if(json.rows[i].razonanual <= json.rows[i].num_Rango_A ){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              }
+              else{
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+
+              }
+            }
+
+          }
+        }
+      //-----------------------------------------------------------------
         $("#tableres").append('</tr>');
        }
 

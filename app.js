@@ -1,9 +1,14 @@
 var express = require('express');
+var compression = require('compression');
+var expiry = require('static-expiry');
+var minify = require('express-minify');
+var minifyHTML = require('express-minify-html');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+// var apicache = require('apicache');
 
 //libreria cargar archivos al servidor
 var fileUpload = require('express-fileupload');
@@ -71,12 +76,10 @@ var consulta_update_relacionTCHC = require('./routes/consulta_update_relacionTCH
 
 var manual = require('./routes/manuales.js');
 
-
-
-
 //aqui se crea el framework de express
 var app = express();
 
+// let cache = apicache.middleware;
 // view engine setup
 //las pagina son tipo jade o pug
 app.set('views', path.join(__dirname, 'views'));
@@ -87,7 +90,28 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(cache('1 minutes'));
 app.use(cookieParser());
+//habilita la compresion gzip
+app.use(compression());
+//minifica js y css
+app.use(minify());
+//app.use(minify({cache: path.join(__dirname, 'public', 'cache')}));
+
+app.use(minifyHTML({
+    override:      true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments:            true,
+        collapseWhitespace:        true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes:     true,
+        removeEmptyAttributes:     true,
+        minifyJS:                  true
+    }
+}));
+app.use(expiry(app, { dir: path.join(__dirname, 'public') }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 //aqui se inicia la sesion para el server

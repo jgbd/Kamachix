@@ -99,7 +99,7 @@ $(document).ready(function(){
 function getPDF(){
 
   //se inicia el servidor de reportes
-  jsreport.serverUrl = 'http://localhost:5488';
+  jsreport.serverUrl = 'http://190.254.4.49:5488';
 
   //areglo para contener todo lo que se envia a el reporte
   var atrind=[];
@@ -323,7 +323,7 @@ function uploadatareport(serialindi){
    url: "manuales", //la url del que realizara la consulta
    dataType : 'json',
    data:{c:serialindi},//Primera consulta
-   //se ejecutasi todo se realiza bien
+   //se ejecuta si todo se realiza bien
    success : function(json) {
      for (var i = 0; i < 23; i++) {
        if(i===3 && serialindi===1 || i===3 && serialindi===6 || i===3 && serialindi===7)
@@ -332,6 +332,7 @@ function uploadatareport(serialindi){
           $("#atrinfo"+(i+1)).val(json[i])
      }
    },
+
    error : function(xhr, status) {
         alert('Disculpe, existió un problema');
     },

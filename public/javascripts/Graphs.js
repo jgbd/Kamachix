@@ -61,7 +61,7 @@ function columnGraph(data, content_name, title, namecolumn, namerows, depth3D, a
     "categoryAxis": {
       "gridPosition": "start",
       "labelRotation": 45,
-      "color":"#de05f2",
+      // "color":"#de05f2",
       // "gridAlpha": 0.40,
       // "gridColor": "#de05f2",
     },

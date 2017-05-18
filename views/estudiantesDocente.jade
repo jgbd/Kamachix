@@ -1,8 +1,6 @@
 extends menu
 block title
   title!=title
-block scriptpage
-  script(src='/javascripts/estudiantes_por_docente.js')
 block resto
   .col-md-2(style='text-align:left')
       input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
@@ -235,3 +233,5 @@ block resto
             td 
               #divg1
               #divg2
+block scriptpage
+  script( src='/javascripts/estudiantes_por_docente.js')

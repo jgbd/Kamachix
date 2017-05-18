@@ -1,11 +1,9 @@
 extends menu
 block title
   title!=title
-block scriptpage
-  script(src='/javascripts/restaurar.js')
 block resto
   .row
-    .col-md-4.col-md-offset-3
+    .col-md-4.col-md-offset-4
       h2 Recuperar Contraseña
       form.form-horizontal(id="frmrec", method="post", action="/recover")
         .form-group
@@ -21,3 +19,5 @@ block resto
             input#txtpass2.form-control(type='password', placeholder='Verificar contraseña' required)
           br
           button#btnrec.btn.btn-info(type='submit') Guardar 
+block scriptpage
+  script( src='/javascripts/restaurar.js')

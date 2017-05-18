@@ -32,7 +32,7 @@ que se van creando sea por clase por id o tipo */
   /*background-color: #ffffff;*/
   color:#000;
   background-color:#EEEEEE;
-  
+
 }
 
 #cabezera{
@@ -42,7 +42,7 @@ que se van creando sea por clase por id o tipo */
   background-size: cover;
   height: 20%;
   background-color:#898585;
-  
+
 }
 
 a {
@@ -128,7 +128,7 @@ a {
 
 #escudo,#logo{
   margin-top: 60px;
-  height: 200px
+  height: 50%
 }
 
 .th, td{
@@ -189,8 +189,8 @@ img{
     background-color:#898585;
     border-radius: 10px;
     border-color: #fff;
-    text-align: center;    
-    
+    text-align: center;
+
  }
 
  .dropdown-menu li a{

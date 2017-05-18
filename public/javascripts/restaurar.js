@@ -27,7 +27,7 @@ function comparar_textos(texto_1, texto_2) {
 }
 
 function actualizarcontrasena(){
-  alert($('#txtpass1').val());
+  // alert($('#txtpass1').val());
   var formData = {
         'pass': $('#txtpass1').val(),
       };
@@ -41,6 +41,7 @@ function actualizarcontrasena(){
     //  aqui comprobamos que si el resultado existe lo redirecciona al siguiente pagina
      if(json>0){
        $("#resrec").text("La contraseña se cambio con exito." );
+       setTimeout(location.href="/",5000);
      }else{
        $("#resrecover").text("La contraseña no se pudo cambiar, vuelve a intentar." );
      }

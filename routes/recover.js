@@ -7,15 +7,16 @@ var SHA256 = require("crypto-js/sha256");
 //variable que controla el pool de conexiones
 var pool = configdb.configdb();
 
-router.get('/:clave/:fecha', function(req, res, next) {
+router.get('/', function(req, res, next) {
+  res._no_cache = true;
   //para verificar la fecha del vinculo y dejar que solo sea usable el dia que lo genero
   var date = new Date();
   var day = ""+date.getDate()+date.getMonth()+date.getFullYear();
   var fec = SHA256(day).toString();
   var ban = true;
-  var ar = [req.params.clave];
+  var ar = [req.query.clave];
 
-  if(fec==req.params.fecha){
+  if(fec==req.query.fe){
     var sql = 'SELECT u.codigo FROM public.users u WHERE u.encriptado LIKE $1';
   }else {
     var enc = ""+date.getDate()+date.getMonth()+date.getFullYear()+

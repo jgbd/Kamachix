@@ -19,16 +19,16 @@ $(document).ready(function(){
   $("#cgdiv1").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
-      columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],0,0);
+      columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
     }
     else if($(this).val() === '2'){
-      columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],40,30);
+      columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],40,30);
     }
     else if($(this).val() === '3'){
-      barGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],0,0);
+      barGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
     }
     else if($(this).val() === '4'){
-      barGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],40,30);
+      barGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],40,30);
     }
   });
 
@@ -39,9 +39,9 @@ $(document).ready(function(){
   $("#cgdiv2").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
-      lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1]);
+      lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
     }else{
-      areaGraph(json.datos,'divgraph2','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1]);
+      areaGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
     }
   });
 });
@@ -109,23 +109,151 @@ function Load_Fist_time(){
    success : function(json) {
     $("#txtjson").val(JSON.stringify(json));
     $("#programa").html(json.Programa);
-    for (var j = 0; j <json.count; j++) {
+    for (var i = 0; i <json.count; i++) {
       $("#tableres").append('<tr>');
-        $("#tableres").append('<td>'+json.datos[j].Nivel+'</td>');
-        $("#tableres").append('<td>'+json.datos[j].Anho+'</td>');
-        if(json.datos[j].Nivel<=40)
-          $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Satisfacción esta muy bajo"></td>');
-        else if(json.datos[j].Nivel>40 && json.datos[j].Nivel<=70)
-          $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Satisfacción esta bajando demasiado"></td>');
-        else
-          $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Satisfacción es bueno "></td>');
+        $("#tableres").append('<td>'+json.datos[i].Nivel+'</td>');
+        $("#tableres").append('<td>'+json.datos[i].Anho+'</td>');
+        
+        //----------------------------------------------------------------------
+        //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
+        // condiciones para insertar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
+        //en caso de que el simbolo del rango adecuado sea '= '
+        if(json.datos[i].sim_Rango_A === '= '){
+          if(json.datos[i].Nivel == json.datos[i].num_Rango_A){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+          }
+          else if(json.datos[i].sim_Rango_MA === '> '){
+            if(json.datos[i].Nivel > json.datos[i].num_Rango_MA){                
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+            }
+            else{                
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+            }
+
+          }
+          else if(json.datos[i].sim_Rango_MA === '< '){
+            if(json.datos[i].Nivel < json.datos[i].num_Rango_MA){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+            }
+            else{
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+            }
+
+          }
+        }
+
+        //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
+        else if(json.datos[i].sim_Rango_MA === '> '){ 
+          if(json.datos[i].Nivel >= json.datos[i].num_Rango_MA){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+          }
+          else if(json.datos[i].sim_Rango_A === '> '){
+            if(json.datos[i].Nivel >= json.datos[i].num_Rango_A){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+            }
+            else{                
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+            } 
+          }
+          else if(json.datos[i].sim_Rango_A === '< ' && json.datos[i].sim_Rango_I === '< ' ){
+            if(json.datos[i].Nivel <= json.datos[i].num_Rango_A && json.datos[i].Nivel > json.datos[i].num_Rango_I){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[j].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+            }
+            else if(json.datos[i].Nivel <= json.datos[i].num_Rango_I){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+            }
+
+          }       
+        }
+        //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+        else if(json.datos[i].sim_Rango_MA === '< '){
+          if(json.datos[i].Nivel <= json.datos[i].num_Rango_MA && json.datos[i].Nivel > json.datos[i].num_Rango_A ){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+          }
+          if(json.datos[i].Nivel <= json.datos[i].num_Rango_A && json.datos[i].Nivel > json.datos[i].num_Rango_I ){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+          }    
+
+          else if(json.datos[i].Nivel <= json.datos[i].num_Rango_I){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+          }
+        }
+        
+        //en caso de que el simbolo del rango muy adecuado sea '= '
+        if(json.datos[i].sim_Rango_MA === '= '){
+          if(json.datos[i].Nivel == json.datos[i].num_Rango_MA){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+          }
+          else if(json.datos[i].sim_Rango_A === '> '){
+            if(json.datos[i].Nivel > json.datos[i].num_Rango_A){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              
+            }
+            else{
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+            }
+
+          }
+          else if(json.datos[i].sim_Rango_A === '< '){
+            if(json.datos[i].sim_Rango_I === '< '){
+              if(json.datos[i].Nivel <= json.datos[i].num_Rango_A && json.datos[i].Nivel > json.datos[i].num_Rango_I){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+              else{
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+              }
+            }
+
+            if(json.datos[i].sim_Rango_I === '> '){
+              if(json.datos[i].Nivel <= json.datos[i].num_Rango_A ){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+              else{
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+              }
+            }
+
+          }
+        }
+      //-----------------------------------------------------------------
       $("#tableres").append('</tr>');
     }
 
-    columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],0,0);
-    lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1]);
-    var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"<br>"+ json.Programa
-    gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');
+    columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
+    lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
+    var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"\n"+ json.Programa
+
+     //semaforo divgraph3
+      //toma los datos de los manuales del indicador para graficar el acelerometro           
+        
+      if(json.datos[json.count-1].sim_Rango_MA == '< ' && json.datos[json.count-1].sim_Rango_I == '> '){
+        
+        gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].sim_Rango_I, titleg, '%');
+        
+      } 
+
+      else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '> ' ){    
+                    
+        gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'y','g','r',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+        
+      }              
+
+      else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '< ' ){
+        alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          
+      }
+
+      else{                               
+        gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+        
+      }
+    //gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');
+
    }
   });
 }
@@ -179,20 +307,147 @@ function Load_Filter(){
            $("#tableres").append('<tr>');
              $("#tableres").append('<td>'+json.datos[j].Nivel+'</td>');
              $("#tableres").append('<td>'+json.datos[j].Anho+'</td>');
-             if(json.datos[j].Nivel<=40)
-               $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Su nivel de Satisfacción esta muy bajo"></td>');
-             else if(json.datos[j].Nivel>40 && json.datos[j].Nivel<=70)
-               $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Su nivel de Satisfacción esta bajando demasiado"></td>');
-             else
-               $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Su nivel de Satisfacción es bueno "></td>');
+             //----------------------------------------------------------------------
+            //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
+            // condiciones para insertar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
+            //en caso de que el simbolo del rango adecuado sea '= '
+            if(json.datos[i].sim_Rango_A === '= '){
+              if(json.datos[i].Nivel == json.datos[i].num_Rango_A){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+              else if(json.datos[i].sim_Rango_MA === '> '){
+                if(json.datos[i].Nivel > json.datos[i].num_Rango_MA){                
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                }
+                else{                
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                }
+
+              }
+              else if(json.datos[i].sim_Rango_MA === '< '){
+                if(json.datos[i].Nivel < json.datos[i].num_Rango_MA){
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                }
+                else{
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+                }
+
+              }
+            }
+
+            //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
+            else if(json.datos[i].sim_Rango_MA === '> '){ 
+              if(json.datos[i].Nivel >= json.datos[i].num_Rango_MA){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+              else if(json.datos[i].sim_Rango_A === '> '){
+                if(json.datos[i].Nivel >= json.datos[i].num_Rango_A){
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                }
+                else{                
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+                } 
+              }
+              else if(json.datos[i].sim_Rango_A === '< ' && json.datos[i].sim_Rango_I === '< ' ){
+                if(json.datos[i].Nivel <= json.datos[i].num_Rango_A && json.datos[i].Nivel > json.datos[i].num_Rango_I){
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[j].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                }
+                else if(json.datos[i].Nivel <= json.datos[i].num_Rango_I){
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                }
+
+              }       
+            }
+            //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+            else if(json.datos[i].sim_Rango_MA === '< '){
+              if(json.datos[i].Nivel <= json.datos[i].num_Rango_MA && json.datos[i].Nivel > json.datos[i].num_Rango_A ){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+              if(json.datos[i].Nivel <= json.datos[i].num_Rango_A && json.datos[i].Nivel > json.datos[i].num_Rango_I ){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }    
+
+              else if(json.datos[i].Nivel <= json.datos[i].num_Rango_I){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+            }
+            
+            //en caso de que el simbolo del rango muy adecuado sea '= '
+            if(json.datos[i].sim_Rango_MA === '= '){
+              if(json.datos[i].Nivel == json.datos[i].num_Rango_MA){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+              else if(json.datos[i].sim_Rango_A === '> '){
+                if(json.datos[i].Nivel > json.datos[i].num_Rango_A){
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  
+                }
+                else{
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+                }
+
+              }
+              else if(json.datos[i].sim_Rango_A === '< '){
+                if(json.datos[i].sim_Rango_I === '< '){
+                  if(json.datos[i].Nivel <= json.datos[i].num_Rango_A && json.datos[i].Nivel > json.datos[i].num_Rango_I){
+                    $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  }
+                  else{
+                    $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+                  }
+                }
+
+                if(json.datos[i].sim_Rango_I === '> '){
+                  if(json.datos[i].Nivel <= json.datos[i].num_Rango_A ){
+                    $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  }
+                  else{
+                    $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+                  }
+                }
+
+              }
+            }
+          //-----------------------------------------------------------------
            $("#tableres").append('</tr>');
          }
 
         //se envia los datos a las diferentes graficasque se realizan
-        columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1],0,0);
-        lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion <br>'+json.Programa,json.fields[0],json.fields[1]);
-        var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"<br>"+ json.Programa
-        gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');
+        columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
+        lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
+        var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"\n"+ json.Programa
+
+        //semaforo divgraph3
+        //toma los datos de los manuales del indicador para graficar el acelerometro           
+          
+        if(json.datos[json.count-1].sim_Rango_MA == '< ' && json.datos[json.count-1].sim_Rango_I == '> '){
+          
+          gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].sim_Rango_I, titleg, '%');
+          
+        } 
+
+        else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '> ' ){    
+                      
+          gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'y','g','r',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+          
+        }              
+
+        else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '< ' ){
+          alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+            
+        }
+
+        else{                               
+          gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+          
+        }
+        //gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');
+
        }
       }
     });

@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
             from: '"Juan Bastidas" <juanbasdel@udenar.edu.co>', // sender address
             to: 'juanbasdel@gmail.com', // list of receivers
             subject: 'Recuperar contraseña kamachix ✔', // Subject line
-            text: 'http://10.42.0.1:3000/recover/'+result.rows[0].encriptado+'/'+fec, // plain text body
+            text: 'http://190.254.4.49:3000/recover?clave='+result.rows[0].encriptado+'&fe='+fec, // plain text body
         };
 
         // send mail with defined transport object
