@@ -103,18 +103,32 @@ $(document).ready(function(){
 
             }       
           }
-          //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+          //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<' 
           else if(json.rows[i].sim_Rango_MA === '< '){
-            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_MA && json.rows[i].relacion_docentes > json.rows[i].num_Rango_A ){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_MA){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
             }
-            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I ){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
-            }    
+            else if(json.rows[i].sim_Rango_A === '> '){
+              if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_A && json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I ){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+               else{
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
 
-            else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }              
             }
+            else if(json.rows[i].sim_Rango_A === '< '){
+              if(json.rows[i].sim_Rango_I === '> '){
+                if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_MA){
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                }
+                else {
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+                }
+              }
+            }
+           
           }
           
           //en caso de que el simbolo del rango muy adecuado sea '= '
@@ -269,18 +283,32 @@ $(document).ready(function(){
 
             }       
           }
-          //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+          //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<' 
           else if(json.rows[i].sim_Rango_MA === '< '){
-            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_MA && json.rows[i].relacion_docentes > json.rows[i].num_Rango_A ){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_MA){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
             }
-            if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I ){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
-            }    
+            else if(json.rows[i].sim_Rango_A === '> '){
+              if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_A && json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I ){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+               else{
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
 
-            else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              }              
             }
+            else if(json.rows[i].sim_Rango_A === '< '){
+              if(json.rows[i].sim_Rango_I === '> '){
+                if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_MA){
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                }
+                else {
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+                }
+              }
+            }
+           
           }
           
           //en caso de que el simbolo del rango muy adecuado sea '= '

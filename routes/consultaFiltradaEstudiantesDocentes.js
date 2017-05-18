@@ -14,7 +14,7 @@ router.post('/', function(req, res, next) {
     //arreglo que contine filtros
     var filters = [];
     //consulta basica sin condiciones
-    var sql ='SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt WHERE ';
+    var sql ='SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt join manuales_indicadores on "manual_Estu_Docente"=codigo WHERE ';
 
     //concatena al sql los valores d elos filtros
     if(req.body.yearfrom!=0){
@@ -67,7 +67,14 @@ router.post('/', function(req, res, next) {
               "razona": result.rows[i].razona,
               "razonb": result.rows[i].razonb,
               "Anho": result.rows[i].Anho,
-              "razonanual": result.rows[i].razonanual
+              "razonanual": result.rows[i].razonanual,
+              "num_Rango_I":result.rows[i].num_Rango_I,
+              "num_Rango_A":result.rows[i].num_Rango_A,
+              "num_Rango_MA":result.rows[i].num_Rango_MA,
+              "sim_Rango_I":result.rows[i].sim_Rango_I,
+              "sim_Rango_A":result.rows[i].sim_Rango_A,
+              "sim_Rango_MA":result.rows[i].sim_Rango_MA
+
             };
             datarray.push(d);
         }

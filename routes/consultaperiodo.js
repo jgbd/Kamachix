@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
 
-  var sql ='SELECT p.abreviatura, pd."periodo", pd."graduados", pd."desertores", pd."desercion", pd."retencion" FROM "Datawarehouse"."KPI_Desercion_Periodo" pd JOIN public.programas p ON p.snies=pd.programa WHERE pd."programa" = '+"'000000'"+'ORDER BY pd."periodo" DESC LIMIT 5';
+  var sql ='SELECT p.abreviatura, pd."periodo", pd."graduados", pd."desertores", pd."desercion", pd."retencion","sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Desercion_Periodo" pd JOIN public.programas p ON p.snies=pd.programa join manuales_indicadores on manual=manuales_indicadores.codigo WHERE pd."programa" = '+"'000000'"+'ORDER BY pd."periodo" DESC LIMIT 5';
   //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
@@ -44,7 +44,13 @@ router.get('/', function(req, res, next) {
             "graduados": result.rows[i].graduados,
             "desertores": result.rows[i].desertores,
             "desercion": result.rows[i].desercion,
-            "retencion": result.rows[i].retencion
+            "retencion": result.rows[i].retencion,
+            "num_Rango_I":result.rows[i].num_Rango_I, 
+            "num_Rango_A":result.rows[i].num_Rango_A,
+            "num_Rango_MA":result.rows[i].num_Rango_MA,
+            "sim_Rango_I":result.rows[i].sim_Rango_I,
+            "sim_Rango_A":result.rows[i].sim_Rango_A,
+            "sim_Rango_MA":result.rows[i].sim_Rango_MA
           };
           datarray.push(d);
         }
@@ -65,7 +71,7 @@ router.post('/',function(req, res, next){
   var periodfrom = req.body.periodfrom;
   var periodto = req.body.periodto;
 
-  var sql ='SELECT p.abreviatura, pd."periodo", pd."graduados", pd."desertores", pd."desercion", pd."retencion" FROM "Datawarehouse"."KPI_Desercion_Periodo" pd JOIN public.programas p ON p.snies=pd.programa WHERE ';
+  var sql ='SELECT p.abreviatura, pd."periodo", pd."graduados", pd."desertores", pd."desercion", pd."retencion","sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Desercion_Periodo" pd JOIN public.programas p ON p.snies=pd.programa join manuales_indicadores on manual=manuales_indicadores.codigo WHERE ';
 
   sql = sql+'pd.programa LIKE $1'
   if(periodfrom!=0){
@@ -112,7 +118,13 @@ router.post('/',function(req, res, next){
               "graduados": result.rows[i].graduados,
               "desertores": result.rows[i].desertores,
               "desercion": result.rows[i].desercion,
-              "retencion": result.rows[i].retencion
+              "retencion": result.rows[i].retencion,
+              "num_Rango_I":result.rows[i].num_Rango_I, 
+              "num_Rango_A":result.rows[i].num_Rango_A,
+              "num_Rango_MA":result.rows[i].num_Rango_MA,
+              "sim_Rango_I":result.rows[i].sim_Rango_I,
+              "sim_Rango_A":result.rows[i].sim_Rango_A,
+              "sim_Rango_MA":result.rows[i].sim_Rango_MA
             };
             datarray.push(d);
           }

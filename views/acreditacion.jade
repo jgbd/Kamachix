@@ -91,26 +91,25 @@ block resto
           tbody#tableres
     .col-md-12        
       h3#lblper
-    .col-md-6
-      #divgraph2
-      .col-md-3
+    .col-md-12  
       .col-md-6
-        select#graph2.form-control(style="background-color:#898585; color:#F2EEEE")
-          option(selected='', value='1') Seleccione un tipo de gráfica
-          optgroup(label='Columnas')
-            option(value='1') 2D
-            option(value='2') 3D
-          optgroup(label='Barras')
-            option(value='4') 2D
-            option(value='5') 3D
-          optgroup(label='Tendencia')
-            option(value='3') Línea
-      .col-md-3
-    .col-md-6
-      #divgraph3
-    .col-md-6
-        br
-        br
+        #divgraph2
+        .col-md-3
+        .col-md-6
+          select#graph2.form-control(style="background-color:#898585; color:#F2EEEE")
+            option(selected='', value='1') Seleccione un tipo de gráfica
+            optgroup(label='Columnas')
+              option(value='1') 2D
+              option(value='2') 3D
+            optgroup(label='Barras')
+              option(value='4') 2D
+              option(value='5') 3D
+            optgroup(label='Tendencia')
+              option(value='3') Línea
+        .col-md-3
+      .col-md-6
+        #divgraph3
+    
     #divtable2.col-md-6(style!=rols)
       #anhoactual
       table.table.table-hover.table-bordered.table-responsed(border='1')

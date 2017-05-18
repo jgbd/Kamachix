@@ -46,7 +46,8 @@ que se van creando sea por clase por id o tipo */
 }
 
 a {
-  color: #00B7FF;
+  color: #E9DDDD;
+  border-color: green;
 }
 
 #divcontent{
@@ -93,13 +94,13 @@ a {
   text-align: right;
   font-family: smalltitle;
   font-size: 18px;
-  color: #fff;
+  color: #E9DDDD;
   border-radius: 15 px;
   border-color: green;
 }
 
 .logout:hover{
-  color: lightblue;
+  color: white;
 }
 
 #divfilter{
@@ -198,7 +199,7 @@ img{
    color: #fff;
  }
 
- .dropdown-menu li:hover a:hover,
+ .dropdown-menu li:hover,
  .dropdown-menu li:focus a:focus,
  .dropdown-menu li.active{
    background-color: lightgreen;
@@ -210,8 +211,16 @@ img{
   margin-left: 5%;
  }
 
-.vinculoFormato{
+.vinculoFormato1{
   text-align: left;
-  color: blue;
+  color: green;
   text-decoration: none;
+}
+
+a:hover { 
+    color: #fff;
+}
+
+a:visited {
+    color: #E9DDDD;
 }

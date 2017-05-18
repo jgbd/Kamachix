@@ -125,18 +125,32 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
 
           }       
         }
-        //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+        //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<' 
         else if(json.rows[i].sim_Rango_MA === '< '){
-          if(json.rows[i].razonanual <= json.rows[i].num_Rango_MA && json.rows[i].razonanual > json.rows[i].num_Rango_A ){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Estudiantes por Docente Tiempo Completo alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+          if(json.rows[i].razonanual <= json.rows[i].num_Rango_MA){
+            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].razonanual+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
           }
-          if(json.rows[i].razonanual <= json.rows[i].num_Rango_A && json.rows[i].razonanual > json.rows[i].num_Rango_I ){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Estudiantes por Docente Tiempo Completo se ha alejado ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
-          }    
+          else if(json.rows[i].sim_Rango_A === '> '){
+            if(json.rows[i].razonanual > json.rows[i].num_Rango_A && json.rows[i].razonanual <= json.rows[i].num_Rango_I ){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Deserción está bajando ('+json.datos[i].razonanual+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+            }
+            else{
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].razonanual+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
 
-          else if(json.rows[i].razonanual <= json.rows[i].num_Rango_I){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Estudiantes por Docente Tiempo Completo no alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+            }              
           }
+          else if(json.rows[i].sim_Rango_A === '< '){
+            if(json.rows[i].sim_Rango_I === '> '){
+              if(json.rows[i].razonanual <= json.rows[i].num_Rango_A && json.rows[i].razonanual > json.rows[i].num_Rango_MA){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Deserción está bajando ('+json.datos[i].razonanual+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+              else {
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].razonanual+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+              }
+            }
+          }
+        
         }
         
         //en caso de que el simbolo del rango muy adecuado sea '= '
@@ -222,7 +236,7 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
         //semaforo divgraph3
         //toma los datos de los manuales del indicador para graficar el acelerometro           
           
-        if(json.rows[json.rowCount-1].sim_Rango_MA == '< ' && json.rows[json.rowCount-1].sim_Rango_I == '> '){
+        if(json.rows[json.rowCount-1].sim_Rango_MA == '> ' && json.rows[json.rowCount-1].sim_Rango_I == '< '){
           
           gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph3','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente', ' estudiantes');
           
@@ -249,7 +263,7 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
         //semaforo divgraph3 
         //toma los datos de los manuales del indicador para graficar el acelerometro           
           
-        if(json.rows[json.rowCount-2].sim_Rango_MA == '< ' && json.rows[json.rowCount-2].sim_Rango_I == '> '){
+        if(json.rows[json.rowCount-2].sim_Rango_MA == '> ' && json.rows[json.rowCount-2].sim_Rango_I == '< '){
           
           gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph3','r','y','g',json.rows[json.rowCount-2].num_Rango_I,json.rows[json.rowCount-2].sim_Rango_MA, 'Estudiantes por Docente', ' estudiantes');
           
@@ -325,7 +339,7 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
      lineTwoGraph(datarray,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
           
      //semaforo divper2 y divper1     
-      if(json.rows[json.rowCount-1].sim_Rango_MA == '< ' && json.rows[json.rowCount-1].sim_Rango_I == '> '){
+      if(json.rows[json.rowCount-1].sim_Rango_MA == '> ' && json.rows[json.rowCount-1].sim_Rango_I == '< '){
         gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '');
         gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente año: '+ fin, '');            
         
@@ -426,8 +440,31 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
         });
         columnTwoGraph(json.datos,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0,"A","B");
         lineTwoGraph(json.datos,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],"A","B");
-        gaugesGraph(json.datos[0].razonanual,'divper1','g','y','r',35,59, 'Estudiantes por Docente año: '+json.datos[0].Anho, '');
-        gaugesGraph(json.datos[json.count-1].razonanual,'divper2','g','y','r',35,59, 'Estudiantes por Docente año: '+json.datos[json.count-1].Anho, '');
+        //semaforo divper2 y divper1     
+        if(json.datos[json.count-1].sim_Rango_MA == '> ' && json.datos[json.count-1].sim_Rango_I == '< '){
+          gaugesGraph(json.datos[0].razonanual,'divper1','r','y','g',json.datos[0].num_Rango_I,json.datos[0].sim_Rango_MA, 'Estudiantes por Docente año:'+json.datos[0].Anho, '');
+          gaugesGraph(json.datos[json.count-1].razonanual,'divper2','r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].sim_Rango_MA, 'Estudiantes por Docente año: '+ json.datos[json.count-1].Anho, '');            
+          
+          
+        }      
+        else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '> ' ){    
+          gaugesGraph(json.datos[0].razonanual,'divper1','r','g','y',json.datos[0].num_Rango_I,json.datos[0].sim_Rango_MA, 'Estudiantes por Docente año:'+json.datos[0].Anho, '');
+          gaugesGraph(json.datos[json.count-1].razonanual,'divper2','r','g','y',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].sim_Rango_MA, 'Estudiantes por Docente año: '+ json.datos[json.count-1].Anho, '');                        
+          
+        }     
+
+        else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '< ' ){
+          alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          
+        }
+        else {                      
+          gaugesGraph(json.datos[0].razonanual,'divper1','g','y','r',json.datos[0].num_Rango_MA,json.datos[0].num_Rango_I, 'Estudiantes por Docente año:'+json.datos[0].Anho, '');
+          gaugesGraph(json.datos[json.count-1].razonanual,'divper2','g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].num_Rango_I, 'Estudiantes por Docente año: '+ json.datos[json.count-1].Anho, '');            
+          
+        }
+      
+        //gaugesGraph(json.datos[0].razonanual,'divper1','g','y','r',35,59, 'Estudiantes por Docente año: '+json.datos[0].Anho, '');
+        //gaugesGraph(json.datos[json.count-1].razonanual,'divper2','g','y','r',35,59, 'Estudiantes por Docente año: '+json.datos[json.count-1].Anho, '');
       }
     });
   }

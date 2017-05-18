@@ -95,19 +95,33 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
 
           }       
         }
-        //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
-        else if(json.rows[i].sim_Rango_MA === '< '){
-          if(json.rows[i].razon <= json.rows[i].num_Rango_MA && json.rows[i].razon > json.rows[i].num_Rango_A ){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
-          }
-          if(json.rows[i].razon <= json.rows[i].num_Rango_A && json.rows[i].razon > json.rows[i].num_Rango_I ){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
-          }    
+         //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<' 
+          else if(json.datos[i].sim_Rango_MA === '< '){
+            if(json.datos[i].porcentaje <= json.datos[i].num_Rango_MA){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+            }
+            else if(json.datos[i].sim_Rango_A === '> '){
+              if(json.datos[i].porcentaje > json.datos[i].num_Rango_A && json.datos[i].porcentaje <= json.datos[i].num_Rango_I ){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+               else{
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
 
-          else if(json.rows[i].razon <= json.rows[i].num_Rango_I){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              }              
+            }
+            else if(json.datos[i].sim_Rango_A === '< '){
+              if(json.datos[i].sim_Rango_I === '> '){
+                if(json.datos[i].porcentaje <= json.datos[i].num_Rango_A && json.datos[i].porcentaje > json.datos[i].num_Rango_MA){
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                }
+                else {
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+                }
+              }
+            }
+           
           }
-        }
         
         //en caso de que el simbolo del rango muy adecuado sea '= '
         if(json.rows[i].sim_Rango_MA === '= '){
@@ -297,7 +311,7 @@ function Load_Not_Accredited(){//carga tabla-menú de programas no acreditados a
         $("#tableresprogram2").append('<tr>');
         var codigo=parseInt(json.rows[j].codigo);
         $("#tableresprogram2").append('<td>'+json.rows[j].abreviatura+'</td>');
-        $("#tableresprogram2").append('<td><span class="btn btn-success.btn-small"><a style!=rols onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0,0)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
+        $("#tableresprogram2").append('<td><span class="btn btn-success "><a onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0,0)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
         $("#tableresprogram2").append('</tr>');
       }
    }
