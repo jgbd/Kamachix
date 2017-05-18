@@ -48,23 +48,23 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
         //en caso de que el simbolo del rango adecuado sea '= '
         if(json.rows[i].sim_Rango_A === '= '){
           if(json.rows[i].razon == json.rows[i].num_Rango_A){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
           }
           else if(json.rows[i].sim_Rango_MA === '> '){
             if(json.rows[i].razon > json.rows[i].num_Rango_MA){                
-              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
             }
             else{                
-              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
             }
 
           }
           else if(json.rows[i].sim_Rango_MA === '< '){
             if(json.rows[i].razon < json.rows[i].num_Rango_MA){
-              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
             }
             else{
-              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
 
             }
 
@@ -74,23 +74,23 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
         //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
         else if(json.rows[i].sim_Rango_MA === '> '){ 
           if(json.rows[i].razon >= json.rows[i].num_Rango_MA){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
           }
           else if(json.rows[i].sim_Rango_A === '> '){
             if(json.rows[i].razon >= json.rows[i].num_Rango_A){
-              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
             }
             else{                
-              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
 
             } 
           }
           else if(json.rows[i].sim_Rango_A === '< ' && json.rows[i].sim_Rango_I === '< ' ){
             if(json.rows[i].razon <= json.rows[i].num_Rango_A && json.rows[i].razon > json.rows[i].num_Rango_I){
-              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[j].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[j].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
             }
             else if(json.rows[i].razon <= json.rows[i].num_Rango_I){
-              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
             }
 
           }       
@@ -98,24 +98,24 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
          //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<' 
           else if(json.datos[i].sim_Rango_MA === '< '){
             if(json.datos[i].porcentaje <= json.datos[i].num_Rango_MA){
-              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
             }
             else if(json.datos[i].sim_Rango_A === '> '){
               if(json.datos[i].porcentaje > json.datos[i].num_Rango_A && json.datos[i].porcentaje <= json.datos[i].num_Rango_I ){
-                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
               }
                else{
-                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
 
               }              
             }
             else if(json.datos[i].sim_Rango_A === '< '){
               if(json.datos[i].sim_Rango_I === '> '){
                 if(json.datos[i].porcentaje <= json.datos[i].num_Rango_A && json.datos[i].porcentaje > json.datos[i].num_Rango_MA){
-                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
                 }
                 else {
-                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
 
                 }
               }
@@ -126,15 +126,15 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
         //en caso de que el simbolo del rango muy adecuado sea '= '
         if(json.rows[i].sim_Rango_MA === '= '){
           if(json.rows[i].razon == json.rows[i].num_Rango_MA){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.png" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta de Acreditación en Alta Calidad de Programas Académicos alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
           }
           else if(json.rows[i].sim_Rango_A === '> '){
             if(json.rows[i].razon > json.rows[i].num_Rango_A){
-              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
               
             }
             else{
-              $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
 
             }
 
@@ -142,20 +142,20 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
           else if(json.rows[i].sim_Rango_A === '< '){
             if(json.rows[i].sim_Rango_I === '< '){
               if(json.rows[i].razon <= json.rows[i].num_Rango_A && json.rows[i].razon > json.rows[i].num_Rango_I){
-                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
               }
               else{
-                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
 
               }
             }
 
             if(json.rows[i].sim_Rango_I === '> '){
               if(json.rows[i].razon <= json.rows[i].num_Rango_A ){
-                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.PNG" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta de Acreditación en Alta Calidad de Programas Académicos está bajando ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
               }
               else{
-                $("#tableres").append('<td class="est"><img id="est" src="/images/red.PNG" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta de Acreditación en Alta Calidad de Programas Académicos no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
 
               }
             }
@@ -282,14 +282,14 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
 
           //--Verificación y muestra de etiquetas de expiración de acreditación de cada programa por días--------------------------------------------------------------------------------------------------------------------
           if (intervalo>0 && intervalo<=365){
-            $("#tableresprogram").append('<td><img id="est" src="/images/red.PNG" alt="RED" title="Acreditación a punto de expirar en '+intervalo+' días"></td>');
+            $("#tableresprogram").append('<td><img id="est" src="/images/red.svg" alt="RED" title="Acreditación a punto de expirar en '+intervalo+' días"></td>');
             $("#tableresprogram").append('<td><span class="btn btn-warning btn-small">'+
                                               '<a style=, onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+','+json.rows[j].periodo+',1)">'+'<img title="ReAcreditar" alt="ReAcreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
           }
           else if(intervalo>365 && intervalo<=730)
-            $("#tableresprogram").append('<td><img id="est" src="/images/orange.PNG" alt="ORANGE" title="Acreditado hasta dentro de '+intervalo+' días"></td>');
+            $("#tableresprogram").append('<td><img id="est" src="/images/orange.svg" alt="ORANGE" title="Acreditado hasta dentro de '+intervalo+' días"></td>');
           else
-            $("#tableresprogram").append('<td><img id="est" src="/images/verde.png" alt="GREEN" title="Acreditado"></td>');
+            $("#tableresprogram").append('<td><img id="est" src="/images/verde.svg" alt="GREEN" title="Acreditado"></td>');
           //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         }
         $("#tableresprogram").append('</tr>');
