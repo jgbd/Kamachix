@@ -7,9 +7,9 @@ router.get('/', function(req, res, next) {
 
   if(req.session.name!=null) {
     if(req.session.rol!=1){
-      res.render('formacion',{title:'formacion', rols:'display:none', arch: 'display:none', refe: 'logout', textmsg: 'Salir'});
+      res.render('formacion',{title:'formacion', rols:'display:none', arch: 'display:none', refe: 'logout', textmsg: 'Salir', user:req.session.name});
     }else{
-      res.render('formacion',{title:'formacion', rols:'visibility: visible', arch: 'visibility: visible', refe: 'logout', textmsg: 'Salir'});
+      res.render('formacion',{title:'formacion', rols:'visibility: visible', arch: 'visibility: visible', refe: 'logout', textmsg: 'Salir', user:req.session.name});
     }
   }
   else {

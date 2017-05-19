@@ -6,7 +6,6 @@
     "start": "supervisor ./bin/www"
   },
   "dependencies": {
-    "apicache": "^0.8.4",
     "body-parser": "~1.15.1",
     "compression": "^1.6.2",
     "cookie-parser": "~1.4.3",
