@@ -224,8 +224,10 @@ block content
            li
              a(href='#' ) Ayuda 
               span.glyphicon.glyphicon-question-sign(aria-hidden='true')
-         p.navbar-text.navbar-right 
-           a.logout(href!=refe)!=textmsg  
+         p.navbar-text.navbar-right
+           a.logout(href!=refe)!=textmsg
+         p.navbar-text.navbar-right
+           a#user.user(href="#")!=user
 
   //bloque que contiene el contenido de cada pagina especifica
   block resto
