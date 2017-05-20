@@ -283,13 +283,16 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
           //--Verificación y muestra de etiquetas de expiración de acreditación de cada programa por días--------------------------------------------------------------------------------------------------------------------
           if (intervalo>0 && intervalo<=365){
             $("#tableresprogram").append('<td><img id="est" src="/images/red.svg" alt="RED" title="Acreditación a punto de expirar en '+intervalo+' días"></td>');
-            $("#tableresprogram").append('<td><span class="btn btn-warning btn-small">'+
+            $("#tableresprogram").append('<td style="border: inset 0pt"><span class="btn btn-warning btn-small">'+
                                               '<a style=, onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+','+json.rows[j].periodo+',1)">'+'<img title="ReAcreditar" alt="ReAcreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
           }
-          else if(intervalo>365 && intervalo<=730)
+          else if(intervalo>365 && intervalo<=730){
             $("#tableresprogram").append('<td><img id="est" src="/images/orange.svg" alt="ORANGE" title="Acreditado hasta dentro de '+intervalo+' días"></td>');
-          else
+            $("#tableresprogram").append('<td style="border: inset 0pt">');}
+          else{
             $("#tableresprogram").append('<td><img id="est" src="/images/verde.svg" alt="GREEN" title="Acreditado"></td>');
+            $("#tableresprogram").append('<td style="border: inset 0pt">');
+          }
           //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         }
         $("#tableresprogram").append('</tr>');
@@ -311,7 +314,7 @@ function Load_Not_Accredited(){//carga tabla-menú de programas no acreditados a
         $("#tableresprogram2").append('<tr>');
         var codigo=parseInt(json.rows[j].codigo);
         $("#tableresprogram2").append('<td>'+json.rows[j].abreviatura+'</td>');
-        $("#tableresprogram2").append('<td><span class="btn btn-success "><a onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0,0)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
+        $("#tableresprogram2").append('<td"><span class="btn btn-success btn-small"><a onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0,0)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
         $("#tableresprogram2").append('</tr>');
       }
    }
