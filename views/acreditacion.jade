@@ -89,28 +89,28 @@ block resto
               th.th Indicador(%)
               th.th.est Estado
           tbody#tableres
-    .col-md-12        
-      h3#lblper
-    .col-md-12  
+  .col-md-12        
+    h3#lblper
+  .col-md-12  
+    .col-md-6
+      #divgraph2
+      .col-md-3
       .col-md-6
-        #divgraph2
-        .col-md-3
-        .col-md-6
-          select#graph2.form-control(style="background-color:#898585; color:#F2EEEE")
-            option(selected='', value='1') Seleccione un tipo de gráfica
-            optgroup(label='Columnas')
-              option(value='1') 2D
-              option(value='2') 3D
-            optgroup(label='Barras')
-              option(value='4') 2D
-              option(value='5') 3D
-            optgroup(label='Tendencia')
-              option(value='3') Línea
-        .col-md-3
-      .col-md-6
-        #divgraph3
-    
-    .col-md-6(style!=rols)
+        select#graph2.form-control(style="background-color:#898585; color:#F2EEEE")
+          option(selected='', value='1') Seleccione un tipo de gráfica
+          optgroup(label='Columnas')
+            option(value='1') 2D
+            option(value='2') 3D
+          optgroup(label='Barras')
+            option(value='4') 2D
+            option(value='5') 3D
+          optgroup(label='Tendencia')
+            option(value='3') Línea
+      .col-md-3
+    .col-md-6
+      #divgraph3
+  .col-md-12(style!=rols)  
+    .col-md-6
       #divtable2
         #anhoactual
         table(style='border: hidden').table.table-hover.table-bordered.table-responsed(border='1')
@@ -119,7 +119,7 @@ block resto
               th.th Programa Académico
               th.th Estado
           tbody#tableresprogram
-    .col-md-6(style!=rols)
+    .col-md-6
       #divtable3
         #anhoactual2
         table(style='border: hidden').table.table-hover.table-bordered.table-responsed(border='1')
