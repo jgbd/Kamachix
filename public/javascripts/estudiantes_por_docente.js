@@ -1,6 +1,5 @@
 var now = new Date();//Hora del sistema.
 var mes=now.getMonth()+1;//formato string mes actual
-//var mes=7;//formato string mes actual
 
 $(document).ready(function(){
   Load_Insert();//Define si muestra o no el formulario
@@ -30,7 +29,8 @@ function Load_Insert(){//Define si muestra o no el formulario
                       //de ingreso de datos tomando en cuenta la fecha de sistema y
                       //anterior entrada
   var anho=now.getFullYear();//formato string año actual
-  //var anho=2014;
+  $('#tabledoctc').html('Registro Semestre ');
+  $('#tablest').html('Registro Semestre ');
   if(mes<3){
     $.ajax({
       type: "get",
@@ -54,6 +54,48 @@ function Load_Insert(){//Define si muestra o no el formulario
         if (json.rowCount==0) opendivupdate(anho,mes);//si esta condición no se cumple
                                                       //significa que los datos del semestre A
                                                       //ya fueron ingresados
+      }
+    });
+  }
+  else if(mes>=3 && mes<=6){
+    $.ajax({
+      type: "get", //el el tipo de peticion puede ser GET y POsT
+      url: "consultaDocentesTC", //la url del que realizara la consulta
+      dataType : 'json',
+      data:{c:3,'anho': anho-1},//señala a la consulta de existencia de datos del semestre B del año anterior
+      success : function(json) {
+        if (json.rowCount!=0) {
+          anho=anho-1;
+          $('#tabledoctc').append('B de '+anho);
+          $('#tablest').append('B de '+anho);
+          $('#sem2').html('<input type="hidden" id="sem1" value="B">');
+          $('#year2').html('<input type="hidden" id="year1" value='+anho+'>');
+          $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+json.rows[0].docentes);
+          $("#flagdoctc").html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Docentes Tiempo Completo al día"></td>');
+          $('#nest').html(json.rows[0].estudiantes);
+          $('#flagest').html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Estudiantes al día"></td>');//Coloca estado actualizado de estudiantes
+        }
+      }
+    });
+  }
+  else{
+    alert("entra");
+    $.ajax({
+      type: "get", //el el tipo de peticion puede ser GET y POsT
+      url: "consultaDocentesTC", //la url del que realizara la consulta
+      dataType : 'json',
+      data:{c:4,'anho': anho},//señala a la consulta de existencia de datos del año en curso
+      success : function(json) {
+        if (json.rowCount!=0) {
+          $('#tabledoctc').append('A de '+anho);
+          $('#tablest').append('A de '+anho);
+          $('#sem2').html('<input type="hidden" id="sem1" value="B">');
+          $('#year2').html('<input type="hidden" id="year1" value='+anho+'>');
+          $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+json.rows[0].docentes);
+          $("#flagdoctc").html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Docentes Tiempo Completo al día"></td>');
+          $('#nest').html(json.rows[0].estudiantes);
+          $('#flagest').html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Estudiantes al día"></td>');//Coloca estado actualizado de estudiantes
+        }
       }
     });
   }
@@ -474,6 +516,7 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
 function Load_Update(){//carga datos obtenidos del formulario de ingreso de estudiantes-docentes
   //se obtiene los valores de las input en variables
   //var anho = $("#year1").val(), estudiantes = $("#est1").val(), docentes= $("#doctc1").val(), semestre= $("#sem1").val();
+  //alert("llega y esto manda: "+$("#year1").val()+" "+$("#est1").val()+" "+$("#sem1").val());
   var anho = $("#year1").val(), estudiantes = $("#est1").val(), semestre= $("#sem1").val();
   //se coloca los datos del form en el formato adecuado para enviar al server
   var formData = {
@@ -511,47 +554,6 @@ function hidenmodal(){
 
 function opendivupdate(year,month){//carga formulario de ingreso-actualizacion de indicador
   var year = year-1;
-  $('#divupdate').html(
-    '<div class="modal-dialog">'+
-      '<div class="modal-content">'+
-        '<div class="modal-header">'+
-          '<button type="button" data-dismiss="modal" aria-label="Close" class="close">'+
-            '<span aria-hidden="true">×</span>'+
-          '</button>'+
-          '<h4 id="modal-title" class="modal-title"></h4>'+
-          '<h4 id="titgral"></h4>'+
-        '</div>'+
-        '<div class="modal-body">'+
-          '<table class="table table-hover table-bordered table-responsed">'+
-              '<tr>'+
-                '<label for="sem"></label>'+
-                '<td colspan="2" id="sem"></td>'+
-                '<div id="sem2"></div>'+
-                '<div id="year2"></div>'+
-              '</tr>'+
-              '<tr>'+
-                '<label for="nroestu"></label>'+
-                '<td>Número de Estudiantes:</td>'+
-                '<td id="est"></td>'+
-              '</tr>'+
-              '<tr>'+
-                '<label for="nrodoctc"> </label>'+
-                '<td>Número de Docentes Tiempo Completo:</td>'+
-                '<td id="doctc"></td>'+
-              '</tr>'+
-              '<tr>'+
-                '<td colspan="2">'+
-                  '<span class="btn btn-primary">'+
-                    '<a onCLick="Load_Update()">'+'<img title="Ingresar" alt="Ingresar" /></a></span>'+
-                '</td>'+
-              '</tr>'+
-          '</table>'+
-        '</div>'+
-        '<div class="modal-footer"></div>'+
-      '</div>'+
-    '</div>');
-  $('#titgral').html('Ingreso Estudiantes y Docentes para el Año ');
-  $('#sem').html('SEMESTRE ');
   if(month<3){//el formulario tomará como datos por defecto los resultados del indicador del año anterior
     $.ajax({
       type: "get",
@@ -560,13 +562,26 @@ function opendivupdate(year,month){//carga formulario de ingreso-actualizacion d
       data:{c:5,'anho': year},//señala a consulta semestralizada de estudiantes y docentes en función
                               //del año anterior y tipo de titulación
       success : function(json) {
-        if(json.rows[0].estudiantesb==0) {
-          $('#titgral').append(year);
-          $('#sem').append('B');
+        if(json.rows[0].estudiantesb==0) {//si esta condicion se cumple significa que aún no
+                                        //hay registro de estudiantes del semestre B del año inmediatamente anterior
+          $('#tabledoctc').append('B de '+year);
+          $('#tablest').append('B de '+year);
           $('#sem2').html('<input type="hidden" id="sem1" value="B">');
           $('#year2').html('<input type="hidden" id="year1" value='+year+'>');
-          $('#est').html('<input type="number" pattern="[0-9]" id="est1" value='+json.rows[0].estudiantesa+' min='+json.rows[0].estudiantesa+' max="99999" class="form-control" required>');
-          $('#doctc').html('<input type="number" pattern="[0-9]" id="doctc1" value='+json.rows[0].docentesa+' min='+json.rows[0].docentesa+' max="999" class="form-control" readonly>');
+          $('#flagest').html('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Este Dato se encuentra desactualizado"></td>');//Advierte estado desactualizado de estudiantes
+          if (json.rows[0].docentesprom) {//si esta condicion se cumple el nivel de formación para 
+                                          //el semestre B del año anterior se encuentra al día
+            $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+json.rows[0].docentesprom);
+            $("#flagdoctc").html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Docentes Tiempo Completo al día"></td>');
+            $('#nest').html('<input type="number" pattern="[0-9]" id="est1" value='+json.rows[0].estudiantesa+' max="99999" style="width: 6em" class="form-control" required>');
+            $('#updest').html('<span class="btn btn-primary"><a onclick="Load_Update()"><img title="Ingresar" alt="Ingresar" /></a></span>');
+          }
+          else {
+            $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+json.rows[0].docentesa);
+            $('#nest').html(json.rows[0].estudiantesa);
+            $("#flagdoctc").html('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Este Dato se encuentra desactualizado"></td>');
+            $('#upddoctc').html('<span class="btn btn-primary"><a onclick="openmodaluploadFormacion()"><img title="Actualizar" alt="Actualizar"/></a></span>');
+          }
         }
       }
     });
@@ -578,13 +593,14 @@ function opendivupdate(year,month){//carga formulario de ingreso-actualizacion d
       dataType : 'json',
       data:{c:3,'anho': year},
       success : function(json) {
-        if(json.rows[0].estudiantes!=0) {
-          $('#titgral').append(year+1);
-          $('#sem').append('A');
+        if(json.rows[0].estudiantes!=0) {//si esta condicion se cumple significa que el KPI
+                                        //estudiantes-docentesTC del año inmediatamente anterior está registrado
+          $('#tabledoctc').append('A de '+(year+1));
+          $('#tablest').append('A de '+(year+1));
           $('#sem2').html('<input type="hidden" id="sem1" value="A">');
           $('#year2').html('<input type="hidden" id="year1" value='+(year+1)+'>');
-          $('#est').html('<input type="number" pattern="[0-9]" id="est1" value='+json.rows[0].estudiantes+' min='+json.rows[0].estudiantes+' max="99999" class="form-control" required>');
-          $('#doctc').html('<input type="number" pattern="[0-9]" id="doctc1" value='+json.rows[0].docentes+' min='+json.rows[0].docentes+' max="999" class="form-control" readonly>');
+          $('#flagest').html('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Este Dato se encuentra desactualizado"></td>');//Advierte estado desactualizado de estudiantes
+          Search_View(year+1,"A",json.rows[0].estudiantes,json.rows[0].docentes);//consulta si existe un registro de docentes del semestre A
         }
       }
     });
@@ -597,20 +613,20 @@ function closedivupdate(){
 }
 
 function Search_Year_KPI(fec){//busca la existencia de otros registros de año en función de la
-                         //fecha de inicio del programa recién acreditado en datawarehouse
+                         //fecha del ultimo kpi estduainte-docenteTC registrado en datawarehouse
   $.ajax({
       type: "get",
       url: "consultaDocentesTC",
       data : {c:5,'anho': fec},//señala a consulta de existencia de KPI en función del año
       dataType : 'json',
       success : function(json) {
-        if(json.rows[0].docentesb==0) Ins_KPI(fec,json.rows[0].estudiantesprom,json.rows[0].docentesprom)//ingresa nuevo kpi en función de primer programa acreditado en el año
+        if(json.rows[0].docentesb==null) Ins_KPI(fec,parseInt(json.rows[0].estudiantesprom),parseInt(json.rows[0].docentesa));//ingresa nuevo kpi en función de primer programa acreditado en el año
         else Upd_KPI(fec,json.rows[0].estudiantesb,json.rows[0].docentesb,json.rows[0].estudiantesprom,json.rows[0].docentesprom);//actualiza kpi en presencia de más de un programa acreditado ya existente en ese año
       }
   });
 }
 
-function Ins_KPI(anho,estudiantesa,docentesa){//ingresa nuevo kpi en función de primer programa acreditado en el año
+function Ins_KPI(anho,estudiantesa,docentesa){//ingresa nuevo kpi en función de la primera relación estudiante-docenteTC en el año
   //alert(anho+' '+estudiantesa+' '+docentesa);
   $.ajax({
       type: "get",
@@ -619,12 +635,14 @@ function Ins_KPI(anho,estudiantesa,docentesa){//ingresa nuevo kpi en función de
       dataType : 'json',
       success : function(json) {
         Load_Start();
+        $('#flagest').html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Estudiantes al día"></td>');//Coloca estado actualizado de estudiantes
+        $('#updest').html('');//Oculta Botón de Actualización de estudiantes
         Load_Semiannual();
       }
   });
 }
 
-function Upd_KPI(anho,estudiantesb,docentesb,estudiantesprom,docentesprom){//actualiza kpi en presencia de más de un programa acreditado ya existente en ese año
+function Upd_KPI(anho,estudiantesb,docentesb,estudiantesprom,docentesprom){//actualiza kpi en presencia de un KPI estudiante-docenteTC existente en ese año
   $.ajax({
       type: "get",
       url: "actualizaKPIDocentesTC", //la url del que realizara la consulta
@@ -632,7 +650,31 @@ function Upd_KPI(anho,estudiantesb,docentesb,estudiantesprom,docentesprom){//act
       dataType : 'json',
       success : function(json) {
         Load_Start();
+        $('#flagest').html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Estudiantes al día"></td>');//Coloca estado actualizado de estudiantes
+        $('#updest').html('');//Oculta Botón de Actualización de estudiantes
         Load_Semiannual();
+      }
+  });
+}
+function Search_View(fec,sem,estudiantes,docentes){//consulta si existe un registro de docentes del semestre A
+  $.ajax({
+      type: "get",
+      url: "consultaDocentesTC",
+      data : {c:6,'anho': fec},//señala a consulta de existencia de KPI en función del año
+      dataType : 'json',
+      success : function(json) {
+        if (json.rowCount) {//si esta condicion se cumple significa que el indicador de nivel de formación está actualizado
+            $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+json.rows[0].docentesa);
+            $("#flagdoctc").html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Docentes Tiempo Completo al día"></td>');
+            $('#nest').html('<input type="number" pattern="[0-9]" id="est1" value='+estudiantes+' max="99999" style="width: 6em" class="form-control" required>');
+            $('#updest').html('<span class="btn btn-primary"><a onclick="Load_Update()"><img title="Ingresar" alt="Ingresar" /></a></span>');
+        }
+        else {//advertencia y enlace a carga de archivo para ctualizar nivel de formacion de docentes
+            $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+docentes);
+            $('#nest').html(estudiantes);
+            $("#flagdoctc").html('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Este Dato se encuentra desactualizado"></td>');
+            $('#upddoctc').html('<span class="btn btn-primary"><a onclick="openmodaluploadFormacion()"><img title="Actualizar" alt="Actualizar"/></a></span>');
+         }
       }
   });
 }
