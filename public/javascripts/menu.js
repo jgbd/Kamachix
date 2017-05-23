@@ -243,12 +243,26 @@ function editRepor(){
   $("#btnsave").css('visibility','visible');
   $("#btnedit").css('visibility','hidden');
   $("#btnpdf").css('visibility','hidden');
+  var l,l2,l3;
 
   //se recorre los atributos del infomre y se quita el solo lectura
 
   for (var i = 1; i < 24; i++) {
     $("#atrinfo"+i).removeAttr('readonly');
   }
+  //lista 1
+  l = "<select id='atrinfo18' name'atrinfo18' class='form-control'> <option value='< '>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+  $("#list").html('');
+  $("#list").append(l);
+  //lista 2
+  l2 = "<select id='atrinfo20' name'atrinfo20' class='form-control'> <option value='< '>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+  $("#list2").html('');
+  $("#list2").append(l2);
+  //lista 3
+  l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+  $("#list3").html('');
+  $("#list3").append(l3);
+    //$("#atrinfo18").html(' '); */ 
 }
 
 //funcion para guardar cambios de los reportes por parte del susuario administrador
@@ -269,11 +283,12 @@ function saveReport(){
      $("#btnsave").css('visibility','hidden');
      $("#btnedit").css('visibility','visible');
      $("#btnpdf").css('visibility','visible');
-
+     
      for (var i = 1; i < 24; i++) {
        if(!$("#atrinfo"+i).attr('readonly'))
          $("#atrinfo"+i).attr('readonly','readonly');
      }
+   
 
      if(json>0){
        $("#lblupdreport").html('Actualización Correcta.');
@@ -298,6 +313,7 @@ function openmodalreport(){
     if(!$("#atrinfo"+i).attr('readonly'))
       $("#atrinfo"+i).attr('readonly','readonly');
   }
+  
 
   var date = new Date();
 
@@ -311,8 +327,7 @@ function openmodalreport(){
   $("#fecha").html(""+day+" de "+meses[month]+" de "+year);
   $("#divtab").html($("#divtable").html());
   $("#divg1").html($("#divgraph1").html());
-  $("#divg2").html($("#divgraph2").html());
-
+  $("#divg2").html($("#divgraph2").html());  
 
 }
 
@@ -325,11 +340,47 @@ function uploadatareport(serialindi){
    data:{c:serialindi},//Primera consulta
    //se ejecuta si todo se realiza bien
    success : function(json) {
+     $("#atrinfo18").html('');
+     $("#atrinfo20").html('');
+     $("#atrinfo22").html('');
      for (var i = 0; i < 23; i++) {
-       if(i===3 && serialindi===1 || i===3 && serialindi===6 || i===3 && serialindi===7)
-          $("#atrinfo"+(i+1)).val(json[i]+" "+$("#programa").html());
-       else
-          $("#atrinfo"+(i+1)).val(json[i])
+       
+       if(i===3 && serialindi===1 || i===3 && serialindi===6 || i===3 && serialindi===7){
+          if(i == 17 || i == 19 || i == 21 ){                      
+            if(json[i]=='< '){
+              $("#atrinfo"+(i+1)).append('<option value="< ">Menor</option>');
+            }
+            else if(json[i]=='> '){
+              $("#atrinfo"+(i+1)).append('<option value="> ">Mayor</option>');
+            }
+            else if(json[i]=='= '){
+              $("#atrinfo"+(i+1)).append('<option value="= ">Igual</option>');
+            }
+             
+          }
+          else{  
+            $("#atrinfo"+(i+1)).val(json[i]+" "+$("#programa").html());
+                       
+          }         
+       }
+       else{
+        if(i == 17 || i == 19 || i == 21){             
+          if(json[i]=='< '){
+            $("#atrinfo"+(i+1)).append('<option value="< ">Menor</option>');
+          }
+          else if(json[i]=='> '){
+            $("#atrinfo"+(i+1)).append('<option value="> ">Mayor</option>');
+          }
+          else if(json[i]=='= '){
+            $("#atrinfo"+(i+1)).append('<option value="= ">Igual</option>');
+          }
+           
+        }
+        else{      
+          $("#atrinfo"+(i+1)).val(json[i])          
+        }
+          
+       }
      }
    },
 
