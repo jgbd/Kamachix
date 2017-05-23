@@ -459,7 +459,10 @@ function opendivupdate(cod,iniday,inimonth,iniyear,per,flag){//carga formulario 
   if(inimonth<10) inimonth='0'+inimonth;
   $("#flag").html('<input type="hidden" id="flag1" value='+flag+' class="form-control" readonly>');
   $("#cod").html('<input type="text" id="cod1" value='+cod+' class="form-control" readonly>');
-  $("#ini").html('<td data-provide="datepicker" data-date-language="es" data-date-start-date='+iniday+'/'+inimonth+'/'+(iniyear+per)+'><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
+  if(flag==0)
+    $("#ini").html('<td data-provide="datepicker" data-date-language="es"><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
+  else
+    $("#ini").html('<td data-provide="datepicker" data-date-language="es" data-date-start-date='+iniday+'/'+inimonth+'/'+(iniyear+per)+'><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
   if(per==0)
     $("#per").html('<input type="number" pattern="[1-9]" id="per1" value='+1+' min="1" max="9" class="form-control" required>');
   else
