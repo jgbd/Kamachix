@@ -209,10 +209,10 @@ img{
     border-color: #fff;
     text-align: center;
 
- } 
+ }
 
  .textareaEdit{
-   color:black; 
+   color:black;
  }
 
  .dropdown-menu li a{
@@ -244,4 +244,9 @@ a:hover {
 
 a:visited {
     color: #E9DDDD;
+}
+
+#modalinfo, #modalinfobody{
+  overflow-y: scroll;
+  overflow-x: scroll;
 }
