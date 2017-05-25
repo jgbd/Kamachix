@@ -125,6 +125,44 @@ block content
             p
           a(href='download/Formato\ datos\ Formacion\ Docentes.xls' class='vinculoFormato') Descargar Formato
   
+  //modal de ayuda 
+  #modalhelp.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', aria-label='Close', data-dismiss='modal')
+            span(aria-hidden='true') ×
+          h3#modal-title.modal-title Ayuda
+            span.glyphicon.glyphicon-question-sign(aria-hidden='true')
+        #modal-body.modal-body
+          center
+            a.btn.btn-primary.btn-xs(href="#") Manual de Usuario 
+              span.glyphicon.glyphicon-file(aria-hidden='true')
+          br
+          iframe#video(width='560', height='315', src='https://www.youtube.com/embed/fLZ3L9MIXAQ', frameborder='1', allowfullscreen='false')
+          br
+          a.btn.btn-success.btn-xs(href='javascript:$("#modalabout").modal("show"); $("#modalhelp").modal("hide");') Acerca de  
+            span.glyphicon.glyphicon-info-sign(aria-hidden='true')
+  
+  //modal acerca de
+  #modalabout.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', aria-label='Close', data-dismiss='modal')
+            span(aria-hidden='true') ×
+          h3#modal-title.modal-title Acerca de 
+            span.glyphicon.glyphicon-info-sign(aria-hidden='true')
+        #modal-body.modal-body
+          .row
+            .col-md-12
+              col-md-4
+                img.drap(src='/images/udenar_logo.svg' alt='logo udenar' style='width: 20%; height: 40%;')
+              col-md-4
+                img.drap(src='/images/GRIAS.png' alt='logo grias' style='width: 50%; height: 40%;')
+              col-md-4
+                img.drap(src='/images/acreditacion.png' alt='logo acreditacion' style='width: 20%; height: 40%;')
+  
   //contiene el head y el menu con los nombres de los indicadores 
   
   //head del aplicativo 
@@ -222,7 +260,7 @@ block content
                      a(href='periodo') 
                        | Deserción por Periodo
            li
-             a(href='#' ) Ayuda 
+             a(href='javascript:$("#modalhelp").modal("show");' ) Ayuda 
               span.glyphicon.glyphicon-question-sign(aria-hidden='true')
          p.navbar-text.navbar-right
            a.logout(href!=refe)!=textmsg
@@ -275,8 +313,6 @@ block scripts
   
   //script general para controlar action a nivel global
   script( type='text/javascript', src='/javascripts/menu.js')
-  
- 
 
   //bloque para colocar los script propios de cada Indicador
   block scriptpage
