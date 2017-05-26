@@ -1,7 +1,9 @@
 $(document).ready(function(){
   //activa la opcion de submenu en el navbar
   $('[data-submenu]').submenupicker();
-
+  //inicia editor
+  // alert('hola')
+  $('.summernote').summernote();
   //se ejecuta al submit de el boton para cargar el archivo de informacion satisfaccion
   $('#uploadformsatisfaccion').submit(function(event){
     var cx = comprueba_extension($('#filesatisfaccion').val());
@@ -118,12 +120,16 @@ function getPDF(){
   var tabres = $('#divtab').html().toString();
   atrind.push(tabres);
 
+  var txtcal = $('#txtcal').summernote('code');
+  var txtlec = $('#txtlec').summernote('code');
+
+  // alert("info: "+txtlec+txtcal);
   //
-  tinymce.triggerSave();
-  //se saca la info de la calificacion y lectura del reporte
-  //.replace(/\n/g,'<br>'))
-  atrind.push($('#txtcal').val());
-  atrind.push($('#txtlec').val());
+  // tinymce.triggerSave();
+  // //se saca la info de la calificacion y lectura del reporte
+  // //.replace(/\n/g,'<br>'))
+  atrind.push(txtcal);
+  atrind.push(txtlec);
 
   //se obtiene el svg de la grafica 1
   var $g1 = $('#divg1 div.amcharts-main-div div.amcharts-chart-div').html();
