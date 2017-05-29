@@ -1,7 +1,9 @@
 $(document).ready(function(){
   //activa la opcion de submenu en el navbar
   $('[data-submenu]').submenupicker();
-
+  //inicia editor
+  // alert('hola')
+  $('.summernote').summernote();
   //se ejecuta al submit de el boton para cargar el archivo de informacion satisfaccion
   $('#uploadformsatisfaccion').submit(function(event){
     var cx = comprueba_extension($('#filesatisfaccion').val());
@@ -94,7 +96,6 @@ $(document).ready(function(){
   });
 });
 
-
 //se invoca para generar el pdf del reporte
 function getPDF(){
 
@@ -105,17 +106,30 @@ function getPDF(){
   var atrind=[];
 
   //se saca la info basica del Indicador para el reporte
-  for (var i = 1; i < 19; i++) {
+  for (var i = 1; i < 18; i++) {
     atrind.push($("#atrinfo"+i).val());
+    if(i===12){
+      var ran = $("#atrinfo18").val()+' '+$("#atrinfo19").val()+' Muy Adecuado \n'+
+                $("#atrinfo20").val()+' '+$("#atrinfo21").val()+' Adecuado \n'+
+                $("#atrinfo22").val()+' '+$("#atrinfo23").val()+' Inadecuado';
+      atrind.push(ran);
+    }
   }
 
   //se saca la tabla de resultados para el reporte
   var tabres = $('#divtab').html().toString();
   atrind.push(tabres);
 
-  //se saca la info de la calificacion y lectura del reporte
-  atrind.push($('#txtcal').val().replace(/\n/g,'<br>'));
-  atrind.push($('#txtlec').val().replace(/\n/g,'<br>'));
+  var txtcal = $('#txtcal').summernote('code');
+  var txtlec = $('#txtlec').summernote('code');
+
+  // alert("info: "+txtlec+txtcal);
+  //
+  // tinymce.triggerSave();
+  // //se saca la info de la calificacion y lectura del reporte
+  // //.replace(/\n/g,'<br>'))
+  atrind.push(txtcal);
+  atrind.push(txtlec);
 
   //se obtiene el svg de la grafica 1
   var $g1 = $('#divg1 div.amcharts-main-div div.amcharts-chart-div').html();
@@ -262,7 +276,7 @@ function editRepor(){
   l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
   $("#list3").html('');
   $("#list3").append(l3);
-    //$("#atrinfo18").html(' '); */ 
+    //$("#atrinfo18").html(' '); */
 }
 
 //funcion para guardar cambios de los reportes por parte del susuario administrador
@@ -283,12 +297,12 @@ function saveReport(){
      $("#btnsave").css('visibility','hidden');
      $("#btnedit").css('visibility','visible');
      $("#btnpdf").css('visibility','visible');
-     
+
      for (var i = 1; i < 24; i++) {
        if(!$("#atrinfo"+i).attr('readonly'))
          $("#atrinfo"+i).attr('readonly','readonly');
      }
-   
+
 
      if(json>0){
        $("#lblupdreport").html('Actualización Correcta.');
@@ -313,7 +327,7 @@ function openmodalreport(){
     if(!$("#atrinfo"+i).attr('readonly'))
       $("#atrinfo"+i).attr('readonly','readonly');
   }
-  
+
 
   var date = new Date();
 
@@ -327,7 +341,7 @@ function openmodalreport(){
   $("#fecha").html(""+day+" de "+meses[month]+" de "+year);
   $("#divtab").html($("#divtable").html());
   $("#divg1").html($("#divgraph1").html());
-  $("#divg2").html($("#divgraph2").html());  
+  $("#divg2").html($("#divgraph2").html());
 
 }
 
@@ -344,9 +358,9 @@ function uploadatareport(serialindi){
      $("#atrinfo20").html('');
      $("#atrinfo22").html('');
      for (var i = 0; i < 23; i++) {
-       
+
        if(i===3 && serialindi===1 || i===3 && serialindi===6 || i===3 && serialindi===7){
-          if(i == 17 || i == 19 || i == 21 ){                      
+          if(i == 17 || i == 19 || i == 21 ){
             if(json[i]=='< '){
               $("#atrinfo"+(i+1)).append('<option value="< ">Menor</option>');
             }
@@ -356,15 +370,15 @@ function uploadatareport(serialindi){
             else if(json[i]=='= '){
               $("#atrinfo"+(i+1)).append('<option value="= ">Igual</option>');
             }
-             
+
           }
-          else{  
+          else{
             $("#atrinfo"+(i+1)).val(json[i]+" "+$("#programa").html());
-                       
-          }         
+
+          }
        }
        else{
-        if(i == 17 || i == 19 || i == 21){             
+        if(i == 17 || i == 19 || i == 21){
           if(json[i]=='< '){
             $("#atrinfo"+(i+1)).append('<option value="< ">Menor</option>');
           }
@@ -374,12 +388,12 @@ function uploadatareport(serialindi){
           else if(json[i]=='= '){
             $("#atrinfo"+(i+1)).append('<option value="= ">Igual</option>');
           }
-           
+
         }
-        else{      
-          $("#atrinfo"+(i+1)).val(json[i])          
+        else{
+          $("#atrinfo"+(i+1)).val(json[i])
         }
-          
+
        }
      }
    },

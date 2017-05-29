@@ -112,10 +112,10 @@ app.use(minifyHTML({
 }));
 app.use(expiry(app, { dir: path.join(__dirname, 'public') }));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'),{maxAge:2*60000}));
 
 //aqui se inicia la sesion para el server 86400000
-app.use(session({secret: '123456', resave: true, saveUninitialized: true, cookie: { maxAge: 86400000 }}));
+app.use(session({secret: '123456', resave: true, saveUninitialized: true, cookie: { maxAge: 7200000 }}));
 
 //file upload
 
