@@ -2,40 +2,70 @@ extends menu
 block title
   title!=title
 block resto
-  .col-md-2(style='text-align:left')
+  .col-md-2(style='text-align:left') 
     input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros')
     br
   #divfilter.modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
     .modal-dialog.modal-lg
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Filtros
         .modal-body
           form#frmDepartamento.form-horizontal(action="formacion" method="POST")
             br
-            .col-md-4
+            .col-md-5
               label
-                |Año: 
-              select#lst_anio.form-control              
-            .col-md-5              
+                 |Departamento:               
+              select#lst_dep.form-control     
+                              
+            .col-md-4              
               label
-                |Departamento:               
-              select#lst_dep.form-control                                                            
+                 |Año: 
+              select#lst_anio.form-control                                                     
             .col-md-3                
               label
                 |periodo:              
               select#lst_per.form-control 
             br   
-            br             
-            input(type='submit' value='Filtrar' class='btn btn-info')
+            br
+            br  
+            br           
+            input(type='submit' value='Filtrar' class='btn btn-success')
   .col-md-8    
-    h3#titulo
+    h3#titulo2
     br
   .col-md-2
   .col-md-12
-    .col-md-6      
+    .col-md-6    
+      #divtable2
+        table.table.hover.tablestyle
+          thead
+            tr(align='center')
+              th.th(style='text-align:center;') Año
+              th.th(style='text-align:center;') Cantidad Docentes Tiempo Completo                          
+          tbody#datBody2!= datos2
+    .col-md-6        
+      #divgraph2      
+      .col-md-3
+      .col-md-6
+        select#graph2.form-control(style="background-color:#898585; color:#F2EEEE") 
+          option(selected='', value='1') Seleccione un tipo de gráfica
+          optgroup(label='Columnas')
+            option(value='1') 2D
+            option(value='2') 3D
+          optgroup(label='Barras')
+            option(value='4') 2D
+            option(value='5') 3D
+          optgroup(label='Tendencia')
+            option(value='3') Línea
+      .col-md-3  
+      
+  .col-md-12
+    h3#titulo       
+  .col-md-12
+    .col-md-6
       #divtable
         table.table.hover.tablestyle
           thead
@@ -43,8 +73,8 @@ block resto
               th.th(style='text-align:center;') Formacion
               th.th(style='text-align:center;') Docentes tiempo completo             
           tbody#datBody!= datos 
-    .col-md-6         
-      #divgraph1      
+    .col-md-6
+      #divgraph1
       .col-md-3
       .col-md-6
         select#graph1.form-control(style="background-color:#898585; color:#F2EEEE") 
@@ -58,20 +88,10 @@ block resto
             optgroup(label='Tendencia')
               option(value='3') Línea
               option(value='4') Area  
-      .col-md-3          
-  .col-md-12
-    .col-md-6
-      #divgraph2  
+            optgroup(label='Pastel')
+              option(value='7') 2D
+              option(value='8') 3D 
       .col-md-3
-      .col-md-6
-        select#graph10.form-control(style="background-color:#898585; color:#F2EEEE") 
-          option(selected='', value='1') Seleccione un tipo de gráfica
-          optgroup(label='Pastel')
-            option(value='1') 2D
-            option(value='2') 3D  
-      .col-md-3     
-    .col-md-6
-      #divgraph3
           
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")

@@ -8,26 +8,28 @@ block resto
   #divfilter.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Filtros
         .modal-body
           form#frmRelacion.form-horizontal(action="relacion_docentes" method="POST")
-            br
-            .col-md-8
-              .col-md-1
-                label Año:  
-              .col-md-5
-                select#lstfilter1.form-control
-                  p#filter!=dat
-              .col-md-1
-                label a
-              .col-md-5          
-                select#lstfilter2.form-control
-                  p#filter2!=dat2          
+            br            
             .col-md-2
-            input(type='submit' value='Filtrar' class='btn btn-info')                
+              label Año:  
+            .col-md-3
+              select#lstfilter1.form-control
+                p#filter!=dat
+            .col-md-3
+              label a
+            .col-md-3         
+              select#lstfilter2.form-control
+                p#filter2!=dat2  
+            .col-md-1      
+            br
+            br
+            br            
+            input(type='submit' value='Filtrar' class='btn btn-success')                
   .col-md-8
     h3#titulo
     br

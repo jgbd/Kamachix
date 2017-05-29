@@ -378,6 +378,7 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
         }
       });
      columnTwoGraph(datarray,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
+     
      lineTwoGraph(datarray,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
           
      //semaforo divper2 y divper1     

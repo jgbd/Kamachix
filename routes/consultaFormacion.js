@@ -33,6 +33,10 @@ router.get('/', function(req, res, next) {
   }
   else if(req.query.c ==8){
     var sql='select sum(t_completo) as completo,anio,estado_meta,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion join manuales_indicadores on "manual_Formacion"=codigo  group by anio,estado_meta,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" order by anio desc limit 5';
+
+  }
+  else if(req.query.c ==9){
+    var sql="select name,anio,periodo,sum(t_completo) as total from formacion_departamento join formacion on formacion=cod_formacion join users on departamento=codigo  where departamento='25' group by name,anio,periodo order by anio desc limit 10";
   }
   else return console.log("error");
   //aquui se crea la conexion a DB

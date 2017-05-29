@@ -8,7 +8,7 @@ block resto
   #divfilter.modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
     .modal-dialog.modal-lg
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Filtros
@@ -24,7 +24,7 @@ block resto
                 select#lst_Anio5.form-control
                                          
             .col-md-4                      
-            input(type='submit' value='Filtrar' class='btn btn-info')
+            input(type='submit' value='Filtrar' class='btn btn-success')
     
   .col-md-8
       h3

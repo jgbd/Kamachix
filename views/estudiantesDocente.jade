@@ -5,28 +5,29 @@ block resto
   .col-md-2(style='text-align:left')
       input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
   #divfilter.modal.fade.bd-example-modal-lg
+    .modal-dialog.modal-lg
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Filtros
         .modal-body
           form#frmfilter(method='POST' action='consultaB')
+            br           
+            .col-md-2 
+              label(for='lstanho1') Años De:
+            .col-md-3
+              select#lstanho1.form-control
+          
+            .col-md-3
+              label(for='lstanho2') a
+            .col-md-3
+              select#lstanho2.form-control
+            .col-md-1
             br
-            .col-md-6
-              .col-sm-6
-                .col-md-3  
-                  label(for='lstanho1') Años De:
-                .col-md-9
-                  select#lstanho1.form-control
-              .col-sm-6
-                .col-md-3
-                  label(for='lstanho2') a
-                .col-md-9
-                  select#lstanho2.form-control
-            .col-md-1  
-              input(type='submit' value='Filtrar' class='btn btn-info' )
-        .modal-footer
+            br
+            br
+            input(type='submit' value='Filtrar' class='btn btn-success' )        
   //#divupdate.modal.fade.bd-example-modal-lg
   .col-md-8
     h3 Panorama General Estudiantes por Docente

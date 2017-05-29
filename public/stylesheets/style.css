@@ -215,6 +215,12 @@ img{
    color:black; 
  }
 
+ .headerModal{
+    background-color: #00994d;
+     color: #fff;
+ }
+
+
  .dropdown-menu li a{
    background-color: #4A4747;
    color: #fff;

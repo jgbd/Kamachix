@@ -217,6 +217,7 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
         }
       });
       columnGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,0,0);
+    
       columnTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
       //semaforo divgraph3
       //toma los datos de los manuales del indicador para graficar el acelerometro           
@@ -391,6 +392,7 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI de acredi
           }
         });
         columnTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],0,0,"Programas Acreditados","Total Programas");
+        
         //semaforo divgraph3
         //toma los datos de los manuales del indicador para graficar el acelerometro           
           

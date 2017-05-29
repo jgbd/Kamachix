@@ -5,42 +5,39 @@ block resto
   #myModal.modal.fade
     .modal-dialog
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Error De Filtros
         #modal-body.modal-body
           p#messageError
         .modal-footer
-          button.btn.btn-primary(type='button', onclick='hidenmodal()') Aceptar
+          button.btn.btn-success(type='button', onclick='hidenmodal()') Aceptar
   #modalfilter.modal.fade.bd-example-modal-lg
-    .modal-content
-      .modal-header
-        button.close(type='button', data-dismiss='modal', aria-label='Close')
-          span(aria-hidden='true') ×
-        h4#modal-title.modal-title Filtros
-      .modal-body
-        form#frmfilter(method='POST' action='consultaperiodinit')
-          br
-          .col-md-5
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Filtros
+        .modal-body
+          form#frmfilter(method='POST' action='consultaperiodinit')
+            br            
+            .col-md-5
+              label(for='lstprog') Programa:            
+              select#lstprog.form-control(name='lstprog' onchange="loadlstsperiod()")          
+            .col-sm-4               
+              label(for='lstperiod1') Periodos De:            
+              select#lstperiod1.form-control            
             .col-md-3
-              label(for='lstprog') Programa:  
-            .col-md-9
-              select#lstprog.form-control(name='lstprog' onchange="loadlstsperiod()")
-          .col-md-6
-            .col-sm-6
-              .col-md-3  
-                label(for='lstperiod1') Periodos De:
-              .col-md-9
-                select#lstperiod1.form-control
-            .col-sm-6
-              .col-md-3
-                label(for='lstperiod2') a
-              .col-md-9
-                select#lstperiod2.form-control
-          .col-md-1  
-            input(type='submit' value='Filtrar' class='btn btn-info' )
-      .modal-footer    
+              label(for='lstperiod2') a              
+              select#lstperiod2.form-control
+            br
+            br
+            br
+            br
+            input(type='submit' value='Filtrar' class='btn btn-success' )
+           
   .col-md-2(style='text-align:left')
     button#btnfilter.btn.btn-success.btn-small(onclick='opendivfilter()') Filtros
   
