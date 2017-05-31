@@ -149,22 +149,48 @@ block content
     
   //modal acerca de
   #modalabout.modal.fade.bd-example-modal-lg
-    .modal-dialog
+    .modal-dialog.modal-lg
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', aria-label='Close', data-dismiss='modal')
             span(aria-hidden='true') ×
           h3#modal-title.modal-title Acerca de 
             span.glyphicon.glyphicon-info-sign(aria-hidden='true')
-        #modal-body.modal-body
-          .row
+        #modal-body.modal-body.modalBackground
+          .row.modal1
+            div           
+              h3 Equipo de Desarrollo              
+              .col-lg-4
+                  img.img-circle(src='/images/1.jpg', alt='Generic placeholder image', style='width: 140px; height: 140px;')
+                  h4 Oscar Erazo Carlosama
+                  p Ingeniero Egresado del Programa de Ingenieria de Sistemas               
+              .col-lg-4
+                  img.img-circle(src='/images/2.jpg', alt='Generic placeholder image', style='width: 140px; height: 140px;')
+                  h4 Juan Bastidas Delgado
+                  p Ingeniero Egresado del Programa de Ingenieria de Sistemas
+              .col-lg-4
+                  img.img-circle(src='/images/3.jpg', alt='Generic placeholder image', style='width: 140px; height: 140px;')
+                  h4 Stephen Molina Martinez
+                  p Ingeniero Egresado del Programa de Ingenieria de Sistemas                              
+              .col-lg-12
+                hr(style='color:black;')
+                h3 Director de Tesis
+              .col-lg-3
+              .col-lg-6
+                  img.img-circle(src='/images/4.jpg', alt='Generic placeholder image', style='width: 140px; height: 140px;')
+                  h4 Ricardo Timaran Pereira
+                  p Phd
+              .col-lg-3
+            
             .col-md-12
+              hr
+              ul
               col-md-4
-                img.drap(src='/images/udenar_logo.svg' alt='logo udenar' style='width: 20%; height: 40%;')
+                img.drap(src='/images/udenar_logo.svg' alt='logo udenar' style='width: 15%; height: 30%;')
               col-md-4
-                img.drap(src='/images/GRIAS.png' alt='logo grias' style='width: 50%; height: 40%;')
+                img.drap(src='/images/GRIAS.png' alt='logo grias' style='width: 40%; height: 30%;')
               col-md-4
-                img.drap(src='/images/acreditacion.png' alt='logo acreditacion' style='width: 20%; height: 40%;')
+                img.drap(src='/images/acreditacion.png' alt='logo acreditacion' style='width: 15%; height: 30%;')
   
   //contiene el head y el menu con los nombres de los indicadores 
   
@@ -262,9 +288,18 @@ block content
                    li
                      a(href='periodo') 
                        | Deserción por Periodo
-           li
-             a(href='javascript:$("#modalhelp").modal("show");' ) Ayuda 
+           li.dropdown            
+            a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')  
+              |Ayuda          
               span.glyphicon.glyphicon-question-sign(aria-hidden='true')
+            ul.dropdown-menu
+              li
+                a
+                  | manual de usuario
+              li.divider
+              li
+                a(href='javascript:$("#modalabout").modal("show");')
+                  | acerca de
          p.navbar-text.navbar-right
            a.logout(href!=refe)!=textmsg
          p.navbar-text.navbar-right

@@ -223,8 +223,7 @@ function Load_Fist_time(){
       //-----------------------------------------------------------------
       $("#tableres").append('</tr>');
     }
-
-    columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
+    columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],40,30);    
     lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
     var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"\n"+ json.Programa
 
@@ -303,10 +302,10 @@ function Load_Filter(){
          }else{
            $("#programa").html(json.Programa);
          }
-         for (var j = 0; j <json.count; j++) {
+         for (var i = 0; i <json.count; i++) {
            $("#tableres").append('<tr>');
-             $("#tableres").append('<td>'+json.datos[j].Nivel+'</td>');
-             $("#tableres").append('<td>'+json.datos[j].Anho+'</td>');
+             $("#tableres").append('<td>'+json.datos[i].Nivel+'</td>');
+             $("#tableres").append('<td>'+json.datos[i].Anho+'</td>');
              //----------------------------------------------------------------------
             //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
             // condiciones para insertar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
@@ -418,7 +417,7 @@ function Load_Filter(){
          }
 
         //se envia los datos a las diferentes graficasque se realizan
-        columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
+        columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],40,30);        
         lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
         var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"\n"+ json.Programa
 

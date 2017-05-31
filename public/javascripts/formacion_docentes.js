@@ -97,7 +97,7 @@ $(document).ready(function(){
                   }
                 });
               //grafica que aparecera por defecto
-              columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+             columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
 
                //semaforo divgraph4 
               //toma los datos de los manuales del indicador para graficar el acelerometro           
@@ -182,7 +182,7 @@ $(document).ready(function(){
                   }
                 });
               //grafica que aparecera por defecto
-              columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+             columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
 
 
               //semaforo divgraph4 
@@ -517,7 +517,7 @@ $(document).ready(function(){
             });
 
           //grafica por defecto
-          columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+           columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
 
            //semaforo divgraph4 
             //toma los datos de los manuales del indicador para graficar el acelerometro           
@@ -541,7 +541,7 @@ $(document).ready(function(){
 
             else{                               
               gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%');
-              
+             
             }       
 
        }

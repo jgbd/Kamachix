@@ -11,6 +11,22 @@ que se van creando sea por clase por id o tipo */
     src:url("/fonts/AnticSlab-Regular.ttf");
 }
 
+.modalBackground{
+  background-color:#EBEBED;
+  
+}
+
+.modal1{
+  color:black;
+}
+
+hr { 
+   border-top: 2px solid #4bceb4; 
+   border-bottom: 2px solid #4bceb4; 
+   border-left:none; 
+   border-right:none; 
+   height: 6px; 
+ } 
 
 .title{
   font-family: titulo;

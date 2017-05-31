@@ -18,8 +18,7 @@ block resto
             .col-md-5
               label
                  |Departamento:               
-              select#lst_dep.form-control     
-                              
+              select#lst_dep.form-control(name='lst_dep' onchange='Load_filter_year()')                             
             .col-md-4              
               label
                  |Año: 
@@ -27,7 +26,7 @@ block resto
             .col-md-3                
               label
                 |periodo:              
-              select#lst_per.form-control 
+              select#lst_per.form-control(name='lst_dep' onchange='panoramaG()') 
             br   
             br
             br  

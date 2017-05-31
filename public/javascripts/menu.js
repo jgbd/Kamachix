@@ -3,7 +3,7 @@ $(document).ready(function(){
   $('[data-submenu]').submenupicker();
   //inicia editor
   // alert('hola')
-  $('.summernote').summernote();
+  //$('.summernote').summernote();
   //se ejecuta al submit de el boton para cargar el archivo de informacion satisfaccion
   $('#uploadformsatisfaccion').submit(function(event){
     var cx = comprueba_extension($('#filesatisfaccion').val());
@@ -120,12 +120,10 @@ function getPDF(){
   var tabres = $('#divtab').html().toString();
   atrind.push(tabres);
 
-  var txtcal = $('#txtcal').summernote('code');
-  var txtlec = $('#txtlec').summernote('code');
-
-  // alert("info: "+txtlec+txtcal);
+  var txtcal = $('#txtcal').tinymce().save();
+  var txtlec = $('#txtlec').tinymce().save();  
   //
-  // tinymce.triggerSave();
+  tinymce.triggerSave();  
   // //se saca la info de la calificacion y lectura del reporte
   // //.replace(/\n/g,'<br>'))
   atrind.push(txtcal);

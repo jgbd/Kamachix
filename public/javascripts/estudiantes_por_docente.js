@@ -272,7 +272,7 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
           barGraph(datarray,'divgraph2','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,40,30);
         }
       });
-      columnGraph(datarray,'divgraph2','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
+      columnGraph(datarray,'divgraph2','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,40,30);
 
       if(mes<=6){
         //semaforo divgraph3
@@ -377,7 +377,7 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
           barTwoGraph(datarray,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"A","B");
         }
       });
-     columnTwoGraph(datarray,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
+     columnTwoGraph(datarray,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"A","B");
      
      lineTwoGraph(datarray,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
           
@@ -481,7 +481,7 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
             barTwoGraph(json.datos,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],40,30,"A","B");
           }
         });
-        columnTwoGraph(json.datos,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0,"A","B");
+        columnTwoGraph(json.datos,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],40,30,"A","B");
         lineTwoGraph(json.datos,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],"A","B");
         //semaforo divper2 y divper1     
         if(json.datos[json.count-1].sim_Rango_MA == '> ' && json.datos[json.count-1].sim_Rango_I == '< '){

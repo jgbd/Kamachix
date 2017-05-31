@@ -22,10 +22,11 @@ router.get('/', function(req, res, next) {
     var sql="select name,t_completo,t_ocasional,hora_catedra,anio,periodo,nom_formacion from formacion_departamento join formacion on formacion=cod_formacion join users on departamento=codigo  where departamento='25' order by anio DESC limit 4";
   }
   else if (req.query.c ==4){
-    var sql='select DISTINCT name from formacion_departamento join users on departamento=codigo order by name';
+    var sql='select DISTINCT name,codigo from formacion_departamento join users on departamento=codigo order by name';
   }
   else if (req.query.c ==5){
-    var sql='select DISTINCT anio from formacion_departamento order by anio DESC';
+    var prog=[req.query.program];
+    var sql="select DISTINCT anio from formacion_departamento join users on departamento=codigo where codigo='"+prog+"'order by anio DESC";
   }
 
   else if (req.query.c ==6){
@@ -37,6 +38,12 @@ router.get('/', function(req, res, next) {
   }
   else if(req.query.c ==9){
     var sql="select name,anio,periodo,sum(t_completo) as total from formacion_departamento join formacion on formacion=cod_formacion join users on departamento=codigo  where departamento='25' group by name,anio,periodo order by anio desc limit 10";
+  }
+
+  else if(req.query.c ==10){
+    var cod=req.query.cod;    
+    var sql="select name,anio,periodo,sum(t_completo) as total from formacion_departamento join formacion on formacion=cod_formacion join users on departamento=codigo  where departamento='"+cod+"' group by name,anio,periodo order by anio desc limit 10";
+    
   }
   else return console.log("error");
   //aquui se crea la conexion a DB
@@ -80,13 +87,13 @@ router.post('/', function(req, res, next) {
   
   if(req.body.c == 1){
     //esta variable es la que contien la consulta a realizarse en la DB
-    var sql='select nom_formacion,t_completo,anio,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion join manuales_indicadores on "manual_Formacion"=codigo where anio=$1 order by anio,formacion,t_completo';
+    var sql='select nom_formacion,t_completo,estado_meta,anio,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" from "Datawarehouse"."KPI_Formacion" join formacion on formacion=cod_formacion join manuales_indicadores on "manual_Formacion"=codigo where anio=$1 order by anio,formacion,t_completo';
     ani = [req.body.anio];
   }
   else if (req.body.c ==7){    
-    var sql='select departamento,name,t_completo,t_ocasional,hora_catedra,anio,periodo,nom_formacion from formacion_departamento join formacion on formacion=cod_formacion join users on departamento=codigo where name=$1 and anio=$2 and periodo=$3 order by anio,formacion,t_completo';
-    ani = [req.body.name,req.body.anio,req.body.periodo];    
-  }
+    var sql='select departamento,name,t_completo,t_ocasional,hora_catedra,anio,periodo,nom_formacion from formacion_departamento join formacion on formacion=cod_formacion join users on departamento=codigo where codigo=$1 and anio=$2 and periodo=$3 order by anio,formacion,t_completo';
+    ani = [req.body.cod,req.body.anio,req.body.periodo];    
+  } 
 
   
   

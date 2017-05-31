@@ -15,8 +15,7 @@ html
     link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css' )
     //css para controlar el submenu del navbar
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-submenu/2.0.4/css/bootstrap-submenu.min.css' )
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-submenu/2.0.4/css/bootstrap-submenu.min.css' )    
     link(rel='stylesheet', href='/stylesheets/style.css' ) 
     block css
   body.body
@@ -28,16 +27,20 @@ html
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
     script( type='text/javascript',src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js')
     script( type='text/javascript',src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.es.min.js')
-    //script(type='text/javascript', src='/javascripts/tinymce/js/tinymce/jquery.tinymce.min.js') 
-    //script(type='text/javascript', src='/javascripts/tinymce/js/tinymce/tinymce.min.js') 
+    script(type='text/javascript', src='/javascripts/tinymce/js/tinymce/jquery.tinymce.min.js') 
+    script(type='text/javascript', src='/javascripts/tinymce/js/tinymce/tinymce.min.js') 
     //script(src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ofbto3aqxophi7148zhf4pkdo0840uu9c44c9ycc5bjs4h65')
-    //script.
-      tinymce.init({ selector:'textarea.textareaEdit', language: 'es' });
-    //- script(src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ofbto3aqxophi7148zhf4pkdo0840uu9c44c9ycc5bjs4h65')
-    //- script.
-    //-   tinymce.init({ selector:'textarea.textareaEdit' });
-    <!-- include summernote css/js-->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
+    script.
+      tinymce.init({ selector:'textarea.textareaEdit',
+       language: 'es',       
+       plugins: [
+        "advlist autolink lists link image charmap print preview anchor",
+        "searchreplace visualblocks code fullscreen",
+        "insertdatetime media table contextmenu paste imagetools"
+      ],
+      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+       });          
+    
     //En este bloque se permite colocar los scripts que no son comunes a todo el proyecto y solo 
     //pertenecen a una pagina en especifico  
     block scripts

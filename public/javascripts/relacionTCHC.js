@@ -428,7 +428,7 @@ $(document).ready(function(){
         });
 
        //   
-       columnGraph(arra2,divgraph1,"Docentes tiempo completo","anio","cantidad",0,0);
+       columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',40,30);
 
        //cambio de graficas de barras hora catedra
         $("#graph2").change(function () {
@@ -454,7 +454,7 @@ $(document).ready(function(){
         });
 
        //   
-       barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
+       barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',40,30);
        // cambio de grafica de tendencia relacion docentes
        $("#graph3").change(function () {
 
@@ -722,7 +722,7 @@ $(document).ready(function(){
         });
 
        //   
-       columnGraph(arra2,divgraph1,"Docentes tiempo completo","anio","cantidad",0,0);
+       columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',40,30);
        //cambio de graficas de barras hora catedra
         $("#graph2").change(function () {
           if($(this).val() === '1'){
@@ -747,7 +747,7 @@ $(document).ready(function(){
         });
 
        //   
-       barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
+        barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',40,30);
        // cambio de grafica de tendencia relacion docentes
        $("#graph3").change(function () {
 

@@ -542,10 +542,11 @@ function barGraph(data, contentName, title, namecolumn, namerows, depth3D, angle
   var chart = AmCharts.makeChart(contentName, {
   "theme": "light",
   "type": "serial",
-  "dataProvider": data,
+  "dataProvider": data,  
   "valueAxes": [{
       "title": title
   }],
+  "startDuration": 1,
   "graphs": [{
       "balloonText": "<b>[[category]]: [[value]]</b>",
       "fillAlphas": 1,
