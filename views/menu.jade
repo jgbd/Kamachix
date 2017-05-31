@@ -123,7 +123,7 @@ block content
           div#mesage(style='color:red;')
             span
             p
-          a(href='download/Formato\ datos\ Formacion\ Docentes.xls' class='vinculoFormato') Descargar Formato
+          a(href='download/Formato\ datos\ Formacion\ Docentes.csv' class='vinculoFormato') Descargar Formato
   
   //modal de ayuda 
   #modalhelp.modal.fade.bd-example-modal-lg
@@ -294,12 +294,12 @@ block content
               span.glyphicon.glyphicon-question-sign(aria-hidden='true')
             ul.dropdown-menu
               li
-                a
-                  | manual de usuario
+                a(href='tutorial')
+                  | Guias de uso
               li.divider
               li
                 a(href='javascript:$("#modalabout").modal("show");')
-                  | acerca de
+                  | Acerca De
          p.navbar-text.navbar-right
            a.logout(href!=refe)!=textmsg
          p.navbar-text.navbar-right

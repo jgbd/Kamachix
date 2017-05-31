@@ -22,6 +22,7 @@ var validar = require('./routes/validarestart'); //validar el usuario para recup
 var indicater = require('./routes/indicadores'); //pagina de bienvenida
 var recover = require('./routes/recover'); //para recuperar contraseña
 var logout = require('./routes/logout'); //pagina de logout
+var tutorial = require('./routes/tutorial'); //pagina de manual y video explicativo
 
 //para controlar todo lo del KPI satisfaccion
 var satisfaction = require('./routes/satisfaccion'); //pagina del indicador de satisfaccion
@@ -129,6 +130,7 @@ app.use('/consultaUsuario', users); //consults usuario en DB
 app.use('/validarestart',validar); //validar usuario recuperar contraseña
 app.use('/recover',recover);
 app.use('/logout',logout);//llamado a cerrar sesion y destruir variables de entorno
+app.use('/tutorial',tutorial);//llamado a la pagina de guias
 
 
 app.use('/satisfacion',satisfaction); //todo la vsualizacion de el kpi de satisfaccion

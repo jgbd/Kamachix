@@ -5,6 +5,19 @@ block resto
   .col-md-2(style='text-align:left') 
     input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros')
     br
+  //modal para sacar mensajes     
+  #myModal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Error De Filtros
+        #modal-body.modal-body
+          p#messageError
+        .modal-footer
+          button.btn.btn-success(type='button', onclick='hidenmodal()') Aceptar 
+  //modal para los filtros 
   #divfilter.modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
     .modal-dialog.modal-lg
       .modal-content
@@ -26,7 +39,7 @@ block resto
             .col-md-3                
               label
                 |periodo:              
-              select#lst_per.form-control(name='lst_dep' onchange='panoramaG()') 
+              select#lst_per.form-control
             br   
             br
             br  
@@ -90,8 +103,7 @@ block resto
             optgroup(label='Pastel')
               option(value='7') 2D
               option(value='8') 3D 
-      .col-md-3
-          
+      .col-md-3         
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
 block scriptpage

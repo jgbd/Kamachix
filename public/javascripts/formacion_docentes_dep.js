@@ -43,94 +43,100 @@ $(document).ready(function(){
           'periodo':$("#lst_per").val()
         };
     //el metodo ajax para consulta asyncronica
-    
-    $.ajax({
-     type: "POST", //el el tipo de peticion puede ser GET y POsT
-     url: "consultaFormacion", //la url del que realizara la consulta
-     data: formData, //los datos que seran enviados al server
-     dataType : 'json', //el formato de datos enviados y devueltos del server
-     //se ejecutasi todo se realiza bien
-     success : function(json) {
-       $("#datBody").html('');
-       $("#titulo").html('');
-       var r="";//variable para llenar los datos y el html e cada una de las filas
-       var tittle="";
-       var conta=json.rowCount;
-       // condicion para verificar que los datos de todos los niveles de formacion del año seleccionado esten en la BD       
-       if(conta == 4){
-         //ciclo para llenar los datos en las filas en r
-          for(var i = conta-4 ; i<conta; i++){
-            r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
-            "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
-          }
-
-          tittle="Nivel de Formación Docentes Tiempo Completo  Año: "+json.rows[conta-3].anio+"  Periodo: "+json.rows[conta-3].periodo+"<br>  Departamento de  "+json.rows[conta-3].name;
-          $("#datBody").append(r);
-          $("#titulo").append(tittle);
-
-          var arra=[];
-
-          for(var i =0; i<4;i++){
-            var programa = {
-              "nivel": json.rows[i].nom_formacion,
-              "cantidad": json.rows[i].t_completo              
+    if($('#lst_anio').val() == '0' || $("#lst_dep").val()=='0' || $("#lst_per").val()=='0') {
+      $("#messageError").html("seleccione una opcion de cada lista");
+      $('#myModal').modal('show');
+    }
+    else{
+      $.ajax({
+      type: "POST", //el el tipo de peticion puede ser GET y POsT
+      url: "consultaFormacion", //la url del que realizara la consulta
+      data: formData, //los datos que seran enviados al server
+      dataType : 'json', //el formato de datos enviados y devueltos del server
+      //se ejecutasi todo se realiza bien
+      success : function(json) {
+        $("#datBody").html('');
+        $("#titulo").html('');
+        var r="";//variable para llenar los datos y el html e cada una de las filas
+        var tittle="";
+        var conta=json.rowCount;
+        // condicion para verificar que los datos de todos los niveles de formacion del año seleccionado esten en la BD       
+        if(conta == 4){
+          //ciclo para llenar los datos en las filas en r
+            for(var i = conta-4 ; i<conta; i++){
+              r = r+"<tr><td><label id='forma"+i+"' name='forma"+i+"'>"+json.rows[i].nom_formacion+
+              "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
             }
-            arra.push(programa);
 
-          }
+            tittle="Nivel de Formación Docentes Tiempo Completo  Año: "+json.rows[conta-3].anio+"  Periodo: "+json.rows[conta-3].periodo;
+            $("#datBody").append(r);
+            $("#titulo").append(tittle);
+
+            var arra=[];
+
+            for(var i =0; i<4;i++){
+              var programa = {
+                "nivel": json.rows[i].nom_formacion,
+                "cantidad": json.rows[i].t_completo              
+              }
+              arra.push(programa);
+
+            }
 
 
-          //cambio de graficas de barras
-            $("#graph1").change(function () {
-              if($(this).val() === '1'){
-                columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
-              }
-              else if($(this).val() === '2'){
-                columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
-              }
-              else if($(this).val() === '3'){
-                lineGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
-              }
-              else if($(this).val() === '4'){
-                areaGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
-              }
-              else if($(this).val() === '5'){
-                barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
-              }
-              else if($(this).val() === '6'){
-                barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
-              }
-              else if($(this).val() === '7'){
-                pieGraph(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
-              }
-              else if($(this).val() === '8'){
-                pieGraph3D(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
-              }
-            });
+            //cambio de graficas de barras
+              $("#graph1").change(function () {
+                if($(this).val() === '1'){
+                  columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+                }
+                else if($(this).val() === '2'){
+                  columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+                }
+                else if($(this).val() === '3'){
+                  lineGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+                }
+                else if($(this).val() === '4'){
+                  areaGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+                }
+                else if($(this).val() === '5'){
+                  barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+                }
+                else if($(this).val() === '6'){
+                  barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+                }
+                else if($(this).val() === '7'){
+                  pieGraph(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+                }
+                else if($(this).val() === '8'){
+                  pieGraph3D(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
+                }
+              });
 
-          //
-          columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+            //
+            columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
 
-         
-       }       
-       else{
-         alert('el año seleccionado no tiene suficientes datos. Por favor llene todos los datos de formacion docentes correspondientes a este año ');
-          $("#lst_anio").html('');
-          $("#lst_dep").html('');
-          $("#titulo").html('');                 
-          $("#datBody2").html('');        
           
-         Load_first_time();   
-         $("#divtable").html('');
-         $("#divgraph2").html('');         
-         $("#titulo2").html('');   
-       }
-       
+        }       
+        else{
+           $("#messageError").html("El departamento seleccionado no tiene suficientes datos para ser visualizado. Por favor seleccione otro periodo ");
+           $('#myModal').modal('show');
+           /* alert('el año seleccionado no tiene suficientes datos. Por favor llene todos los datos de formacion docentes correspondientes a este año ');
+            $("#lst_anio").html('');
+            $("#lst_dep").html('');
+            $("#titulo").html('');                 
+            $("#datBody2").html('');        
+            
+          Load_first_time();   
+          $("#divtable").html('');
+          $("#divgraph2").html('');         
+          $("#titulo2").html('');   */
+        }       
 
 
-     }
-   });
-   
+      }
+    });
+    panoramaG();
+  }
     
           
    closedivfilter();
@@ -178,7 +184,7 @@ function Load_first_time(){
         "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
       }
 
-      tittle="Nivel de Formación Docentes Tiempo Completo Año: "+json.rows[conta-3].anio+" Periodo: "+json.rows[conta-3].periodo+"<br>  Departamento de  "+json.rows[conta-3].name;
+      tittle="Nivel de Formación Docentes Tiempo Completo Año: "+json.rows[conta-3].anio+" Periodo: "+json.rows[conta-3].periodo;
       $("#datBody").append(r);
       $("#titulo").append(tittle);
 
@@ -350,7 +356,7 @@ $.ajax({
 
       }
       
-      tittle2="Nivel de Formación Docentes Tiempo Completo de los Ultimos 5 Años <br>  Departamento de  "+json.rows[conta-3].name;
+      tittle2="Departamento de  "+json.rows[conta-3].name+" <br><br> Nivel de Formación Docentes Tiempo Completo de los Ultimos 5 Años";
       $("#datBody2").append(r2);
       $("#titulo2").append(tittle2);
 
@@ -455,19 +461,22 @@ function panoramaG(){
           for(var i =conta-1; i>=conta-10;i--){
             var y=i-1;
             var programa2;
-            if(json.rows[i].periodo == '2'){
+            
+            if(json.rows[i].periodo == '2 '){
+              alert(json.rows[i].periodo)
               programa2 = {
                   "anio": json.rows[i].anio,
                   "periodoa": json.rows[i].total,
                   "periodob": json.rows[y].total        
                         
               }
+              
             }
             else{
               programa2 = {
                   "anio": json.rows[i].anio,
-                  "periodob": json.rows[y].total,
-                  "periodoa": json.rows[i].total     
+                  "periodoa": json.rows[y].total,
+                  "periodob": json.rows[i].total     
                         
               }
             }             
@@ -555,7 +564,7 @@ function panoramaG(){
 
         }
         
-        tittle2="Nivel de Formación Docentes Tiempo Completo de los Ultimos 5 Años <br>  Departamento de  "+json.rows[conta-3].name;
+        tittle2="Departamento de  "+json.rows[conta-3].name+" <br><br> Nivel de Formación Docentes Tiempo Completo de los Ultimos 5 Años";
         
         $("#datBody2").html(r2);
         $("#titulo2").append(tittle2);
