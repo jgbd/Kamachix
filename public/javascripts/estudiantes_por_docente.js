@@ -79,7 +79,7 @@ function Load_Insert(){//Define si muestra o no el formulario
     });
   }
   else{
-    alert("entra");
+    //alert("entra");
     $.ajax({
       type: "get", //el el tipo de peticion puede ser GET y POsT
       url: "consultaDocentesTC", //la url del que realizara la consulta
@@ -439,11 +439,17 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
   var ban = true;
   //se obtiene los valores de las input en variables
   var yearfrom = $("#lstanho1").val(), yearto = $("#lstanho2").val();
-  if(yearfrom==yearto  && yearfrom!=0 && yearto!=0){
+  if(yearfrom==0 && yearto==0){
     ban=false;
+    $("#messageError").html("seleccione una opcion de cada lista");
     $('#myModal').modal('show');
   }
-  if(yearfrom>yearto && yearto!=0){
+  else if(yearfrom==yearto  && yearfrom!=0 && yearto!=0){
+    ban=false;
+    $("#messageError").html("No seleccione el mismo año dos veces");
+    $('#myModal').modal('show');
+  }
+  else if(yearfrom>yearto && yearto!=0){
     var aux = yearfrom;
     yearfrom=yearto;
     yearto=aux;
@@ -575,13 +581,13 @@ function opendivupdate(year,month){//carga formulario de ingreso-actualizacion d
             $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+json.rows[0].docentesprom);
             $("#flagdoctc").html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Docentes Tiempo Completo al día"></td>');
             $('#nest').html('<input type="number" pattern="[0-9]" id="est1" value='+json.rows[0].estudiantesa+' max="99999" style="width: 6em" class="form-control" required>');
-            $('#updest').html('<span class="btn btn-primary"><a onclick="Load_Update()"><img title="Ingresar" alt="Ingresar" /></a></span>');
+            $('#updest').html('<span class="btn btn-warning btn-small"><a onclick="Load_Update()"><img title="Ingresar" alt="Ingresar" /></a></span>');
           }
           else {
             $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+json.rows[0].docentesa);
             $('#nest').html(json.rows[0].estudiantesa);
             $("#flagdoctc").html('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Este Dato se encuentra desactualizado"></td>');
-            $('#upddoctc').html('<span class="btn btn-primary"><a onclick="openmodaluploadFormacion()"><img title="Actualizar" alt="Actualizar"/></a></span>');
+            $('#upddoctc').html('<span class="btn btn-danger btn-small"><a onclick="openmodaluploadFormacion()"><img title="Actualizar" alt="Actualizar"/></a></span>');
           }
         }
       }

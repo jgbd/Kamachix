@@ -350,11 +350,17 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI de acredi
   var ban = true;
   //se obtiene los valores de las input en variables
   var yearfrom = $("#lstanho1").val(), yearto = $("#lstanho2").val();
-  if(yearfrom==yearto  && yearfrom!=0 && yearto!=0){//validación en selección de años
+  if(yearfrom==0 || yearto==0) {//validación para falta de selección de años
     ban=false;
+    $("#messageError").html("seleccione una opcion de cada lista");
     $('#myModal').modal('show');
   }
-  if(yearfrom>yearto && yearto!=0){
+  else if(yearfrom==yearto  && yearfrom!=0 && yearto!=0){//validación para selección de años iguales
+    ban=false;
+    $("#messageError").html("No seleccione el mismo año dos veces");
+    $('#myModal').modal('show');
+  }
+  else if(yearfrom>yearto && yearto!=0){
     var aux = yearfrom;
     yearfrom=yearto;
     yearto=aux;
