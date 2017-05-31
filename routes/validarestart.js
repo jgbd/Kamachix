@@ -34,17 +34,20 @@ router.post('/', function(req, res, next) {
         let transporter = nodemailer.createTransport({
             service: '"Outlook365"',
             auth: {
-                user: 'juanbasdel@udenar.edu.co',
-                pass: '1085301712Jgbd'
+                user: 'acreditacioninstitucional@udenar.edu.co',
+                pass: 'Acreditacion2016'
             }
         });
 
         // setup email data with unicode symbols
         let mailOptions = {
-            from: '"Juan Bastidas" <juanbasdel@udenar.edu.co>', // sender address
+            from: '"Acreditacion" <acreditacioninstitucional@udenar.edu.co>', // sender address
             to: 'juanbasdel@gmail.com', // list of receivers
             subject: 'Recuperar contraseña kamachix ✔', // Subject line
-            text: 'http://190.254.4.49:3000/recover?clave='+result.rows[0].encriptado+'&fe='+fec, // plain text body
+            text: 'http://190.254.4.49:3000/recover?clave='+result.rows[0].encriptado+'&fe='+fec,
+            html: "<center><a href="+'http://190.254.4.49:3000/recover?clave='+result.rows[0].encriptado+'&fe='+fec+
+                  " style='font-size:20px; font-family:Verdana,Helvetica;font-weight:bold;color:white;background:#419121;border:2px solid outset blue;width:200px;height:100px;text-decoration: none;border-radius: 5px; box-shadow: 2px 2px 5px #999;'>Recuperar Contraseña</a><center>"+
+                  "<p>Si ha recibido esta comunicación por error, le rogamos nos informe inmediatamente respondiendo al remitente y eliminando el documento original sin mantener copia alguna. </p>" // plain text body
         };
 
         // send mail with defined transport object
