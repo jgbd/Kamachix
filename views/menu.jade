@@ -66,7 +66,7 @@ block content
           div#mesage(style='color:red;')
             span
             p
-          a(href='download/Formato\ datos\ Deserción\ Periodo.csv' class='vinculoFormato') Descargar Formato
+          a.acol(href='download/Formato\ datos\ Deserción\ Periodo.csv' class='vinculoFormato') Descargar Formato
   
   //modaluploadcohorte
   #modaluploadcohorte.modal.fade.bd-example-modal-lg
@@ -85,7 +85,7 @@ block content
           div#mesage(style='color:red;')
             span
             p
-          a(href='download/Formato\ datos\ Deserción\ Cohorte.csv' class='vinculoFormato') Descargar Formato
+          a.acol(href='download/Formato\ datos\ Deserción\ Cohorte.csv' class='vinculoFormato') Descargar Formato
   
   //modaluploadsatisfacion
   #modaluploadsatisfaccion.modal.fade.bd-example-modal-lg
@@ -104,7 +104,7 @@ block content
           div#mesage(style='color:red;')
             span
             p
-          a(href='download/Formato\ datos\ Nivel\ de\ Satisfacción.csv' class='vinculoFormato') Descargar Formato
+          a.acol(href='download/Formato\ datos\ Nivel\ de\ Satisfacción.csv' class='vinculoFormato') Descargar Formato
   
   //modaluploadformacion y relacion docentes
   #modaluploadFormacion.modal.fade.bd-example-modal-lg
@@ -123,8 +123,8 @@ block content
           div#mesage(style='color:red;')
             span
             p
-          a(href='download/Formato\ datos\ Formacion\ Docentes.csv' class='vinculoFormato') Descargar Formato
-    
+          a.acol(href='download/Formato\ datos\ Formacion\ Docentes.csv' class='vinculoFormato') Descargar Formato
+  
   //modal acerca de
   #modalabout.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
@@ -164,11 +164,15 @@ block content
               hr
               ul
               col-md-4
-                img.drap(src='/images/udenar_logo.svg' alt='logo udenar' style='width: 15%; height: 30%;')
+                a(title='logo udenar', href='http://www2.udenar.edu.co' target='_blank')
+                  img(src='/images/udenar_logo.svg', alt='logo udenar', style='width: 15%; height: 30%;')
+
               col-md-4
-                img.drap(src='/images/GRIAS.png' alt='logo grias' style='width: 40%; height: 30%;')
+                a(title='logo grias', href='http://grias.udenar.edu.co' target='_blank')
+                  img(src='/images/GRIAS.png', alt='logo grias', style='width: 40%; height: 30%;')                
               col-md-4
-                img.drap(src='/images/acreditacion.png' alt='logo acreditacion' style='width: 15%; height: 30%;')
+                a(title='logo acreditacion', href='http://acreditacion.udenar.edu.co/' target='_blank')
+                  img(src='/images/acreditacion.png', alt='logo acreditacion', style='width: 15%; height: 30%;')                
   
   //contiene el head y el menu con los nombres de los indicadores 
   
