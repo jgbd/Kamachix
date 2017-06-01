@@ -66,6 +66,15 @@ a {
   border-color: green;
 }
 
+.acol{
+  color: #72FF33;
+  border-color: #72FF33;
+}
+
+.acol:hover{
+  color: green;
+}
+
 #divcontent{
   text-align: left;
   border: 2px solid red;
