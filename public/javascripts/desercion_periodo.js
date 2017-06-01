@@ -69,7 +69,7 @@ function load_start(){
            json.datos[i].retencion=json.datos[i].retencion.replace(/%/g,"");
            $("#tableres").append('<td>'+json.datos[i].desercion+'%</td>');
            $("#tableres").append('<td>'+json.datos[i].retencion+'%</td>');
-           
+
            //----------------------------------------------------------------------
             //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
             // condiciones para insertar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
@@ -79,10 +79,10 @@ function load_start(){
                 $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
               }
               else if(json.datos[i].sim_Rango_MA === '> '){
-                if(json.datos[i].desercion > json.datos[i].num_Rango_MA){                
+                if(json.datos[i].desercion > json.datos[i].num_Rango_MA){
                   $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
                 }
-                else{                
+                else{
                   $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
                 }
 
@@ -100,7 +100,7 @@ function load_start(){
             }
 
             //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
-            else if(json.datos[i].sim_Rango_MA === '> '){ 
+            else if(json.datos[i].sim_Rango_MA === '> '){
               if(json.datos[i].desercion >= json.datos[i].num_Rango_MA){
                 $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
               }
@@ -108,10 +108,10 @@ function load_start(){
                 if(json.datos[i].desercion >= json.datos[i].num_Rango_A){
                   $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
                 }
-                else{                
+                else{
                   $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
 
-                } 
+                }
               }
               else if(json.datos[i].sim_Rango_A === '< ' && json.datos[i].sim_Rango_I === '< ' ){
                 if(json.datos[i].desercion <= json.datos[i].num_Rango_A && json.datos[i].desercion > json.datos[i].num_Rango_I){
@@ -121,9 +121,9 @@ function load_start(){
                   $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
                 }
 
-              }       
+              }
             }
-            //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<' 
+            //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<'
             else if(json.datos[i].sim_Rango_MA === '< '){
               if(json.datos[i].desercion <= json.datos[i].num_Rango_MA){
                 $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
@@ -135,7 +135,7 @@ function load_start(){
                 else{
                   $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
 
-                }              
+                }
               }
               else if(json.datos[i].sim_Rango_A === '< '){
                 if(json.datos[i].sim_Rango_I === '> '){
@@ -148,9 +148,9 @@ function load_start(){
                   }
                 }
               }
-            
+
             }
-            
+
             //en caso de que el simbolo del rango muy adecuado sea '= '
             else if(json.datos[i].sim_Rango_MA === '= '){
               if(json.datos[i].desercion == json.datos[i].num_Rango_MA){
@@ -159,7 +159,7 @@ function load_start(){
               else if(json.datos[i].sim_Rango_A === '> '){
                 if(json.datos[i].desercion > json.datos[i].num_Rango_A){
                   $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
-                  
+
                 }
                 else{
                   $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
@@ -192,7 +192,7 @@ function load_start(){
             }
           //-----------------------------------------------------------------
          $("#tableres").append('</tr>');
-       }      
+       }
       columnTwoGraph(json.datos,'divgraph1','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
       lineTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],"Deserción","Retención");
       gaugesTwoAxesGraph(json.datos[0].desercion,json.datos[0].retencion,'divgraph3')
@@ -285,6 +285,7 @@ function load_filters(){
        if(json.Error){
          $("#messageError").html("No existen datos");
          $('#myModal').modal('show');
+         load_start();
        }else{
          $("#txtjson").val(JSON.stringify(json));
          if(periodfrom!=0){
@@ -314,10 +315,10 @@ function load_filters(){
                   $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
                 }
                 else if(json.datos[i].sim_Rango_MA === '> '){
-                  if(json.datos[i].desercion > json.datos[i].num_Rango_MA){                
+                  if(json.datos[i].desercion > json.datos[i].num_Rango_MA){
                     $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
                   }
-                  else{                
+                  else{
                     $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
                   }
 
@@ -335,7 +336,7 @@ function load_filters(){
               }
 
               //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
-              else if(json.datos[i].sim_Rango_MA === '> '){ 
+              else if(json.datos[i].sim_Rango_MA === '> '){
                 if(json.datos[i].desercion >= json.datos[i].num_Rango_MA){
                   $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
                 }
@@ -343,10 +344,10 @@ function load_filters(){
                   if(json.datos[i].desercion >= json.datos[i].num_Rango_A){
                     $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de se esta alejando de la meta('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
                   }
-                  else{                
+                  else{
                     $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
 
-                  } 
+                  }
                 }
                 else if(json.datos[i].sim_Rango_A === '< ' && json.datos[i].sim_Rango_I === '< ' ){
                   if(json.datos[i].desercion <= json.datos[i].num_Rango_A && json.datos[i].desercion > json.datos[i].num_Rango_I){
@@ -356,9 +357,9 @@ function load_filters(){
                     $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
                   }
 
-                }       
+                }
               }
-              //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<' 
+              //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<'
               else if(json.datos[i].sim_Rango_MA === '< '){
                 if(json.datos[i].desercion <= json.datos[i].num_Rango_MA){
                   $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
@@ -370,7 +371,7 @@ function load_filters(){
                   else{
                     $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
 
-                  }              
+                  }
                 }
                 else if(json.datos[i].sim_Rango_A === '< '){
                   if(json.datos[i].sim_Rango_I === '> '){
@@ -383,9 +384,9 @@ function load_filters(){
                     }
                   }
                 }
-              
+
               }
-              
+
               //en caso de que el simbolo del rango muy adecuado sea '= '
               else if(json.datos[i].sim_Rango_MA === '= '){
                 if(json.datos[i].desercion == json.datos[i].num_Rango_MA){
@@ -394,7 +395,7 @@ function load_filters(){
                 else if(json.datos[i].sim_Rango_A === '> '){
                   if(json.datos[i].desercion > json.datos[i].num_Rango_A){
                     $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
-                    
+
                   }
                   else{
                     $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].desercion+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
@@ -427,7 +428,7 @@ function load_filters(){
               }
             //-----------------------------------------------------------------
             $("#tableres").append('</tr>');
-          }          
+          }
           columnTwoGraph(json.datos,'divgraph1','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
           lineTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],"Deserción","Retención");
           gaugesTwoAxesGraph(json.datos[0].desercion,json.datos[0].retencion,'divgraph3')

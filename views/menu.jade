@@ -8,7 +8,7 @@ block content
   #modallogin.modal.fade.bd-example-modal-lg
     .modal-dialog
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='false') ×
           h3#modal-title.modal-title.title Iniciar Sesión.
@@ -33,7 +33,7 @@ block content
   #modalrestart.modal.fade.bd-example-modal-lg
     .modal-dialog
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', onclick='openmodallogin()', aria-label='Close')
             span(aria-hidden='true') ×
           h3#modal-title.modal-title.title Recuperar Contraseña.
@@ -53,7 +53,7 @@ block content
   #modaluploadperiodo.modal.fade.bd-example-modal-lg
     .modal-dialog
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Carga Archivo Deserción por Periodo.
@@ -72,7 +72,7 @@ block content
   #modaluploadcohorte.modal.fade.bd-example-modal-lg
     .modal-dialog
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Carga Archivo Deserción por Cohorte.
@@ -91,7 +91,7 @@ block content
   #modaluploadsatisfaccion.modal.fade.bd-example-modal-lg
     .modal-dialog
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Carga Archivo Nivel de Satisfacción.
@@ -110,7 +110,7 @@ block content
   #modaluploadFormacion.modal.fade.bd-example-modal-lg
     .modal-dialog
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Carga Archivo Nivel de Formacion Docentes.
@@ -124,28 +124,6 @@ block content
             span
             p
           a(href='download/Formato\ datos\ Formacion\ Docentes.csv' class='vinculoFormato') Descargar Formato
-  
-  //modal de ayuda 
-  #modalhelp.modal.fade.bd-example-modal-lg
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button.close(type='button', aria-label='Close', data-dismiss='modal')
-            span(aria-hidden='true') ×
-          h3#modal-title.modal-title Ayuda
-            span.glyphicon.glyphicon-question-sign(aria-hidden='true')
-        #modal-body.modal-body
-          .row
-            center.col-md-12
-              a.btn.btn-primary.btn-xs(href="#") Manual de Usuario 
-                span.glyphicon.glyphicon-file(aria-hidden='true')
-            br
-            .col-md-12
-              iframe#video(width='90%', height='350', src='https://www.youtube.com/embed/fLZ3L9MIXAQ', frameborder='1', allowfullscreen='false')
-            br
-            .col-md-12(style='text-align:right')
-              a.btn.btn-success.btn-xs(href='javascript:$("#modalabout").modal("show"); $("#modalhelp").modal("hide");') Acerca de  
-                span.glyphicon.glyphicon-info-sign(aria-hidden='true')
     
   //modal acerca de
   #modalabout.modal.fade.bd-example-modal-lg
@@ -298,7 +276,7 @@ block content
                   | Guias de uso
               li.divider
               li
-                a(href='javascript:$("#modalabout").modal("show");')
+                a(href='#' onclick='openabout()')
                   | Acerca De
          p.navbar-text.navbar-right
            a.logout(href!=refe)!=textmsg

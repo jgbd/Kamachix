@@ -121,9 +121,9 @@ function getPDF(){
   atrind.push(tabres);
 
   var txtcal = $('#txtcal').tinymce().save();
-  var txtlec = $('#txtlec').tinymce().save();  
+  var txtlec = $('#txtlec').tinymce().save();
   //
-  tinymce.triggerSave();  
+  tinymce.triggerSave();
   // //se saca la info de la calificacion y lectura del reporte
   // //.replace(/\n/g,'<br>'))
   atrind.push(txtcal);
@@ -310,6 +310,11 @@ function saveReport(){
      }
    }
   })
+}
+
+//abre modal acerca de
+function openabout(){
+  $("#modalabout").modal('show');
 }
 
 //abre el modal de reportes
