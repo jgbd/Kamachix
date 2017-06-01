@@ -116,14 +116,14 @@ block resto
   #myModal.modal.fade
       .modal-dialog
         .modal-content
-          .modal-header
+          .modal-header.headerModal
             button.close(type='button', data-dismiss='modal', aria-label='Close')
               span(aria-hidden='true') ×
             h4#modal-title.modal-title Error De Filtros
           #modal-body.modal-body
-            p No seleccione el mismo año dos veces 
+            p#messageError 
           .modal-footer
-            button.btn.btn-primary(type='button', onclick='hidenmodal()') Aceptar
+            button.btn.btn-success(type='button', onclick='hidenmodal()') Aceptar
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
   //modal para los infomes 
