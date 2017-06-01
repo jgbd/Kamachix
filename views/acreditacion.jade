@@ -33,13 +33,12 @@ block resto
   #divupdate.modal.fade.bd-example-modal-lg
     .modal-dialog
       .modal-content
-        .modal-header
+        .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
           h4#modal-title.modal-title Estado de Acreditación
         .modal-body
           form#frmupdate(method='POST' action='actualizaAltaCalidad')
-            br
             table.table.table-hover.table-bordered.table-responsed
               #flag
               tr
@@ -55,9 +54,8 @@ block resto
                 td Periodo (Años):
                 td#per
               tr  
-                td(colspan="2")
-                  input(type='submit' value='Acreditar' class='btn btn-info' )
-        .modal-footer
+                td(colspan="2",style='border: hidden')
+                  input(type='submit' value='Actualizar' class='btn btn-success' )
   .col-md-8
     h3 Panorama General Programas Acreditados en Alta Calidad
     br
@@ -132,14 +130,14 @@ block resto
   #myModal.modal.fade
       .modal-dialog
         .modal-content
-          .modal-header
+          .modal-header.headerModal
             button.close(type='button', data-dismiss='modal', aria-label='Close')
               span(aria-hidden='true') ×
             h4#modal-title.modal-title Error De Filtros
           #modal-body.modal-body
-            p No seleccione el mismo año dos veces 
+            p#messageError 
           .modal-footer
-            button.btn.btn-primary(type='button', onclick='hidenmodal()') Aceptar
+            button.btn.btn-success(type='button', onclick='hidenmodal()') Aceptar
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
   //modal para los informes 

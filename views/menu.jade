@@ -125,7 +125,6 @@ block content
             p
           a.acol(href='download/Formato\ datos\ Formacion\ Docentes.csv' class='vinculoFormato') Descargar Formato
   
-     
   //modal acerca de
   #modalabout.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
@@ -281,7 +280,7 @@ block content
                   | Guias de uso
               li.divider
               li
-                a(href='javascript:$("#modalabout").modal("show");')
+                a(href='#' onclick='openabout()')
                   | Acerca De
          p.navbar-text.navbar-right
            a.logout(href!=refe)!=textmsg
