@@ -555,7 +555,10 @@ function Upd_KPI(anho){//actualiza kpi en presencia de más de un programa acred
 }
 
 function Upd_Warning_Accreditation(aviso,cod,gravedad){//actualiza estado de advertencia para enviar a correo electrónico
-  if (cod<100) cod='0'+cod;
+  if (cod<100) {
+    if (cod<10) cod='00'+cod;
+    else cod='0'+cod;
+  }
   var formData = {
     'aviso': aviso,
     'codigo': cod,
