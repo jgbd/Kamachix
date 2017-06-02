@@ -451,7 +451,7 @@ function Load_Update(){//carga datos obtenidos del formulario de ingreso de prog
   if (reacredited){
     Supr_Accreditation(codigo);//desactiva programa acreditado si este ya expiró
   }
-  Upd_Warning_Accreditation(40,codigo,0);
+  Upd_Warning_Accreditation(40,codigo,0);//actualiza estado de advertencia para enviar a correo electrónico
   //se coloca los datos del form en el formato adecuado para enviar al server
   var formData = {
     'codigo': codigo,
