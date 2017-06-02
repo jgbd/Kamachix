@@ -41,7 +41,7 @@ router.get('/', function(req, res, next) {
       if(err) {
         return console.error('error running query', err);
       }
-      console.log(result);
+      //console.log(result);
       res.json(result);
     });
   });

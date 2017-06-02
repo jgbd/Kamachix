@@ -288,9 +288,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
             $("#tableresprogram").append('<td><img id="est" src="/images/red.svg" alt="RED" title="Acreditación a punto de expirar en '+intervalo+' días"></td>');
             $("#tableresprogram").append('<td style="border: inset 0pt"><span class="btn btn-warning btn-small">'+
                                               '<a style=, onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+','+json.rows[j].periodo+',1,40)">'+'<img title="ReAcreditar" alt="ReAcreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
-            if(intervalo<=365){
               Upd_Warning_Accreditation(aviso,codigo,2);//actualiza estado de advertencia para enviar a correo electrónico
-            }
           }
           else if(intervalo>365 && intervalo<=730){
             $("#tableresprogram").append('<td><img id="est" src="/images/orange.svg" alt="ORANGE" title="Acreditado hasta dentro de '+intervalo+' días"></td>');
@@ -449,9 +447,9 @@ function Load_Update(){//carga datos obtenidos del formulario de ingreso de prog
   //se obtiene los valores de las input en variables
   var codigo = $("#cod1").val(), inicio= $("#ini1").val(), periodo = $("#per1").val(), reacredited = $("#flag1").val(), warning = $("#warning1").val();
   if (reacredited){
+    Upd_Warning_Accreditation(40,codigo,0);//actualiza estado de advertencia para enviar a correo electrónico
     Supr_Accreditation(codigo);//desactiva programa acreditado si este ya expiró
   }
-  Upd_Warning_Accreditation(40,codigo,0);//actualiza estado de advertencia para enviar a correo electrónico
   //se coloca los datos del form en el formato adecuado para enviar al server
   var formData = {
     'codigo': codigo,
