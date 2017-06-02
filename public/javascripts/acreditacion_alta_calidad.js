@@ -277,8 +277,8 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
 
         //--Verificación y muestra de etiquetas de estado de los programas acreditados en función de días restantes de expiración--------------------------------------------------------------------------------------------
         if(intervalo<0){
-          Supr_Accreditation(json.rows[j].programa);//desactiva programa acreditado si este ya expiró
           Upd_Warning_Accreditation(json.rows[j].departamento,json.rows[j].programa,2);//actualiza estado de advertencia para enviar a correo electrónico
+          Supr_Accreditation(json.rows[j].programa);//desactiva programa acreditado si este ya expiró
         }
         else {
           $("#tableresprogram").append('<td>'+json.rows[j].abreviatura+'</td>');
@@ -288,12 +288,12 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
             $("#tableresprogram").append('<td><img id="est" src="/images/red.svg" alt="RED" title="Acreditación a punto de expirar en '+intervalo+' días"></td>');
             $("#tableresprogram").append('<td style="border: inset 0pt"><span class="btn btn-warning btn-small">'+
                                               '<a style=, onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+','+json.rows[j].periodo+',1,40)">'+'<img title="ReAcreditar" alt="ReAcreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
-              Upd_Warning_Accreditation(aviso,codigo,2);//actualiza estado de advertencia para enviar a correo electrónico
+            Upd_Warning_Accreditation(aviso,codigo,2);//actualiza estado de advertencia para enviar a correo electrónico
           }
           else if(intervalo>365 && intervalo<=730){
             $("#tableresprogram").append('<td><img id="est" src="/images/orange.svg" alt="ORANGE" title="Acreditado hasta dentro de '+intervalo+' días"></td>');
             $("#tableresprogram").append('<td style="border: inset 0pt">');
-            Upd_Warning_Accreditation(aviso,codigo,1);//actualiza estado de advertencia para enviar a correo electrónico
+            if (aviso==40) Upd_Warning_Accreditation(aviso,codigo,1);//actualiza estado de advertencia para enviar a correo electrónico
           }
           else{
             $("#tableresprogram").append('<td><img id="est" src="/images/verde.svg" alt="GREEN" title="Acreditado"></td>');
