@@ -51,6 +51,7 @@ var filtredconsultationaccreditation = require('./routes/consultaFiltradaAcredit
 var insertionaccreditation = require('./routes/actualizaAltaCalidad'); //inserta nuevo programa acreditado
 var deactivateaccreditation = require('./routes/desactivaAltaCalidad'); //desactiva programa acreditado en caso de perdida de vigencia (update)
 var updatekpiaccreditation = require('./routes/actualizaKPIAcreditacion'); //actualiza kpi general de acreditación
+var updatewarninghighquality = require('./routes/actualizaAvisoAltaCalidad'); //actualiza kpi general de acreditación
 
 //para controlar todo lo del KPI estudiantes por docentes tiempo completo
 var filtredconsultationaccreditationstudentsperteacher = require('./routes/consultaFiltradaEstudiantesDocentes'); //consulta de filtros para estudiantes por docente tiempo completo
@@ -162,6 +163,7 @@ app.use('/actualizaAltaCalidad',insertionaccreditation);
 app.use('/actualizaKPIAcreditacion',updatekpiaccreditation);
 app.use('/actualizaDocentesTC',insertionstudentsperteacher);
 app.use('/actualizaKPIDocentesTC',updatekpistudentsperteacher);
+app.use('/actualizaAvisoAltaCalidad',updatewarninghighquality);
 
 //datos oscar
 app.use('/formacion',formacion); //visualizacion del KPI nivel de formacion

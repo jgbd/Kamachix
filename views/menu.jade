@@ -132,32 +132,33 @@ block content
         .modal-header.headerModal
           button.close(type='button', aria-label='Close', data-dismiss='modal')
             span(aria-hidden='true') ×
-          h3#modal-title.modal-title Acerca de 
+          h3#modal-title.modal-title Acerca de... 
             span.glyphicon.glyphicon-info-sign(aria-hidden='true')
         #modal-body.modal-body.modalBackground
           .row.modal1
             div           
               h3 Equipo de Desarrollo              
               .col-lg-4
-                  img.img-circle(src='/images/1.jpg', alt='Generic placeholder image', style='width: 140px; height: 140px;')
-                  h4 Oscar Erazo Carlosama
-                  p oscare2193@hotmail.com               
-              .col-lg-4
                   img.img-circle(src='/images/2.jpg', alt='Generic placeholder image', style='width: 140px; height: 140px;')
                   h4 Juan Bastidas Delgado
-                  p juanbasdel@udenar.edu.co
+                  a(style='color:black',href='mailto:juanbasdel@udenar.edu.co') juanbasdel@udenar.edu.co
               .col-lg-4
-                  img.img-circle(src='/images/3.jpg', alt='Generic placeholder image', style='width: 140px; height: 140px;')
+                  img.img-circle(src='/images/1.jpg', alt='Generic placeholder image', style='width: 140px; height: 140px;')
+                  h4 Oscar Erazo Carlosama
+                  a(style='color:black',href='mailto:oscare2193@hotmail.com') oscare2193@hotmail.com               
+              .col-lg-4
+                  img.img-circle(src='/images/3.png', alt='Generic placeholder image', style='width: 140px; height: 140px;')
                   h4 Stephen Molina Martinez
-                  p 1stephenmm@udenar.edu.co                             
+                  a(style='color:black',href='mailto:1stephenmm@udenar.edu.co') 1stephenmm@udenar.edu.co                             
               .col-lg-12
                 hr(style='color:black;')
-                h3 Director de Tesis
+                h3 Director de Trabajo de grado
               .col-lg-3
               .col-lg-6
                   img.img-circle(src='/images/4.jpg', alt='Generic placeholder image', style='width: 140px; height: 140px;')
                   h4 Ricardo Timaran Pereira
                   p Phd
+                  a(style='color:black',href='mailto:siritimar@gmail.com') siritimar@gmail.com
               .col-lg-3
             
             .col-md-12
@@ -173,6 +174,22 @@ block content
               col-md-4
                 a(title='logo acreditacion', href='http://acreditacion.udenar.edu.co/' target='_blank')
                   img(src='/images/acreditacion.png', alt='logo acreditacion', style='width: 15%; height: 30%;')                
+            .col-md-12
+              hr
+              ul
+                col-md-3
+                a(title='Ministerio de Educación', href='http://www.mineducacion.gov.co/' target='_blank')
+                  img(src='/images/MEN.png', alt='logo MEN', style='width: 15%; height: 30%;')
+                col-md-3
+                a(title='Node.js®', href='http://www.nodejs.org/' target='_blank')
+                  img(src='/images/nodejs.png', alt='logo NodeJS', style='width: 15%; height: 30%;')
+                col-md-3
+                a(title='amCharts', href='https://www.amcharts.com/' target='_blank')
+                  img(src='/images/amcharts1.png', alt='logo amcharts', style='width: 15%; height: 30%;')
+                col-md-3
+                a(title='jsreport', href='https://jsreport.net/' target='_blank')
+                  img(src='/images/jsreport.png', alt='logo jsreport', style='width: 15%; height: 30%;')
+                p © 2016-2017 Kamachix. Derechos Reservados.
   
   //contiene el head y el menu con los nombres de los indicadores 
   
@@ -281,7 +298,7 @@ block content
               li.divider
               li
                 a(href='#' onclick='openabout()')
-                  | Acerca De
+                  | Acerca De...
          p.navbar-text.navbar-right
            a.logout(href!=refe)!=textmsg
          p.navbar-text.navbar-right
