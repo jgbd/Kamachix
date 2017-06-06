@@ -489,9 +489,9 @@ function opendivupdate(cod,iniday,inimonth,iniyear,per,flag,warning){//carga for
   else
     $("#ini").html('<td data-provide="datepicker" data-date-language="es" data-date-start-date='+iniday+'/'+inimonth+'/'+(iniyear+per)+'><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
   if(per==0)
-    $("#per").html('<input type="number" pattern="[1-9]" id="per1" value='+1+' min="1" max="9" class="form-control" required>');
+    $("#per").html('<input type="number" pattern="[1-9]" id="per1" value='+1+' min="3" max="9" class="form-control" required>');
   else
-    $("#per").html('<input type="number" pattern="[1-9]" id="per1" value='+per+' min="1" max="9" class="form-control" required>');
+    $("#per").html('<input type="number" pattern="[1-9]" id="per1" value='+per+' min="3" max="9" class="form-control" required>');
   $("#divupdate").modal('show');
 }
 
