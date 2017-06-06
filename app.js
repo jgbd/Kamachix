@@ -75,8 +75,10 @@ var consulta_update_relacionTCHC = require('./routes/consulta_update_relacionTCH
 
 
 //comtrola informacion manuales_indicadores
-
 var manual = require('./routes/manuales.js');
+
+//controla en envio de correo de alertas de acreditados
+var mail = require('./routes/alertaCorreo.js');
 
 //aqui se crea el framework de express
 var app = express();
@@ -148,7 +150,6 @@ app.use('/filtroscohorte',filtercohorte); //consulta filtros desercion cohorte
 app.use('/consultacohorte',consultationcohorte );//por get hace el primer llenado de datos y
                                                 //por post lo filtra todo desde db
 
-
 //datos stephen para cada ves que se llaman una url asigne el archivo router adecuado
 app.use('/acreditacion',acreditacion);
 app.use('/estudiantesDocente',studentsPerTeacher);
@@ -184,6 +185,8 @@ app.use('/uploadfileperiodo',uploadfileperiod);
 //manuales
 app.use('/manuales',manual);
 
+//alerta Correo
+app.use('/alertaCorreo',mail);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
