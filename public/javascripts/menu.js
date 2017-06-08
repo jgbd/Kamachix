@@ -7,6 +7,10 @@ $(document).ready(function(){
   //se ejecuta al submit de el boton para cargar el archivo de informacion satisfaccion
   $('#uploadformsatisfaccion').submit(function(event){
     var cx = comprueba_extension($('#filesatisfaccion').val());
+    $('#mesage span').removeClass('green');
+    $('#mesage span').addClass('red');
+    $('#mesage p').removeClass('green');
+    $('#mesage p').addClass('red');
     if(cx===0) {
       $('#mesage span').addClass('glyphicon glyphicon-alert');
       $('#mesage p').html('Seleccione un archivo!!');
@@ -24,6 +28,10 @@ $(document).ready(function(){
   //se ejecuta al submit de el boton para cargar el archivo de informacion cohorte
   $('#uploadformcohorte').submit(function(event){
     var cx = comprueba_extension($('#filescohorte').val());
+    $('#mesage span').removeClass('green');
+    $('#mesage span').addClass('red');
+    $('#mesage p').removeClass('green');
+    $('#mesage p').addClass('red');
     if(cx===0) {
       $('#mesage span').addClass('glyphicon glyphicon-alert');
       $('#mesage p').html('Seleccione un archivo!!');
@@ -41,6 +49,10 @@ $(document).ready(function(){
   //se ejecuta al submit de el boton para cargar el archivo de informacion periodo
   $('#uploadformperiodo').submit(function(event){
     var cx = comprueba_extension($('#filesperiodo').val());
+    $('#mesage span').removeClass('green');
+    $('#mesage span').addClass('red');
+    $('#mesage p').removeClass('green');
+    $('#mesage p').addClass('red');
     if(cx===0) {
       $('#mesage span').addClass('glyphicon glyphicon-alert');
       $('#mesage p').html('Seleccione un archivo!!');
@@ -58,6 +70,10 @@ $(document).ready(function(){
   //se ejecuta al submit de el boton para cargar el archivo de informacion del nivel de formacion docentes
   $('#uploadformacion').submit(function(event){
     var cx = comprueba_extension($('#fileformacion').val());
+    $('#mesage span').removeClass('green');
+    $('#mesage span').addClass('red');
+    $('#mesage p').removeClass('green');
+    $('#mesage p').addClass('red');
     if(cx===0) {
       $('#mesage span').addClass('glyphicon glyphicon-alert');
       $('#mesage p').html('Seleccione un archivo!!');
@@ -409,27 +425,54 @@ function uploadatareport(serialindi){
 
 //abre modal de cargar datos satisfaccion
 function openmodaluploadsatisfaccion(){
+  $('#mesage span').removeClass('green');
+  $('#mesage span').addClass('red');
+  $('#mesage p').removeClass('green');
+  $('#mesage p').addClass('red');
+  $('#mesage span').removeClass('glyphicon glyphicon-alert');
+  $('#mesage span').removeClass('glyphicon glyphicon-ok');
+  $('#mesage span').removeClass('glyphicon glyphicon-remove')
+  $('#mesage p').html('');
   $("#modaluploadsatisfaccion").modal('show');
-  $('#mesage').html("");
 }
 
 //abre modal para cargar datos de formacion docentes
 function openmodaluploadFormacion(){
+  $('#mesage span').removeClass('green');
+  $('#mesage span').addClass('red');
+  $('#mesage p').removeClass('green');
+  $('#mesage p').addClass('red');
+  $('#mesage span').removeClass('glyphicon glyphicon-alert');
+  $('#mesage span').removeClass('glyphicon glyphicon-ok');
+  $('#mesage span').removeClass('glyphicon glyphicon-remove')
+  $('#mesage p').html('');
   $("#modaluploadFormacion").modal('show');
-  $('#mesage').html("");
-
 }
 
 //abre modal cargar datos desercion por cohorte
 function openmodaluploadcohorte(){
+  $('#mesage span').removeClass('green');
+  $('#mesage span').addClass('red');
+  $('#mesage p').removeClass('green');
+  $('#mesage p').addClass('red');
+  $('#mesage span').removeClass('glyphicon glyphicon-alert');
+  $('#mesage span').removeClass('glyphicon glyphicon-ok');
+  $('#mesage span').removeClass('glyphicon glyphicon-remove')
+  $('#mesage p').html('');
   $("#modaluploadcohorte").modal('show');
-  $('#mesage').html("");
 }
 
 //abre modal cargar datos desercion por periodo
 function openmodaluploadperiodo(){
+  $('#mesage span').removeClass('green');
+  $('#mesage span').addClass('red');
+  $('#mesage p').removeClass('green');
+  $('#mesage p').addClass('red');
+  $('#mesage span').removeClass('glyphicon glyphicon-alert');
+  $('#mesage span').removeClass('glyphicon glyphicon-ok');
+  $('#mesage span').removeClass('glyphicon glyphicon-remove')
+  $('#mesage p').html('');
   $("#modaluploadperiodo").modal('show');
-  $('#mesage').html("");
 }
 
 //abre modal para login de la aplicacion
@@ -441,6 +484,8 @@ function openmodallogin(){
 //abre modal cambio contraseña
 function openmodalrestart(){
   $("#modallogin").modal('hide');
+  $('#resrecover').html('');
+  $("#txtreuser").val("");
   $("#modalrestart").modal('show');
 }
 

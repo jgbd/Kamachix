@@ -6,7 +6,7 @@ que se van creando sea por clase por id o tipo */
     src:url("/fonts/Oswald-Bold.ttf");
 }
 
-@font-face {
+/*@font-face {*/
     font-family: smalltitle;
     src:url("/fonts/AnticSlab-Regular.ttf");
 }
@@ -290,4 +290,12 @@ a:visited {
 #more:hover{
   color: #a6a0f7;
   margin-right: 5px;
+}
+
+.green{
+  color: green;
+}
+
+.red{
+  color: red;
 }

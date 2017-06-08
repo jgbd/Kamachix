@@ -4,7 +4,7 @@ var configdb = require("../config/dbConfig.js");
 var AES = require("crypto-js/aes");
 var SHA256 = require("crypto-js/sha256");
 'use strict';
-const nodemailer = require('nodemailer');
+var configmail = require("../config/emailconfig.js");
 
 //variable que controla el pool de conexiones
 var pool = configdb.configdb();
@@ -31,17 +31,17 @@ router.post('/', function(req, res, next) {
       //estos seran los datos de cada objeto o programa devuelto
       if(result.rowCount>0){
         // create reusable transporter object using the default SMTP transport
-        let transporter = nodemailer.createTransport({
-            service: '"Outlook365"',
-            auth: {
-                user: 'acreditacioninstitucional@udenar.edu.co',
-                pass: 'Acreditacion2016'
-            }
-        });
-
+        // let transporter = nodemailer.createTransport({
+        //     service: '"Outlook365"',
+        //     auth: {
+        //         user: 'acreditacioninstitucional@udenar.edu.co',
+        //         pass: 'Acreditacion2016'
+        //     }
+        // });
+        let transporter = configmail.configmail();
         // setup email data with unicode symbols
         let mailOptions = {
-            from: '"Acreditacion" <acreditacioninstitucional@udenar.edu.co>', // sender address
+            from: '"Kamachix" <indicadoresacademicos@udenar.edu.co>', // sender address
             to: 'juanbasdel@gmail.com', // list of receivers
             subject: 'Recuperar contraseña kamachix ✔', // Subject line
             text: 'http://190.254.4.49:3000/recover?clave='+result.rows[0].encriptado+'&fe='+fec,

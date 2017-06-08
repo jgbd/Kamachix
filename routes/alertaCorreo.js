@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var configdb = require("../config/dbConfig.js");
-const nodemailer = require('nodemailer');
+var configmail = require("../config/emailconfig.js");
 
 //variable que controla el pool de conexiones
 var pool = configdb.configdb();
@@ -55,21 +55,15 @@ router.post('/', function(req, res, next) {
         texto+='<center><h2 style="color:orange">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '</b> Tiene menos de dos años para reacreditarse. Verifique.</p>';
 
         var sqlup = 'UPDATE public.acreditacion_alta_calidad SET mail = true' +
-                    ' WHERE programa = $1 '
+                    ' WHERE programa = $1 AND activo=true'
       } else{
         texto+='<center><h2 style="color:red">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '<b> Tiene menos de un año para reacreditarse. Verifique.</p>';
 
         var sqlup = 'UPDATE public.acreditacion_alta_calidad SET mail = false' +
-                    ' WHERE programa = $1 '
+                    ' WHERE programa = $1 AND activo=true '
       }
       //envio mensajes
-      let transporter = nodemailer.createTransport({
-          service: '"Outlook365"',
-          auth: {
-              user: 'acreditacioninstitucional@udenar.edu.co',
-              pass: 'Acreditacion2016'
-          }
-      });
+      let transporter = configmail.configmail();
       let mailOptions = {
           from: '"Acreditacion" <acreditacioninstitucional@udenar.edu.co>', // sender address
           to: 'juanbasdel@udenar.edu.co', // list of receivers

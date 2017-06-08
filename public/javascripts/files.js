@@ -51,7 +51,10 @@ function loadfile(url, name){
        }
        else {
          if(data.count!='0'){
-           $('#mesage').css('color','green');
+           $('#mesage span').removeClass('red');
+           $('#mesage span').addClass('green');
+           $('#mesage p').removeClass('red');
+           $('#mesage p').addClass('green');
            $('#mesage span').removeClass('glyphicon glyphicon-alert')
            $('#mesage span').removeClass('glyphicon glyphicon-remove')
            $('#mesage span').addClass('glyphicon glyphicon-ok')
