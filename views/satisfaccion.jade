@@ -3,9 +3,23 @@ extends menu
 block title
   title!=title
 block resto
+  //boton para abrir modal de filtros
   .col-md-2(style='text-align:left')
     input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
-    br
+  //modal info 
+  #modalinfo.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4 Info 
+            span.glyphicon.glyphicon-info-sign
+        #modal-body.modal-body
+          p
+            | Porcentaje de estudiantes de los diferentes programas académicos   
+            | que califican la Formación Académica como satisfactoria.
+  //modal de filtros
   #divfilter.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
       .modal-content
@@ -30,12 +44,15 @@ block resto
             br
             br
             input(type='submit' value='Filtrar' class='btn btn-success' )
-        
+  //titulo de Indicador 
   .col-md-8
-    h3 Nivel de Satisfacción de:
+    h3 
+      span#more.glyphicon.glyphicon-question-sign(onclick='openinfo()')
+      | Nivel de Satisfacción del Proceso de Formación Académica:
     h3#programa
     br
   .col-md-2
+  //division para graficos y contenido
   .col-md-12
     .col-md-6
       #divtable
@@ -70,6 +87,7 @@ block resto
       .col-md-3
     .col-md-6
       #divgraph3
+  //modal de respues a mal filtro
   #myModal.modal.fade
     .modal-dialog
       .modal-content

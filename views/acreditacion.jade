@@ -2,9 +2,23 @@ extends menu
 block title
   title!=title
 block resto
+  //boton Filtrar
   .col-md-2(style='text-align:left')
       input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
       br
+  //modal info 
+  #modalinfo.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4 Info 
+            span.glyphicon.glyphicon-info-sign
+        #modal-body.modal-body
+          p
+            | Porcentaje de los programas académicos acreditados en alta calidad   
+  //modal de Filtros
   #divfilter.modal.fade.bd-example-modal-lg
       .modal-dialog.modal-lg
         .modal-content
@@ -57,7 +71,9 @@ block resto
                 td(colspan="2",style='border: hidden')
                   input(type='submit' value='Actualizar' class='btn btn-success' )
   .col-md-8
-    h3 Panorama General Programas Acreditados en Alta Calidad
+    h3 
+      span#more.glyphicon.glyphicon-question-sign(onclick='openinfo()')
+      | Panorama General Programas Acreditados en Alta Calidad
     br
   .col-md-2
   .col-md-12

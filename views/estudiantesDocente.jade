@@ -2,8 +2,23 @@ extends menu
 block title
   title!=title
 block resto
+  //boton para abrir filtros
   .col-md-2(style='text-align:left')
       input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
+  //modal info 
+  #modalinfo.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4 Info 
+            span.glyphicon.glyphicon-info-sign
+        #modal-body.modal-body
+          p
+            | Establecer el número de docentes Tiempo Completo 
+            | con relación a la cantidad de Estudiantes matriculados en la Universidad de Nariño.
+  //modal de filtros
   #divfilter.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
       .modal-content
@@ -28,9 +43,10 @@ block resto
             br
             br
             input(type='submit' value='Filtrar' class='btn btn-success' )        
-  //#divupdate.modal.fade.bd-example-modal-lg
   .col-md-8
-    h3 Panorama General Estudiantes por Docente
+    h3 
+      span#more.glyphicon.glyphicon-question-sign(onclick='openinfo()')
+      | Panorama General Estudiantes por Docente
     br
   .col-md-2
   .col-md-12

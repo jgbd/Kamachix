@@ -2,6 +2,7 @@ extends menu
 block title
   title!=title
 block resto
+  //modal error filtros
   #myModal.modal.fade
     .modal-dialog
       .modal-content
@@ -13,6 +14,7 @@ block resto
           p#messageError
         .modal-footer
           button.btn.btn-success(type='button', onclick='hidenmodal()') Aceptar
+  //modal de filtros
   #modalfilter.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
       .modal-content
@@ -37,12 +39,26 @@ block resto
             br
             br
             input(type='submit' value='Filtrar' class='btn btn-success' )
-           
+  //modal info 
+  #modalinfo.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4 Info 
+            span.glyphicon.glyphicon-info-sign
+        #modal-body.modal-body
+          p
+            | Medir la capacidad de retención del Proceso “Formación Académica” por periodo
+            | (Anual) 
   .col-md-2(style='text-align:left')
     button#btnfilter.btn.btn-success.btn-small(onclick='opendivfilter()') Filtros
   
   .col-md-8(style='text-align:center')
-    h3 Nivel de Desercion por Periodo de :
+    h3 
+      span#more.glyphicon.glyphicon-question-sign(onclick='openinfo()')
+      | Nivel de Desercion por Periodo de :
     h3#programa
   .col-md-2  
   .col-md-12

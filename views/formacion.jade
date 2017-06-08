@@ -2,9 +2,11 @@ extends menu
 block title
   title!=title
 block resto
+  //boton abrir filtros
   .col-md-2(style='text-align:left')
     input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros')
     br
+  //modal de filtros
   #divfilter.modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
     .modal-dialog.modal-lg
       .modal-content
@@ -25,9 +27,22 @@ block resto
                                          
             .col-md-4                      
             input(type='submit' value='Filtrar' class='btn btn-success')
-    
+  //modal info 
+  #modalinfo.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4 Info 
+            span.glyphicon.glyphicon-info-sign
+        #modal-body.modal-body
+          p
+            | Incrementar el nivel de formación de los docentes Tiempo Completo de la 
+            | Universidad de Nariño.
   .col-md-8
       h3
+        span#more.glyphicon.glyphicon-question-sign(onclick='openinfo()')
         |Panorama General del Nivel de Formacion Docentes de los Ultimos 5 Años 
       br
   .col-md-2

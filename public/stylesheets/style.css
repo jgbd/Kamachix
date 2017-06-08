@@ -13,20 +13,20 @@ que se van creando sea por clase por id o tipo */
 
 .modalBackground{
   background-color:#EBEBED;
-  
+
 }
 
 .modal1{
   color:black;
 }
 
-hr { 
-   border-top: 2px solid green; 
-   border-bottom: 2px solid green; 
-   border-left:none; 
-   border-right:none; 
-   height: 6px; 
- } 
+hr {
+   border-top: 2px solid green;
+   border-bottom: 2px solid green;
+   border-left:none;
+   border-right:none;
+   height: 6px;
+ }
 
 .title{
   font-family: titulo;
@@ -280,4 +280,14 @@ a:visited {
 #modalinfo, #modalinfobody{
   overflow-y: scroll;
   overflow-x: scroll;
+}
+
+#more{
+  color: #918e8e;
+  margin-right: 5px;
+}
+
+#more:hover{
+  color: #a6a0f7;
+  margin-right: 5px;
 }

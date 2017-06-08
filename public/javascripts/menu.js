@@ -443,3 +443,8 @@ function openmodalrestart(){
   $("#modallogin").modal('hide');
   $("#modalrestart").modal('show');
 }
+
+//abre modla informacion
+function openinfo(){
+  $('#modalinfo').modal('show');
+}

@@ -14,6 +14,19 @@ block resto
           p#messageError
         .modal-footer
           button.btn.btn-success(type='button', onclick='hidenmodal()') Aceptar
+  //modal info 
+  #modalinfo.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4 Info 
+            span.glyphicon.glyphicon-info-sign
+        #modal-body.modal-body
+          p
+            | Medir la capacidad de retención del Proceso “Formación Académica” por cohorte
+            | (Semestral) 
   //modal para los filtros 
   #modalfilter.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
@@ -46,7 +59,9 @@ block resto
     button#btnfilter.btn.btn-success.btn-small(onclick='opendivfilter()') Filtros
   //divicion que contiene todo el contenido de la pagina
   .col-md-8
-    h3 Nivel de Desercion por Cohorte de:
+    h3 
+      span#more.glyphicon.glyphicon-question-sign(onclick='openinfo()')
+      | Nivel de Desercion por Cohorte de:
     h3#programa
     br
   .col-md-2
