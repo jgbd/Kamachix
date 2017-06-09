@@ -491,5 +491,5 @@ function openmodalrestart(){
 
 //abre modla informacion
 function openinfo(){
-  $('#modalinfo').modal('show');
+  $('#modalmoreinfo').modal('show');
 }
