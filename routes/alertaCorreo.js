@@ -65,7 +65,7 @@ router.post('/', function(req, res, next) {
       //envio mensajes
       let transporter = configmail.configmail();
       let mailOptions = {
-          from: '"Kamachix" <indicadoresacademicos@udenar.edu.co>', // sender address
+          from: '"Indicadores Academicos Udenar" <indicadoresacademicos@udenar.edu.co>', // sender address
           to: 'juanbasdel@udenar.edu.co', // list of receivers
           subject: 'Alerta de Reacreditacion ✔', // Subject line
           text: ' ',
