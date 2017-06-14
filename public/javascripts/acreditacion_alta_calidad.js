@@ -582,14 +582,14 @@ function Upd_Warning_Accreditation(aviso,cod,gravedad){//actualiza estado de adv
 }
 
 function Send_Mail(avi,cod,grav){
-  // alert('hola')
+  alert('holamail')
   var formData = {
     'aviso': avi,
     'codigo': cod,
     'gravedad': grav
   };
   $.ajax({
-      type: "post",
+      type: "get",
       url: "alertaCorreo",
       data : formData,//señala a actualización de aviso de advertencia para correo electrónico
       dataType : 'json',

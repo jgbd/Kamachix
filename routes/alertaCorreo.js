@@ -6,20 +6,20 @@ var configmail = require("../config/emailconfig.js");
 //variable que controla el pool de conexiones
 var pool = configdb.configdb();
 
-router.post('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
   var sql = 'SELECT us.email, pr.nombre '+
             'FROM public.users us JOIN public.programas pr ON pr.departamento = us.codigo '+
             'WHERE	pr.codigo = $1 LIMIT 1 '
 
-  console.log(req.body.codigo);
+  console.log(req.query.codigo);
   var cod;
-  if(req.body.codigo<100){
-    cod='0'+req.body.codigo;
-    if(req.body.codigo<10){
+  if(req.query.codigo<100){
+    cod='0'+req.query.codigo;
+    if(req.query.codigo<10){
       cod='0'+cod;
     }
   }else {
-    cod=req.body.codigo;
+    cod=req.query.codigo;
   }
 
 
@@ -51,7 +51,7 @@ router.post('/', function(req, res, next) {
       }
 
       var texto = "";
-      if(req.body.gravedad == 1){
+      if(req.query.gravedad == 1){
         texto+='<center><h2 style="color:orange">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '</b> Tiene menos de dos años para reacreditarse. Verifique.</p>';
 
         var sqlup = 'UPDATE public.acreditacion_alta_calidad SET mail = true' +
@@ -99,12 +99,12 @@ router.post('/', function(req, res, next) {
       pool.on('error', function (err, client) {
         console.error('idle client error', err.message, err.stack)
       });
-
+      res.json('hola');
     });
   });
   //se ejecuta si el usuario o password no son correctas y no se puede conectar al SGBD
   pool.on('error', function (err, client) {
-  console.error('idle client error', err.message, err.stack)
+    console.error('idle client error', err.message, err.stack)
   });
 
 });

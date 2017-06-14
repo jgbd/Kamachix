@@ -116,7 +116,7 @@ $(document).ready(function(){
 function getPDF(){
 
   //se inicia el servidor de reportes
-  jsreport.serverUrl = 'http://190.254.4.49:5488';
+  jsreport.serverUrl = 'http://localhost:5488';
 
   //areglo para contener todo lo que se envia a el reporte
   var atrind=[];
@@ -217,28 +217,26 @@ function getPDF(){
     }
    };
 
-   jsreport.headers['Content-Type'] = "application/json " ;
-   jsreport.headers['Authorization'] = "Basic " + btoa("report:123");
+   jsreport.headers['Authorization'] = "Basic " + btoa("admin:password");
 
+   jsreport.renderAsync(request).then(function(res) {
+     console.log(res);
 
-  //  jsreport.renderAsync(request).then(function(res) {
-  //    console.log(res);
+     //open in new window
+     window.open(res.toDataURI())
+
+     //open download dialog
+     //res.download('test.pdf')
+   });
+  //  var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
    //
-  //    //open in new window
-  //    window.open(res.toDataURI())
+  //  if(!isOpera){
+  //   //  alert('hola')
+  //    jsreport.render('_blank', request);
    //
-  //    //open download dialog
-  //    res.download('test.pdf')
-  //  });
-   var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-
-   if(!isOpera){
-    //  alert('hola')
-     jsreport.render('_blank', request);
-
-   }else{
-     jsreport.download('myReport.pdf', request);
-   }
+  //  }else{
+  //    jsreport.download('myReport.pdf', request);
+  //  }
 
 }
 
