@@ -9,18 +9,18 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
   var sql = 'SELECT us.email, pr.nombre '+
             'FROM public.users us JOIN public.programas pr ON pr.departamento = us.codigo '+
-            'WHERE	pr.codigo = $1 LIMIT 1 '
+            'WHERE	pr.snies = $1 LIMIT 1 '
 
   console.log(req.query.codigo);
-  var cod;
-  if(req.query.codigo<100){
-    cod='0'+req.query.codigo;
-    if(req.query.codigo<10){
-      cod='0'+cod;
-    }
-  }else {
-    cod=req.query.codigo;
-  }
+  var cod=req.query.codigo;
+  // if(req.query.codigo<100){
+  //   cod='0'+req.query.codigo;
+  //   if(req.query.codigo<10){
+  //     cod='0'+cod;
+  //   }
+  // }else {
+  //   cod=req.query.codigo;
+  // }
 
 
   //aqui se crea la conexion a DB
@@ -40,15 +40,6 @@ router.get('/', function(req, res, next) {
       // recupera cosa para el mensaje
       var email = result.rows[0].email;
       var programa = result.rows[0].nombre;
-      if(programa.indexOf('Pasto')>-1){
-        programa = programa.replace('Pasto','')
-      }else if (programa.indexOf('Túquerres')>-1) {
-        programa = programa.replace('Túquerres','')
-      }else if (programa.indexOf('Buesaco')>-1 ) {
-        programa = programa.replace('Buesaco','')
-      }else if (programa.indexOf('Ipiales')>-1) {
-        programa = programa.replace('Ipiales','')
-      }
 
       var texto = "";
       if(req.query.gravedad == 1){

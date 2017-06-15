@@ -290,7 +290,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
             $("#tableresprogram").append('<td style="border: inset 0pt"><span class="btn btn-warning btn-small">'+
                                               '<a style=, onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+','+json.rows[j].periodo+',1,99)">'+'<img title="ReAcreditar" alt="ReAcreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
             if (gravedad==1) Upd_Warning_Accreditation(aviso,codigo,2);//actualiza estado de advertencia para enviar a correo electrónico
-            alert(gravedad + "bandera: "+banderaCorreo)
+
             if(gravedad==2 && banderaCorreo){
               Send_Mail(aviso, codigo, gravedad);
             }
@@ -299,7 +299,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
             $("#tableresprogram").append('<td><img id="est" src="/images/orange.svg" alt="ORANGE" title="Acreditado hasta dentro de '+intervalo+' días"></td>');
             $("#tableresprogram").append('<td style="border: inset 0pt">');
             if(gravedad==0) Upd_Warning_Accreditation(aviso,codigo,1);//actualiza estado de advertencia para enviar a correo electrónico
-            alert(gravedad + "bandera: "+banderaCorreo)
+
             if(gravedad==1 && !banderaCorreo){
               Send_Mail(aviso, codigo, gravedad);
             }
@@ -490,9 +490,9 @@ function opendivupdate(cod,iniday,inimonth,iniyear,per,flag,warning){//carga for
   else
     $("#ini").html('<td data-provide="datepicker" data-date-language="es" data-date-start-date='+iniday+'/'+inimonth+'/'+(iniyear+per)+'><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
   if(per==0)
-    $("#per").html('<input type="number" pattern="[1-9]" id="per1" value='+4+' min="4" max="9" class="form-control" required>');
+    $("#per").html('<select id="per1" class="form-control" > <option value="4" selected>4</option> <option value="6">6</option> </select>');
   else
-    $("#per").html('<input type="number" pattern="[1-9]" id="per1" value='+per+' min="4" max="9" class="form-control" required>');
+    $("#per").html('<select id="per1" class="form-control"> <option value="4" selected>4</option> <option value="6">6</option> </select>');
   $("#divupdate").modal('show');
 }
 
@@ -582,7 +582,7 @@ function Upd_Warning_Accreditation(aviso,cod,gravedad){//actualiza estado de adv
 }
 
 function Send_Mail(avi,cod,grav){
-  alert('holamail')
+  //alert('holamail')
   var formData = {
     'aviso': avi,
     'codigo': cod,
@@ -594,7 +594,7 @@ function Send_Mail(avi,cod,grav){
       data : formData,//señala a actualización de aviso de advertencia para correo electrónico
       dataType : 'json',
       success : function(json) {
-        alert(json);
+        console.log(json);
       }
   });
 }
