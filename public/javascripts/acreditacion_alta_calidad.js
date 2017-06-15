@@ -327,9 +327,9 @@ function Load_Not_Accredited(){//carga tabla-menú de programas no acreditados a
       $("#anhoactual2").html('<h6>Programas No Acreditados al año '+now.getFullYear()+'</h>');
       for (var j = json.rowCount-1; j >=0; j--) {
         $("#tableresprogram2").append('<tr>');
-        var codigo=parseInt(json.rows[j].codigo);
+        var codigo=parseInt(json.rows[j].snies);
         $("#tableresprogram2").append('<td>'+json.rows[j].abreviatura+'</td>');
-        $("#tableresprogram2").append('<td"><span class="btn btn-success btn-small"><a onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0,0)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
+        $("#tableresprogram2").append('<td"><span class="btn btn-success btn-small"><a onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0,0,99)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
         $("#tableresprogram2").append('</tr>');
       }
    }
@@ -490,9 +490,9 @@ function opendivupdate(cod,iniday,inimonth,iniyear,per,flag,warning){//carga for
   else
     $("#ini").html('<td data-provide="datepicker" data-date-language="es" data-date-start-date='+iniday+'/'+inimonth+'/'+(iniyear+per)+'><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
   if(per==0)
-    $("#per").html('<input type="number" pattern="[1-9]" id="per1" value='+1+' min="3" max="9" class="form-control" required>');
+    $("#per").html('<input type="number" pattern="[1-9]" id="per1" value='+4+' min="4" max="9" class="form-control" required>');
   else
-    $("#per").html('<input type="number" pattern="[1-9]" id="per1" value='+per+' min="3" max="9" class="form-control" required>');
+    $("#per").html('<input type="number" pattern="[1-9]" id="per1" value='+per+' min="4" max="9" class="form-control" required>');
   $("#divupdate").modal('show');
 }
 

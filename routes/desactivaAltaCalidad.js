@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 router.post('/', function(req, res, next) {
   var beforedata=[req.body.codigo];
   //consulta basica sin condiciones
-  var sql ='UPDATE "public"."acreditacion_alta_calidad" SET activo=false WHERE programa=$1';
+  var sql ='UPDATE "public"."acreditacion_alta_calidad" SET activo=false,mail=false WHERE programa=$1';
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
