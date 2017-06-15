@@ -8,7 +8,6 @@ $(document).ready(function(){
   Load_Accredited();//carga tabla-menú de programas acreditados al año actual
   Load_Not_Accredited();//carga tabla-menú de programas no acreditados al año actual
   Load_Year_List();//carga menú desplegable de años para el formulario de filtro
-
   //carga datos y gráficos a partir del filtro de años realizado
   $("#frmfilter").submit(function(event){
     Load_Filter();
@@ -332,8 +331,8 @@ function Load_Not_Accredited(){//carga tabla-menú de programas no acreditados a
         $("#tableresprogram2").append('<td"><span class="btn btn-success btn-small"><a onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0,0,99)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
         $("#tableresprogram2").append('</tr>');
       }
-   }
- });
+    }
+   });
 }
 
 function Load_Year_List(){//carga menú desplegable de años para el formulario de filtro
