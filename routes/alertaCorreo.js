@@ -7,8 +7,8 @@ var configmail = require("../config/emailconfig.js");
 var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
-  var sql = 'SELECT us.email, pr.nombre '+
-            'FROM public.users us JOIN public.programas pr ON pr.departamento = us.codigo '+
+  var sql = 'SELECT us.email, pr.nombre, aac.resolucion '+
+            'FROM public.users us JOIN public.programas pr ON pr.departamento = us.codigo JOIN public.acreditacion_alta_calidad aac ON pr.departamento=aac.aviso '+
             'WHERE	pr.snies = $1 LIMIT 1 '
 
   console.log(req.query.codigo);
@@ -40,15 +40,16 @@ router.get('/', function(req, res, next) {
       // recupera cosa para el mensaje
       var email = result.rows[0].email;
       var programa = result.rows[0].nombre;
+      var resolucion = result.rows[0].resolucion;
 
       var texto = "";
       if(req.query.gravedad == 1){
-        texto+='<center><h2 style="color:orange">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '</b> Tiene menos de dos años para reacreditarse. Verifique.</p>';
+        texto+='<center><h2 style="color:orange">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '</b> Tiene menos de dos años para reacreditarse (ver Resolución Nº: '+resolucion+'). Verifique.</p>';
 
         var sqlup = 'UPDATE public.acreditacion_alta_calidad SET mail = true' +
                     ' WHERE programa = $1 AND activo=true'
       } else{
-        texto+='<center><h2 style="color:red">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '<b> Tiene menos de un año para reacreditarse. Verifique.</p>';
+        texto+='<center><h2 style="color:red">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '<b> Tiene menos de un año para reacreditarse (ver Resolución Nº: '+resolucion+'). Verifique.</p>';
 
         var sqlup = 'UPDATE public.acreditacion_alta_calidad SET mail = false' +
                     ' WHERE programa = $1 AND activo=true '
