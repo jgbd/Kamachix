@@ -14,7 +14,9 @@ router.post('/', function(req, res, next) {
   console.log(req.body.codigo);
   var beforedata=[req.body.acuerdo,req.body.codigo,req.body.inicio,req.body.periodo];
   //consulta basica sin condiciones
-  var sql ='INSERT INTO "public"."acreditacion_alta_calidad" VALUES ($1,$2,$3,$4,true)';
+  var sql ='INSERT INTO "public"."acreditacion_alta_calidad"'+
+            '(resolucion,programa,inicioacreditacion,periodo,activo) '
+            +'VALUES ($1,$2,$3,$4,true)';
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);

@@ -1,0 +1,34 @@
+extends menu
+block title
+  title!=title
+block resto
+  h2 SEGUIMIENTO DE REACREDITACIÓN DE PROGRAMAS.
+  label Seleccione el programa 
+  select#lstacre
+  br 
+  label SNIES
+  br 
+  label Estado de acreditación. 
+  input#estacre(type='text' readonly)
+  br 
+  label Fecha Inicio de Acreditación. 
+  input#feciniacre(type='text' readonly)
+  label Fecha finalización de Acreditacion. 
+  input#fecfinacre(type='text' readonly)
+  br 
+  table 
+    thead 
+      tr 
+        th Fechas de Finalizacion fase de reacreditación. 
+        th Estado 
+    tbody
+      tr
+        td Primer plan de mejoramiento
+        td
+          input#finpm1(type='text' readonly)
+        td
+      tr
+      tr
+      tr
+      tr
+block scriptpage
