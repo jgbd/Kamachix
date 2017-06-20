@@ -1,5 +1,6 @@
 var now = new Date();//Hora del sistema.
 var anhoinicio=now.getFullYear();//formato string año actual
+//var anhoinicio=2016;
 var mesinicio=now.getMonth()+1;//formato string mes actual
 var diainicio=now.getDate();//formato string día actual
 
@@ -260,6 +261,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
         var codigo=parseInt(json.rows[j].programa);
         var aviso=parseInt(json.rows[j].departamento);
         var gravedad=parseInt(json.rows[j].gravedad);
+        var resolucion=parseInt(json.rows[j].resolucion);
         var banderaCorreo=json.rows[j].mail;
         //-formato especial a string para formulario de entrada por defecto de fecha inicio de acreditación-----------
         var inicio=new Date(json.rows[j].inicioacreditacion);
@@ -287,7 +289,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
           if (intervalo>0 && intervalo<=365){
             $("#tableresprogram").append('<td><img id="est" src="/images/red.svg" alt="RED" title="Acreditación a punto de expirar en '+intervalo+' días"></td>');
             $("#tableresprogram").append('<td style="border: inset 0pt"><span class="btn btn-warning btn-small">'+
-                                              '<a style=, onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+','+json.rows[j].periodo+',1,99)">'+'<img title="ReAcreditar" alt="ReAcreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
+                                              '<a style=, onCLick="opendivupdate('+resolucion+','+codigo+','+diainicio+','+mesinicio+','+anhoinicio+','+json.rows[j].periodo+',1,99)">'+'<img title="ReAcreditar" alt="ReAcreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
             if (gravedad==1) Upd_Warning_Accreditation(aviso,codigo,2);//actualiza estado de advertencia para enviar a correo electrónico
 
             if(gravedad==2 && banderaCorreo){
@@ -328,7 +330,7 @@ function Load_Not_Accredited(){//carga tabla-menú de programas no acreditados a
         $("#tableresprogram2").append('<tr>');
         var codigo=parseInt(json.rows[j].snies);
         $("#tableresprogram2").append('<td>'+json.rows[j].abreviatura+'</td>');
-        $("#tableresprogram2").append('<td"><span class="btn btn-success btn-small"><a onCLick="opendivupdate('+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0,0,99)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
+        $("#tableresprogram2").append('<td"><span class="btn btn-success btn-small"><a onCLick="opendivupdate(0,'+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0,0,99)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
         $("#tableresprogram2").append('</tr>');
       }
     }
@@ -453,7 +455,8 @@ function closedivfilter(){
 
 function Load_Update(){//carga datos obtenidos del formulario de ingreso de programa
   //se obtiene los valores de las input en variables
-  var codigo = $("#cod1").val(), inicio= $("#ini1").val(), periodo = $("#per1").val(), reacredited = $("#flag1").val(), warning = $("#warning1").val();
+  var acuerdo = $("#reso1").val(),codigo = $("#cod1").val(), inicio= $("#ini1").val(), periodo = $("#per1").val(), reacredited = $("#flag1").val(), warning = $("#warning1").val();
+  //alert(acuerdo);
   if (reacredited){
     Upd_Warning_Accreditation(99,codigo,0);//actualiza estado de advertencia para enviar a correo electrónico
     Supr_Accreditation(codigo);//desactiva programa acreditado si este ya expiró
@@ -462,7 +465,8 @@ function Load_Update(){//carga datos obtenidos del formulario de ingreso de prog
   var formData = {
     'codigo': codigo,
     'inicio': inicio,
-    'periodo': periodo
+    'periodo': periodo,
+    'acuerdo': acuerdo
   };
   $.ajax({
       type: "post", //el el tipo de peticion puede ser GET y POsT
@@ -477,21 +481,26 @@ function Load_Update(){//carga datos obtenidos del formulario de ingreso de prog
   closedivupdate();
 }
 
-function opendivupdate(cod,iniday,inimonth,iniyear,per,flag,warning){//carga formulario de ingreso-actualizacion de programa
+function opendivupdate(reso,cod,iniday,inimonth,iniyear,per,flag,warning){//carga formulario de ingreso-actualizacion de programa
   if(cod<100) cod='0'+cod;
   if(iniday<10) iniday='0'+iniday;
   if(inimonth<10) inimonth='0'+inimonth;
   $("#flag").html('<input type="hidden" id="flag1" value='+flag+' class="form-control" readonly>');
   $("#warning").html('<input type="hidden" id="warning1" value='+warning+' class="form-control" readonly>');
   $("#cod").html('<input type="text" id="cod1" value='+cod+' class="form-control" readonly>');
-  if(flag==0)
+  if(flag==0){
+    $("#reso").html('<input type="text" id="reso1" class="form-control">');
     $("#ini").html('<td data-provide="datepicker" data-date-language="es"><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
-  else
+  }
+  else{
+    //$("#reso").html('<input type="text" id="reso1" value='+reso+' pattern="[0-9]" class="form-control">');
     $("#ini").html('<td data-provide="datepicker" data-date-language="es" data-date-start-date='+iniday+'/'+inimonth+'/'+(iniyear+per)+'><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
+  }
   if(per==0)
     $("#per").html('<select id="per1" class="form-control" > <option value="4" selected>4</option> <option value="6">6</option> </select>');
-  else
-    $("#per").html('<select id="per1" class="form-control"> <option value="4" selected>4</option> <option value="6">6</option> </select>');
+  else{
+    $("#reso").html('<input type="text" id="reso1" value='+reso+' pattern="[0-9]" class="form-control">');
+    $("#per").html('<select id="per1" class="form-control"> <option value="4" selected>4</option> <option value="6">6</option> </select>');}
   $("#divupdate").modal('show');
 }
 
