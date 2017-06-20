@@ -206,6 +206,12 @@ img{
   height: 30px;
 }
 
+#btnhist{
+  border-radius: 30px;
+  width: 80px;
+  height: 30px;
+}
+
 #divsem1,#divsem2,#divsem3,#divsem4{
  	width		: 50%;
  	height		: 150px;

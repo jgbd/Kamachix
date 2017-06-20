@@ -5,7 +5,25 @@ block resto
   //boton Filtrar
   .col-md-2(style='text-align:left')
       input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
+      input#btnhist.btn.btn-warning.btn-small(type='button' value='Historico' onCLick='openhistory()')
       br
+  //modal history 
+  #modalhistory.modal.fade.bd-example-modal-lg
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4 Historico de Acreditaciones 
+            span.glyphicon.glyphicon-book
+        #modal-body.modal-body
+          table#tablehist.table.table-striped.table-bordered(cellspacing='0' width='100%')
+            thead
+              tr
+                th Programa
+                th Inicio Acreditación
+                th Fin Acreditación
+                th Activo
   //modal info 
   #modalmoreinfo.modal.fade
     .modal-dialog
@@ -283,11 +301,13 @@ block resto
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 21. CALIFICACIÓN:
             td
-              textarea#txtcal.form-control.textareaEdit(cols='40', rows='3')
+              div#txtcal.summernote
+              //textarea#txtcal.form-control.textareaEdit(cols='40', rows='3')
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 22. LECTURA DE LA EVOLUCIÓN DEL INDICADOR:
             td
-              textarea#txtlec.form-control.textareaEdit(cols='40', rows='6')
+              div#txtlec.summernote
+              //textarea#txtlec.form-control.textareaEdit(cols='40', rows='6')
           tr
             td(style='font-size: 14px;width: 15%;text-align: left;') 23. EVOLUCIÓN GRÁFICA:
             td 

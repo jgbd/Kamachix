@@ -73,6 +73,8 @@ var relacionTCHC = require('./routes/relacion_docentes');
 var filterTCHC = require('./routes/consultaTCHC');
 var consulta_update_relacionTCHC = require('./routes/consulta_update_relacionTCHC');
 
+//controla la consulta a del Historico
+var historico = require('./routes/historico.js');
 
 //comtrola informacion manuales_indicadores
 var manual = require('./routes/manuales.js');
@@ -181,6 +183,9 @@ app.use('/uploadfileformacion',uploadfileformacio);
 app.use('/uploadfilesatisfaccion',uploadfilesatisfaccion);
 app.use('/uploadfilecohorte',uploadfilecohorte);
 app.use('/uploadfileperiodo',uploadfileperiod);
+
+//historico
+app.use('/historico',historico);
 
 //manuales
 app.use('/manuales',manual);

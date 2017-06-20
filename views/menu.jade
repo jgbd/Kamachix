@@ -4,6 +4,8 @@ block css
   //css del boton de export de las graficas
   link(rel='stylesheet', href="/javascripts/amcharts/plugins/export/export.css")
   link(rel='stylesheet', href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css")
+  link(href='http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css', rel='stylesheet')
+
 block content
   //modallogin
   #modallogin.modal.fade.bd-example-modal-lg
@@ -309,9 +311,6 @@ block content
   block resto
 block scripts
     
-  //script del login
-  script( src='/javascripts/usuarios_inicio.js')
-    
   //scripts que se usan despues de login
   
   //script para crear el submenu en el navbar
@@ -344,14 +343,17 @@ block scripts
   script( type='text/javascript', src='/javascripts/files.js')
     
   //script de formacion Docentes
-  script( src='/javascripts/update_formacion_docentes.js')
-  
+  //- script( src='/javascripts/update_formacion_docentes.js')
+  script(src='http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js')
+  script(src='/javascripts/summernote-es-ES.js')
   //script de conexion para sacar reportes del server
   script( type='text/javascript', src='/javascripts/jsreport.min.js')
   
   //script general para controlar action a nivel global
   script( type='text/javascript', src='/javascripts/menu.js')
 
+  //script del login
+  script( src='/javascripts/usuarios_inicio.js')
   //bloque para colocar los script propios de cada Indicador
   block scriptpage
 

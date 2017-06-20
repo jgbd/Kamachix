@@ -597,3 +597,30 @@ function Send_Mail(avi,cod,grav){
       }
   });
 }
+
+var simple_checkbox = function ( data, type, full, meta ) {
+    var is_checked = data == true ? "checked" : "";
+    return '<input type="checkbox" class="checkbox" ' +
+        is_checked + ' readonly/>';
+}
+
+function openhistory(){
+  $('#modalhistory').modal('show');
+  $.getJSON('/historico', function(json) {
+    $('#tablehist').DataTable({
+      "responsive": true,
+      "processing": true,
+      "retrieve":true,
+      "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+      },
+      data : json.data,
+      columns : [
+        {"data":"nombre"},
+        {"data":"inicio"},
+        {"data":"finalizacion"},
+        {"data":"activo", "render":simple_checkbox}
+      ]
+    })
+  });
+}

@@ -3,7 +3,19 @@ $(document).ready(function(){
   $('[data-submenu]').submenupicker();
   //inicia editor
   // alert('hola')
-  //$('.summernote').summernote();
+  $('.summernote').summernote({
+    toolbar: [
+      ["style", ["style"]],
+      ["font", ["bold", "italic","underline", "clear"]],
+      ["fontname", ["fontname"]],
+      ["color", ["color"]],
+      ["para", ["ul", "ol", "paragraph"]],
+      ["table", ["table"]],
+      ["insert", ["picture"]],
+      ["view", ["help"]]
+    ],
+    lang: 'es-ES'
+  });
   //se ejecuta al submit de el boton para cargar el archivo de informacion satisfaccion
   $('#uploadformsatisfaccion').submit(function(event){
     var cx = comprueba_extension($('#filesatisfaccion').val());
@@ -116,7 +128,7 @@ $(document).ready(function(){
 function getPDF(){
 
   //se inicia el servidor de reportes
-  jsreport.serverUrl = 'http://localhost:5488';
+  jsreport.serverUrl = 'http://190.254.4.49:5488';
 
   //areglo para contener todo lo que se envia a el reporte
   var atrind=[];
@@ -136,10 +148,10 @@ function getPDF(){
   var tabres = $('#divtab').html().toString();
   atrind.push(tabres);
 
-  var txtcal = $('#txtcal').tinymce().save();
-  var txtlec = $('#txtlec').tinymce().save();
+  var txtcal = $('#txtcal').summernote('code');
+  var txtlec = $('#txtlec').summernote('code');
   //
-  tinymce.triggerSave();
+  //tinymce.triggerSave();
   // //se saca la info de la calificacion y lectura del reporte
   // //.replace(/\n/g,'<br>'))
   atrind.push(txtcal);
