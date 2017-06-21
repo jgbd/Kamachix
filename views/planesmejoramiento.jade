@@ -2,33 +2,88 @@ extends menu
 block title
   title!=title
 block resto
-  h2 SEGUIMIENTO DE REACREDITACIÓN DE PROGRAMAS.
-  label Seleccione el programa 
-  select#lstacre
-  br 
-  label SNIES
-  br 
-  label Estado de acreditación. 
-  input#estacre(type='text' readonly)
-  br 
-  label Fecha Inicio de Acreditación. 
-  input#feciniacre(type='text' readonly)
-  label Fecha finalización de Acreditacion. 
-  input#fecfinacre(type='text' readonly)
-  br 
-  table 
-    thead 
-      tr 
-        th Fechas de Finalizacion fase de reacreditación. 
-        th Estado 
-    tbody
-      tr
-        td Primer plan de mejoramiento
-        td
-          input#finpm1(type='text' readonly)
-        td
-      tr
-      tr
-      tr
-      tr
+  h3 SEGUIMIENTO DE REACREDITACIÓN DE PROGRAMAS.
+  .col-md-8.col-md-offset-2(style='text-align: left;')
+    .col-md-12
+      .col-md-4
+        label.control-label Seleccione el programa 
+      .col-md-8
+        select#lstacre.form-control(onchange='viewplans()')
+    .col-md-12
+      .col-md-4
+        label.control-label  SNIES
+      .col-md-8
+        input#txtsnies.form-control(type='text' readonly)
+    .col-md-12
+      .col-md-4
+        label.control-label Estado de acreditación. 
+      .col-md-8
+        input#plestacre.form-control(type='text' readonly)
+    .col-md-12
+      .col-md-3
+        label.control-label Fecha Inicio de Acreditación. 
+      .col-md-3
+        input#feciniacre.form-control(type='text' readonly)
+      .col-md-3
+        label.control-label Fecha fin de Acreditacion. 
+      .col-md-3
+        input#fecfinacre.form-control(type='text' readonly)
+    .col-md-12(style='background-color: lightgreen')
+      br
+      .col-md-8
+        label Fechas de Finalizacion Fase de Reacreditación. 
+      .col-md-4
+        label Estado
+    .col-md-12
+      br
+      .col-md-8.col-sm-10.col-xs-12
+        .col-md-7
+          label.control-label Primer Plan de Mejoramiento.
+        .col-md-5
+          input#fecpm1.form-control
+      .col-md-1.col-sm-3.col-xs-6
+        img.plest(src='/images/red.svg' alt='rojo')
+      .col-md-3.col-sm-5.col-xs-10
+        input#chpm1.form-control(type='checkbox' style!=check )
+      br
+      .col-md-8.col-sm-10.col-xs-12
+        .col-md-7
+          label.control-label Primera Auto Evaluación
+        .col-md-5
+          input#fecaev1.form-control
+      .col-md-1.col-sm-3.col-xs-6
+        img.plest(src='/images/red.svg' alt='rojo')
+      .col-md-3.col-sm-5.col-xs-10
+        input#cheva1.form-control(type='checkbox' style!=check )
+      hr.col-md-11
+      .col-md-8.col-sm-10.col-xs-12
+        .col-md-7
+          label.control-label Segundo Plan de Mejoramiento
+        .col-md-5
+          input#fecpm2.form-control
+      .col-md-1.col-sm-3.col-xs-6
+        img.plest(src='/images/red.svg' alt='rojo')
+      .col-md-3.col-sm-5.col-xs-10
+        input#chpm2.form-control(type='checkbox' style!=check )
+      br
+      .col-md-8.col-sm-10.col-xs-12
+        .col-md-7
+          label.control-label Segunda Auto Evaluación
+        .col-md-5
+          input#fecave2.form-control
+      .col-md-1.col-sm-3.col-xs-6
+        img.plest(src='/images/red.svg' alt='rojo')
+      .col-md-3.col-sm-5.col-xs-10
+        input#cheva2.form-control(type='checkbox' style!=check )
+      hr.col-md-11
+      .col-md-8.col-sm-10.col-xs-12
+        .col-md-7
+          label.control-label Tramite Plataforma MEN
+        .col-md-5
+          input#fectrmen.form-control
+      .col-md-1.col-sm-3.col-xs-6
+        img.plest(src='/images/red.svg' alt='rojo')
+      .col-md-3.col-sm-5.col-xs-10
+        input#chtrmen.form-control(type='checkbox' style!=check )
 block scriptpage
+  script(src='/javascripts/planesmejoramiento.js')

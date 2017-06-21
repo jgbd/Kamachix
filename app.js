@@ -82,6 +82,9 @@ var manual = require('./routes/manuales.js');
 //controla en envio de correo de alertas de acreditados
 var mail = require('./routes/alertaCorreo.js');
 
+//controla vista planes mejoramiento
+var planes = require('./routes/planesmejoramiento.js');
+var consultaplanes = require('./routes/consultaplanes.js');
 //aqui se crea el framework de express
 var app = express();
 
@@ -192,6 +195,10 @@ app.use('/manuales',manual);
 
 //alerta Correo
 app.use('/alertaCorreo',mail);
+
+//planes mejoramiento
+app.use('/planesmejoramiento',planes);
+app.use('/consultaplanes',consultaplanes);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
