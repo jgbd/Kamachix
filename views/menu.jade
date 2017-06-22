@@ -251,45 +251,53 @@ block content
                | Indicadores Academicos 
                span.caret
              ul.dropdown-menu
-               li
-                 a(href='satisfacion')
-                   | Satisfacción
-               li.divider
-               li.dropdown-submenu
-                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                   | Nivel de Formacion Docentes 
-                 ul.dropdown-menu
-                   li
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                  | Deserción Académica
+                ul.dropdown-menu
+                  li
+                    a(href='cohorte') 
+                      | Deserción por Cohorte
+                  li.divider
+                  li
+                    a(href='periodo') 
+                      | Deserción por Periodo
+              li.divider
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                  | Nivel de formación de docentes tiempo completo
+                ul.dropdown-menu
+                  li
                     a(href='formacion')
                       | KPI Formacion Docentes
-                   li.divider
-                   li
-                     a(href='formacion_departamento') 
-                       | Formacion Docentes por Departamento
-               li.divider
-               li
-                 a(href='relacion_docentes')
-                   | Relacion Docentes
-               li.divider
-               li
-                 a(href='acreditacion')
-                   | Acreditación en Alta Calidad
-               li.divider
-               li
-                 a(href='estudiantesDocente')
-                   | Estudiantes por Docente Tiempo Completo
-               li.divider
-               li.dropdown-submenu
-                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                   | Deserción 
-                 ul.dropdown-menu
-                   li
-                     a(href='cohorte') 
-                       | Deserción por Cohorte
-                   li.divider
-                   li
-                     a(href='periodo') 
-                       | Deserción por Periodo
+                  li.divider
+                  li
+                    a(href='formacion_departamento') 
+                      | Formacion Docentes por Departamento
+              li.divider
+              li
+                a(href='satisfacion')
+                  | Nivel de Satisfacción del Proceso de Formación Académica
+              li.divider
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                  | Programas Acreditados en Alta Calidad
+                ul.dropdown-menu
+                  li
+                    a(href='acreditacion')
+                      | KPI Programas Acreditados
+                  li.divider
+                  li
+                    a(href='planesmejoramiento') 
+                      | Planes de mejoramiento
+              li.divider
+              li
+                a(href='estudiantesDocente')
+                  | Relación de todo el personal Docente con respecto al número de Estudiantes de Pregrado
+              li.divider
+              li
+                a(href='relacion_docentes')
+                  | Relación de todo el personal Docente Tiempo Completo con respecto a los Hora Cátedra
            li.dropdown            
             a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false', data-submenu='')  
               |Ayuda          
