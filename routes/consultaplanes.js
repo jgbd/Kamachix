@@ -9,7 +9,7 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next){
   if(req.session.name != null){
     var sql = 'SELECT ac.programa, pr.nombre, ac.periodo FROM public.acreditacion_alta_calidad ac'+
-              ' JOIN public.programas pr ON pr.snies=ac.programa WHERE ac.activo = TRUE';
+              ' JOIN public.programas pr ON pr.snies=ac.programa WHERE ac.activo=TRUE';
     if(req.session.rol != 1){
       sql = sql+' AND pr.departamento = '+"'"+req.session.codigo+"'";
     }
@@ -27,7 +27,7 @@ router.get('/', function(req, res, next){
         if(err) {
           return console.error('error running query', err);
         }
-        console.log(result.rows);
+        console.log(result.rowCount);
         res.json(result.rows);
       });
     });
@@ -42,12 +42,14 @@ router.post('/',function(req, res, next){
   if(req.body.periodo == 4){
     var sql = "SELECT ac.inicioacreditacion inicio, ac.inicioacreditacion +(ac.periodo|| '  years')::interval fin,"+
               "ac.inicioacreditacion +interval '2 years'  fpm1,ac.inicioacreditacion +interval '3 years'  feva1,"+
-              " 'no aplica' fpm2, 'no aplica' feva2 FROM public.acreditacion_alta_calidad ac where ac.programa = $1";
+              " 'no aplica' fpm2, 'no aplica' feva2, ac.chkpm1, ac.chkaev1, ac.chkpm2, ac.chkaev2, ac.chkmen"+
+              " FROM public.acreditacion_alta_calidad ac where ac.programa = $1 AND ac.activo=TRUE";
   }else{
     var sql = "SELECT ac.inicioacreditacion inicio, ac.inicioacreditacion +(ac.periodo|| '  years')::interval fin,"+
               " ac.inicioacreditacion +interval '1.5 years'  fpm1, ac.inicioacreditacion +interval '2 years'  feva1,"+
-              " ac.inicioacreditacion +interval '4 years'  fpm2,ac.inicioacreditacion +interval '5 years'  feva2"+
-              " FROM public.acreditacion_alta_calidad ac where ac.programa = $1"
+              " ac.inicioacreditacion +interval '4 years'  fpm2,ac.inicioacreditacion +interval '5 years'  feva2,"+
+              " ac.chkpm1, ac.chkaev1, ac.chkpm2, ac.chkaev2, ac.chkmen"+
+              " FROM public.acreditacion_alta_calidad ac where ac.programa = $1 AND ac.activo=TRUE"
   }
 
   pool.connect(function(err, client, done) {

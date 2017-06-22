@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 
   }
   else {
-    res.render('tutorial',{title:'Guias de uso', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Ingresar'});
+    res.render('tutorial',{title:'Guias de uso', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Ingresar', plan:'display:none'});
   }
 });
 

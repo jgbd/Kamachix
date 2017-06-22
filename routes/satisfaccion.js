@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     }
   }
   else {
-    res.render('satisfaccion',{title:'satisfaccion', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Ingresar'});
+    res.render('satisfaccion',{title:'satisfaccion', rols:'display:none', arch: 'display:none', refe: 'javascript:openmodallogin();', textmsg: 'Ingresar', plan:'display:none'});
   }
 });
 

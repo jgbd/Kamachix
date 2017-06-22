@@ -42,9 +42,10 @@ block resto
         .col-md-5
           input#fecpm1.form-control(type='text' readonly)
       .col-md-1.col-sm-3.col-xs-6
-        img.plest(src='/images/red.svg' alt='rojo')
+        #imgestpm1
+        //img.plest(src='/images/red.svg' alt='rojo')
       .col-md-3.col-sm-5.col-xs-10
-        input#chpm1.form-control(type='checkbox' style!=check )
+        input#chpm1.form-control(type='checkbox' style!=check onchange='checkeds()' value = 'true')
       br
       .col-md-8.col-sm-10.col-xs-12
         .col-md-7
@@ -52,9 +53,9 @@ block resto
         .col-md-5
           input#fecaev1.form-control(type='text' readonly)
       .col-md-1.col-sm-3.col-xs-6
-        img.plest(src='/images/red.svg' alt='rojo')
+        #imgestaev1
       .col-md-3.col-sm-5.col-xs-10
-        input#cheva1.form-control(type='checkbox' style!=check )
+        input#cheva1.form-control(type='checkbox' style!=check onchange='checkeds()' value = 'true')
       hr.col-md-11
       .col-md-8.col-sm-10.col-xs-12
         .col-md-7
@@ -62,9 +63,9 @@ block resto
         .col-md-5
           input#fecpm2.form-control(type='text' readonly)
       .col-md-1.col-sm-3.col-xs-6
-        img.plest(src='/images/red.svg' alt='rojo')
+        #imgestpm2
       .col-md-3.col-sm-5.col-xs-10
-        input#chpm2.form-control(type='checkbox' style!=check )
+        input#chpm2.form-control(type='checkbox' style!=check onchange='checkeds()' value = 'true') 
       br
       .col-md-8.col-sm-10.col-xs-12
         .col-md-7
@@ -72,9 +73,9 @@ block resto
         .col-md-5
           input#fecave2.form-control(type='text' readonly)
       .col-md-1.col-sm-3.col-xs-6
-        img.plest(src='/images/red.svg' alt='rojo')
+        #imgestaev2
       .col-md-3.col-sm-5.col-xs-10
-        input#cheva2.form-control(type='checkbox' style!=check )
+        input#cheva2.form-control(type='checkbox' style!=check onchange='checkeds()' value = 'true')
       hr.col-md-11
       .col-md-8.col-sm-10.col-xs-12
         .col-md-7
@@ -82,8 +83,8 @@ block resto
         .col-md-5
           input#fectrmen.form-control(type='text' readonly)
       .col-md-1.col-sm-3.col-xs-6
-        img.plest(src='/images/red.svg' alt='rojo')
+        #imgestmen
       .col-md-3.col-sm-5.col-xs-10
-        input#chtrmen.form-control(type='checkbox' style!=check )
+        input#chtrmen.form-control(type='checkbox' style!=check onchange='checkeds()' value = 'true')
 block scriptpage
   script(src='/javascripts/planesmejoramiento.js')
