@@ -45,7 +45,7 @@ block resto
         #imgestpm1
         //img.plest(src='/images/red.svg' alt='rojo')
       .col-md-3.col-sm-5.col-xs-10
-        input#chpm1.form-control(type='checkbox' style!=check onchange='checkeds()' value = 'true')
+        input#chpm1.form-control(type='checkbox' style!=check onchange='openconfirmation()' value = 'true')
       br
       .col-md-8.col-sm-10.col-xs-12
         .col-md-7
@@ -55,7 +55,7 @@ block resto
       .col-md-1.col-sm-3.col-xs-6
         #imgestaev1
       .col-md-3.col-sm-5.col-xs-10
-        input#cheva1.form-control(type='checkbox' style!=check onchange='checkeds()' value = 'true')
+        input#cheva1.form-control(type='checkbox' style!=check onchange='openconfirmation()' value = 'true')
       hr.col-md-11
       .col-md-8.col-sm-10.col-xs-12
         .col-md-7
@@ -65,7 +65,7 @@ block resto
       .col-md-1.col-sm-3.col-xs-6
         #imgestpm2
       .col-md-3.col-sm-5.col-xs-10
-        input#chpm2.form-control(type='checkbox' style!=check onchange='checkeds()' value = 'true') 
+        input#chpm2.form-control(type='checkbox' style!=check onchange='openconfirmation()' value = 'true') 
       br
       .col-md-8.col-sm-10.col-xs-12
         .col-md-7
@@ -75,7 +75,7 @@ block resto
       .col-md-1.col-sm-3.col-xs-6
         #imgestaev2
       .col-md-3.col-sm-5.col-xs-10
-        input#cheva2.form-control(type='checkbox' style!=check onchange='checkeds()' value = 'true')
+        input#cheva2.form-control(type='checkbox' style!=check onchange='openconfirmation()' value = 'true')
       hr.col-md-11
       .col-md-8.col-sm-10.col-xs-12
         .col-md-7
@@ -85,6 +85,21 @@ block resto
       .col-md-1.col-sm-3.col-xs-6
         #imgestmen
       .col-md-3.col-sm-5.col-xs-10
-        input#chtrmen.form-control(type='checkbox' style!=check onchange='checkeds()' value = 'true')
+        input#chtrmen.form-control(type='checkbox' style!=check onchange='openconfirmation()' value = 'true')
+  //modal de confirmacion
+  #modalconfirm.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h3#modal-title.modal-title.title Confirmacion de Entrega.
+        #modal-body.modal-body
+          h2
+            span(class='glyphicon glyphicon-bell' aria-hidden="true" style='color:orange;')
+          p ¿Está seguro que desea registrar la entrega de este documento?
+          input#btnacept.btn.btn-success(type='button' value='Aceptar' onclick='checkeds()')
+          input#btncancel.btn.btn-default(type='button' value='Cancelar' onclick='cancelsend()')
+          
 block scriptpage
   script(src='/javascripts/planesmejoramiento.js')

@@ -608,9 +608,8 @@ function Send_Mail(avi,cod,grav){
 }
 
 var simple_checkbox = function ( data, type, full, meta ) {
-    var is_checked = data == true ? "checked" : "";
-    return '<input type="checkbox" class="checkbox" ' +
-        is_checked + ' readonly/>';
+    var is_checked = data == true ? "Si" : "No";
+    return '<label>'+is_checked+'</label>';
 }
 
 function openhistory(){
@@ -625,6 +624,7 @@ function openhistory(){
       },
       data : json.data,
       columns : [
+        {"data":"resolucion"},
         {"data":"nombre"},
         {"data":"inicio"},
         {"data":"finalizacion"},

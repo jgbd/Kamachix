@@ -21,6 +21,7 @@ function load_programs(){
 
 //permite ver las fechas para los pasos de la reacreditación
 function viewplans(){
+  clear();
   enableschecks();
   var inf = $("#lstacre").val().split('p');
   var formdata = {
@@ -164,7 +165,7 @@ function clear(){
    document.getElementById('chtrmen').checked=false;
 }
 
-//invoca al checked un valor
+//invoca al aceptar la entrega
 function checkeds(){
   var cpm1=false;
   var caev1=false;
@@ -213,7 +214,10 @@ function checkeds(){
    dataType : 'json', //el formato de datos enviados y devueltos del server
    //se ejecutasi todo se realiza bien
    success : function(json) {
-     if(json>0) viewplans()
+     if(json>0) {
+       $("#modalconfirm").modal('hide');
+       viewplans()
+     }
    }
   });
 
@@ -226,4 +230,19 @@ function enableschecks(){
   document.getElementById('chpm2').disabled=false;
   document.getElementById('cheva2').disabled=false;
   document.getElementById('chtrmen').disabled=false;
+}
+
+//abrir modal de Confirmacion de Entrega
+function openconfirmation(){
+  $("#modalconfirm").modal('show');
+}
+
+//boton Cancelar Entrega
+function cancelsend(){
+  document.getElementById('chpm1').checked=false;
+  document.getElementById('cheva1').checked=false;
+  document.getElementById('chpm2').checked=false;
+  document.getElementById('cheva2').checked=false;
+  document.getElementById('chtrmen').checked=false;
+  $("#modalconfirm").modal('hide');
 }

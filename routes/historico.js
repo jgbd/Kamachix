@@ -8,6 +8,7 @@ var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
   var sql = 'SELECT pr.nombre,'+
+            'ac.resolucion,'+
             'ac.inicioacreditacion "Inicio",'+
             "ac.inicioacreditacion + (ac.periodo || ' years')::interval"+' "Fin",'+
             'ac.activo'+' FROM public.acreditacion_alta_calidad ac'+
@@ -31,6 +32,7 @@ router.get('/', function(req, res, next) {
         var mesi = result.rows[i].Inicio.getMonth()+1;
         var mesf = result.rows[i].Fin.getMonth()+1;
         var prog = {
+          'resolucion':result.rows[i].resolucion,
           'nombre': result.rows[i].nombre,
           'inicio': result.rows[i].Inicio.getDate()+'/'+mesi+'/'
                     +result.rows[i].Inicio.getFullYear(),
