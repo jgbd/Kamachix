@@ -286,7 +286,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
           $("#tableresprogram").append('<td>'+json.rows[j].abreviatura+'</td>');
 
           //--Verificación y muestra de etiquetas de expiración de acreditación de cada programa por días--------------------------------------------------------------------------------------------------------------------
-          if (intervalo>0 && intervalo<=365){
+          if (intervalo>0 && intervalo<365){
             $("#tableresprogram").append('<td><img id="est" src="/images/red.svg" alt="RED" title="Acreditación a punto de expirar en '+intervalo+' días"></td>');
             $("#tableresprogram").append('<td style="border: inset 0pt"><span class="btn btn-warning btn-small">'+
                                               '<a style=, onCLick="opendivupdate('+resolucion+','+codigo+','+diainicio+','+mesinicio+','+anhoinicio+','+json.rows[j].periodo+',1,99)">'+'<img title="ReAcreditar" alt="ReAcreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
@@ -296,7 +296,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
               Send_Mail(aviso, codigo, gravedad);
             }
           }
-          else if(intervalo>365 && intervalo<=730){
+          else if(intervalo>=365 && intervalo<=660){
             $("#tableresprogram").append('<td><img id="est" src="/images/orange.svg" alt="ORANGE" title="Acreditado hasta dentro de '+intervalo+' días"></td>');
             $("#tableresprogram").append('<td style="border: inset 0pt">');
             if(gravedad==0) Upd_Warning_Accreditation(aviso,codigo,1);//actualiza estado de advertencia para enviar a correo electrónico
