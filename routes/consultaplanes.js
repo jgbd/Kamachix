@@ -43,12 +43,14 @@ router.post('/',function(req, res, next){
     var sql = "SELECT ac.inicioacreditacion inicio, ac.inicioacreditacion +(ac.periodo|| '  years')::interval fin,"+
               "ac.inicioacreditacion +interval '2 years'  fpm1,ac.inicioacreditacion +interval '3 years'  feva1,"+
               " 'no aplica' fpm2, 'no aplica' feva2, ac.chkpm1, ac.chkaev1, ac.chkpm2, ac.chkaev2, ac.chkmen"+
+              " ,ac.mailpm1, ac.mailaev1, ac.mailpm2, ac.mailaev2, ac.mailmen"+
               " FROM public.acreditacion_alta_calidad ac where ac.programa = $1 AND ac.activo=TRUE";
   }else{
     var sql = "SELECT ac.inicioacreditacion inicio, ac.inicioacreditacion +(ac.periodo|| '  years')::interval fin,"+
               " ac.inicioacreditacion +interval '1.5 years'  fpm1, ac.inicioacreditacion +interval '2 years'  feva1,"+
               " ac.inicioacreditacion +interval '4 years'  fpm2,ac.inicioacreditacion +interval '5 years'  feva2,"+
               " ac.chkpm1, ac.chkaev1, ac.chkpm2, ac.chkaev2, ac.chkmen"+
+              " ,ac.mailpm1, ac.mailaev1, ac.mailpm2, ac.mailaev2, ac.mailmen"+
               " FROM public.acreditacion_alta_calidad ac where ac.programa = $1 AND ac.activo=TRUE"
   }
 

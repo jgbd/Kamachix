@@ -86,6 +86,7 @@ var mail = require('./routes/alertaCorreo.js');
 var planes = require('./routes/planesmejoramiento.js');
 var consultaplanes = require('./routes/consultaplanes.js');
 var actualizaplanes = require('./routes/actualizaplanes.js');
+var alertaplanes = require('./routes/alertaPlanes.js');
 
 //aqui se crea el framework de express
 var app = express();
@@ -202,6 +203,7 @@ app.use('/alertaCorreo',mail);
 app.use('/planesmejoramiento',planes);
 app.use('/consultaplanes',consultaplanes);
 app.use('/actualizaplanes',actualizaplanes);
+app.use('/alertaPlanes',alertaplanes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

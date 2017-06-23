@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 
   console.log(req.query.codigo);
   var cod=req.query.codigo;
-  
+
   //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
       // recupera cosa para el mensaje
       var email = result.rows[0].email;
       var programa = result.rows[0].nombre;
-      
+
       var texto = "";
       if(req.query.gravedad == 1){
         texto+='<center><h2 style="color:orange">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '</b> Tiene menos de dos años para reacreditarse (ver Resolución Nº: '+req.query.codigo+'). Verifique.</p>';
@@ -88,7 +88,5 @@ router.get('/', function(req, res, next) {
   pool.on('error', function (err, client) {
     console.error('idle client error', err.message, err.stack)
   });
-
 });
-
 module.exports = router;

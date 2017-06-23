@@ -13,7 +13,7 @@ router.post('/', function(req, res, next) {
   var date = new Date();
   var enc = ""+date.getDate()+date.getMonth()+date.getFullYear();
   var fec = SHA256(enc).toString();
-  var sql = 'SELECT u.codigo, u.encriptado FROM public.users u WHERE u.user LIKE MD5($1)';  //aqui se crea la conexion a DB
+  var sql = 'SELECT u.codigo, u.encriptado, u.email FROM public.users u WHERE u.user LIKE MD5($1)';  //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
