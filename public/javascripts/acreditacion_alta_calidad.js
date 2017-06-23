@@ -19,11 +19,6 @@ $(document).ready(function(){
     Load_Update();
     event.preventDefault();
   });
-  //carga datos formulario insertar
-  $("#frminsert").submit(function(event){
-    Load_Update();
-    event.preventDefault();
-  });
 });
 
 function Load_Start(){//carga tabla y gráficos a partir de datos almacenados anteriormente
@@ -280,7 +275,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
 
         //--Verificación y muestra de etiquetas de estado de los programas acreditados en función de días restantes de expiración--------------------------------------------------------------------------------------------
         if(intervalo<0){
-          Supr_Accreditation(json.rows[j].programa);//desactiva programa acreditado si este ya expiró
+          Supr_Accreditation(json.rows[j].codigo,2);//desactiva programa acreditado si este ya expiró
         }
         else {
           $("#tableresprogram").append('<td>'+json.rows[j].abreviatura+'</td>');
@@ -290,20 +285,16 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
             $("#tableresprogram").append('<td><img id="est" src="/images/red.svg" alt="RED" title="Acreditación a punto de expirar en '+intervalo+' días"></td>');
             $("#tableresprogram").append('<td style="border: inset 0pt"><span class="btn btn-warning btn-small">'+
                                               '<a style=, onCLick="opendivupdate('+resolucion+','+codigo+','+diainicio+','+mesinicio+','+anhoinicio+','+json.rows[j].periodo+',1,99)">'+'<img title="ReAcreditar" alt="ReAcreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
-            if (gravedad==1) Upd_Warning_Accreditation(aviso,codigo,2);//actualiza estado de advertencia para enviar a correo electrónico
+            if (gravedad==1) Upd_Warning_Accreditation(aviso,resolucion,2);//actualiza estado de advertencia para enviar a correo electrónico
 
-            if(gravedad==2 && banderaCorreo){
-              Send_Mail(aviso, codigo, gravedad);
-            }
+            if(gravedad==2 && banderaCorreo) Send_Mail(aviso, resolucion, gravedad);
           }
           else if(intervalo>=365 && intervalo<=660){
             $("#tableresprogram").append('<td><img id="est" src="/images/orange.svg" alt="ORANGE" title="Acreditado hasta dentro de '+intervalo+' días"></td>');
             $("#tableresprogram").append('<td style="border: inset 0pt">');
-            if(gravedad==0) Upd_Warning_Accreditation(aviso,codigo,1);//actualiza estado de advertencia para enviar a correo electrónico
+            if(gravedad==0) Upd_Warning_Accreditation(aviso,resolucion,1);//actualiza estado de advertencia para enviar a correo electrónico
 
-            if(gravedad==1 && !banderaCorreo){
-              Send_Mail(aviso, codigo, gravedad);
-            }
+            if(gravedad==1 && !banderaCorreo) Send_Mail(aviso, resolucion, gravedad);
           }
           else{
             $("#tableresprogram").append('<td><img id="est" src="/images/verde.svg" alt="GREEN" title="Acreditado"></td>');
@@ -330,7 +321,7 @@ function Load_Not_Accredited(){//carga tabla-menú de programas no acreditados a
         $("#tableresprogram2").append('<tr>');
         var codigo=parseInt(json.rows[j].snies);
         $("#tableresprogram2").append('<td>'+json.rows[j].abreviatura+'</td>');
-        $("#tableresprogram2").append('<td"><span class="btn btn-success btn-small"><a onCLick="opendivupdate(0,'+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',0,0,99)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
+        $("#tableresprogram2").append('<td"><span class="btn btn-success btn-small"><a onCLick="opendivupdate(0,'+codigo+','+diainicio+','+mesinicio+','+anhoinicio+',4,0,99)"><img title="Acreditar" alt="Acreditar" /></a></span></td>');//carga formulario de actualización de acreditacion programa
         $("#tableresprogram2").append('</tr>');
       }
     }
@@ -456,10 +447,9 @@ function closedivfilter(){
 function Load_Update(){//carga datos obtenidos del formulario de ingreso de programa
   //se obtiene los valores de las input en variables
   var acuerdo = $("#reso1").val(),codigo = $("#cod1").val(), inicio= $("#ini1").val(), periodo = $("#per1").val(), reacredited = $("#flag1").val(), warning = $("#warning1").val();
-  //alert(acuerdo);
-  if (reacredited){
-    Upd_Warning_Accreditation(99,codigo,0);//actualiza estado de advertencia para enviar a correo electrónico
-    Supr_Accreditation(codigo);//desactiva programa acreditado si este ya expiró
+  if (reacredited==1){
+    //Upd_Warning_Accreditation(99,acuerdo,0);//actualiza estado de advertencia para enviar a correo electrónico
+    Supr_Accreditation(codigo,2);//desactiva programa acreditado si este ya expiró
   }
   //se coloca los datos del form en el formato adecuado para enviar al server
   var formData = {
@@ -493,14 +483,13 @@ function opendivupdate(reso,cod,iniday,inimonth,iniyear,per,flag,warning){//carg
     $("#ini").html('<td data-provide="datepicker" data-date-language="es"><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
   }
   else{
-    //$("#reso").html('<input type="text" id="reso1" value='+reso+' pattern="[0-9]" class="form-control">');
+    $("#reso").html('<input type="text" id="reso1" value='+reso+' class="form-control">');
     $("#ini").html('<td data-provide="datepicker" data-date-language="es" data-date-start-date='+iniday+'/'+inimonth+'/'+(iniyear+per)+'><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
   }
-  if(per==0)
-    $("#per").html('<select id="per1" class="form-control" > <option value="4" selected>4</option> <option value="6">6</option> </select>');
+  if(per==4)
+    $("#per").html('<select id="per1" class="form-control"><option value="4" selected>4</option> <option value="6">6</option> </select>');
   else{
-    $("#reso").html('<input type="text" id="reso1" value='+reso+' pattern="[0-9]" class="form-control">');
-    $("#per").html('<select id="per1" class="form-control"> <option value="4" selected>4</option> <option value="6">6</option> </select>');}
+    $("#per").html('<select id="per1" class="form-control"><option value='+per+' selected>4</option> <option value="6">6</option> </select>');}
   $("#divupdate").modal('show');
 }
 
@@ -513,9 +502,10 @@ function hidenmodal(){
     $("#divfilter").modal('show');
 }
 
-function Supr_Accreditation(cod){//desactiva programa acreditado si este ya expiró
+function Supr_Accreditation(cod,gra){//desactiva programa acreditado si este ya expiró
   var formData = {
-    'codigo': cod
+    'codigo': cod,
+    'gravedad': gra
   };
   $.ajax({
       type: "post",
@@ -545,7 +535,7 @@ function Ins_KPI(anho){//ingresa nuevo kpi en función de primer programa acredi
   $.ajax({
       type: "get",
       url: "actualizaKPIAcreditacion",
-      data : {c:1,'anho': anho, 'flag': 1},//señala a inserción en datawarehouse
+      data : {c:1,'anho': anho, 'bandera': 1},//señala a inserción en datawarehouse
       dataType : 'json',
       success : function(json) {
         Load_Start();
@@ -559,7 +549,7 @@ function Upd_KPI(anho){//actualiza kpi en presencia de más de un programa acred
   $.ajax({
       type: "get",
       url: "actualizaKPIAcreditacion", //la url del que realizara la consulta
-      data : {c:2,'anho': anho, 'flag': 1},////señala a actualización en datawarehouse
+      data : {c:2,'anho': anho, 'bandera': 1},////señala a actualización en datawarehouse
       dataType : 'json',
       success : function(json) {
         Load_Start();
@@ -570,10 +560,6 @@ function Upd_KPI(anho){//actualiza kpi en presencia de más de un programa acred
 }
 
 function Upd_Warning_Accreditation(aviso,cod,gravedad){//actualiza estado de advertencia para enviar a correo electrónico
-  if (cod<100) {
-    if (cod<10) cod='00'+cod;
-    else cod='0'+cod;
-  }
   var formData = {
     'aviso': aviso,
     'codigo': cod,

@@ -11,9 +11,9 @@ var pool = configdb.configdb();
 //next que es la siguiente function
 
 router.post('/', function(req, res, next) {
-  var beforedata=[req.body.codigo];
+  var beforedata=[req.body.codigo,req.body.gravedad];
   //consulta basica sin condiciones
-  var sql ='UPDATE "public"."acreditacion_alta_calidad" SET activo=false,mail=false WHERE programa=$1';
+  var sql ='UPDATE "public"."acreditacion_alta_calidad" SET activo=false WHERE programa=$1 AND activo=TRUE AND gravedad=$2';
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);

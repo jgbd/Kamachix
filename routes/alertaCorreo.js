@@ -7,22 +7,13 @@ var configmail = require("../config/emailconfig.js");
 var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
-  var sql = 'SELECT us.email, pr.nombre, aac.resolucion '+
+  var sql = 'SELECT us.email, pr.nombre '+
             'FROM public.users us JOIN public.programas pr ON pr.departamento = us.codigo JOIN public.acreditacion_alta_calidad aac ON pr.departamento=aac.aviso '+
-            'WHERE	pr.snies = $1 LIMIT 1 '
+            'WHERE	aac.resolucion = $1 LIMIT 1'
 
   console.log(req.query.codigo);
   var cod=req.query.codigo;
-  // if(req.query.codigo<100){
-  //   cod='0'+req.query.codigo;
-  //   if(req.query.codigo<10){
-  //     cod='0'+cod;
-  //   }
-  // }else {
-  //   cod=req.query.codigo;
-  // }
-
-
+  
   //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
@@ -40,25 +31,24 @@ router.get('/', function(req, res, next) {
       // recupera cosa para el mensaje
       var email = result.rows[0].email;
       var programa = result.rows[0].nombre;
-      var resolucion = result.rows[0].resolucion;
-
+      
       var texto = "";
       if(req.query.gravedad == 1){
-        texto+='<center><h2 style="color:orange">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '</b> Tiene menos de dos años para reacreditarse (ver Resolución Nº: '+resolucion+'). Verifique.</p>';
+        texto+='<center><h2 style="color:orange">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '</b> Tiene menos de dos años para reacreditarse (ver Resolución Nº: '+req.query.codigo+'). Verifique.</p>';
 
         var sqlup = 'UPDATE public.acreditacion_alta_calidad SET mail = true' +
-                    ' WHERE programa = $1 AND activo=true'
+                    ' WHERE resolucion = $1'
       } else{
-        texto+='<center><h2 style="color:red">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '<b> Tiene menos de un año para reacreditarse (ver Resolución Nº: '+resolucion+'). Verifique.</p>';
+        texto+='<center><h2 style="color:red">¡Atención!,</h2></center><br><p>Por favor su programa: <b>'+ programa + '<b> Tiene menos de un año para reacreditarse (ver Resolución Nº: '+req.query.codigo+'). Verifique.</p>';
 
         var sqlup = 'UPDATE public.acreditacion_alta_calidad SET mail = false' +
-                    ' WHERE programa = $1 AND activo=true '
+                    ' WHERE resolucion = $1'
       }
       //envio mensajes
       let transporter = configmail.configmail();
       let mailOptions = {
           from: '"Indicadores Academicos Udenar" <indicadoresacademicos@udenar.edu.co>', // sender address
-          to: 'juanbasdel@udenar.edu.co', // list of receivers
+          to: '1stephenmm@udenar.edu.co', // list of receivers
           subject: 'Alerta de Reacreditacion ✔', // Subject line
           text: ' ',
           html: texto // plain text body

@@ -12,7 +12,7 @@ var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
     //consulta basica sin condiciones
-    var beforedata=[req.query.anho.substr(6, 9),req.query.flag];
+    var beforedata=[req.query.anho.substr(6, 9),req.query.bandera];
     console.log(beforedata);
     if(req.query.c == 1)
         var sql ='INSERT INTO "Datawarehouse"."KPI_Acreditacion" VALUES '+

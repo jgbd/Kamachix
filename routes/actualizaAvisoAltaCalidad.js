@@ -12,7 +12,7 @@ var pool = configdb.configdb();
 
 router.post('/', function(req, res, next) {
   var beforedata=[req.body.aviso,req.body.codigo,req.body.gravedad];
-  var sql ='UPDATE "public"."acreditacion_alta_calidad" SET aviso=$1,gravedad=$3 WHERE programa=$2 and activo=true';
+  var sql ='UPDATE "public"."acreditacion_alta_calidad" SET aviso=$1,gravedad=$3 WHERE resolucion=$2';
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
