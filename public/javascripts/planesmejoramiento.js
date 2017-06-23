@@ -140,7 +140,7 @@ function calculate_state(fecha){
   resto = Math.floor(resto/(1000*60*60*24));
   var cad='';
   if(resto>0){
-    cad ='<img src='+"'/images/verde.svg' alt='green' title='Quedan "+resto+" dias para Entrega' class=plest>";
+    cad ='<img src='+"'/images/orange.svg' alt='orange' title='Quedan "+resto+" dias para Entrega' class=plest>";
   }else{
     cad ='<img src='+"'/images/red.svg' alt='red' title='Fecha de Entrega venció hace "+Math.abs(resto)+" dias' class='plest'>";
   }

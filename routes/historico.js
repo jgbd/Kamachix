@@ -29,14 +29,20 @@ router.get('/', function(req, res, next) {
       }
       var data = [];
       for (var i = 0; i < result.rowCount; i++) {
+        var diai = result.rows[i].Inicio.getDate();
+        var diaf = result.rows[i].Fin.getDate();
         var mesi = result.rows[i].Inicio.getMonth()+1;
         var mesf = result.rows[i].Fin.getMonth()+1;
+        if (diai<10) diai='0'+mesi;
+        if (diaf<10) diaf='0'+mesf;
+        if (mesi<10) mesi='0'+mesi;
+        if (mesf<10) mesf='0'+mesf;
         var prog = {
           'resolucion':result.rows[i].resolucion,
           'nombre': result.rows[i].nombre,
-          'inicio': result.rows[i].Inicio.getDate()+'/'+mesi+'/'
+          'inicio': diai+'/'+mesi+'/'
                     +result.rows[i].Inicio.getFullYear(),
-          'finalizacion': result.rows[i].Fin.getDate()+'/'+mesf+'/'
+          'finalizacion': diaf+'/'+mesf+'/'
                     +result.rows[i].Fin.getFullYear(),
           'activo': result.rows[i].activo
         }

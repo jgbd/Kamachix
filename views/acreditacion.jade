@@ -5,7 +5,7 @@ block resto
   //boton Filtrar
   .col-md-2(style='text-align:left')
       input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
-      input#btnhist.btn.btn-warning.btn-small(type='button' value='Historico' onCLick='openhistory()')
+      input#btnhist.btn.btn-warning.btn-small(type='button' value='Histórico' onCLick='openhistory()')
       br
   //modal history 
   #modalhistory.modal.fade.bd-example-modal-lg
@@ -14,7 +14,7 @@ block resto
         .modal-header.headerModal
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
-          h4 Historico de Acreditaciones 
+          h4 Histórico de Acreditaciones 
             span.glyphicon.glyphicon-book
         #modal-body.modal-body
           table#tablehist.table.table-striped.table-bordered(cellspacing='0' width='100%')
