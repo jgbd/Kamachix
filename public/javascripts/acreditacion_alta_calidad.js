@@ -275,7 +275,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
 
         //--Verificación y muestra de etiquetas de estado de los programas acreditados en función de días restantes de expiración--------------------------------------------------------------------------------------------
         if(intervalo<0){
-          Supr_Accreditation(json.rows[j].codigo,2);//desactiva programa acreditado si este ya expiró
+          Supr_Accreditation(json.rows[j].programa,2);//desactiva programa acreditado si este ya expiró
         }
         else {
           $("#tableresprogram").append('<td>'+json.rows[j].abreviatura+'</td>');
