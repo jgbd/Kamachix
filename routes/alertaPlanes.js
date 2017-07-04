@@ -52,7 +52,7 @@ router.get('/', function(req, res, next) {
       let transporter = configmail.configmail();
       let mailOptions = {
           from: '"Indicadores Academicos Udenar" <indicadoresacademicos@udenar.edu.co>', // sender address
-          to: ''+result.row[0].email+', '+result.rows[0].alternative_email, // list of receivers
+          to: ''+result.rows[0].email+', '+result.rows[0].alternative_email, // list of receivers
           subject: 'Alerta de seguimiento acreditacion ✔', // Subject line
           text: 'Pro favor revizar indicadoresacademicos.udenar.edu.co ',
           html: texto // plain text body
