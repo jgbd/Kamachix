@@ -11,10 +11,18 @@ function load_programs(){
    dataType : 'json', //el formato de datos enviados y devueltos del server
    //se ejecutasi todo se realiza bien
    success : function(json) {
-     $("#lstacre").html('<option selected value=0>Seleccione Programa'+'</option>')
-     for (var i = 0; i < json.length; i++) {
-       $("#lstacre").append('<option value='+json[i].programa+'p'+json[i].periodo+'>'+json[i].nombre+'</option>')
+     if(json==0){
+       $("#messageError").html("Lo sentimos su departamento no cuenta con programas acreditados en alta calidad")
+       $("#myModal").modal('show');
+       setTimeout ("location.href = '/'", 2000);
+
+     }else {
+       $("#lstacre").html('<option selected value=0>Seleccione Programa'+'</option>')
+       for (var i = 0; i < json.length; i++) {
+         $("#lstacre").append('<option value='+json[i].programa+'p'+json[i].periodo+'>'+json[i].nombre+'</option>')
+       }
      }
+
    }
   });
 }

@@ -13,7 +13,7 @@ router.post('/', function(req, res, next) {
   var date = new Date();
   var enc = ""+date.getDate()+date.getMonth()+date.getFullYear();
   var fec = SHA256(enc).toString();
-  var sql = 'SELECT u.codigo, u.encriptado, u.email FROM public.users u WHERE u.user LIKE MD5($1)';  //aqui se crea la conexion a DB
+  var sql = 'SELECT u.codigo, u.encriptado, u.email, u.alternative_email FROM public.users u WHERE u.user LIKE MD5($1)';  //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -30,19 +30,12 @@ router.post('/', function(req, res, next) {
 
       //estos seran los datos de cada objeto o programa devuelto
       if(result.rowCount>0){
-        // create reusable transporter object using the default SMTP transport
-        // let transporter = nodemailer.createTransport({
-        //     service: '"Outlook365"',
-        //     auth: {
-        //         user: 'acreditacioninstitucional@udenar.edu.co',
-        //         pass: 'Acreditacion2016'
-        //     }
-        // });
+
         let transporter = configmail.configmail();
         // setup email data with unicode symbols
         let mailOptions = {
             from: '"Indicadores Academicos Udenar" <indicadoresacademicos@udenar.edu.co>', // sender address
-            to: 'juanbasdel@gmail.com', // list of receivers
+            to: ''+result.rows[0].email+', '+result.rows[0].alternative_email, // list of receivers
             subject: 'Recuperar contraseña kamachix ✔', // Subject line
             text: 'http://190.254.4.49/recover?clave='+result.rows[0].encriptado+'&fe='+fec,
             html: "<center><a href="+'http://190.254.4.49/recover?clave='+result.rows[0].encriptado+'&fe='+fec+

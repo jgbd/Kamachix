@@ -7,7 +7,7 @@ var configmail = require("../config/emailconfig.js");
 var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
-  var sql = 'SELECT pr.nombre, de.email '+
+  var sql = 'SELECT pr.nombre, de.email, de.alternative_email '+
             'FROM public.programas pr JOIN public.users de '+
             'ON pr.departamento=de.codigo WHERE pr.snies = $1 LIMIT 1'
 
@@ -52,7 +52,7 @@ router.get('/', function(req, res, next) {
       let transporter = configmail.configmail();
       let mailOptions = {
           from: '"Indicadores Academicos Udenar" <indicadoresacademicos@udenar.edu.co>', // sender address
-          to: 'juanbasdel@udenar.edu.co', // list of receivers
+          to: ''+result.rows[0].email+', '+result.rows[0].alternative_email, // list of receivers
           subject: 'Alerta de seguimiento acreditacion ✔', // Subject line
           text: 'Pro favor revizar indicadoresacademicos.udenar.edu.co ',
           html: texto // plain text body

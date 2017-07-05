@@ -17,15 +17,16 @@ block resto
             span(aria-hidden='true') ×
           h4 Histórico de Acreditaciones 
             span.glyphicon.glyphicon-book
-        #modal-body.modal-body
-          table#tablehist.table.table-striped.table-bordered(cellspacing='0' width='100%')
-            thead
-              tr
-                th Resolución
-                th Programa
-                th Inicio Acreditación
-                th Fin Acreditación
-                th Activo
+        #divhist.modal-body
+          .table-responsive
+            table#tablehist.table.table-striped.table-bordered.table-bordered(cellspacing='0' width='100%')
+              thead
+                tr
+                  th Resolución
+                  th Programa
+                  th Inicio Acreditación
+                  th Fin Acreditación
+                  th Activo
   //modal info 
   #modalmoreinfo.modal.fade
     .modal-dialog

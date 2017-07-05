@@ -100,6 +100,17 @@ block resto
           p ¿Está seguro que desea registrar la entrega de este documento?
           input#btnacept.btn.btn-success(type='button' value='Aceptar' onclick='checkeds()')
           input#btncancel.btn.btn-default(type='button' value='Cancelar' onclick='cancelsend()')
-          
+  //modal para sacar mensajes     
+  #myModal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Error De Filtros
+        #modal-body.modal-body
+          p#messageError
+        .modal-footer
+          button.btn.btn-success(type='button', onclick='hidenmodal()') Aceptar 
 block scriptpage
   script(src='/javascripts/planesmejoramiento.js')

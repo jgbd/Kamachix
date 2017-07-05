@@ -7,7 +7,7 @@ var configmail = require("../config/emailconfig.js");
 var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
-  var sql = 'SELECT us.email, pr.nombre '+
+  var sql = 'SELECT us.email, pr.nombre, us.alternative_email '+
             'FROM public.users us JOIN public.programas pr ON pr.departamento = us.codigo JOIN public.acreditacion_alta_calidad aac ON pr.departamento=aac.aviso '+
             'WHERE	aac.resolucion = $1 LIMIT 1'
 
@@ -48,7 +48,7 @@ router.get('/', function(req, res, next) {
       let transporter = configmail.configmail();
       let mailOptions = {
           from: '"Indicadores Academicos Udenar" <indicadoresacademicos@udenar.edu.co>', // sender address
-          to: '1stephenmm@udenar.edu.co', // list of receivers
+          to: ''+result.rows[0].email+', '+result.rows[0].alternative_email, // list of receivers
           subject: 'Alerta de Reacreditacion ✔', // Subject line
           text: ' ',
           html: texto // plain text body

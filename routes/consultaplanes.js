@@ -27,8 +27,14 @@ router.get('/', function(req, res, next){
         if(err) {
           return console.error('error running query', err);
         }
-        console.log(result.rowCount);
-        res.json(result.rows);
+        if (result.rowCount > 0) {
+          console.log("si"+result.rowCount);
+          res.json(result.rows);
+        }
+        else {
+          console.log("no"+result.rowCount);
+          res.json(result.rowCount);
+        }
       });
     });
     //se ejecuta si el usuario o password no son correctas y no se puede conectar al SGBD
