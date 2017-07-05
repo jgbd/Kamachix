@@ -3,8 +3,21 @@ block title
   title!=title
 block resto
   .col-md-2(style='text-align:left')
-    input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros')
+    input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros') 
     br
+    //modal para sacar mensajes     
+  #myModal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Error De Filtros
+        #modal-body.modal-body
+          p#messageError
+        .modal-footer
+          button.btn.btn-success(type='button', onclick='hidenmodal()') Aceptar 
+  //modal de filtros
   #divfilter.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
       .modal-content
@@ -41,10 +54,10 @@ block resto
           thead
             tr(align='center')
               th.th(style='text-align:center;') Año
-              th.th(style='text-align:center;') Docentes tiempo completo             
-              th.th(style='text-align:center;') Docentes hora catedra
+              th.th(style='text-align:center;') No. Docentes tiempo completo             
+              th.th(style='text-align:center;') No. Docentes hora catedra
               th.th(style='text-align:center;') Relacion Docentes
-              th.th.est(style='text-align:center;') Estado %
+              th.th.est(style='text-align:center;') Estado 
           tbody#datBody!= datos  
     .col-md-6
       #divgraph1

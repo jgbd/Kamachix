@@ -54,25 +54,25 @@ $(document).ready(function(){
           //en caso de que el simbolo del rango adecuado sea '= '
           if(json.rows[i].sim_Rango_A === '= '){
             if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_A){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }
             else if(json.rows[i].sim_Rango_MA === '> '){
               if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_MA){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
               else{
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
 
             }
             else if(json.rows[i].sim_Rango_MA === '< '){
               if(json.rows[i].relacion_docentes < json.rows[i].num_Rango_MA){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
               }
               else{
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
 
@@ -82,23 +82,23 @@ $(document).ready(function(){
           //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
           else if(json.rows[i].sim_Rango_MA === '> '){ 
             if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_MA){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }
             else if(json.rows[i].sim_Rango_A === '> '){
               if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_A){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
               }
               else{                
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               } 
             }
             else if(json.rows[i].sim_Rango_A === '< ' && json.rows[i].sim_Rango_I === '< ' ){
               if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
               }
               else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
               }
 
             }       
@@ -106,24 +106,24 @@ $(document).ready(function(){
           //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<' 
           else if(json.rows[i].sim_Rango_MA === '< '){
             if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_MA){
-              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].porcentaje+' de '+json.datos[i].num_Rango_MA+')"></td>');
             }
             else if(json.rows[i].sim_Rango_A === '> '){
               if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_A && json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I ){
-                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+' de '+json.datos[i].num_Rango_MA+')"></td>');
               }
                else{
-                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+' de '+json.datos[i].num_Rango_MA+')"></td>');
 
               }              
             }
             else if(json.rows[i].sim_Rango_A === '< '){
               if(json.rows[i].sim_Rango_I === '> '){
                 if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_MA){
-                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+' de '+json.datos[i].num_Rango_MA+')"></td>');
                 }
                 else {
-                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+' de '+json.datos[i].num_Rango_MA+')"></td>');
 
                 }
               }
@@ -134,16 +134,16 @@ $(document).ready(function(){
           //en caso de que el simbolo del rango muy adecuado sea '= '
           if(json.rows[i].sim_Rango_MA === '= '){
             if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_MA){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }
             else if(json.rows[i].sim_Rango_A === '> '){
               if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_A){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
                 
 
               }
               else{
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
 
@@ -151,20 +151,20 @@ $(document).ready(function(){
             else if(json.rows[i].sim_Rango_A === '< '){
               if(json.rows[i].sim_Rango_I === '< '){
                 if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
                 }
                 else{
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
                 }
               }
 
               if(json.rows[i].sim_Rango_I === '> '){
                 if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A ){
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
                 }
                 else{
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
                 }
               }
@@ -234,25 +234,25 @@ $(document).ready(function(){
           //en caso de que el simbolo del rango adecuado sea '= '
           if(json.rows[i].sim_Rango_A === '= '){
             if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_A){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }
             else if(json.rows[i].sim_Rango_MA === '> '){
               if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_MA){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
               else{
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
 
             }
             else if(json.rows[i].sim_Rango_MA === '< '){
               if(json.rows[i].relacion_docentes < json.rows[i].num_Rango_MA){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
               }
               else{
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
 
@@ -262,23 +262,23 @@ $(document).ready(function(){
           //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
           else if(json.rows[i].sim_Rango_MA === '> '){ 
             if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_MA){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }
             else if(json.rows[i].sim_Rango_A === '> '){
               if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_A){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
               }
               else{                
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               } 
             }
             else if(json.rows[i].sim_Rango_A === '< ' && json.rows[i].sim_Rango_I === '< ' ){
               if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
               }
               else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
               }
 
             }       
@@ -286,24 +286,24 @@ $(document).ready(function(){
           //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<' 
           else if(json.rows[i].sim_Rango_MA === '< '){
             if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_MA){
-              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].porcentaje+' de '+json.datos[i].num_Rango_MA+')"></td>');
             }
             else if(json.rows[i].sim_Rango_A === '> '){
               if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_A && json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I ){
-                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+' de '+json.datos[i].num_Rango_MA+')"></td>');
               }
                else{
-                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+' de '+json.datos[i].num_Rango_MA+')"></td>');
 
               }              
             }
             else if(json.rows[i].sim_Rango_A === '< '){
               if(json.rows[i].sim_Rango_I === '> '){
                 if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_MA){
-                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+' de '+json.datos[i].num_Rango_MA+')"></td>');
                 }
                 else {
-                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+' de '+json.datos[i].num_Rango_MA+')"></td>');
 
                 }
               }
@@ -314,16 +314,16 @@ $(document).ready(function(){
           //en caso de que el simbolo del rango muy adecuado sea '= '
           if(json.rows[i].sim_Rango_MA === '= '){
             if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_MA){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }
             else if(json.rows[i].sim_Rango_A === '> '){
               if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_A){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
                 
 
               }
               else{
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
 
@@ -331,20 +331,20 @@ $(document).ready(function(){
             else if(json.rows[i].sim_Rango_A === '< '){
               if(json.rows[i].sim_Rango_I === '< '){
                 if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
                 }
                 else{
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
                 }
               }
 
               if(json.rows[i].sim_Rango_I === '> '){
                 if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A ){
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
                 }
                 else{
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
                 }
               }
@@ -428,7 +428,7 @@ $(document).ready(function(){
         });
 
        //   
-       columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',40,30);
+       columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',0,0);
 
        //cambio de graficas de barras hora catedra
         $("#graph2").change(function () {
@@ -454,7 +454,7 @@ $(document).ready(function(){
         });
 
        //   
-       barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',40,30);
+       barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
        // cambio de grafica de tendencia relacion docentes
        $("#graph3").change(function () {
 
@@ -535,25 +535,25 @@ $(document).ready(function(){
           //en caso de que el simbolo del rango adecuado sea '= '
           if(json.rows[i].sim_Rango_A === '= '){
             if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_A){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }
             else if(json.rows[i].sim_Rango_MA === '> '){
               if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_MA){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
               else{
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
 
             }
             else if(json.rows[i].sim_Rango_MA === '< '){
               if(json.rows[i].relacion_docentes < json.rows[i].num_Rango_MA){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
               }
               else{
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
 
@@ -563,23 +563,23 @@ $(document).ready(function(){
           //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '>'
           else if(json.rows[i].sim_Rango_MA === '> '){ 
             if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_MA){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }
             else if(json.rows[i].sim_Rango_A === '> '){
               if(json.rows[i].relacion_docentes >= json.rows[i].num_Rango_A){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
               }
               else{                
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               } 
             }
             else if(json.rows[i].sim_Rango_A === '< ' && json.rows[i].sim_Rango_I === '< ' ){
               if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
               }
               else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
               }
 
             }       
@@ -587,30 +587,30 @@ $(document).ready(function(){
           //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
           else if(json.rows[i].sim_Rango_MA === '< '){
             if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_MA && json.rows[i].relacion_docentes > json.rows[i].num_Rango_A ){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }
             if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I ){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }    
 
             else if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_I){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }
           }
           
           //en caso de que el simbolo del rango muy adecuado sea '= '
           if(json.rows[i].sim_Rango_MA === '= '){
             if(json.rows[i].relacion_docentes == json.rows[i].num_Rango_MA){
-              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+              tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
             }
             else if(json.rows[i].sim_Rango_A === '> '){
               if(json.rows[i].relacion_docentes > json.rows[i].num_Rango_A){
-                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
                 
 
               }
               else{
-                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
               }
 
@@ -618,20 +618,20 @@ $(document).ready(function(){
             else if(json.rows[i].sim_Rango_A === '< '){
               if(json.rows[i].sim_Rango_I === '< '){
                 if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A && json.rows[i].relacion_docentes > json.rows[i].num_Rango_I){
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
                 }
                 else{
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
                 }
               }
 
               if(json.rows[i].sim_Rango_I === '> '){
                 if(json.rows[i].relacion_docentes <= json.rows[i].num_Rango_A ){
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/orange.svg" alt="ORANGE" title="La Meta del Nivel de Formacion Docentes se ha Alejado  ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
                 }
                 else{
-                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
+                  tabla2 = tabla2+'<td ><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Formacion Docentes no Alcanzada ('+json.rows[i].relacion_docentes+' de '+json.rows[i].num_Rango_MA+')"></td></tr>';
 
                 }
               }
@@ -722,7 +722,7 @@ $(document).ready(function(){
         });
 
        //   
-       columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',40,30);
+       columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',0,0);
        //cambio de graficas de barras hora catedra
         $("#graph2").change(function () {
           if($(this).val() === '1'){
@@ -747,7 +747,7 @@ $(document).ready(function(){
         });
 
        //   
-        barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',40,30);
+        barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
        // cambio de grafica de tendencia relacion docentes
        $("#graph3").change(function () {
 

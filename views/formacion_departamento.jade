@@ -35,7 +35,7 @@ block resto
             .col-md-4              
               label
                  |Año: 
-              select#lst_anio.form-control                                                     
+              select#lst_anio.form-control(name='lst_anio' onchange='Load_filter_period()')                                                         
             .col-md-3                
               label
                 |periodo:              

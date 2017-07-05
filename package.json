@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "sudo pm2 start ./bin/www"
+    "start": "supervisor ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.15.1",

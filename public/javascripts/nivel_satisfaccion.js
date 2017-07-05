@@ -166,19 +166,33 @@ function Load_Fist_time(){
             }
 
           }
-        }
-        //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+        }        
+        //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<'
         else if(json.datos[i].sim_Rango_MA === '< '){
-          if(json.datos[i].Nivel <= json.datos[i].num_Rango_MA && json.datos[i].Nivel > json.datos[i].num_Rango_A ){
+          if(json.datos[i].Nivel <= json.datos[i].num_Rango_MA){
             $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
           }
-          if(json.datos[i].Nivel <= json.datos[i].num_Rango_A && json.datos[i].Nivel > json.datos[i].num_Rango_I ){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+          else if(json.datos[i].sim_Rango_A === '> '){
+            if(json.datos[i].Nivel > json.datos[i].num_Rango_A && json.datos[i].Nivel <= json.datos[i].num_Rango_I ){
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+            }
+              else{
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+            }
+          }
+          else if(json.datos[i].sim_Rango_A === '< '){
+            if(json.datos[i].sim_Rango_I === '> '){
+              if(json.datos[i].Nivel <= json.datos[i].num_Rango_A && json.datos[i].Nivel > json.datos[i].num_Rango_MA){
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              }
+              else {
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+              }
+            }
           }
 
-          else if(json.datos[i].Nivel <= json.datos[i].num_Rango_I){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
-          }
         }
 
         //en caso de que el simbolo del rango muy adecuado sea '= '
@@ -232,7 +246,7 @@ function Load_Fist_time(){
 
       if(json.datos[json.count-1].sim_Rango_MA == '< ' && json.datos[json.count-1].sim_Rango_I == '> '){
 
-        gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].sim_Rango_I, titleg, '%');
+        gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].num_Rango_I, titleg, '%');
 
       }
 
@@ -243,7 +257,9 @@ function Load_Fist_time(){
       }
 
       else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '< ' ){
-        alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+        //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+        $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+        $('#myModal').modal('show');
 
       }
 
@@ -360,18 +376,32 @@ function Load_Filter(){
 
               }
             }
-            //en caso de que el simbolo del rango muy adecuado sea el simbolo de mayor '<'
+            //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<'
             else if(json.datos[i].sim_Rango_MA === '< '){
-              if(json.datos[i].Nivel <= json.datos[i].num_Rango_MA && json.datos[i].Nivel > json.datos[i].num_Rango_A ){
+              if(json.datos[i].Nivel <= json.datos[i].num_Rango_MA){
                 $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
               }
-              if(json.datos[i].Nivel <= json.datos[i].num_Rango_A && json.datos[i].Nivel > json.datos[i].num_Rango_I ){
-                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Satisfacción está bajando ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              else if(json.datos[i].sim_Rango_A === '> '){
+                if(json.datos[i].Nivel > json.datos[i].num_Rango_A && json.datos[i].Nivel <= json.datos[i].num_Rango_I ){
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                }
+                  else{
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+                }
+              }
+              else if(json.datos[i].sim_Rango_A === '< '){
+                if(json.datos[i].sim_Rango_I === '> '){
+                  if(json.datos[i].Nivel <= json.datos[i].num_Rango_A && json.datos[i].Nivel > json.datos[i].num_Rango_MA){
+                    $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  }
+                  else {
+                    $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+
+                  }
+                }
               }
 
-              else if(json.datos[i].Nivel <= json.datos[i].num_Rango_I){
-                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Satisfacción no alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
-              }
             }
 
             //en caso de que el simbolo del rango muy adecuado sea '= '
@@ -427,7 +457,7 @@ function Load_Filter(){
 
         if(json.datos[json.count-1].sim_Rango_MA == '< ' && json.datos[json.count-1].sim_Rango_I == '> '){
 
-          gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].sim_Rango_I, titleg, '%');
+          gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].num_Rango_I, titleg, '%');
 
         }
 

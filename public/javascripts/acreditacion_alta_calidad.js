@@ -93,24 +93,24 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
          //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<'
           else if(json.datos[i].sim_Rango_MA === '< '){
             if(json.datos[i].porcentaje <= json.datos[i].num_Rango_MA){
-              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
             }
             else if(json.datos[i].sim_Rango_A === '> '){
               if(json.datos[i].porcentaje > json.datos[i].num_Rango_A && json.datos[i].porcentaje <= json.datos[i].num_Rango_I ){
-                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
               }
                else{
-                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
 
               }
             }
             else if(json.datos[i].sim_Rango_A === '< '){
               if(json.datos[i].sim_Rango_I === '> '){
                 if(json.datos[i].porcentaje <= json.datos[i].num_Rango_A && json.datos[i].porcentaje > json.datos[i].num_Rango_MA){
-                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
                 }
                 else {
-                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.rows[i].razon+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
 
                 }
               }
@@ -211,15 +211,15 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
           barTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"Programas Acreditados","Total Programas");
         }
       });
-      columnGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,40,30);
+      columnGraph(datarray,'divgraph1','Nivel de Acreditación \n',json.fields[0].name,json.fields[3].name,0,0);
 
-      columnTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"Programas Acreditados","Total Programas");
+      columnTwoGraph(datarray,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"Programas Acreditados","Total Programas");
       //semaforo divgraph3
       //toma los datos de los manuales del indicador para graficar el acelerometro
 
       if(json.rows[json.rowCount-1].sim_Rango_MA == '< ' && json.rows[json.rowCount-1].sim_Rango_I == '> '){
 
-        gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].sim_Rango_I, 'Acreditación \n Alta Calidad', '%');
+        gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].num_Rango_I, 'Acreditación \n Alta Calidad', '%');
 
       }
       else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '> ' ){
@@ -230,7 +230,9 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
 
       else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' ){
 
-        alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+        //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+        $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+        $('#myModal').modal('show');
 
       }
       else {
@@ -403,14 +405,14 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI de acredi
             barTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],40,30,"Programas Acreditados","Total Programas");
           }
         });
-        columnTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],40,30,"Programas Acreditados","Total Programas");
+        columnTwoGraph(json.datos,'divgraph2','Programas Acreditados\n vs\n Total de Programas Pregrado',json.fieldstwo[0],json.fieldstwo[1],json.fieldstwo[2],0,0,"Programas Acreditados","Total Programas");
 
         //semaforo divgraph3
         //toma los datos de los manuales del indicador para graficar el acelerometro
 
         if(json.rows[json.rowCount-1].sim_Rango_MA == '< ' && json.rows[json.rowCount-1].sim_Rango_I == '> '){
 
-          gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].sim_Rango_I, 'Acreditación \n Alta Calidad', '%');
+          gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].num_Rango_I, 'Acreditación \n Alta Calidad', '%');
 
         }
         else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '> ' ){
@@ -421,7 +423,9 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI de acredi
 
         else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' ){
 
-          alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+          $('#myModal').modal('show');
 
         }
         else {

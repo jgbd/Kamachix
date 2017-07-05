@@ -170,24 +170,24 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
         //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<' 
         else if(json.rows[i].sim_Rango_MA === '< '){
           if(json.rows[i].razonanual <= json.rows[i].num_Rango_MA){
-            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].razonanual+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+            $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
           }
           else if(json.rows[i].sim_Rango_A === '> '){
             if(json.rows[i].razonanual > json.rows[i].num_Rango_A && json.rows[i].razonanual <= json.rows[i].num_Rango_I ){
-              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción está bajando ('+json.datos[i].razonanual+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción está bajando ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
             }
             else{
-              $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].razonanual+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
 
             }              
           }
           else if(json.rows[i].sim_Rango_A === '< '){
             if(json.rows[i].sim_Rango_I === '> '){
               if(json.rows[i].razonanual <= json.rows[i].num_Rango_A && json.rows[i].razonanual > json.rows[i].num_Rango_MA){
-                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción está bajando ('+json.datos[i].razonanual+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción está bajando ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
               }
               else {
-                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].razonanual+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.rows[i].razonanual+'% de '+json.rows[i].num_Rango_MA+'%)"></td>');
 
               }
             }
@@ -272,7 +272,7 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
           barGraph(datarray,'divgraph2','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,40,30);
         }
       });
-      columnGraph(datarray,'divgraph2','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,40,30);
+      columnGraph(datarray,'divgraph2','Número de Estudiantes por Docente \n',json.fields[0].name,json.fields[1].name,0,0);
 
       if(mes<=6){
         //semaforo divgraph3
@@ -280,7 +280,7 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
           
         if(json.rows[json.rowCount-1].sim_Rango_MA == '> ' && json.rows[json.rowCount-1].sim_Rango_I == '< '){
           
-          gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph3','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente', ' estudiantes');
+          gaugesGraph(json.rows[json.rowCount-1].razonanual,'divgraph3','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Estudiantes por Docente', ' estudiantes');
           
         }        
         else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '> ' ){    
@@ -291,7 +291,9 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
 
         else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' ){
           
-          alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+          $('#myModal').modal('show');
           
         }
         else {  
@@ -307,7 +309,7 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
           
         if(json.rows[json.rowCount-2].sim_Rango_MA == '> ' && json.rows[json.rowCount-2].sim_Rango_I == '< '){
           
-          gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph3','r','y','g',json.rows[json.rowCount-2].num_Rango_I,json.rows[json.rowCount-2].sim_Rango_MA, 'Estudiantes por Docente', ' estudiantes');
+          gaugesGraph(json.rows[json.rowCount-2].razonanual,'divgraph3','r','y','g',json.rows[json.rowCount-2].num_Rango_I,json.rows[json.rowCount-2].num_Rango_MA, 'Estudiantes por Docente', ' estudiantes');
           
         }   
 
@@ -321,7 +323,9 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
 
         else if(json.rows[json.rowCount-2].sim_Rango_MA === '= ' && json.rows[json.rowCount-2].sim_Rango_A == '< ' && json.rows[json.rowCount-2].sim_Rango_A == '< ' ){
           
-          alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+          $('#myModal').modal('show');
           
         }
         else {                         
@@ -377,25 +381,27 @@ function Load_Semiannual(){//carga graficos semestralizados de indicador a lo la
           barTwoGraph(datarray,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"A","B");
         }
       });
-     columnTwoGraph(datarray,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,40,30,"A","B");
-     
+      
+     columnTwoGraph(datarray,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,0,0,"A","B");
      lineTwoGraph(datarray,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fields[0].name,json.fields[1].name,json.fields[2].name,"A","B");
           
      //semaforo divper2 y divper1     
       if(json.rows[json.rowCount-1].sim_Rango_MA == '> ' && json.rows[json.rowCount-1].sim_Rango_I == '< '){
-        gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '');
-        gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente año: '+ fin, '');            
+        gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '');
+        gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Estudiantes por Docente año: '+ fin, '');            
         
         
       }      
       else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '> ' ){    
-        gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','r','g','y',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '');
-        gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','r','g','y',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].sim_Rango_MA, 'Estudiantes por Docente año: '+ fin, '');                        
+        gaugesGraph(json.rows[json.rowCount-5].razonanual,'divper1','r','g','y',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Estudiantes por Docente año:'+json.rows[json.rowCount-5].Anho, '');
+        gaugesGraph(json.rows[json.rowCount-1].razonanual,'divper2','r','g','y',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Estudiantes por Docente año: '+ fin, '');                        
         
       }     
 
       else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' ){
-        alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+        //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+        $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+        $('#myModal').modal('show');
          
       }
       else {                      
@@ -487,23 +493,26 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
             barTwoGraph(json.datos,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],40,30,"A","B");
           }
         });
-        columnTwoGraph(json.datos,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],40,30,"A","B");
+        columnTwoGraph(json.datos,'divgraph1','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],0,0,"A","B");
+        
         lineTwoGraph(json.datos,'divgraph4','Número de estudiantes por Docente\n por Semestre',json.fieldsthree[0],json.fieldsthree[1],json.fieldsthree[2],"A","B");
         //semaforo divper2 y divper1     
         if(json.datos[json.count-1].sim_Rango_MA == '> ' && json.datos[json.count-1].sim_Rango_I == '< '){
-          gaugesGraph(json.datos[0].razonanual,'divper1','r','y','g',json.datos[0].num_Rango_I,json.datos[0].sim_Rango_MA, 'Estudiantes por Docente año:'+json.datos[0].Anho, '');
-          gaugesGraph(json.datos[json.count-1].razonanual,'divper2','r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].sim_Rango_MA, 'Estudiantes por Docente año: '+ json.datos[json.count-1].Anho, '');            
+          gaugesGraph(json.datos[0].razonanual,'divper1','r','y','g',json.datos[0].num_Rango_I,json.datos[0].num_Rango_MA, 'Estudiantes por Docente año:'+json.datos[0].Anho, '');
+          gaugesGraph(json.datos[json.count-1].razonanual,'divper2','r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, 'Estudiantes por Docente año: '+ json.datos[json.count-1].Anho, '');            
           
           
         }      
         else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '> ' ){    
-          gaugesGraph(json.datos[0].razonanual,'divper1','r','g','y',json.datos[0].num_Rango_I,json.datos[0].sim_Rango_MA, 'Estudiantes por Docente año:'+json.datos[0].Anho, '');
-          gaugesGraph(json.datos[json.count-1].razonanual,'divper2','r','g','y',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].sim_Rango_MA, 'Estudiantes por Docente año: '+ json.datos[json.count-1].Anho, '');                        
+          gaugesGraph(json.datos[0].razonanual,'divper1','r','g','y',json.datos[0].num_Rango_I,json.datos[0].num_Rango_MA, 'Estudiantes por Docente año:'+json.datos[0].Anho, '');
+          gaugesGraph(json.datos[json.count-1].razonanual,'divper2','r','g','y',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, 'Estudiantes por Docente año: '+ json.datos[json.count-1].Anho, '');                        
           
         }     
 
         else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '< ' ){
-          alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+          $('#myModal').modal('show');
           
         }
         else {                      
@@ -539,7 +548,7 @@ function Load_Update(){//carga datos obtenidos del formulario de ingreso de estu
       dataType : 'json',
       success : function(json) {}
   });
-  alert("Nuevo KPI ingresado");
+  //alert("Nuevo KPI ingresado");
   Search_Year_KPI(anho);//busca la existencia de otros registros de año en función del
                           //año en curso en datawarehouse
   closedivupdate();

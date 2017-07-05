@@ -97,14 +97,14 @@ $(document).ready(function(){
                   }
                 });
               //grafica que aparecera por defecto
-             columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+              columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
 
                //semaforo divgraph4 
               //toma los datos de los manuales del indicador para graficar el acelerometro           
                
-              if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){
+              if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){                
                 
-                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].sim_Rango_I, 'Indicador de Meta', '%');
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%');
                 
               } 
 
@@ -115,7 +115,10 @@ $(document).ready(function(){
               }              
 
               else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '< ' ){
-                alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+                
+                //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+                $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+                $('#myModal').modal('show');
                  
               }
 
@@ -175,22 +178,22 @@ $(document).ready(function(){
                     barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
                   }
                   else if($(this).val() === '7'){
-                    pieGraph(arra, divgraph1, "nivel", "cantidad","Cantidad Docentes Tiempo Completo");
+                    pieGraph(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
                   }
                   else if($(this).val() === '8'){
-                    pieGraph3D(arra, divgraph1, "nivel", "cantidad","Cantidad Docentes Tiempo Completo");
+                    pieGraph3D(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
                   }
                 });
               //grafica que aparecera por defecto
-             columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+              pieGraph(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
 
 
               //semaforo divgraph4 
               //toma los datos de los manuales del indicador para graficar el acelerometro           
                
-              if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){
+              if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){       
                 
-                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].sim_Rango_I, 'Indicador de Meta', '%');
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%');
                 
               } 
 
@@ -201,7 +204,9 @@ $(document).ready(function(){
               }              
 
               else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '< ' ){
-                alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+                //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no ');
+                $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+                $('#myModal').modal('show');
                  
               }
 
@@ -214,11 +219,20 @@ $(document).ready(function(){
 
        }
       else{
-        $("#datBody").html('');
-        alert('el ultimo año no tiene suficientes datos para ser vizualizado. Por favor llene todos los datos de formacion docentes correspondientes al año: '+ json.rows[0].anio);
-
+        //$("#datBody2").html('');
+        //$("#datBody").html('');
+        
+        $("#divgraph3").html('');
+        $("#divgraph2").html('');   
+        $("#divgraph1").html('');
+        $("#divtable").html('');     
+        
+        //alert('el ultimo año no tiene suficientes datos para ser vizualizado. Por favor llene todos los datos de formacion docentes correspondientes al año: '+ json.rows[0].anio);
+        $("#messageError2").html("el ultimo año no tiene suficientes datos para ser vizualizado. Por favor llene todos los datos de formacion docentes correspondientes al año: "+ json.rows[0].anio);
+        $('#myModal2').modal('show');
          $("#lst_Anio5").html('');
-        location.href="/"; //metodo de resireccionamiento
+        
+        setTimeout(function redireccion(){location.href="/"},4000); //metodo de resireccionamiento
       }
 
      }
@@ -256,6 +270,7 @@ $(document).ready(function(){
 
             }
             else if(json.rows[i].sim_Rango_MA === '< '){
+              
               if(json.rows[i].estado_meta < json.rows[i].num_Rango_MA){
                 tabla2 = tabla2+'<td ><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Formacion Docentes Alcanzada ('+json.rows[i].estado_meta+'% de '+json.rows[i].num_Rango_MA+'%)"></td></tr>';
               }
@@ -292,26 +307,27 @@ $(document).ready(function(){
             }       
           }
            //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<' 
-          else if(json.rows[i].sim_Rango_MA === '< '){
+          else if(json.rows[i].sim_Rango_MA === '< '){            
             if(json.rows[i].estado_meta <= json.rows[i].num_Rango_MA){
-              $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              tabla2 = tabla2+'<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Deserción Alcanzada ('+json.rows[i].estado_meta+'% de '+json.rows[i].num_Rango_MA+'%)"></td>';
             }
-            else if(json.rows[i].sim_Rango_A === '> '){
+            else if(json.rows[i].sim_Rango_A === '> '){  
+                         
               if(json.rows[i].estado_meta > json.rows[i].num_Rango_A && json.rows[i].estado_meta <= json.rows[i].num_Rango_I ){
-                $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                tabla2 = tabla2+'<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.rows[i].estado_meta+'% de '+json.rows[i].num_Rango_MA+'%)"></td>';
               }
-               else{
-                $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+              else{                 
+                tabla2 = tabla2+'<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.rows[i].estado_meta+'% de '+json.rows[i].num_Rango_MA+'%)"></td>';
 
               }              
             }
             else if(json.rows[i].sim_Rango_A === '< '){
               if(json.rows[i].sim_Rango_I === '> '){
                 if(json.rows[i].estado_meta <= json.rows[i].num_Rango_A && json.rows[i].estado_meta > json.rows[i].num_Rango_MA){
-                  $("#tableres").append('<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  tabla2 = tabla2+'<td class="est"><img id="est" src="/images/orange.svg" alt="ORANGE" title="La meta del Nivel de Deserción se esta alejando de la meta ('+json.rows[i].estado_meta+'% de '+json.rows[i].num_Rango_MA+'%)"></td>';
                 }
                 else {
-                  $("#tableres").append('<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.datos[i].porcentaje+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                  tabla2 = tabla2+'<td class="est"><img id="est" src="/images/red.svg" alt="RED" title="Meta del Nivel de Deserción no alcanzada ('+json.rows[i].estado_meta+'% de '+json.rows[i].num_Rango_MA+'%)"></td>';
 
                 }
               }
@@ -400,7 +416,7 @@ $(document).ready(function(){
         
         
       });
-      columnGraph(arra2,divgraph2,'Nivel de Formacion Docentes','anio','cantidad',40,30);
+      columnGraph(arra2,divgraph2,'Nivel de Formacion Docentes','anio','cantidad',0,0);
      }
 
   });   
@@ -509,22 +525,22 @@ $(document).ready(function(){
                 barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
               }
               else if($(this).val() === '7'){
-                pieGraph(arra, divgraph, "anio", "cantidad","Porcentaje Docentes Tiempo Completo");
+                pieGraph(arra, divgraph1, "anio", "cantidad","Porcentaje Docentes Tiempo Completo");
               }
               else if($(this).val() === '8'){
-                pieGraph3D(arra, divgraph, "anio", "cantidad","Porcentaje Docentes Tiempo Completo");
+                pieGraph3D(arra, divgraph1, "anio", "cantidad","Porcentaje Docentes Tiempo Completo");
               }
             });
 
           //grafica por defecto
-           columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+           pieGraph(arra, divgraph1, "anio", "cantidad","Porcentaje Docentes Tiempo Completo");
 
            //semaforo divgraph4 
             //toma los datos de los manuales del indicador para graficar el acelerometro           
               
             if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){
                 
-              gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].sim_Rango_I, 'Indicador de Meta', '%');
+              gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%');
               
             } 
 
@@ -535,7 +551,9 @@ $(document).ready(function(){
             }              
 
             else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '< ' ){
-              alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+              //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+               $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+               $('#myModal').modal('show');
               
             }
 
@@ -546,10 +564,12 @@ $(document).ready(function(){
 
        }
        else{
-         alert('el año seleccionado no tiene suficientes datos. Por favor llene todos los datos de formacion docentes correspondientes a este año ');
+          $("#messageError").html("el año seleccionado no tiene suficientes datos para ser visualizado. Por favor seleccione otro año ");
+          $('#myModal').modal('show');
+         /*alert('el año seleccionado no tiene suficientes datos. Por favor llene todos los datos de formacion docentes correspondientes a este año ');
          $("#lst_Anio5").html('');
          Load_first_time();
-         Load_yearfirst_time();
+         Load_yearfirst_time();*/
        }
 
 

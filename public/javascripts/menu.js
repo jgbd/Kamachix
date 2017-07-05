@@ -281,25 +281,262 @@ function editRepor(){
   $("#btnsave").css('visibility','visible');
   $("#btnedit").css('visibility','hidden');
   $("#btnpdf").css('visibility','hidden');
-  var l,l2,l3;
+  var l,l2,l3;  
 
   //se recorre los atributos del infomre y se quita el solo lectura
 
   for (var i = 1; i < 24; i++) {
     $("#atrinfo"+i).removeAttr('readonly');
   }
-  //lista 1
-  l = "<select id='atrinfo18' name'atrinfo18' class='form-control'> <option value='< '>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
-  $("#list").html('');
-  $("#list").append(l);
-  //lista 2
-  l2 = "<select id='atrinfo20' name'atrinfo20' class='form-control'> <option value='< '>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
-  $("#list2").html('');
-  $("#list2").append(l2);
-  //lista 3
-  l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
-  $("#list3").html('');
-  $("#list3").append(l3);
+  // consulta para colocar el signo correcto
+  $.ajax({
+   type: "POST", //el el tipo de peticion puede ser GET y POsT
+   url: "consultaFormacion", //la url a la  que se realizara la consulta
+   data:{c:11,'id':$("#txtindser").val()},
+   dataType : 'json',
+   success : function(json) {   
+    if(json.rows[0].sim_Rango_MA === '< '){
+      //lista 1
+      l = "<select id='atrinfo18' name'atrinfo18' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+      $("#list").html('');
+      $("#list").append(l);
+      if(json.rows[0].sim_Rango_A === '< '){
+        //lista 2
+        l2 = "<select id='atrinfo20' name'atrinfo20' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+        $("#list2").html('');
+        $("#list2").append(l2);
+        if(json.rows[0].sim_Rango_I === '< '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '> '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '= '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+      }
+      else if(json.rows[0].sim_Rango_A === '> '){
+        //lista 2
+        l2 = "<select id='atrinfo20' name'atrinfo20' class='form-control'> <option value='< ' >Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+        $("#list2").html('');
+        $("#list2").append(l2);
+        if(json.rows[0].sim_Rango_I === '< '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '> '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '= '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+
+      }
+      else if(json.rows[0].sim_Rango_A === '= '){
+        //lista 2
+        l2 = "<select id='atrinfo20' name'atrinfo20' class='form-control'> <option value='< ' >Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+        $("#list2").html('');
+        $("#list2").append(l2);
+        if(json.rows[0].sim_Rango_I === '< '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '> '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '= '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+      }
+    }
+    else if(json.rows[0].sim_Rango_MA === '> '){
+       //lista 1
+      l = "<select id='atrinfo18' name'atrinfo18' class='form-control'> <option value='< '>Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+      $("#list").html('');
+      $("#list").append(l);
+      if(json.rows[0].sim_Rango_A === '< '){
+        //lista 2
+        l2 = "<select id='atrinfo20' name'atrinfo20' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+        $("#list2").html('');
+        $("#list2").append(l2);
+        if(json.rows[0].sim_Rango_I === '< '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '> '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '= '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+      }
+      else if(json.rows[0].sim_Rango_A === '> '){
+        //lista 2
+        l2 = "<select id='atrinfo20' name'atrinfo20' class='form-control'> <option value='< ' >Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+        $("#list2").html('');
+        $("#list2").append(l2);
+        if(json.rows[0].sim_Rango_I === '< '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '> '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '= '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+
+      }
+      else if(json.rows[0].sim_Rango_A === '= '){
+        //lista 2
+        l2 = "<select id='atrinfo20' name'atrinfo20' class='form-control'> <option value='< ' >Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+        $("#list2").html('');
+        $("#list2").append(l2);
+        if(json.rows[0].sim_Rango_I === '< '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '> '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '= '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+      }      
+
+    }
+    else if(json.rows[0].sim_Rango_MA === '= '){
+       //lista 1
+      l = "<select id='atrinfo18' name'atrinfo18' class='form-control'> <option value='< '>Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+      $("#list").html('');
+      $("#list").append(l);
+      if(json.rows[0].sim_Rango_A === '< '){
+        //lista 2
+        l2 = "<select id='atrinfo20' name'atrinfo20' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+        $("#list2").html('');
+        $("#list2").append(l2);
+        if(json.rows[0].sim_Rango_I === '< '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '> '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '= '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+      }
+      else if(json.rows[0].sim_Rango_A === '> '){
+        //lista 2
+        l2 = "<select id='atrinfo20' name'atrinfo20' class='form-control'> <option value='< ' >Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+        $("#list2").html('');
+        $("#list2").append(l2);
+        if(json.rows[0].sim_Rango_I === '< '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '> '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '= '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+
+      }
+      else if(json.rows[0].sim_Rango_A === '= '){
+        //lista 2
+        l2 = "<select id='atrinfo20' name'atrinfo20' class='form-control'> <option value='< ' >Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+        $("#list2").html('');
+        $("#list2").append(l2);
+        if(json.rows[0].sim_Rango_I === '< '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< ' selected>Menor</option><option value='> '>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '> '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' selected>Mayor</option><option value='= '>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+        else if(json.rows[0].sim_Rango_I === '= '){
+          //lista 3
+          l3 = "<select id='atrinfo22' name'atrinfo22' class='form-control'> <option value='< '>Menor</option><option value='> ' >Mayor</option><option value='= ' selected>Igual</option></select>";
+          $("#list3").html('');
+          $("#list3").append(l3);
+        }
+      } 
+    }    
+   }
+  })
+
+  
     //$("#atrinfo18").html(' '); */
 }
 

@@ -113,23 +113,14 @@ $(document).ready(function(){
               });
 
             //
-            columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+            pieGraph(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
 
 
         }
         else{
-           $("#messageError").html("El departamento seleccionado no tiene suficientes datos para ser visualizado. Por favor seleccione otro periodo ");
+           $("#messageError").html("El departamento seleccionado no tiene suficientes datos para ser visualizado.");
            $('#myModal').modal('show');
-           /* alert('el año seleccionado no tiene suficientes datos. Por favor llene todos los datos de formacion docentes correspondientes a este año ');
-            $("#lst_anio").html('');
-            $("#lst_dep").html('');
-            $("#titulo").html('');
-            $("#datBody2").html('');
-
-          Load_first_time();
-          $("#divtable").html('');
-          $("#divgraph2").html('');
-          $("#titulo2").html('');   */
+           
         }
 
 
@@ -226,7 +217,7 @@ function Load_first_time(){
         }
       });
       //grafica que aparece por defecto
-     columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+      pieGraph(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
 
 
     var totalTC=0;
@@ -304,7 +295,7 @@ $.ajax({
             barTwoGraph(arra2,'divgraph2','Docentes TC Periodo A\n vs\n Docentes TC Periodo B',json.fields[1].name,"periodob","periodoa",40,30,"Periodo A","Periodo B");
           }
         });
-        columnTwoGraph(arra2,'divgraph2','Docentes TC Periodo A\n vs\n Docentes TC Periodo B',json.fields[1].name,"periodob","periodoa",40,30,"Periodo A","Periodo B");
+        columnTwoGraph(arra2,'divgraph2','Docentes TC Periodo A\n vs\n  Docentes TC Periodo B',json.fields[1].name,"periodob","periodoa",0,0,"Periodo A","Periodo B");
 
       }
       //si no se cumple la condicion anterior se grafican os dtos devueltos en graficas simples indicando solamente el valor del periodo b
@@ -352,11 +343,11 @@ $.ajax({
           }
         });
         //grafica que aparece por defecto
-        columnGraph(arra2,divgraph2,'Docentes TC Periodo B','anio','periodo',40,30);
+        columnGraph(arra2,divgraph2,'Docentes TC Periodo B','anio','periodo',0,0);
 
       }
 
-      tittle2="Departamento de  "+json.rows[conta-3].name+" <br><br> Nivel de Formación Docentes Tiempo Completo de los Ultimos 5 Años";
+      tittle2=json.rows[conta-3].name+" <br><br> Nivel de Formación Docentes Tiempo Completo de los Ultimos 5 Años";
       $("#datBody2").append(r2);
       $("#titulo2").append(tittle2);
 
@@ -387,26 +378,31 @@ function Load_filterfirst_time(){
     }
   });
 
+}
 
-  //ajax para llenar la lista de periodos
-$.ajax({
-    type: "GET", //el el tipo de peticion puede ser GET y POsT
-    url: "consultaFormacion", //la url del que realizara la consulta
-    dataType : 'json',
-    data:{c:6},//Primera consulta
-    //se ejecutasi todo se realiza bien
-    success : function(json) {
+function Load_filter_period(){  //ajax para llenar la lista de periodos
+   $("#lst_per").html('');
+  $.ajax({
+      type: "GET", //el el tipo de peticion puede ser GET y POsT
+      url: "consultaFormacion", //la url del que realizara la consulta
+      dataType : 'json',
+      data:{c:12,
+          'program':$("#lst_dep").val(),
+          'anio':$("#lst_anio").val()},//Primera consulta
+      //se ejecutasi todo se realiza bien
+      success : function(json) {
+        $("#lst_per").append('<option value="0" selected>Seleccionar periodo</option>');
+        // llenado de lista de periodo
+        var r4="";
+        for(var k = 0 ; k<json.rowCount; k++){
+          r4 = r4+"<option value='"+json.rows[k].periodo+"'>"+ json.rows[k].periodo+"</option> ";
+        }
+        $("#lst_per").append(r4);
 
-      // llenado de lista de años
-      var r4="";
-      for(var k = 0 ; k<json.rowCount; k++){
-        r4 = r4+"<option value='"+json.rows[k].periodo+"'>"+ json.rows[k].periodo+"</option> ";
+
       }
-      $("#lst_per").append(r4);
-
-
-    }
   });
+
 }
 
 function Load_filter_year(){
@@ -512,7 +508,7 @@ function panoramaG(){
               barTwoGraph(arra2,'divgraph2','Docentes TC Periodo A\n vs\n Docentes TC Periodo B',json.fields[1].name,"periodob","periodoa",40,30,"Periodo A","Periodo B");
             }
           });
-          columnTwoGraph(arra2,'divgraph2','Docentes TC Periodo A\n vs\n Docentes TC Periodo B',json.fields[1].name,"periodob","periodoa",40,30,"Periodo A","Periodo B");
+          columnTwoGraph(arra2,'divgraph2','Docentes TC Periodo A\n vs\n  Docentes TC Periodo B',json.fields[1].name,"periodob","periodoa",0,0,"Periodo A","Periodo B");
 
         }
         //si no se cumple la condicion anterior se grafican os dtos devueltos en graficas simples indicando solamente el valor del periodo b
@@ -560,11 +556,11 @@ function panoramaG(){
             }
           });
           //grafica que aparece por defecto
-          columnGraph(arra2,divgraph2,'Docentes TC Periodo B','anio','periodo',40,30);
+          columnGraph(arra2,divgraph2,'Docentes TC Periodo B','anio','periodo',0,0);
 
         }
 
-        tittle2="Departamento de  "+json.rows[conta-3].name+" <br><br> Nivel de Formación Docentes Tiempo Completo de los Ultimos 5 Años";
+        tittle2=json.rows[conta-3].name+" <br><br> Nivel de Formación Docentes Tiempo Completo de los Ultimos 5 Años";
 
         $("#datBody2").html(r2);
         $("#titulo2").append(tittle2);

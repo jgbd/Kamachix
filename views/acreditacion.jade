@@ -6,7 +6,8 @@ block resto
   .col-md-2(style='text-align:left')
       input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros' onCLick='opendivfilter()')
       input#btnhist.btn.btn-warning.btn-small(type='button' value='Histórico' onCLick='openhistory()')
-      br
+      br   
+  
   //modal history 
   #modalhistory.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
@@ -166,6 +167,7 @@ block resto
             tr
               th.th Programa Académico
           tbody#tableresprogram2
+   //modal para sacar mensajes   
   #myModal.modal.fade
       .modal-dialog
         .modal-content

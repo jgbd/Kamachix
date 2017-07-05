@@ -6,6 +6,31 @@ block resto
   .col-md-2(style='text-align:left')
     input#btnfil.btn.btn-success.btn-small(type='button' value='Filtros')
     br
+  //modal para sacar mensajes     
+  #myModal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Error De Filtros
+        #modal-body.modal-body
+          p#messageError
+        .modal-footer
+          button.btn.btn-success(type='button', onclick='hidenmodal()') Aceptar 
+    
+    //modal para sacar mensajes     
+  #myModal2.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Error De Filtros
+        #modal-body.modal-body
+          p#messageError2
+        .modal-footer
+          
   //modal de filtros
   #divfilter.modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
     .modal-dialog.modal-lg
@@ -54,7 +79,10 @@ block resto
             tr(align='center')
               th.th(style='text-align:center;') Año
               th.th(style='text-align:center;') Cantidad Docentes TC 
-              th.th(style='text-align:center;') Nivel de Formacion Docentes
+              th.th(style='text-align:center;') 
+                | Nivel de Formacion Docentes 
+                br
+                | (% Magísteres y Doctores)
               th.th.est(style='text-align:center;') Estado Meta                        
           tbody#datBody2!= datos2                
     .col-md-6
@@ -69,7 +97,7 @@ block resto
           optgroup(label='Barras')
             option(value='3') 2D
             option(value='4') 3D
-            optgroup(label='Tendencia')
+          optgroup(label='Tendencia')
             option(value='5') Lí­nea
             option(value='6') Area 
       .col-md-3
@@ -78,7 +106,7 @@ block resto
   .col-md-12     
     .col-md-4   
       #divtable
-        table(border='1').table.hover.tablestyle
+        table(border='1').table.hover.tablestyle 
           thead
             tr(align='center')
             th.th(style='text-align:center;') Formacion

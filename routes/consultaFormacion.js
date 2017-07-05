@@ -45,6 +45,12 @@ router.get('/', function(req, res, next) {
     var sql="select name,anio,periodo,sum(t_completo) as total from formacion_departamento join formacion on formacion=cod_formacion join users on departamento=codigo  where departamento='"+cod+"' group by name,anio,periodo order by anio desc limit 10";
     
   }
+
+  else if(req.query.c == 12){
+    var prog=req.query.program;
+    var ani=req.query.anio; 
+    var sql="select DISTINCT periodo from formacion_departamento join users on departamento=codigo where codigo='"+prog+"' and anio='"+ani+"' order by periodo";
+  }
   else return console.log("error");
   //aquui se crea la conexion a DB
   pool.connect(function(err, client, done) {
@@ -94,6 +100,10 @@ router.post('/', function(req, res, next) {
     var sql='select departamento,name,t_completo,t_ocasional,hora_catedra,anio,periodo,nom_formacion from formacion_departamento join formacion on formacion=cod_formacion join users on departamento=codigo where codigo=$1 and anio=$2 and periodo=$3 order by anio,formacion,t_completo';
     ani = [req.body.cod,req.body.anio,req.body.periodo];    
   } 
+  else if(req.body.c ==11){
+    var sql= 'select "sim_Rango_MA","sim_Rango_A","sim_Rango_I" from manuales_indicadores where codigo=$1';
+    ani= [req.body.id];
+  }
 
   
   

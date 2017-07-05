@@ -185,8 +185,8 @@ function load_start(){
           }
         //-----------------------------------------------------------------
          $("#tableres").append('</tr>');
-       }
-      columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],40,30);
+       }      
+      columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
       lineGraph(json.datos,'divgraph2','Desercion por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
       var titleg="Nivel de Deserción por cohorte "+ json.datos[json.count-1].periodo +"\n"+ json.Programa
       //semaforo divgraph3
@@ -194,7 +194,7 @@ function load_start(){
 
       if(json.datos[json.count-1].sim_Rango_MA == '> ' && json.datos[json.count-1].sim_Rango_I == '< '){
 
-        gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].sim_Rango_MA, titleg, '%');
+        gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
 
       }
 
@@ -205,7 +205,9 @@ function load_start(){
       }
 
       else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '< ' ){
-        alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+        //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+        $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+        $('#myModal').modal('show');
 
       }
 
@@ -451,8 +453,8 @@ function load_filters(){
               }
             //-----------------------------------------------------------------
             $("#tableres").append('</tr>');
-          }
-         columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],40,30);
+          }         
+         columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
          lineGraph(json.datos,'divgraph2','Desercion por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
          var titleg="Nivel de Deserción por cohorte "+ json.datos[json.count-1].periodo +"\n"+ json.Programa
          //semaforo divgraph3
@@ -460,7 +462,7 @@ function load_filters(){
 
           if(json.datos[json.count-1].sim_Rango_MA == '> ' && json.datos[json.count-1].sim_Rango_I == '< '){
 
-            gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].sim_Rango_MA, titleg, '%');
+            gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
 
           }
 
@@ -471,7 +473,9 @@ function load_filters(){
           }
 
           else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '< ' ){
-            alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+            //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+            $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+            $('#myModal').modal('show');
 
           }
 
