@@ -484,7 +484,7 @@ function opendivupdate(reso,cod,iniday,inimonth,iniyear,per,flag,warning){//carg
   $("#cod").html('<input type="text" id="cod1" value='+cod+' class="form-control" readonly>');
   if(flag==0){
     $("#reso").html('<input type="text" id="reso1" class="form-control">');
-    $("#ini").html('<td data-provide="datepicker" data-date-language="es"><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+(iniyear+per)+' class="form-control" required></td>');
+    $("#ini").html('<td data-provide="datepicker" data-date-language="es"><input type="text" id="ini1" value='+iniday+'/'+inimonth+'/'+iniyear+' class="form-control" required></td>');
   }
   else{
     $("#reso").html('<input type="text" id="reso1" value='+reso+' class="form-control">');

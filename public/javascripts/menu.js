@@ -114,9 +114,9 @@ $(document).ready(function(){
      success : function(json) {
        //aqui comprobamos que si el resultado existe lo redirecciona al siguiente pagina
        if(json>0){
-         $("#resrecover").text("Por favor reviza tu bandeja de entrada." );
+         $("#resrecover").text("Por favor revise su bandeja de entrada." );
        }else{
-         $("#resrecover").text("EL usuario no existe, vuelve a intentar." );
+         $("#resrecover").text("El usuario no existe, vuelva a intentar." );
        }
      }
     });
