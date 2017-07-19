@@ -15,10 +15,10 @@ router.get('/', function(req, res, next) {
 
   if(req.query.c == 1){
     var sql = 'SELECT sl."Programa", p.nombre From "Datawarehouse"."KPI_Nivel_Satisfaccion"  sl JOIN public.programas p ON p.snies=sl."Programa"';
-    if(typeof(req.session.rol) != "undefined"){
-      if(req.session.rol!=1)
-        sql=sql+' WHERE p.departamento='+"'"+req.session.codigo+"'"+' OR sl."Programa" = '+"'000000'"+' GROUP BY sl."Programa", p.nombre ORDER BY p.nombre';
-    }
+    // if(typeof(req.session.rol) != "undefined"){
+    //   if(req.session.rol!=1)
+    //     sql=sql+' WHERE p.departamento='+"'"+req.session.codigo+"'"+' OR sl."Programa" = '+"'000000'"+' GROUP BY sl."Programa", p.nombre ORDER BY p.nombre';
+    // }
     sql=sql+' GROUP BY sl."Programa", p.nombre ORDER BY p.nombre';
   }else if (req.query.c == 2){
     var prog=[req.query.program];

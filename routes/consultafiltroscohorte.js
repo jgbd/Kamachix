@@ -14,10 +14,10 @@ var pool = configdb.configdb();
 router.get('/', function(req, res, next) {
   if(req.query.c == 1){
     var sql = 'SELECT cd.programa, p.nombre FROM "Datawarehouse"."KPI_Desercion_Cohorte" cd JOIN public.programas p ON p.snies=cd.programa';
-    if(typeof(req.session.rol) != "undefined"){
-      if(req.session.rol!=1)
-        sql=sql+' WHERE p.departamento='+"'"+req.session.codigo+"'"+' OR cd.programa = '+"'000000'"+' GROUP BY cd.programa, p.nombre ORDER BY p.nombre';
-    }
+    // if(typeof(req.session.rol) != "undefined"){
+    //   if(req.session.rol!=1)
+    //     sql=sql+' WHERE p.departamento='+"'"+req.session.codigo+"'"+' OR cd.programa = '+"'000000'"+' GROUP BY cd.programa, p.nombre ORDER BY p.nombre';
+    // }
     sql=sql+' GROUP BY cd.programa, p.nombre ORDER BY p.nombre';
   }else if (req.query.c ==2){
     var prog=[req.query.program];

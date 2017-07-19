@@ -43,8 +43,23 @@ block resto
             br
             br            
             input(type='submit' value='Filtrar' class='btn btn-success')                
+  //modal info 
+  #modalmoreinfo.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4 Info 
+            span.glyphicon.glyphicon-info-sign
+        #modal-body.modal-body
+          p
+            | Establecer el número de docentes Tiempo Completo 
+            | con relación a la cantidad de Horas Cátedra en la Universidad de Nariño.
+  //codigo principal 
   .col-md-8
     h3#titulo
+      span#more.glyphicon.glyphicon-question-sign(onclick='openinfo()')
     br
   .col-md-2
   .col-md-12 

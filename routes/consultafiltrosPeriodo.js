@@ -15,10 +15,10 @@ router.get('/', function(req, res, next) {
 
   if(req.query.c == 1){
     var sql = 'SELECT p.nombre,  pd.programa FROM "Datawarehouse"."KPI_Desercion_Periodo" pd JOIN public.programas p ON p.snies=pd.programa';
-    if(typeof(req.session.rol) != "undefined"){
-      if(req.session.rol!=1)
-        sql=sql+' WHERE p.departamento='+"'"+req.session.codigo+"'"+' OR pd.programa = '+"'000000'"+' GROUP BY pd.programa, p.nombre  ORDER BY p.nombre';
-    }
+    // if(typeof(req.session.rol) != "undefined"){
+    //   if(req.session.rol!=1)
+    //     sql=sql+' WHERE p.departamento='+"'"+req.session.codigo+"'"+' OR pd.programa = '+"'000000'"+' GROUP BY pd.programa, p.nombre  ORDER BY p.nombre';
+    // }
     sql=sql+' GROUP BY pd.programa, p.nombre  ORDER BY p.nombre';
   }else if (req.query.c ==2){
     var prog=[req.query.program];
