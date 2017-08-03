@@ -548,7 +548,9 @@ function Load_Update(){//carga datos obtenidos del formulario de ingreso de estu
       dataType : 'json',
       success : function(json) {}
   });
-  //alert("Nuevo KPI ingresado");
+  //alert("El indicador ha sido actualizado!");
+  $("#error").html("El indicador ha sido actualizado!");
+  $("#Modalupdate").modal("show");
   Search_Year_KPI(anho);//busca la existencia de otros registros de año en función del
                           //año en curso en datawarehouse
   closedivupdate();

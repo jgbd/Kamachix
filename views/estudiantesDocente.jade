@@ -140,6 +140,17 @@ block resto
             p#messageError 
           .modal-footer
             button.btn.btn-success(type='button', onclick='hidenmodal()') Aceptar
+  #Modalupdate.modal.fade(role='dialog')
+      .modal-dialog
+        .modal-content
+          .modal-header.headerModal
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+            h4#modal-title.modal-title Confirmación
+          #modal-body.modal-body
+            p#error 
+          .modal-footer
+            button.btn.btn-success(type='button', data-dismiss='modal') Cerrar
   //campo oculto para manterne le json del contenido
   input(id='txtjson' type="hidden")
   //modal para los infomes 
