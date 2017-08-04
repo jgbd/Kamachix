@@ -237,7 +237,7 @@ function Load_Fist_time(){
       //-----------------------------------------------------------------
       $("#tableres").append('</tr>');
     }
-    columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],40,30);
+    columnGraph(json.datos,'divgraph1','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1],0,0);
     lineGraph(json.datos,'divgraph2','Nivel de Satisfaccion \n'+json.Programa,json.fields[0],json.fields[1]);
     var titleg="Nivel de Satisfacción "+ json.datos[json.count-1].Anho +"\n"+ json.Programa
 
