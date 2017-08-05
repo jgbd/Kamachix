@@ -227,8 +227,8 @@ $(document).ready(function(){
         $("#divgraph1").html('');
         $("#divtable").html('');     
         
-        //alert('el ultimo año no tiene suficientes datos para ser vizualizado. Por favor llene todos los datos de formacion docentes correspondientes al año: '+ json.rows[0].anio);
-        $("#messageError2").html("el ultimo año no tiene suficientes datos para ser vizualizado. Por favor llene todos los datos de formación docentes correspondientes al año: "+ json.rows[0].anio);
+        //alert('el ultimo año no tiene suficientes datos para ser visualizado. Por favor llene todos los datos de formacion docentes correspondientes al año: '+ json.rows[0].anio);
+        $("#messageError2").html("el ultimo año no tiene suficientes datos para ser visualizado. Por favor llene todos los datos de formación docentes correspondientes al año: "+ json.rows[0].anio);
         $('#myModal2').modal('show');
          $("#lst_Anio5").html('');
         
