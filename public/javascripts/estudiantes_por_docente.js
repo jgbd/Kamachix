@@ -111,7 +111,7 @@ function Load_Start(){//carga tabla y gráficos anuales del indicador a partir d
    success : function(json) {
      //alert(json.rowCount);
        for (var i = json.rowCount-1; i >=json.rowCount-5; i--) {
-        $('#meta').html('Meta: Menor a '+parseInt(json.rows[i].num_Rango_MA)+' estudiantes');
+        $('#meta').html('Meta: Menor a '+parseInt(json.rows[i].num_Rango_MA)+' (Estudiantes/Docente)');
         $("#tableres").append('<tr>');
         $("#tableres").append('<td>'+json.rows[i].Anho+'</td>');
         $("#tableres").append('<td>'+json.rows[i].razonanual+'</td>');

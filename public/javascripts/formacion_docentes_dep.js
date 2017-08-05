@@ -333,7 +333,7 @@ $.ajax({
             columnGraph(arra2,divgraph2,'Docentes TC Periodo B','anio','periodo',40,30);
           }
           else if($(this).val() === '3'){
-            lineGraph(arra2,divgraph2,'Docentes Tiempo Completo Perioo B','anio','periodo');
+            lineGraph(arra2,divgraph2,'Docentes Tiempo Completo Periodo B','anio','periodo');
           }
           else if($(this).val() === '4'){
             barGraph(arra2,divgraph2,'Docentes Tiempo Completo','anio','periodo',0,0);
@@ -546,7 +546,7 @@ function panoramaG(){
               columnGraph(arra2,divgraph2,' Docentes TC Periodo B','anio','periodo',40,30);
             }
             else if($(this).val() === '3'){
-              lineGraph(arra2,divgraph2,'Docentes Tiempo Completo Perioo B','anio','periodo');
+              lineGraph(arra2,divgraph2,'Docentes Tiempo Completo Periodo B','anio','periodo');
             }
             else if($(this).val() === '4'){
               barGraph(arra2,divgraph2,'Docentes Tiempo Completo','anio','periodo',0,0);

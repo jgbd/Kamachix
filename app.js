@@ -144,7 +144,7 @@ app.use('/logout',logout);//llamado a cerrar sesion y destruir variables de ento
 app.use('/tutorial',tutorial);//llamado a la pagina de guias
 
 
-app.use('/satisfacion',satisfaction); //todo la vsualizacion de el kpi de satisfaccion
+app.use('/satisfaccion',satisfaction); //todo la vsualizacion de el kpi de satisfaccion
 app.use('/consultaFiltros',filter); //consulta filtros de satisfacccion
 app.use('/consulta',consultation); //por get hace el primer llenado de datos y
                                    //por post lo filtra todo desde db
