@@ -87,22 +87,22 @@ $(document).ready(function(){
             //cambio de graficas de barras
               $("#graph1").change(function () {
                 if($(this).val() === '1'){
-                  columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+                  columnGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad',0,0);
                 }
                 else if($(this).val() === '2'){
-                  columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+                  columnGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad',40,30);
                 }
                 else if($(this).val() === '3'){
-                  lineGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+                  lineGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad');
                 }
                 else if($(this).val() === '4'){
-                  areaGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+                  areaGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad');
                 }
                 else if($(this).val() === '5'){
-                  barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+                  barGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad',0,0);
                 }
                 else if($(this).val() === '6'){
-                  barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+                  barGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad',40,30);
                 }
                 else if($(this).val() === '7'){
                   pieGraph(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
@@ -192,22 +192,22 @@ function Load_first_time(){
       //cambio de graficas de barras
       $("#graph1").change(function () {
         if($(this).val() === '1'){
-          columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+          columnGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad',0,0);
         }
         else if($(this).val() === '2'){
-          columnGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+          columnGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad',40,30);
         }
         else if($(this).val() === '3'){
-          lineGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+          lineGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad');
         }
         else if($(this).val() === '4'){
-          areaGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad');
+          areaGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad');
         }
         else if($(this).val() === '5'){
-          barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',0,0);
+          barGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad',0,0);
         }
         else if($(this).val() === '6'){
-          barGraph(arra,divgraph1,'Docentes tiempo completo','nivel','cantidad',40,30);
+          barGraph(arra,divgraph1,'Docentes Tiempo Completo','nivel','cantidad',40,30);
         }
         else if($(this).val() === '7'){
           pieGraph(arra, divgraph1, "nivel", "cantidad","Porcentaje Docentes Tiempo Completo");
@@ -336,10 +336,10 @@ $.ajax({
             lineGraph(arra2,divgraph2,'Docentes Tiempo Completo Perioo B','anio','periodo');
           }
           else if($(this).val() === '4'){
-            barGraph(arra2,divgraph2,'Docentes tiempo completo','anio','periodo',0,0);
+            barGraph(arra2,divgraph2,'Docentes Tiempo Completo','anio','periodo',0,0);
           }
           else if($(this).val() === '5'){
-            barGraph(arra2,divgraph2,'Docentes tiempo completo','anio','periodo',40,30);
+            barGraph(arra2,divgraph2,'Docentes Tiempo Completo','anio','periodo',40,30);
           }
         });
         //grafica que aparece por defecto
@@ -347,7 +347,7 @@ $.ajax({
 
       }
 
-      tittle2=json.rows[conta-3].name+" <br><br> Nivel de Formación Docentes Tiempo Completo de los Ultimos 5 Años";
+      tittle2=json.rows[conta-3].name+" <br><br> Nivel de Formación Docentes Tiempo Completo de los Últimos 5 Años";
       $("#datBody2").append(r2);
       $("#titulo2").append(tittle2);
 
@@ -549,10 +549,10 @@ function panoramaG(){
               lineGraph(arra2,divgraph2,'Docentes Tiempo Completo Perioo B','anio','periodo');
             }
             else if($(this).val() === '4'){
-              barGraph(arra2,divgraph2,'Docentes tiempo completo','anio','periodo',0,0);
+              barGraph(arra2,divgraph2,'Docentes Tiempo Completo','anio','periodo',0,0);
             }
             else if($(this).val() === '5'){
-              barGraph(arra2,divgraph2,'Docentes tiempo completo','anio','periodo',40,30);
+              barGraph(arra2,divgraph2,'Docentes Tiempo Completo','anio','periodo',40,30);
             }
           });
           //grafica que aparece por defecto

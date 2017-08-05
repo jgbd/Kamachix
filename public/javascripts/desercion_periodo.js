@@ -14,34 +14,34 @@ $(document).ready(function(){
   $("#cgdiv1").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
-      columnTwoGraph(json.datos,'divgraph1','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
+      columnTwoGraph(json.datos,'divgraph1','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
     }
     else if($(this).val() === '2'){
-      columnTwoGraph(json.datos,'divgraph1','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
+      columnTwoGraph(json.datos,'divgraph1','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
     }
     else if($(this).val() === '3'){
-      barTwoGraph(json.datos,'divgraph1','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
+      barTwoGraph(json.datos,'divgraph1','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
     }
     else{
-      barTwoGraph(json.datos,'divgraph1','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
+      barTwoGraph(json.datos,'divgraph1','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
     }
   });
   $("#cgdiv2").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
-      columnTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
+      columnTwoGraph(json.datos,'divgraph2','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
     }
     else if($(this).val() === '2'){
-      columnTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
+      columnTwoGraph(json.datos,'divgraph2','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
     }
     else if($(this).val() === '3'){
-      lineTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],"Deserción","Retención");
+      lineTwoGraph(json.datos,'divgraph2','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],"Deserción","Retención");
     }
     else if($(this).val() === '4'){
-      barTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
+      barTwoGraph(json.datos,'divgraph2','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
     }
     else if($(this).val() === '5'){
-      barTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
+      barTwoGraph(json.datos,'divgraph2','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],40,30,"Deserción","Retención");
     }
   });
 });
@@ -193,8 +193,8 @@ function load_start(){
           //-----------------------------------------------------------------
          $("#tableres").append('</tr>');
        }
-      columnTwoGraph(json.datos,'divgraph1','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");      
-      lineTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],"Deserción","Retención");
+      columnTwoGraph(json.datos,'divgraph1','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");      
+      lineTwoGraph(json.datos,'divgraph2','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],"Deserción","Retención");
       gaugesTwoAxesGraph(json.datos[0].desercion,json.datos[0].retencion,'divgraph3')
    }
  });
@@ -429,8 +429,8 @@ function load_filters(){
             //-----------------------------------------------------------------
             $("#tableres").append('</tr>');
           }
-          columnTwoGraph(json.datos,'divgraph1','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
-          lineTwoGraph(json.datos,'divgraph2','Desercion por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],"Deserción","Retención");
+          columnTwoGraph(json.datos,'divgraph1','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
+          lineTwoGraph(json.datos,'divgraph2','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],"Deserción","Retención");
           gaugesTwoAxesGraph(json.datos[0].desercion,json.datos[0].retencion,'divgraph3')
         }
      }

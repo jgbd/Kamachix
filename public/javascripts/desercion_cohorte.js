@@ -18,16 +18,16 @@
   $("#cgdiv1").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
-      columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
+      columnGraph(json.datos.reverse(),'divgraph1','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
     }
     else if($(this).val() === '2'){
-      columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],40,30);
+      columnGraph(json.datos.reverse(),'divgraph1','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1],40,30);
     }
     else if($(this).val() === '3'){
-      barGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
+      barGraph(json.datos.reverse(),'divgraph1','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
     }
     else{
-      barGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],40,30);    }
+      barGraph(json.datos.reverse(),'divgraph1','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1],40,30);    }
   });
 
   // cambia grafica del segundo div
@@ -35,9 +35,9 @@
   $("#cgdiv2").change(function () {
     var json = JSON.parse($('#txtjson').val());
     if($(this).val() === '1'){
-      lineGraph(json.datos.reverse(),'divgraph2','Desercion por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
+      lineGraph(json.datos.reverse(),'divgraph2','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
     }else{
-      areaGraph(json.datos.reverse(),'divgraph2','Desercion por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
+      areaGraph(json.datos.reverse(),'divgraph2','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
     }
   });
 });
@@ -186,9 +186,9 @@ function load_start(){
         //-----------------------------------------------------------------
          $("#tableres").append('</tr>');
        }      
-      columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
-      lineGraph(json.datos,'divgraph2','Desercion por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
-      var titleg="Nivel de Deserción por cohorte "+ json.datos[json.count-1].periodo +"\n"+ json.Programa
+      columnGraph(json.datos.reverse(),'divgraph1','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
+      lineGraph(json.datos,'divgraph2','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
+      var titleg="Nivel de Deserción por Cohorte "+ json.datos[json.count-1].periodo +"\n"+ json.Programa
       //semaforo divgraph3
       //toma los datos de los manuales del indicador para graficar el acelerometro
 
@@ -454,9 +454,9 @@ function load_filters(){
             //-----------------------------------------------------------------
             $("#tableres").append('</tr>');
           }         
-         columnGraph(json.datos.reverse(),'divgraph1','Desercion por cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
-         lineGraph(json.datos,'divgraph2','Desercion por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
-         var titleg="Nivel de Deserción por cohorte "+ json.datos[json.count-1].periodo +"\n"+ json.Programa
+         columnGraph(json.datos.reverse(),'divgraph1','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
+         lineGraph(json.datos,'divgraph2','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
+         var titleg="Nivel de Deserción por Cohorte "+ json.datos[json.count-1].periodo +"\n"+ json.Programa
          //semaforo divgraph3
           //toma los datos de los manuales del indicador para graficar el acelerometro
 

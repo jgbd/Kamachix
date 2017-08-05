@@ -12,7 +12,7 @@ function load_programs(){
    //se ejecutasi todo se realiza bien
    success : function(json) {
      if(json==0){
-       $("#messageError").html("Lo sentimos su departamento no cuenta con programas acreditados en alta calidad")
+       $("#messageError").html("Lo sentimos, su departamento no cuenta con programas acreditados en Alta Calidad")
        $("#myModal").modal('show');
        setTimeout ("location.href = '/'", 2000);
 
