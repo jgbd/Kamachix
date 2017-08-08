@@ -113,7 +113,8 @@ function Load_Fist_time(){
       $("#tableres").append('<tr>');
         $("#tableres").append('<td>'+json.datos[i].Nivel+'</td>');
         $("#tableres").append('<td>'+json.datos[i].Anho+'</td>');
-
+        json.datos[i].Nivel=json.datos[i].Nivel.replace(/%/g,"");
+        json.datos[i].Nivel=parseFloat(json.datos[i].Nivel);
         //----------------------------------------------------------------------
         //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
         // condiciones para insertar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
@@ -166,7 +167,7 @@ function Load_Fist_time(){
             }
 
           }
-        }        
+        }
         //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<'
         else if(json.datos[i].sim_Rango_MA === '< '){
           if(json.datos[i].Nivel <= json.datos[i].num_Rango_MA){
@@ -323,7 +324,9 @@ function Load_Filter(){
            $("#tableres").append('<tr>');
              $("#tableres").append('<td>'+json.datos[i].Nivel+'</td>');
              $("#tableres").append('<td>'+json.datos[i].Anho+'</td>');
-             //----------------------------------------------------------------------
+             json.datos[i].Nivel=json.datos[i].Nivel.replace(/%/g,"");
+             json.datos[i].Nivel=parseFloat(json.datos[i].Nivel);
+            //----------------------------------------------------------------------
             //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
             // condiciones para insertar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
             //en caso de que el simbolo del rango adecuado sea '= '

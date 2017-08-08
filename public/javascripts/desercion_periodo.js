@@ -67,6 +67,8 @@ function load_start(){
            $("#tableres").append('<td>'+json.datos[i].desertores+'</td>');
            json.datos[i].desercion=json.datos[i].desercion.replace(/%/g,"");
            json.datos[i].retencion=json.datos[i].retencion.replace(/%/g,"");
+           json.datos[i].desercion=parseFloat(json.datos[i].desercion);
+           json.datos[i].retencion=parseFloat(json.datos[i].retencion);
            $("#tableres").append('<td>'+json.datos[i].desercion+'%</td>');
            $("#tableres").append('<td>'+json.datos[i].retencion+'%</td>');
 
@@ -193,7 +195,7 @@ function load_start(){
           //-----------------------------------------------------------------
          $("#tableres").append('</tr>');
        }
-      columnTwoGraph(json.datos,'divgraph1','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");      
+      columnTwoGraph(json.datos,'divgraph1','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],0,0,"Deserción","Retención");
       lineTwoGraph(json.datos,'divgraph2','Deserción por Periodo\n'+json.programa,json.fields[0],json.fields[1],json.fields[2],"Deserción","Retención");
       gaugesTwoAxesGraph(json.datos[0].desercion,json.datos[0].retencion,'divgraph3')
    }
@@ -304,6 +306,8 @@ function load_filters(){
               $("#tableres").append('<td>'+json.datos[i].desertores+'</td>');
               json.datos[i].desercion=json.datos[i].desercion.replace(/%/g,"");
               json.datos[i].retencion=json.datos[i].retencion.replace(/%/g,"");
+              json.datos[i].desercion=parseFloat(json.datos[i].desercion);
+              json.datos[i].retencion=parseFloat(json.datos[i].retencion);
               $("#tableres").append('<td>'+json.datos[i].desercion+'</td>');
               $("#tableres").append('<td>'+json.datos[i].retencion+'</td>');
              //----------------------------------------------------------------------

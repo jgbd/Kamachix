@@ -61,8 +61,8 @@ function load_start(){
          $("#tableres").append('<tr>');
            $("#tableres").append('<td>'+json.datos[i].periodo+'</td>');
            $("#tableres").append('<td>'+json.datos[i].porcentaje+'</td>');
-           json.datos[i].porcentaje=json.datos[i].porcentaje.replace("%","");
-
+           json.datos[i].porcentaje=json.datos[i].porcentaje.replace(/%/g,"");
+           json.datos[i].porcentaje = parseFloat(json.datos[i].porcentaje);
            //----------------------------------------------------------------------
           //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
           // condiciones para insertar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
@@ -185,7 +185,7 @@ function load_start(){
           }
         //-----------------------------------------------------------------
          $("#tableres").append('</tr>');
-       }      
+       }
       columnGraph(json.datos.reverse(),'divgraph1','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
       lineGraph(json.datos,'divgraph2','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
       var titleg="Nivel de Deserción por Cohorte "+ json.datos[json.count-1].periodo +"\n"+ json.Programa
@@ -327,10 +327,12 @@ function load_filters(){
             $("#programa").html(json.Programa);
           }
           for (var i = json.count-1; i >=0; i--) {
+
             $("#tableres").append('<tr>');
               $("#tableres").append('<td>'+json.datos[i].periodo+'</td>');
               $("#tableres").append('<td>'+json.datos[i].porcentaje+'</td>');
-              json.datos[i].porcentaje=json.datos[i].porcentaje.replace("%","");
+              json.datos[i].porcentaje=json.datos[i].porcentaje.replace(/%/g,"");
+              json.datos[i].porcentaje = parseFloat(json.datos[i].porcentaje);
               //----------------------------------------------------------------------
               //--Verificación y muestra de etiquetas de estado de los KPI's en función de la meta a lo largo de los años---------------------------------------------------------------------------------------------------------------
               // condiciones para insertar el estado rojo verde o amarillo segun el estado de meta y segun los rangos establecidos en los manuales
@@ -453,7 +455,7 @@ function load_filters(){
               }
             //-----------------------------------------------------------------
             $("#tableres").append('</tr>');
-          }         
+          }
          columnGraph(json.datos.reverse(),'divgraph1','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1],0,0);
          lineGraph(json.datos,'divgraph2','Deserción por Cohorte\n'+json.Programa,json.fields[0],json.fields[1]);
          var titleg="Nivel de Deserción por Cohorte "+ json.datos[json.count-1].periodo +"\n"+ json.Programa
