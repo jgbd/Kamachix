@@ -11,7 +11,7 @@ var pool = configdb.configdb();
 //next que es la siguiente function
 
 router.get('/', function(req, res, next) {
-  console.log("hola:"+req.session.rol);
+  //console.log("hola:"+req.session.rol);
 
   if(req.query.c == 1){
     var sql = 'SELECT sl."Programa", p.nombre From "Datawarehouse"."KPI_Nivel_Satisfaccion"  sl JOIN public.programas p ON p.snies=sl."Programa"';
