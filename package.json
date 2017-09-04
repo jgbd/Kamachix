@@ -1,9 +1,9 @@
 {
-  "name": "Prototipo1",
+  "name": "Kamachix",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "sudo supervisor ./bin/www"
+    "start": "sudo pm2 start ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.15.1",

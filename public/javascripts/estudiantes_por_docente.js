@@ -44,7 +44,7 @@ function Load_Insert(){//Define si muestra o no el formulario
       }
     });
   }
-  else if(mes>6 && mes<9){
+  else if(mes>7 && mes<10){
     $.ajax({
       type: "get", //el el tipo de peticion puede ser GET y POsT
       url: "consultaDocentesTC", //la url del que realizara la consulta
@@ -57,7 +57,7 @@ function Load_Insert(){//Define si muestra o no el formulario
       }
     });
   }
-  else if(mes>=3 && mes<=6){
+  else if(mes>=3 && mes<=7){
     $.ajax({
       type: "get", //el el tipo de peticion puede ser GET y POsT
       url: "consultaDocentesTC", //la url del que realizara la consulta
@@ -605,7 +605,7 @@ function opendivupdate(year,month){//carga formulario de ingreso-actualizacion d
       }
     });
   }
-  else if (month>6 && month<9){//el formulario tomará como datos por defecto los datos ingresados en el asemestre A del año en curso
+  else if (month>7 && month<10){//el formulario tomará como datos por defecto los datos ingresados en el asemestre A del año en curso
     $.ajax({
       type: "get", //el el tipo de peticion puede ser GET y POsT
       url: "consultaDocentesTC", //la url del que realizara la consulta
