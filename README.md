@@ -1,4 +1,5 @@
-# prototipe
-prototipo de tesis 
+# KAMACHIX DASHBOARD PARA LA VISUALIZACION DE INDICADORES ACADEMICOS DE LA UNIVERSIDAD DE NARIÑO
 
-contiene todo lo avanzado del proyecto de grado para ing de sistemas 
+
+
+
