@@ -389,13 +389,7 @@ function Load_Filter(){
             //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<'
             else if(json.datos[i].sim_Rango_MA === '< '){
               if(json.datos[i].Nivel <= json.datos[i].num_Rango_MA){
-                $("#tablere$('#cgdiv1 > option[value="0"]').attr('selected', 'selected');
-                $('#cgdiv2 > option[value="0"]').attr('selected', 'selected');
-                $("#tableres").html("");
-                $("#divgraph1").html("");
-                $("#divgraph2").html("");
-                $("#divgraph3").html("");
-                s").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                s("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
               }
               else if(json.datos[i].sim_Rango_A === '> '){
                 if(json.datos[i].Nivel > json.datos[i].num_Rango_A && json.datos[i].Nivel <= json.datos[i].num_Rango_I ){

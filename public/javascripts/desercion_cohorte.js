@@ -43,6 +43,7 @@
 });
 
 function load_start(){
+  alert("hola1")
   $('#cgdiv1 > option[value="0"]').attr('selected', 'selected');
   $('#cgdiv2 > option[value="0"]').attr('selected', 'selected');
   $("#tableres").html('');
@@ -504,4 +505,4 @@ function closedivfilter(){
 function hidenmodal(){
     $("#myModal").modal('hide');
     $("#modalfilter").modal('show');
-}f(ban){
+}
