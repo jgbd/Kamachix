@@ -275,12 +275,19 @@ function Load_Fist_time(){
 }
 
 function Load_Filter(){
-  $("#cgc1").attr('checked',true);
+  //$("#cgc1").attr('checked',true);
   var ban = true;
   //vacea el contenido de la tabla para volver a cargar datos nuevos
+  $('#cgdiv1 > option[value="0"]').attr('selected', 'selected');
+  $('#cgdiv2 > option[value="0"]').attr('selected', 'selected');
   $("#tableres").html("");
+  $("#divgraph1").html("");
+  $("#divgraph2").html("");
+  $("#divgraph3").html("");
   //se obtiene los valores de las input en variables
-  var program = $('#lstprog').val(), yearfrom = $("#lstanho1").val(), yearto = $("#lstanho2").val();
+  var program = $('#lstprog').val(), 
+  yearfrom = $("#lstanho1").val(), 
+  yearto = $("#lstanho2").val();
 
   if(yearfrom>yearto && yearto!=0){
     var aux = yearfrom;
@@ -382,7 +389,13 @@ function Load_Filter(){
             //en caso de que el simbolo del rango muy adecuado sea el simbolo de menor '<'
             else if(json.datos[i].sim_Rango_MA === '< '){
               if(json.datos[i].Nivel <= json.datos[i].num_Rango_MA){
-                $("#tableres").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
+                $("#tablere$('#cgdiv1 > option[value="0"]').attr('selected', 'selected');
+                $('#cgdiv2 > option[value="0"]').attr('selected', 'selected');
+                $("#tableres").html("");
+                $("#divgraph1").html("");
+                $("#divgraph2").html("");
+                $("#divgraph3").html("");
+                s").append('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Meta del Nivel de Satisfacción Alcanzada ('+json.datos[i].Nivel+'% de '+json.datos[i].num_Rango_MA+'%)"></td>');
               }
               else if(json.datos[i].sim_Rango_A === '> '){
                 if(json.datos[i].Nivel > json.datos[i].num_Rango_A && json.datos[i].Nivel <= json.datos[i].num_Rango_I ){

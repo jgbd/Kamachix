@@ -303,7 +303,7 @@ function load_filters(){
         'periodfrom': periodfrom,
         'periodto':periodto
       };
-  //el metodo ajax para consulta asyncronica
+  //el metodo ajax para consulta f(ban){f(ban){f(ban){f(ban){f(ban){asyncronica
   if(ban){
     $.ajax({
      type: "POST", //el el tipo de peticion puede ser GET y POsT
@@ -504,4 +504,4 @@ function closedivfilter(){
 function hidenmodal(){
     $("#myModal").modal('hide');
     $("#modalfilter").modal('show');
-}
+}f(ban){
