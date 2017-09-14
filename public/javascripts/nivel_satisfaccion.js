@@ -101,9 +101,14 @@ function Load_Year_List(){
 
 function Load_Fist_time(){
   //$("#cgc1").attr('checked',true);
+  $('#cgdiv1 > option[value="0"]').attr('selected', 'selected');
+  $('#cgdiv2 > option[value="0"]').attr('selected', 'selected');
   $("#tableres").html('');
+  $("#divgraph1").html('');
+  $("#divgraph2").html('');
+  $("#divgraph3").html('');
   $.ajax({
-   type: "get", //el el tipo de peticion puede ser GET y POsT
+   type: "GET", //el el tipo de peticion puede ser GET y POsT
    url: "consulta", //la url del que realizara la consulta
    dataType : 'json',
    success : function(json) {
@@ -306,7 +311,7 @@ function Load_Filter(){
   //el metodo ajax para consulta asyncronica
   if(ban){
     $.ajax({
-     type: "post", //el el tipo de peticion puede ser GET y POsT
+     type: "POST", //el el tipo de peticion puede ser GET y POsT
      url: "consulta", //la url del que realizara la consulta
      data : formData,
      dataType : 'json',

@@ -43,7 +43,7 @@
 });
 
 function load_start(){
-  alert("hola1")
+  // alert("hola1")
   $('#cgdiv1 > option[value="0"]').attr('selected', 'selected');
   $('#cgdiv2 > option[value="0"]').attr('selected', 'selected');
   $("#tableres").html('');
@@ -288,7 +288,9 @@ function load_filters(){
   $("#divgraph2").html("");
   $("#divgraph3").html("");
   //se obtiene los valores de las input en variables
-  var program=$("#lstprog").val(), periodfrom = $("#lstperiod1").val(), periodto = $("#lstperiod2").val();
+  var program=$("#lstprog").val(), 
+  periodfrom = $("#lstperiod1").val(), 
+  periodto = $("#lstperiod2").val();
 
   if(periodfrom>periodto && periodto!=0){
     var aux = periodfrom;
