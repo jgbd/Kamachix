@@ -22,10 +22,5 @@
     "pg": "^6.1.0",
     "serve-favicon": "~2.3.0",
     "static-expiry": "0.0.11"
-  },
-  "devDependencies": {
-    "@ngui/ngui": "^0.15.2",
-    "@types/googlemaps": "^3.26.18",
-    "@types/hammerjs": "^2.0.34"
   }
 }

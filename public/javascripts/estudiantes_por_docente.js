@@ -41,10 +41,18 @@ function Load_Insert(){//Define si muestra o no el formulario
         if (json.rowCount) opendivupdate(anho,mes);//si esta condición no se cumple
                                                     //significa que ya está el indicador
                                                     //actualizado a la fecha
+        else {
+          $('#tabledoctc').append('B de '+anho+' Cierre');
+          $('#tablest').append('B de '+anho+' Cierre');
+          $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+json.rows[0].docentes);
+          $("#flagdoctc").html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Docentes Tiempo Completo al día"></td>');
+          $('#nest').html(json.rows[0].estudiantes);
+          $('#flagest').html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Estudiantes al día"></td>');//Coloca estado actualizado de estudiantes
+        }
       }
     });
   }
-  else if(mes>7 && mes<10){
+  else if(mes>6 && mes<9){
     $.ajax({
       type: "get", //el el tipo de peticion puede ser GET y POsT
       url: "consultaDocentesTC", //la url del que realizara la consulta
@@ -54,10 +62,18 @@ function Load_Insert(){//Define si muestra o no el formulario
         if (json.rowCount==0) opendivupdate(anho,mes);//si esta condición no se cumple
                                                       //significa que los datos del semestre A
                                                       //ya fueron ingresados
+        else {
+          $('#tabledoctc').append('A de '+anho+' Corte');
+          $('#tablest').append('A de '+anho+' Corte');
+          $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+json.rows[0].docentes);
+          $("#flagdoctc").html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Docentes Tiempo Completo al día"></td>');
+          $('#nest').html(json.rows[0].estudiantes);
+          $('#flagest').html('<td class="est"><img id="est" src="/images/verde.svg" alt="GREEN" title="Número de Estudiantes al día"></td>');//Coloca estado actualizado de estudiantes
+        }
       }
     });
   }
-  else if(mes>=3 && mes<=7){
+  else if(mes>=3 && mes<=6){
     $.ajax({
       type: "get", //el el tipo de peticion puede ser GET y POsT
       url: "consultaDocentesTC", //la url del que realizara la consulta
@@ -66,8 +82,8 @@ function Load_Insert(){//Define si muestra o no el formulario
       success : function(json) {
         if (json.rowCount!=0) {
           anho=anho-1;
-          $('#tabledoctc').append('B de '+anho);
-          $('#tablest').append('B de '+anho);
+          $('#tabledoctc').append('B de '+anho+' Cierre');
+          $('#tablest').append('B de '+anho+' Cierre');
           $('#sem2').html('<input type="hidden" id="sem1" value="B">');
           $('#year2').html('<input type="hidden" id="year1" value='+anho+'>');
           $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+json.rows[0].docentes);
@@ -79,7 +95,6 @@ function Load_Insert(){//Define si muestra o no el formulario
     });
   }
   else{
-    //alert("entra");
     $.ajax({
       type: "get", //el el tipo de peticion puede ser GET y POsT
       url: "consultaDocentesTC", //la url del que realizara la consulta
@@ -87,8 +102,8 @@ function Load_Insert(){//Define si muestra o no el formulario
       data:{c:4,'anho': anho},//señala a la consulta de existencia de datos del año en curso
       success : function(json) {
         if (json.rowCount!=0) {
-          $('#tabledoctc').append('A de '+anho);
-          $('#tablest').append('A de '+anho);
+          $('#tabledoctc').append('A de '+anho+' Corte');
+          $('#tablest').append('A de '+anho+' Corte');
           $('#sem2').html('<input type="hidden" id="sem1" value="B">');
           $('#year2').html('<input type="hidden" id="year1" value='+anho+'>');
           $('#ndoctc').html('Promedio de Docentes Tiempo Completo: '+json.rows[0].docentes);
