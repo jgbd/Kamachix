@@ -68,7 +68,7 @@ $(document).ready(function(){
               "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";
             }
 
-            tittle="Nivel de Formación Docentes Tiempo Completo  Año: "+json.rows[conta-3].anio+"  Periodo: "+json.rows[conta-3].periodo;
+            tittle="Nivel de Formación Docentes Tiempo Completo de Pregrado Año: "+json.rows[conta-3].anio+"  Periodo: "+json.rows[conta-3].periodo;
             $("#datBody").append(r);
             $("#titulo").append(tittle);
 
@@ -300,19 +300,18 @@ $.ajax({
       }
       //si no se cumple la condicion anterior se grafican os dtos devueltos en graficas simples indicando solamente el valor del periodo b
       else{
-
+         var colo3=[];
       //ciclo para llenar el array para las graficas con los objetos de un periodo
         for(var i =conta-1; i>=conta-10;i--){
           var programa2;
-          if(json.rows[i].periodo == '2'){
+          if(json.rows[i].periodo == '2 '){
             programa2 = {
                 "anio": json.rows[i].anio,
                 "periodo": json.rows[i].total,
                 "color": colo3[i]
             }
-          }
-
-          arra2.push(programa2);
+            arra2.push(programa2);
+          }          
 
         }
         //ciclo para llenar los datos en las filas en r
@@ -513,19 +512,20 @@ function panoramaG(){
         }
         //si no se cumple la condicion anterior se grafican os dtos devueltos en graficas simples indicando solamente el valor del periodo b
         else{
-
+           var colo3=[];
         //ciclo para llenar el array para las graficas con los objetos de un periodo
           for(var i =conta-1; i>=conta-10;i--){
             var programa2;
-            if(json.rows[i].periodo == '2'){
+            if(json.rows[i].periodo == '2 '){
               programa2 = {
                   "anio": json.rows[i].anio,
                   "periodo": json.rows[i].total,
                   "color": colo3[i]
               }
+              arra2.push(programa2);
             }
 
-            arra2.push(programa2);
+            
 
           }
           //ciclo para llenar los datos en las filas en r
