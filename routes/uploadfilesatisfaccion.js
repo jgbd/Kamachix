@@ -32,10 +32,10 @@ router.post('/',function(req, res, next){
           var cam = arrdata[i].split(',');
           console.log(arrdata[i].length);
           if(i===arrdata.length-1){
-            sql=sql+"('"+cam[0]+"','"+cam[1]+"',"+cam[2]+")";
+            sql=sql+"('"+cam[0]+"','"+cam[1]+"','"+cam[2]+"')";
           }
           else{
-            sql=sql+"('"+cam[0]+"','"+cam[1]+"',"+cam[2]+"),";
+            sql=sql+"('"+cam[0]+"','"+cam[1]+"','"+cam[2]+"'),";
           }
         }
         console.log(sql);
