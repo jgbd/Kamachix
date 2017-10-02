@@ -12,7 +12,7 @@ var pool = configdb.configdb();
 //next que es la siguiente function
 
 router.get('/', function(req, res, next) {
-  var sql ='SELECT p.abreviatura, sl."Nivel", sl. "Anho","sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Nivel_Satisfaccion" sl JOIN public.programas p ON p.snies=sl."Programa" join manuales_indicadores on manual=manuales_indicadores.codigo WHERE sl."Programa" = '+"'1296'"+' ORDER BY p."abreviatura", sl."Anho"';
+  var sql ='SELECT p.abreviatura, sl."Nivel", sl. "Anho","sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Nivel_Satisfaccion" sl JOIN public.programas p ON p.snies=sl."Programa" join manuales_indicadores on manual=manuales_indicadores.codigo WHERE sl."Programa" = '+"'1206'"+' ORDER BY p."abreviatura", sl."Anho"';
   //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {

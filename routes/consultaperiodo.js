@@ -13,7 +13,7 @@ var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
 
-  var sql ='SELECT p.abreviatura, pd."periodo", pd."graduados", pd."desertores", pd."desercion", pd."retencion","sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Desercion_Periodo" pd JOIN public.programas p ON p.snies=pd.programa join manuales_indicadores on manual=manuales_indicadores.codigo WHERE pd."programa" = '+"'1296'"+'ORDER BY pd."periodo" DESC LIMIT 5';
+  var sql ='SELECT p.abreviatura, pd."periodo", pd."graduados", pd."desertores", pd."desercion", pd."retencion","sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Desercion_Periodo" pd JOIN public.programas p ON p.snies=pd.programa join manuales_indicadores on manual=manuales_indicadores.codigo WHERE pd."programa" = '+"'1206'"+'ORDER BY pd."periodo" DESC LIMIT 5';
   //aqui se crea la conexion a DB
   pool.connect(function(err, client, done) {
     if(err) {
