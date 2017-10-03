@@ -63,7 +63,7 @@ function load_start(){
        for (var i = json.count-1; i >=0; i--) {
          $("#tableres").append('<tr>');
            $("#tableres").append('<td>'+json.datos[i].periodo+'</td>');
-           $("#tableres").append('<td>'+json.datos[i].graduados+'</td>');
+           $("#tableres").append('<td>'+json.datos[i].no_graduados+'</td>');
            $("#tableres").append('<td>'+json.datos[i].desertores+'</td>');
            json.datos[i].desercion=json.datos[i].desercion.replace(/%/g,"");
            json.datos[i].retencion=json.datos[i].retencion.replace(/%/g,"");
@@ -302,7 +302,7 @@ function load_filters(){
           for (var i = json.count-1; i >=0; i--) {
             $("#tableres").append('<tr>');
               $("#tableres").append('<td>'+json.datos[i].periodo+'</td>');
-              $("#tableres").append('<td>'+json.datos[i].graduados+'</td>');
+              $("#tableres").append('<td>'+json.datos[i].no_graduados+'</td>');
               $("#tableres").append('<td>'+json.datos[i].desertores+'</td>');
               json.datos[i].desercion=json.datos[i].desercion.replace(/%/g,"");
               json.datos[i].retencion=json.datos[i].retencion.replace(/%/g,"");
