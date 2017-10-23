@@ -29,16 +29,27 @@ block resto
         .modal-body
           form#frmfilter(method='POST' action='consultaB')
             br           
-            .col-md-2 
+            //.col-md-2 
               label(for='lstanho1') Años De:
-            .col-md-3
+            //.col-md-3
               select#lstanho1.form-control
           
-            .col-md-3
+            //.col-md-3
               label(for='lstanho2') a
-            .col-md-3
+            //.col-md-3
               select#lstanho2.form-control
-            .col-md-1
+            //.col-md-1
+            .col-md-5
+              label(for='lstdep')
+                |Departamento:              
+              select#lstdep.form-control(name='lstdep' onchange="Load_Year_List()")          
+            .col-md-4                        
+                label(for='lstanho1') Años De:                         
+                select#lstanho1.form-control
+            .col-md-3            
+              label(for='lstanho2') a            
+              select#lstanho2.form-control
+            br
             br
             br
             br
@@ -46,7 +57,8 @@ block resto
   .col-md-8
     h3 
       span#more.glyphicon.glyphicon-question-sign(onclick='openinfo()')
-      | Panorama General Estudiantes por Docente
+      | Panorama General Estudiantes por Docente de:
+    h3#departamento
     br
   .col-md-2
   .col-md-12
@@ -79,7 +91,7 @@ block resto
     .col-md-4
       #divgraph3
       h6 Indicador Actual
-  .col-md-12
+  //.col-md-12
     .col-md-6
       table.table.table-hover.table-bordered.table-responsed
         thead

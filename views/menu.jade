@@ -127,6 +127,25 @@ block content
             span
             p
           a.acol(href='download/Formato\ datos\ Formacion\ Docentes.csv' class='vinculoFormato') Descargar Formato
+
+  //modaluploadestudiantes y relacion estudiantes
+  #modaluploadEstudiantes.modal.fade.bd-example-modal-lg
+    .modal-dialog
+      .modal-content
+        .modal-header.headerModal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#modal-title.modal-title Carga Archivo Estudiantes por Departamento.
+        #modal-body.modal-body
+          form(class='form-inline' ref='uploadestudiantes' id='uploadestudiantes' action='/uploadfilestudiantes', method='POST', enctype='multipart/form-data')
+            .form-group
+              input.file(type='file', name='archivo', id='filestudiantes')
+            input(type='submit', value='Subir' class='btn btn-primary')
+          br
+          div#mesage(style='color:red;')
+            span
+            p
+          a.acol(href='download/Formato\ datos\ Estudiantes\ Departamento.csv' class='vinculoFormato') Descargar Formato
   
   //modal acerca de
   #modalabout.modal.fade.bd-example-modal-lg
@@ -243,6 +262,10 @@ block content
                    li
                      a(href='#' onclick='openmodaluploadFormacion()') 
                        | Nivel de Formación Docentes.                         
+                   li.divider
+                   li
+                     a(href='#' onclick='openmodaluploadEstudiantes()') 
+                       | Estudiantes por departamento. 
                li
                  a(href='#' onclick='openmodalreport()' style!=rep)
                    | Generar Reporte

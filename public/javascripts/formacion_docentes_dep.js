@@ -363,7 +363,7 @@ function Load_filterfirst_time(){
     data:{c:4},//Primera consulta
     //se ejecutasi todo se realiza bien
     success : function(json) {
-      $("#lst_dep").append('<option value="0" selected>Seleccionar Programa</option>');
+      $("#lst_dep").append('<option value="0" selected>Seleccionar Departamento</option>');
       $("#lst_anio").append('<option value="0" selected>Seleccionar Año</option>');
       $("#lst_per").append('<option value="0" selected>Seleccionar Periodo</option>');
       //llenado de lista de departamentos

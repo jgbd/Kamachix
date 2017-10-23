@@ -12,34 +12,33 @@ var pool = configdb.configdb();
 
 router.post('/', function(req, res, next) {
     //arreglo que contine filtros
-    var filters = [];
+    var filters = [req.body.department];
     //consulta basica sin condiciones
-    var sql ='SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt join manuales_indicadores on "manual_Estu_Docente"=codigo WHERE ';
-
+    var sql ='SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual, u.name, "sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt JOIN manuales_indicadores on "manual_Estu_Docente"=codigo JOIN users u ON spctt.departamento=u.codigo WHERE ';
+    sql=sql+'spctt.departamento LIKE $1';
     //concatena al sql los valores d elos filtros
     if(req.body.yearfrom!=0){
       filters.push(req.body.yearfrom);
-      sql=sql+'spctt."Anho" BETWEEN $1';
+      sql=sql+' AND spctt."Anho" BETWEEN $2';
       if(req.body.yearto!=0){
         filters.push(req.body.yearto);
-        sql=sql+' AND $2';
+        sql=sql+' AND $3';
       }
       else {
-        sql=sql+' AND $1';
+        sql=sql+' AND $2';
       }
     }
     else{
       filters.push(req.body.yearto);
-      sql=sql+'spctt."Anho" BETWEEN $1';
+      sql=sql+' AND spctt."Anho" BETWEEN $2';
       if(req.body.yearfrom!=0){
         filters.push(req.body.yearfrom);
-        sql=sql+' AND $2';
+        sql=sql+' AND $3';
       }
       else {
-        sql=sql+' AND $1';
+        sql=sql+' AND $2';
       }
     }
-
     //al final se concatena al sql un ORDER BY por programa y año
     sql = sql+' ORDER BY spctt."Anho"';
 
@@ -56,7 +55,7 @@ router.post('/', function(req, res, next) {
         //objeto que va acontener la estructura del json a retornar
         var re={
           "datos":[],
-          "fieldsthree":[result.fields[0].name,result.fields[1].name,result.fields[2].name],
+          "fieldsthree":[result.fields[0].name,result.fields[1].name,result.fields[2].name,result.fields[3].name,result.fields[4].name],
           "count":result.rowCount
         };
 
@@ -68,6 +67,7 @@ router.post('/', function(req, res, next) {
               "razonb": result.rows[i].razonb,
               "Anho": result.rows[i].Anho,
               "razonanual": result.rows[i].razonanual,
+              "departamento": result.rows[i].name,
               "num_Rango_I":result.rows[i].num_Rango_I,
               "num_Rango_A":result.rows[i].num_Rango_A,
               "num_Rango_MA":result.rows[i].num_Rango_MA,

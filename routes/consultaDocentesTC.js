@@ -11,12 +11,12 @@ var pool = configdb.configdb();
 
 router.get('/', function(req, res, next) {
   if(req.query.c == 1)
-    //var sql ='SELECT spctt."Anho", spctt."estudiantes", spctt."docentes", ROUND(spctt."estudiantes"/spctt."docentes",0) AS razon FROM "Datawarehouse"."KPI_Students_per_Complete_Time_Teacher" spctt ORDER BY spctt."Anho"';
-    var sql ='SELECT spctt."Anho", spctt.razonanual,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt join manuales_indicadores on "manual_Estu_Docente"=codigo ORDER BY spctt."Anho"';
+    //var sql ='SELECT spctt."Anho", spctt.razonanual,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt join manuales_indicadores on "manual_Estu_Docente"=codigo ORDER BY spctt."Anho"';
+    var sql ='SELECT spctt."Anho", ROUND(SUM(spctt.estudiantes)/SUM(spctt.docentes),0) AS razonanual,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt join manuales_indicadores on "manual_Estu_Docente"=codigo GROUP BY spctt."Anho","sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" ORDER BY spctt."Anho"';
   else if (req.query.c == 2)
-    //var sql = 'SELECT pe."anho", pd."tipo", ROUND(pe."semestreA"/pd."semestreA",0) as razonA, ROUND(pe."semestreB"/pd."semestreB",0) as razonB FROM "poblacion_estudiantes" pe JOIN "poblacion_docentes" pd ON pe.anho=pd.anho WHERE pd."tipo"='+"'1'"+'ORDER BY pe."anho"';
-    var sql = 'SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt join manuales_indicadores on "manual_Estu_Docente"=codigo ORDER BY spctt."Anho"';
-  else if (req.query.c == 3){
+    //var sql = 'SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt join manuales_indicadores on "manual_Estu_Docente"=codigo ORDER BY spctt."Anho"';
+    var sql = 'SELECT spctt."Anho", t1.ea/t2.da as razona, t3.eb/t4.db as razonb, "sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt join manuales_indicadores on "manual_Estu_Docente"=codigo JOIN (SELECT estudiantes_departamento.anho, sum(estudiantes_departamento.matriculados) AS ea FROM estudiantes_departamento WHERE estudiantes_departamento.periodo='+"'1'"+' GROUP BY estudiantes_departamento.anho) t1 ON t1.anho=spctt."Anho" JOIN ( SELECT formacion_departamento.anio, sum(formacion_departamento.t_completo) AS da FROM formacion_departamento WHERE formacion_departamento.periodo ='+"'1'"+' GROUP BY formacion_departamento.anio) t2 ON t1.anho=t2.anio FULL JOIN (SELECT estudiantes_departamento.anho, sum(estudiantes_departamento.matriculados) AS eb FROM estudiantes_departamento WHERE estudiantes_departamento.periodo = '+"'2'"+' GROUP BY estudiantes_departamento.anho) t3 ON t1.anho=t3.anho FULL JOIN ( SELECT formacion_departamento.anio, sum(formacion_departamento.t_completo) AS db FROM formacion_departamento WHERE formacion_departamento.periodo = '+"'2'"+'  GROUP BY formacion_departamento.anio) t4 ON t1.anho=t4.anio GROUP BY spctt."Anho",t1.ea,t2.da,t3.eb,t4.db,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" ORDER BY spctt."Anho"';
+/*  else if (req.query.c == 3){
     var beforedata=[req.query.anho];
     var sql = 'SELECT * FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt WHERE "Anho"=$1';
   }
@@ -35,6 +35,13 @@ router.get('/', function(req, res, next) {
   else if (req.query.c == 6){
     var beforedata=[req.query.anho];
     var sql = 'SELECT "semestreA" as docentesa FROM vista_poblacion_docentes where anho=$1';
+  }*/
+  else if (req.query.c == 7){
+    var dep=[req.query.department];
+    var sql ='SELECT "Anho" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" WHERE departamento LIKE $1 ORDER BY "Anho"';
+  }
+  else if (req.query.c == 8){
+    var sql ='SELECT spctt.departamento,u.name FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt JOIN users u ON spctt.departamento=u.codigo GROUP BY spctt.departamento,u.name ORDER BY u.name';
   }
   else return console.log("error");
   //aqui se crea la conexion a DB
@@ -46,7 +53,7 @@ router.get('/', function(req, res, next) {
     //resive el sql, el arreglo siguiente contiene los parametros que van en el sql  preparado
     //la funcion anonima recive la variable de err que controla el error  y la result
     //que es la que controla el resultado de la consulta el cual es un JSON
-    client.query(sql, beforedata, function(err, result) {
+    client.query(sql, dep, function(err, result) {
       done();
       if(err) {
         return console.error('error running query', err);

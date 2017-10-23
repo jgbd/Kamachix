@@ -60,6 +60,7 @@ var consultationstudentsperteacher = require('./routes/consultaDocentesTC');//co
                                                                           //estudiantes por docente
 var insertionstudentsperteacher = require('./routes/actualizaDocentesTC'); //actualiza poblacion de docentes o estudiantes en public
 var updatekpistudentsperteacher = require('./routes/actualizaKPIDocentesTC'); //actualiza kpi general de estudiantes por docente TC
+var uploadfilestudiante = require('./routes/uploadfilestudiantes');
 
 //para controlar todo lo del KPI del nivel de formacion docentes y vista de formacion docentes por departamento
 var formacion = require('./routes/formacion');
@@ -173,6 +174,7 @@ app.use('/actualizaKPIAcreditacion',updatekpiaccreditation);
 app.use('/actualizaDocentesTC',insertionstudentsperteacher);
 app.use('/actualizaKPIDocentesTC',updatekpistudentsperteacher);
 app.use('/actualizaAvisoAltaCalidad',updatewarninghighquality);
+app.use('/uploadfilestudiantes',uploadfilestudiante);
 
 //datos oscar
 app.use('/formacion',formacion); //visualizacion del KPI nivel de formacion
