@@ -130,6 +130,27 @@ ALTER FUNCTION "Datawarehouse".fun_delete_period() OWNER TO postgres;
 SET search_path = public, pg_catalog;
 
 --
+-- Name: Actua_Estudiantes_Dep(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION "Actua_Estudiantes_Dep"() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+  cantidad_e INTEGER;
+BEGIN
+  SELECT Count(*) INTO cantidad_e FROM estudiantes_departamento ek WHERE ek.departamento = new.departamento and ek.anho=NEW.anho and ek.periodo=new.periodo;
+	IF cantidad_e > 0 THEN
+    	DELETE  FROM estudiantes_departamento ek WHERE ek.departamento = new.departamento and ek.anho=NEW.anho and ek.periodo=new.periodo;
+   	END IF;  
+   	return new;
+END;
+$$;
+
+
+ALTER FUNCTION public."Actua_Estudiantes_Dep"() OWNER TO postgres;
+
+--
 -- Name: Actua_Formacion_Dep(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -149,6 +170,142 @@ $$;
 
 
 ALTER FUNCTION public."Actua_Formacion_Dep"() OWNER TO postgres;
+
+--
+-- Name: Fun_Actua_KPI_Est_Doc(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION "Fun_Actua_KPI_Est_Doc"() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+  cantidad_e INTEGER;
+BEGIN
+	SELECT Count(*) INTO cantidad_e FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" ek WHERE ek."Anho"=NEW.anho AND ek.departamento=NEW.departamento;
+	IF NEW.departamento<>'99' THEN
+    	IF cantidad_e < 1 THEN
+	    	IF NEW.periodo='1' THEN
+				INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razona,razonanual) 
+					SELECT 
+						t2.departamento, 
+						t1.anho, 
+						t1.ea::numeric(5,0),
+						t2.da::numeric(3,0),
+						t1.ea/t2.da::numeric(3,0),
+						t1.ea/t2.da::numeric(3,0)
+					FROM ( 
+						SELECT anho,matriculados AS ea
+						FROM estudiantes_departamento 
+						WHERE 
+							periodo = NEW.periodo 
+						AND 
+							anho = NEW.anho 
+						AND 
+							departamento = NEW.departamento) t1
+					JOIN ( 
+						SELECT anio,departamento,sum(t_completo) AS da
+						FROM formacion_departamento 
+						WHERE
+							periodo = NEW.periodo 
+						AND 
+							anio=NEW.anho 
+						AND
+							departamento = NEW.departamento 
+						GROUP BY anio,departamento) t2 
+					ON t2.departamento=NEW.departamento;
+            ELSE
+				INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razonb,razonanual) 
+					SELECT 
+						t2.departamento,
+						t1.anho, 
+						t1.eb::numeric(5,0),
+						t2.db::numeric(3,0),
+						t1.eb/t2.db::numeric(3,0),
+						t1.eb/t2.db::numeric(3,0)
+					FROM ( 
+						SELECT anho,matriculados AS eb
+						FROM estudiantes_departamento 
+						WHERE 
+							periodo = NEW.periodo 
+						AND 
+							anho = NEW.anho
+						AND 
+							departamento = NEW.departamento) t1
+					JOIN ( 
+						SELECT anio,departamento,sum(t_completo) AS db
+						FROM formacion_departamento 
+						WHERE 
+							periodo = NEW.periodo 
+						AND 
+							anio=NEW.anho 
+						AND 
+							departamento=NEW.departamento 
+						GROUP BY anio,departamento) t2 
+					ON t2.departamento=NEW.departamento;
+            END IF;
+        ELSE
+			IF NEW.periodo='2' THEN
+				UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+					SET 
+						estudiantes=(
+							SELECT 
+								sum(matriculados)/2::numeric(5,0)
+							FROM estudiantes_departamento 
+							WHERE 
+								anho=NEW.anho
+							AND 
+								departamento=NEW.departamento),
+						docentes=(
+							SELECT 
+								sum(t_completo)/2::numeric(3,0)
+							FROM formacion_departamento 
+							WHERE 
+								anio=NEW.anho
+							AND 
+								departamento=NEW.departamento);
+					WHERE 
+						"Anho"=new.anho
+					AND
+						departamento=NEW.departamento;
+				UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+					SET 
+						razonanual=(
+							SELECT 
+								estudiantes/docentes::numeric(3,0)
+							FROM 
+								"Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
+							WHERE
+								"Anho"=NEW.anho
+							AND 
+								departamento=NEW.departamento)
+					WHERE 
+						"Anho"=new.anho
+					AND
+						departamento=NEW.departamento;
+                UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+					SET 
+						razonb=(
+							SELECT 
+								(2*razonanual-razona)::numeric(3,0)
+							FROM 
+								"Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
+							WHERE
+								"Anho"=NEW.anho
+							AND 
+								departamento=NEW.departamento)
+					WHERE 
+						"Anho"=new.anho
+					AND
+						departamento=NEW.departamento;
+			END IF;
+    	END IF;
+	END IF;
+	return NEW;
+END;
+$$;
+
+
+ALTER FUNCTION public."Fun_Actua_KPI_Est_Doc"() OWNER TO postgres;
 
 --
 -- Name: Fun_Actua_KPI_Form(); Type: FUNCTION; Schema: public; Owner: postgres
@@ -257,6 +414,7 @@ ALTER TABLE "KPI_Desercion_Periodo" OWNER TO postgres;
 --
 
 CREATE TABLE "KPI_Estudiantes_por_Docentes_TC" (
+    departamento character(2),
     "Anho" character(4) NOT NULL,
     estudiantes numeric(5,0) NOT NULL,
     docentes numeric(3,0) NOT NULL,
@@ -346,6 +504,42 @@ CREATE TABLE acreditacion_alta_calidad (
 ALTER TABLE acreditacion_alta_calidad OWNER TO postgres;
 
 --
+-- Name: estudiantes_departamento; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE estudiantes_departamento (
+    cod_est_dep integer NOT NULL,
+    departamento character(2),
+    matriculados integer,
+    anho character(4),
+    periodo character(1)
+);
+
+
+ALTER TABLE estudiantes_departamento OWNER TO postgres;
+
+--
+-- Name: estudiantes_departamento_cod_est_dep_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE estudiantes_departamento_cod_est_dep_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE estudiantes_departamento_cod_est_dep_seq OWNER TO postgres;
+
+--
+-- Name: estudiantes_departamento_cod_est_dep_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE estudiantes_departamento_cod_est_dep_seq OWNED BY estudiantes_departamento.cod_est_dep;
+
+
+--
 -- Name: formacion; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -432,20 +626,6 @@ CREATE TABLE manuales_indicadores (
 ALTER TABLE manuales_indicadores OWNER TO postgres;
 
 --
--- Name: poblacion_estudiantes; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE poblacion_estudiantes (
-    anho character(4) NOT NULL,
-    "semestreA" integer NOT NULL,
-    "semestreB" integer DEFAULT 0,
-    promedio numeric(5,0)
-);
-
-
-ALTER TABLE poblacion_estudiantes OWNER TO postgres;
-
---
 -- Name: programas; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -489,28 +669,11 @@ COMMENT ON COLUMN users.email IS 'correo de cada departamento para recuperar con
 
 
 --
--- Name: vista_poblacion_docentes; Type: VIEW; Schema: public; Owner: postgres
+-- Name: cod_est_dep; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-CREATE VIEW vista_poblacion_docentes AS
- SELECT t1.anio AS anho,
-    t1.a AS "semestreA",
-    t2.b AS "semestreB",
-    (((t1.a + t2.b) / 2))::numeric AS promedio
-   FROM (( SELECT formacion_departamento.anio,
-            sum(formacion_departamento.t_completo) AS a
-           FROM formacion_departamento
-          WHERE (formacion_departamento.periodo = '1'::bpchar)
-          GROUP BY formacion_departamento.anio) t1
-     FULL JOIN ( SELECT formacion_departamento.anio,
-            sum(formacion_departamento.t_completo) AS b
-           FROM formacion_departamento
-          WHERE (formacion_departamento.periodo = '2'::bpchar)
-          GROUP BY formacion_departamento.anio) t2 ON (((t1.anio)::text = (t2.anio)::text)))
-  ORDER BY t1.anio;
+ALTER TABLE ONLY estudiantes_departamento ALTER COLUMN cod_est_dep SET DEFAULT nextval('estudiantes_departamento_cod_est_dep_seq'::regclass);
 
-
-ALTER TABLE vista_poblacion_docentes OWNER TO postgres;
 
 --
 -- Name: cod_forma_dep; Type: DEFAULT; Schema: public; Owner: postgres
@@ -1657,15 +1820,247 @@ COPY "KPI_Desercion_Periodo" (programa, periodo, no_graduados, desertores, deser
 -- Data for Name: KPI_Estudiantes_por_Docentes_TC; Type: TABLE DATA; Schema: Datawarehouse; Owner: postgres
 --
 
-COPY "KPI_Estudiantes_por_Docentes_TC" ("Anho", estudiantes, docentes, razonanual, razona, razonb, "manual_Estu_Docente") FROM stdin;
-2010	8298	267	31	32	29	5  
-2011	10244	267	38	37	38	5  
-2012	10444	267	39	38	39	5  
-2013	10458	268	39	39	38	5  
-2014	10614	269	39	39	39	5  
-2015	10976	270	41	41	39	5  
-2016	11360	270	43	42	43	5  
-2017	11732	259	45	45	0	5  
+COPY "KPI_Estudiantes_por_Docentes_TC" (departamento, "Anho", estudiantes, docentes, razonanual, razona, razonb, "manual_Estu_Docente") FROM stdin;
+1 	2010	198	6	26	25	27	5  
+1 	2011	198	6	28	28	28	5  
+1 	2012	198	6	31	30	32	5  
+1 	2013	198	6	32	32	32	5  
+1 	2014	198	6	35	32	38	5  
+1 	2015	198	6	37	42	32	5  
+1 	2016	198	6	34	33	35	5  
+1 	2017	198	6	38	38	0	5  
+2 	2010	198	6	59	54	64	5  
+2 	2011	198	6	61	58	64	5  
+2 	2012	198	6	61	56	66	5  
+2 	2013	198	6	56	58	54	5  
+2 	2014	198	6	54	53	55	5  
+2 	2015	198	6	54	50	58	5  
+2 	2016	198	6	56	51	61	5  
+2 	2017	198	6	56	56	0	5  
+3 	2010	198	6	31	29	33	5  
+3 	2011	198	6	35	37	33	5  
+3 	2012	198	6	33	28	38	5  
+3 	2013	198	6	41	40	42	5  
+3 	2014	198	6	45	42	48	5  
+3 	2015	198	6	50	45	55	5  
+3 	2016	198	6	38	36	40	5  
+3 	2017	198	6	39	39	0	5  
+12	2010	198	6	0	0	0	5  
+4 	2010	198	6	47	43	51	5  
+4 	2011	198	6	49	46	52	5  
+4 	2012	198	6	50	48	52	5  
+4 	2013	198	6	51	50	52	5  
+4 	2014	198	6	56	54	58	5  
+4 	2015	198	6	49	52	46	5  
+4 	2016	198	6	49	47	51	5  
+4 	2017	198	6	54	54	0	5  
+5 	2010	198	6	31	30	32	5  
+5 	2011	198	6	27	25	29	5  
+5 	2012	198	6	27	26	28	5  
+5 	2013	198	6	22	23	21	5  
+5 	2014	198	6	21	20	22	5  
+5 	2015	198	6	21	18	24	5  
+5 	2016	198	6	25	23	27	5  
+5 	2017	198	6	24	24	0	5  
+6 	2010	198	6	25	28	22	5  
+6 	2011	198	6	28	28	28	5  
+6 	2012	198	6	33	34	32	5  
+6 	2013	198	6	33	35	31	5  
+6 	2014	198	6	41	44	38	5  
+6 	2015	198	6	50	49	51	5  
+6 	2016	198	6	59	59	59	5  
+6 	2017	198	6	63	63	0	5  
+7 	2010	198	6	54	62	46	5  
+7 	2011	198	6	49	51	47	5  
+7 	2012	198	6	51	54	48	5  
+7 	2013	198	6	44	45	43	5  
+7 	2014	198	6	43	46	40	5  
+7 	2015	198	6	34	40	28	5  
+7 	2016	198	6	44	42	46	5  
+7 	2017	198	6	46	46	0	5  
+8 	2010	198	6	147	148	146	5  
+8 	2011	198	6	147	147	147	5  
+8 	2012	198	6	149	156	142	5  
+8 	2013	198	6	141	142	140	5  
+8 	2014	198	6	138	136	140	5  
+8 	2015	198	6	113	143	83	5  
+8 	2016	198	6	91	85	97	5  
+8 	2017	198	6	110	110	0	5  
+9 	2010	198	6	51	0	102	5  
+9 	2011	198	6	110	108	112	5  
+9 	2012	198	6	115	113	117	5  
+9 	2013	198	6	114	112	116	5  
+9 	2014	198	6	116	112	120	5  
+9 	2015	198	6	165	161	169	5  
+9 	2016	198	6	175	167	183	5  
+9 	2017	198	6	180	180	0	5  
+10	2010	198	6	30	32	28	5  
+10	2011	198	6	31	35	27	5  
+10	2012	198	6	37	39	35	5  
+10	2013	198	6	38	40	36	5  
+10	2014	198	6	39	41	37	5  
+10	2015	198	6	35	44	26	5  
+10	2016	198	6	38	41	35	5  
+10	2017	198	6	42	42	0	5  
+11	2010	198	6	16	14	18	5  
+11	2011	198	6	20	18	22	5  
+11	2012	198	6	21	21	21	5  
+11	2013	198	6	18	18	18	5  
+11	2014	198	6	12	18	6	5  
+11	2015	198	6	23	21	25	5  
+11	2016	198	6	25	24	26	5  
+11	2017	198	6	24	24	0	5  
+12	2011	198	6	0	0	0	5  
+12	2012	198	6	40	43	37	5  
+12	2013	198	6	43	45	41	5  
+12	2014	198	6	46	46	46	5  
+12	2015	198	6	63	68	58	5  
+12	2016	198	6	84	87	81	5  
+12	2017	198	6	98	98	0	5  
+13	2010	198	6	23	22	24	5  
+13	2011	198	6	25	24	26	5  
+13	2012	198	6	29	28	30	5  
+13	2013	198	6	29	29	29	5  
+13	2014	198	6	68	33	103	5  
+13	2015	198	6	36	36	36	5  
+13	2016	198	6	31	31	31	5  
+13	2017	198	6	31	31	0	5  
+14	2010	198	6	54	55	53	5  
+14	2011	198	6	53	54	52	5  
+14	2012	198	6	45	48	42	5  
+14	2013	198	6	42	44	40	5  
+14	2014	198	6	36	43	29	5  
+14	2015	198	6	37	39	35	5  
+14	2016	198	6	39	39	39	5  
+14	2017	198	6	48	48	0	5  
+15	2010	198	6	36	39	33	5  
+15	2011	198	6	35	32	38	5  
+15	2012	198	6	35	32	38	5  
+15	2013	198	6	35	32	38	5  
+15	2014	198	6	37	34	40	5  
+15	2015	198	6	39	42	36	5  
+15	2016	198	6	41	38	44	5  
+15	2017	198	6	50	50	0	5  
+16	2010	198	6	29	37	21	5  
+16	2011	198	6	26	28	24	5  
+16	2012	198	6	28	29	27	5  
+16	2013	198	6	24	25	23	5  
+16	2014	198	6	28	29	27	5  
+16	2015	198	6	33	37	29	5  
+16	2016	198	6	57	66	48	5  
+16	2017	198	6	62	62	0	5  
+17	2010	198	6	120	209	31	5  
+17	2011	198	6	127	117	137	5  
+17	2012	198	6	130	128	132	5  
+17	2013	198	6	128	118	138	5  
+17	2014	198	6	133	125	141	5  
+17	2015	198	6	146	135	157	5  
+17	2016	198	6	156	148	164	5  
+17	2017	198	6	146	146	0	5  
+18	2010	198	6	31	56	6	5  
+18	2011	198	6	12	15	9	5  
+18	2012	198	6	11	13	9	5  
+18	2013	198	6	11	12	10	5  
+18	2014	198	6	10	12	8	5  
+18	2015	198	6	11	12	10	5  
+18	2016	198	6	11	13	9	5  
+18	2017	198	6	13	13	0	5  
+19	2010	198	6	30	28	32	5  
+19	2011	198	6	32	31	33	5  
+19	2012	198	6	11	9	13	5  
+19	2013	198	6	12	10	14	5  
+19	2014	198	6	11	10	12	5  
+19	2015	198	6	10	10	10	5  
+19	2016	198	6	11	8	14	5  
+19	2017	198	6	9	9	0	5  
+20	2010	198	6	12	12	12	5  
+20	2011	198	6	14	14	14	5  
+20	2012	198	6	15	15	15	5  
+20	2013	198	6	16	17	15	5  
+20	2014	198	6	16	16	16	5  
+20	2015	198	6	16	16	16	5  
+20	2016	198	6	17	17	17	5  
+20	2017	198	6	17	17	0	5  
+21	2010	198	6	12	12	12	5  
+21	2011	198	6	13	15	11	5  
+21	2012	198	6	14	15	13	5  
+21	2013	198	6	15	16	14	5  
+21	2014	198	6	17	18	16	5  
+21	2015	198	6	17	21	13	5  
+21	2016	198	6	15	17	13	5  
+21	2017	198	6	16	16	0	5  
+22	2010	198	6	85	81	89	5  
+22	2011	198	6	76	85	67	5  
+22	2012	198	6	74	73	75	5  
+22	2013	198	6	74	69	79	5  
+22	2014	198	6	70	75	65	5  
+22	2015	198	6	66	68	64	5  
+22	2016	198	6	82	66	98	5  
+22	2017	198	6	96	96	0	5  
+23	2010	198	6	34	32	36	5  
+23	2011	198	6	41	39	43	5  
+23	2012	198	6	43	43	43	5  
+23	2013	198	6	42	45	39	5  
+23	2014	198	6	41	42	40	5  
+23	2015	198	6	51	49	53	5  
+23	2016	198	6	60	60	60	5  
+23	2017	198	6	65	65	0	5  
+24	2010	198	6	47	49	45	5  
+24	2011	198	6	45	47	43	5  
+24	2012	198	6	43	45	41	5  
+24	2013	198	6	47	47	47	5  
+24	2014	198	6	49	50	48	5  
+24	2015	198	6	53	56	50	5  
+24	2016	198	6	55	58	52	5  
+24	2017	198	6	60	60	0	5  
+25	2010	198	6	63	63	63	5  
+25	2011	198	6	59	58	60	5  
+25	2012	198	6	64	65	63	5  
+25	2013	198	6	54	60	48	5  
+25	2014	198	6	56	58	54	5  
+25	2015	198	6	57	61	53	5  
+25	2016	198	6	57	62	52	5  
+25	2017	198	6	62	62	0	5  
+26	2010	198	6	52	66	38	5  
+26	2011	198	6	51	52	50	5  
+26	2012	198	6	44	47	41	5  
+26	2013	198	6	42	45	39	5  
+26	2014	198	6	46	48	44	5  
+26	2015	198	6	45	49	41	5  
+26	2016	198	6	43	45	41	5  
+26	2017	198	6	45	45	0	5  
+27	2010	198	6	74	73	75	5  
+27	2011	198	6	72	77	67	5  
+27	2012	198	6	70	74	66	5  
+27	2013	198	6	62	65	59	5  
+27	2014	198	6	63	67	59	5  
+27	2015	198	6	52	65	39	5  
+27	2016	198	6	56	60	52	5  
+27	2017	198	6	60	60	0	5  
+28	2010	198	6	24	25	23	5  
+28	2011	198	6	25	27	23	5  
+28	2012	198	6	26	28	24	5  
+28	2013	198	6	26	28	24	5  
+28	2014	198	6	26	27	25	5  
+28	2015	198	6	28	32	24	5  
+28	2016	198	6	30	31	29	5  
+28	2017	198	6	38	38	0	5  
+29	2010	198	6	30	31	29	5  
+29	2011	198	6	34	36	32	5  
+29	2012	198	6	32	34	30	5  
+29	2013	198	6	31	33	29	5  
+29	2014	198	6	31	33	29	5  
+29	2015	198	6	37	39	35	5  
+29	2016	198	6	37	39	35	5  
+29	2017	198	6	34	34	0	5  
+30	2010	198	6	37	33	41	5  
+30	2011	198	6	38	34	42	5  
+30	2012	198	6	40	38	42	5  
+30	2013	198	6	38	35	41	5  
+30	2014	198	6	32	35	29	5  
+30	2015	198	6	35	31	39	5  
+30	2016	198	6	33	29	37	5  
+30	2017	178	6	30	30	0	5  
 \.
 
 
@@ -1935,6 +2330,471 @@ COPY acreditacion_alta_calidad (resolucion, programa, inicioacreditacion, period
 14781	12696	2017-07-28	4	t	99	0	f	f	f	f	f	f	f	f	f	f	f
 9233	6564	2015-06-26	4	t	27	1	t	f	f	f	f	f	f	f	f	f	f
 \.
+
+
+--
+-- Data for Name: estudiantes_departamento; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY estudiantes_departamento (cod_est_dep, departamento, matriculados, anho, periodo) FROM stdin;
+3601	1 	300	2010	1
+3602	1 	320	2010	2
+3603	1 	332	2011	1
+3604	1 	347	2011	2
+3605	1 	356	2012	1
+3606	1 	375	2012	2
+3607	1 	383	2013	1
+3608	1 	382	2013	2
+3609	1 	386	2014	1
+3610	1 	394	2014	2
+3611	1 	420	2015	1
+3612	1 	396	2015	2
+3613	1 	363	2016	1
+3614	1 	382	2016	2
+3615	1 	419	2017	1
+3616	2 	488	2010	1
+3617	2 	580	2010	2
+3618	2 	519	2011	1
+3619	2 	584	2011	2
+3620	2 	508	2012	1
+3621	2 	588	2012	2
+3622	2 	525	2013	1
+3623	2 	593	2013	2
+3624	2 	534	2014	1
+3625	2 	548	2014	2
+3626	2 	504	2015	1
+3627	2 	582	2015	2
+3628	2 	509	2016	1
+3629	2 	604	2016	2
+3630	2 	500	2017	1
+3631	3 	260	2010	1
+3632	3 	290	2010	2
+3633	3 	259	2011	1
+3634	3 	296	2011	2
+3635	3 	226	2012	1
+3636	3 	294	2012	2
+3637	3 	317	2013	1
+3638	3 	335	2013	2
+3639	3 	297	2014	1
+3640	3 	334	2014	2
+3641	3 	314	2015	1
+3642	3 	391	2015	2
+3643	3 	284	2016	1
+3644	3 	326	2016	2
+3645	3 	311	2017	1
+3646	4 	259	2010	1
+3647	4 	302	2010	2
+3648	4 	273	2011	1
+3649	4 	315	2011	2
+3650	4 	289	2012	1
+3651	4 	315	2012	2
+3652	4 	302	2013	1
+3653	4 	307	2013	2
+3654	4 	323	2014	1
+3655	4 	353	2014	2
+3656	4 	314	2015	1
+3657	4 	366	2015	2
+3658	4 	331	2016	1
+3659	4 	356	2016	2
+3660	4 	324	2017	1
+3661	5 	301	2010	1
+3662	5 	312	2010	2
+3663	5 	252	2011	1
+3664	5 	292	2011	2
+3665	5 	258	2012	1
+3666	5 	281	2012	2
+3667	5 	227	2013	1
+3668	5 	248	2013	2
+3669	5 	225	2014	1
+3670	5 	246	2014	2
+3671	5 	203	2015	1
+3672	5 	251	2015	2
+3673	5 	229	2016	1
+3674	5 	260	2016	2
+3675	5 	241	2017	1
+3676	6 	248	2010	1
+3677	6 	241	2010	2
+3678	6 	275	2011	1
+3679	6 	285	2011	2
+3680	6 	337	2012	1
+3681	6 	326	2012	2
+3682	6 	351	2013	1
+3683	6 	368	2013	2
+3684	6 	436	2014	1
+3685	6 	457	2014	2
+3686	6 	544	2015	1
+3687	6 	564	2015	2
+3688	6 	649	2016	1
+3689	6 	656	2016	2
+3690	6 	692	2017	1
+3691	7 	556	2010	1
+3692	7 	516	2010	2
+3693	7 	512	2011	1
+3694	7 	463	2011	2
+3695	7 	484	2012	1
+3696	7 	433	2012	2
+3697	7 	406	2013	1
+3698	7 	391	2013	2
+3699	7 	412	2014	1
+3700	7 	357	2014	2
+3701	7 	359	2015	1
+3702	7 	311	2015	2
+3703	7 	339	2016	1
+3704	7 	364	2016	2
+3705	7 	370	2017	1
+3706	8 	740	2010	1
+3707	8 	730	2010	2
+3708	8 	736	2011	1
+3709	8 	729	2011	2
+3710	8 	780	2012	1
+3711	8 	705	2012	2
+3712	8 	711	2013	1
+3713	8 	694	2013	2
+3714	8 	682	2014	1
+3715	8 	699	2014	2
+3716	8 	714	2015	1
+3717	8 	639	2015	2
+3718	8 	598	2016	1
+3719	8 	680	2016	2
+3720	8 	657	2017	1
+3721	9 	0	2010	1
+3722	9 	507	2010	2
+3723	9 	432	2011	1
+3724	9 	446	2011	2
+3725	9 	453	2012	1
+3726	9 	462	2012	2
+3727	9 	449	2013	1
+3728	9 	464	2013	2
+3729	9 	448	2014	1
+3730	9 	477	2014	2
+3731	9 	483	2015	1
+3732	9 	505	2015	2
+3733	9 	500	2016	1
+3734	9 	552	2016	2
+3735	9 	541	2017	1
+3736	10	191	2010	1
+3737	10	173	2010	2
+3738	10	207	2011	1
+3739	10	165	2011	2
+3740	10	193	2012	1
+3741	10	173	2012	2
+3742	10	200	2013	1
+3743	10	177	2013	2
+3744	10	206	2014	1
+3745	10	183	2014	2
+3746	10	218	2015	1
+3747	10	205	2015	2
+3748	10	248	2016	1
+3749	10	202	2016	2
+3750	10	251	2017	1
+3751	11	170	2010	1
+3752	11	206	2010	2
+3753	11	196	2011	1
+3754	11	235	2011	2
+3755	11	207	2012	1
+3756	11	206	2012	2
+3757	11	175	2013	1
+3758	11	216	2013	2
+3759	11	195	2014	1
+3760	11	243	2014	2
+3761	11	231	2015	1
+3762	11	282	2015	2
+3763	11	241	2016	1
+3764	11	263	2016	2
+3765	11	238	2017	1
+3766	12	0	2010	1
+3767	12	0	2010	2
+3768	12	0	2011	1
+3769	12	0	2011	2
+3770	12	215	2012	1
+3771	12	184	2012	2
+3772	12	224	2013	1
+3773	12	201	2013	2
+3774	12	231	2014	1
+3775	12	227	2014	2
+3776	12	273	2015	1
+3777	12	227	2015	2
+3778	12	262	2016	1
+3779	12	240	2016	2
+3780	12	293	2017	1
+3781	13	352	2010	1
+3782	13	372	2010	2
+3783	13	387	2011	1
+3784	13	400	2011	2
+3785	13	424	2012	1
+3786	13	438	2012	2
+3787	13	437	2013	1
+3788	13	443	2013	2
+3789	13	468	2014	1
+3790	13	483	2014	2
+3791	13	499	2015	1
+3792	13	519	2015	2
+3793	13	533	2016	1
+3794	13	530	2016	2
+3795	13	528	2017	1
+3796	14	331	2010	1
+3797	14	316	2010	2
+3798	14	324	2011	1
+3799	14	310	2011	2
+3800	14	337	2012	1
+3801	14	298	2012	2
+3802	14	309	2013	1
+3803	14	281	2013	2
+3804	14	304	2014	1
+3805	14	272	2014	2
+3806	14	312	2015	1
+3807	14	277	2015	2
+3808	14	314	2016	1
+3809	14	302	2016	2
+3810	14	335	2017	1
+3811	15	196	2010	1
+3812	15	233	2010	2
+3813	15	222	2011	1
+3814	15	271	2011	2
+3815	15	226	2012	1
+3816	15	258	2012	2
+3817	15	226	2013	1
+3818	15	262	2013	2
+3819	15	235	2014	1
+3820	15	279	2014	2
+3821	15	253	2015	1
+3822	15	214	2015	2
+3823	15	228	2016	1
+3824	15	268	2016	2
+3825	15	302	2017	1
+3826	16	148	2010	1
+3827	16	140	2010	2
+3828	16	141	2011	1
+3829	16	123	2011	2
+3830	16	143	2012	1
+3831	16	132	2012	2
+3832	16	124	2013	1
+3833	16	112	2013	2
+3834	16	147	2014	1
+3835	16	128	2014	2
+3836	16	186	2015	1
+3837	16	139	2015	2
+3838	16	197	2016	1
+3839	16	147	2016	2
+3840	16	186	2017	1
+3841	17	209	2010	1
+3842	17	268	2010	2
+3843	17	234	2011	1
+3844	17	274	2011	2
+3845	17	256	2012	1
+3846	17	262	2012	2
+3847	17	236	2013	1
+3848	17	275	2013	2
+3849	17	249	2014	1
+3850	17	282	2014	2
+3851	17	270	2015	1
+3852	17	312	2015	2
+3853	17	295	2016	1
+3854	17	328	2016	2
+3855	17	291	2017	1
+3856	18	621	2010	1
+3857	18	117	2010	2
+3858	18	160	2011	1
+3859	18	123	2011	2
+3860	18	152	2012	1
+3861	18	112	2012	2
+3862	18	140	2013	1
+3863	18	115	2013	2
+3864	18	139	2014	1
+3865	18	108	2014	2
+3866	18	157	2015	1
+3867	18	126	2015	2
+3868	18	167	2016	1
+3869	18	128	2016	2
+3870	18	163	2017	1
+3871	19	278	2010	1
+3872	19	325	2010	2
+3873	19	310	2011	1
+3874	19	329	2011	2
+3875	19	88	2012	1
+3876	19	130	2012	2
+3877	19	100	2013	1
+3878	19	143	2013	2
+3879	19	99	2014	1
+3880	19	140	2014	2
+3881	19	113	2015	1
+3882	19	101	2015	2
+3883	19	93	2016	1
+3884	19	148	2016	2
+3885	19	96	2017	1
+3886	20	291	2010	1
+3887	20	326	2010	2
+3888	20	340	2011	1
+3889	20	359	2011	2
+3890	20	365	2012	1
+3891	20	405	2012	2
+3892	20	429	2013	1
+3893	20	405	2013	2
+3894	20	416	2014	1
+3895	20	417	2014	2
+3896	20	427	2015	1
+3897	20	433	2015	2
+3898	20	453	2016	1
+3899	20	449	2016	2
+3900	20	462	2017	1
+3901	21	135	2010	1
+3902	21	123	2010	2
+3903	21	162	2011	1
+3904	21	129	2011	2
+3905	21	170	2012	1
+3906	21	135	2012	2
+3907	21	174	2013	1
+3908	21	147	2013	2
+3909	21	183	2014	1
+3910	21	147	2014	2
+3911	21	209	2015	1
+3912	21	161	2015	2
+3913	21	203	2016	1
+3914	21	160	2016	2
+3915	21	196	2017	1
+3916	22	651	2010	1
+3917	22	707	2010	2
+3918	22	679	2011	1
+3919	22	689	2011	2
+3920	22	656	2012	1
+3921	22	679	2012	2
+3922	22	624	2013	1
+3923	22	703	2013	2
+3924	22	678	2014	1
+3925	22	711	2014	2
+3926	22	684	2015	1
+3927	22	763	2015	2
+3928	22	661	2016	1
+3929	22	806	2016	2
+3930	22	765	2017	1
+3931	23	477	2010	1
+3932	23	543	2010	2
+3933	23	588	2011	1
+3934	23	629	2011	2
+3935	23	638	2012	1
+3936	23	655	2012	2
+3937	23	623	2013	1
+3938	23	650	2013	2
+3939	23	636	2014	1
+3940	23	589	2014	2
+3941	23	642	2015	1
+3942	23	675	2015	2
+3943	23	724	2016	1
+3944	23	709	2016	2
+3945	23	775	2017	1
+3946	24	537	2010	1
+3947	24	507	2010	2
+3948	24	522	2011	1
+3949	24	469	2011	2
+3950	24	498	2012	1
+3951	24	458	2012	2
+3952	24	512	2013	1
+3953	24	529	2013	2
+3954	24	555	2014	1
+3955	24	521	2014	2
+3956	24	612	2015	1
+3957	24	558	2015	2
+3958	24	634	2016	1
+3959	24	586	2016	2
+3960	24	659	2017	1
+3961	25	571	2010	1
+3962	25	563	2010	2
+3963	25	525	2011	1
+3964	25	535	2011	2
+3965	25	589	2012	1
+3966	25	566	2012	2
+3967	25	537	2013	1
+3968	25	539	2013	2
+3969	25	580	2014	1
+3970	25	537	2014	2
+3971	25	605	2015	1
+3972	25	538	2015	2
+3973	25	618	2016	1
+3974	25	517	2016	2
+3975	25	622	2017	1
+3976	26	393	2010	1
+3977	26	331	2010	2
+3978	26	367	2011	1
+3979	26	346	2011	2
+3980	26	375	2012	1
+3981	26	333	2012	2
+3982	26	358	2013	1
+3983	26	318	2013	2
+3984	26	337	2014	1
+3985	26	302	2014	2
+3986	26	345	2015	1
+3987	26	291	2015	2
+3988	26	316	2016	1
+3989	26	282	2016	2
+3990	26	317	2017	1
+3991	27	513	2010	1
+3992	27	518	2010	2
+3993	27	538	2011	1
+3994	27	464	2011	2
+3995	27	519	2012	1
+3996	27	458	2012	2
+3997	27	456	2013	1
+3998	27	409	2013	2
+3999	27	472	2014	1
+4000	27	416	2014	2
+4001	27	455	2015	1
+4002	27	377	2015	2
+4003	27	479	2016	1
+4004	27	421	2016	2
+4005	27	478	2017	1
+4006	28	199	2010	1
+4007	28	176	2010	2
+4008	28	214	2011	1
+4009	28	192	2011	2
+4010	28	224	2012	1
+4011	28	192	2012	2
+4012	28	227	2013	1
+4013	28	195	2013	2
+4014	28	216	2014	1
+4015	28	200	2014	2
+4016	28	254	2015	1
+4017	28	192	2015	2
+4018	28	248	2016	1
+4019	28	226	2016	2
+4020	28	265	2017	1
+4021	29	247	2010	1
+4022	29	235	2010	2
+4023	29	284	2011	1
+4024	29	257	2011	2
+4025	29	275	2012	1
+4026	29	239	2012	2
+4027	29	267	2013	1
+4028	29	232	2013	2
+4029	29	261	2014	1
+4030	29	233	2014	2
+4031	29	272	2015	1
+4032	29	240	2015	2
+4033	29	275	2016	1
+4034	29	240	2016	2
+4035	29	275	2017	1
+4036	30	166	2010	1
+4037	30	202	2010	2
+4038	30	171	2011	1
+4039	30	208	2011	2
+4040	30	189	2012	1
+4041	30	215	2012	2
+4042	30	175	2013	1
+4043	30	202	2013	2
+4044	30	174	2014	1
+4045	30	205	2014	2
+4046	30	186	2015	1
+4047	30	228	2015	2
+4048	30	172	2016	1
+4049	30	224	2016	2
+4050	30	178	2017	1
+\.
+
+
+--
+-- Name: estudiantes_departamento_cod_est_dep_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('estudiantes_departamento_cod_est_dep_seq', 4050, true);
 
 
 --
@@ -3900,22 +4760,6 @@ COPY manuales_indicadores (codigo, proceso, lider, "objProceso", "nombreIndicado
 
 
 --
--- Data for Name: poblacion_estudiantes; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY poblacion_estudiantes (anho, "semestreA", "semestreB", promedio) FROM stdin;
-2011	10114	10374	10244
-2012	10406	10482	10444
-2013	10446	10470	10458
-2014	10632	10596	10614
-2015	11161	10791	10976
-2016	11308	11413	11360
-2010	8522	8075	8298
-2017	11732	0	11732
-\.
-
-
---
 -- Data for Name: programas; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4132,14 +4976,6 @@ ALTER TABLE ONLY manuales_indicadores
 
 
 --
--- Name: poblacion_estudiantes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY poblacion_estudiantes
-    ADD CONSTRAINT poblacion_estudiantes_pkey PRIMARY KEY (anho);
-
-
---
 -- Name: programas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4161,13 +4997,6 @@ ALTER TABLE ONLY users
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY ("user", pass);
-
-
---
--- Name: poblacion_estudiantes_promedio_key; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX poblacion_estudiantes_promedio_key ON poblacion_estudiantes USING btree (promedio);
 
 
 SET search_path = "Datawarehouse", pg_catalog;
@@ -4203,10 +5032,24 @@ CREATE TRIGGER tr_relacion AFTER INSERT OR UPDATE ON "KPI_Formacion" FOR EACH RO
 SET search_path = public, pg_catalog;
 
 --
+-- Name: tr_est_dep; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER tr_est_dep BEFORE INSERT ON estudiantes_departamento FOR EACH ROW EXECUTE PROCEDURE "Actua_Estudiantes_Dep"();
+
+
+--
 -- Name: tr_for_dep; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
 CREATE TRIGGER tr_for_dep BEFORE INSERT ON formacion_departamento FOR EACH ROW EXECUTE PROCEDURE "Actua_Formacion_Dep"();
+
+
+--
+-- Name: tr_kpi_est_doc; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER tr_kpi_est_doc AFTER INSERT OR UPDATE ON estudiantes_departamento FOR EACH ROW EXECUTE PROCEDURE "Fun_Actua_KPI_Est_Doc"();
 
 
 --
@@ -4263,7 +5106,7 @@ ALTER TABLE ONLY "KPI_Estudiantes_por_Docentes_TC"
 --
 
 ALTER TABLE ONLY "KPI_Estudiantes_por_Docentes_TC"
-    ADD CONSTRAINT "KPI_Estudiantes_por_Docentes_TC_fk1" FOREIGN KEY (estudiantes) REFERENCES public.poblacion_estudiantes(promedio);
+    ADD CONSTRAINT "KPI_Estudiantes_por_Docentes_TC_fk1" FOREIGN KEY (departamento) REFERENCES public.users(codigo);
 
 
 --
@@ -4322,6 +5165,14 @@ SET search_path = public, pg_catalog;
 
 ALTER TABLE ONLY acreditacion_alta_calidad
     ADD CONSTRAINT acreditacion_alta_calidad_fk FOREIGN KEY (programa) REFERENCES programas(snies);
+
+
+--
+-- Name: estudiantes_departamento_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY estudiantes_departamento
+    ADD CONSTRAINT estudiantes_departamento_fk FOREIGN KEY (departamento) REFERENCES users(codigo);
 
 
 --

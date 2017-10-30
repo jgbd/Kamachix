@@ -1,50 +1,22 @@
+﻿-- SQL Manager for PostgreSQL 5.7.0.46919
+-- ---------------------------------------
+-- Host      : localhost
+-- Database  : datos_indicadores
+-- Version   : PostgreSQL 9.6.5, compiled by Visual C++ build 1800, 64-bit
+
+
+
+CREATE SCHEMA "Datawarehouse" AUTHORIZATION postgres;
 --
--- PostgreSQL database dump
+-- Definition for function fun_actua_formacion (OID = 19400) : 
 --
-
--- Dumped from database version 9.5.7
--- Dumped by pg_dump version 9.5.7
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- Name: Datawarehouse; Type: SCHEMA; Schema: -; Owner: postgres
---
-
-CREATE SCHEMA "Datawarehouse";
-
-
-ALTER SCHEMA "Datawarehouse" OWNER TO postgres;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
 SET search_path = "Datawarehouse", pg_catalog;
-
---
--- Name: fun_actua_formacion(); Type: FUNCTION; Schema: Datawarehouse; Owner: postgres
---
-
-CREATE FUNCTION fun_actua_formacion() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
+SET check_function_bodies = false;
+CREATE FUNCTION "Datawarehouse".fun_actua_formacion (
+)
+RETURNS trigger
+AS 
+$body$
 DECLARE
   cantidad_f INTEGER;
 BEGIN
@@ -55,18 +27,16 @@ BEGIN
    END IF;  
    return new;
  END;
-$$;
-
-
-ALTER FUNCTION "Datawarehouse".fun_actua_formacion() OWNER TO postgres;
-
+$body$
+LANGUAGE plpgsql;
 --
--- Name: fun_actua_relacion(); Type: FUNCTION; Schema: Datawarehouse; Owner: postgres
+-- Definition for function fun_actua_relacion (OID = 19401) : 
 --
-
-CREATE FUNCTION fun_actua_relacion() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
+CREATE FUNCTION "Datawarehouse".fun_actua_relacion (
+)
+RETURNS trigger
+AS 
+$body$
 DECLARE
   cantidad_r INTEGER;
 BEGIN
@@ -80,18 +50,16 @@ BEGIN
    END IF;  
    return new;
  END;
-$$;
-
-
-ALTER FUNCTION "Datawarehouse".fun_actua_relacion() OWNER TO postgres;
-
+$body$
+LANGUAGE plpgsql;
 --
--- Name: fun_delete_cohort(); Type: FUNCTION; Schema: Datawarehouse; Owner: postgres
+-- Definition for function fun_delete_cohort (OID = 19402) : 
 --
-
-CREATE FUNCTION fun_delete_cohort() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
+CREATE FUNCTION "Datawarehouse".fun_delete_cohort (
+)
+RETURNS trigger
+AS 
+$body$
 DECLARE
  cantidad_c INTEGER;
 BEGIN
@@ -101,18 +69,16 @@ BEGIN
    END IF;
     return new;
 END;
-$$;
-
-
-ALTER FUNCTION "Datawarehouse".fun_delete_cohort() OWNER TO postgres;
-
+$body$
+LANGUAGE plpgsql;
 --
--- Name: fun_delete_period(); Type: FUNCTION; Schema: Datawarehouse; Owner: postgres
+-- Definition for function fun_delete_period (OID = 19403) : 
 --
-
-CREATE FUNCTION fun_delete_period() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
+CREATE FUNCTION "Datawarehouse".fun_delete_period (
+)
+RETURNS trigger
+AS 
+$body$
 DECLARE
 	cantidad_p INTEGER;
 BEGIN
@@ -122,20 +88,36 @@ BEGIN
   END IF;
   RETURN NEW;
 END;
-$$;
-
-
-ALTER FUNCTION "Datawarehouse".fun_delete_period() OWNER TO postgres;
-
+$body$
+LANGUAGE plpgsql;
+--
+-- Definition for function Actua_Estudiantes_Dep (OID = 19404) : 
+--
 SET search_path = public, pg_catalog;
-
+CREATE FUNCTION public."Actua_Estudiantes_Dep" (
+)
+RETURNS trigger
+AS 
+$body$
+DECLARE
+  cantidad_e INTEGER;
+BEGIN
+  SELECT Count(*) INTO cantidad_e FROM estudiantes_departamento ek WHERE ek.departamento = new.departamento and ek.anho=NEW.anho and ek.periodo=new.periodo;
+	IF cantidad_e > 0 THEN
+    	DELETE  FROM estudiantes_departamento ek WHERE ek.departamento = new.departamento and ek.anho=NEW.anho and ek.periodo=new.periodo;
+   	END IF;  
+   	return new;
+END;
+$body$
+LANGUAGE plpgsql;
 --
--- Name: Actua_Formacion_Dep(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Definition for function Actua_Formacion_Dep (OID = 19405) : 
 --
-
-CREATE FUNCTION "Actua_Formacion_Dep"() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
+CREATE FUNCTION public."Actua_Formacion_Dep" (
+)
+RETURNS trigger
+AS 
+$body$
 DECLARE
   cantidad_f INTEGER;
 BEGIN
@@ -145,18 +127,152 @@ BEGIN
    	END IF;  
    	return new;
  END;
-$$;
-
-
-ALTER FUNCTION public."Actua_Formacion_Dep"() OWNER TO postgres;
-
+$body$
+LANGUAGE plpgsql;
 --
--- Name: Fun_Actua_KPI_Form(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Definition for function Fun_Actua_KPI_Est_Doc (OID = 19406) : 
 --
-
-CREATE FUNCTION "Fun_Actua_KPI_Form"() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
+CREATE FUNCTION public."Fun_Actua_KPI_Est_Doc" (
+)
+RETURNS trigger
+AS 
+$body$
+DECLARE
+  cantidad_e INTEGER;
+BEGIN
+	SELECT Count(*) INTO cantidad_e FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" ek WHERE ek."Anho"=NEW.anho AND ek.departamento=NEW.departamento;
+		/*IF NEW.departamento<>'99' THEN*/
+			IF cantidad_e < 1 THEN
+				IF NEW.periodo='1' THEN
+					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razona,razonanual) 
+						SELECT 
+							t2.departamento, 
+							t1.anho, 
+							t1.ea::numeric(5,0),
+							t2.da::numeric(3,0),
+							t1.ea/t2.da::numeric(3,0),
+							t1.ea/t2.da::numeric(3,0)
+						FROM ( 
+							SELECT anho,matriculados AS ea
+							FROM estudiantes_departamento 
+							WHERE 
+								periodo = NEW.periodo 
+							AND 
+								anho = NEW.anho 
+							AND 
+								departamento = NEW.departamento) t1
+						JOIN ( 
+							SELECT anio,departamento,sum(t_completo) AS da
+							FROM formacion_departamento 
+							WHERE
+								periodo = NEW.periodo 
+							AND 
+								anio=NEW.anho 
+							AND
+								departamento = NEW.departamento 
+							GROUP BY anio,departamento) t2 
+						ON t2.departamento=NEW.departamento
+						ORDER BY t1.anho;
+				ELSE
+					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razonb,razonanual) 
+						SELECT 
+							t2.departamento,
+							t1.anho, 
+							t1.eb::numeric(5,0),
+							t2.db::numeric(3,0),
+							t1.eb/t2.db::numeric(3,0),
+							t1.eb/t2.db::numeric(3,0)
+						FROM ( 
+							SELECT anho,matriculados AS eb
+							FROM estudiantes_departamento 
+							WHERE 
+								periodo = NEW.periodo 
+							AND 
+								anho = NEW.anho
+							AND 
+								departamento = NEW.departamento) t1
+						JOIN ( 
+							SELECT anio,departamento,sum(t_completo) AS db
+							FROM formacion_departamento 
+							WHERE 
+								periodo = NEW.periodo 
+							AND 
+								anio=NEW.anho 
+							AND 
+								departamento=NEW.departamento 
+							GROUP BY anio,departamento) t2 
+						ON t2.departamento=NEW.departamento
+						ORDER BY t1.anho;
+				END IF;
+			ELSE
+                  IF NEW.periodo='2' THEN
+                      UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+                          SET 
+                              estudiantes=(
+                                  SELECT 
+                                      sum(matriculados)/2::numeric(5,0)
+                                  FROM estudiantes_departamento 
+                                  WHERE 
+                                      anho=NEW.anho
+                                  AND 
+                                      departamento=NEW.departamento),
+                              docentes=(
+                                  SELECT 
+                                      sum(t_completo)/2::numeric(3,0)
+                                  FROM formacion_departamento 
+                                  WHERE 
+                                      anio=NEW.anho
+                                  AND 
+                                      departamento=NEW.departamento)
+                          WHERE 
+                              "Anho"=new.anho
+                          AND
+                              departamento=NEW.departamento;
+                      UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+                          SET 
+                              razonanual=(
+                                  SELECT 
+                                      estudiantes/docentes::numeric(3,0)
+                                  FROM 
+                                      "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
+                                  WHERE
+                                      "Anho"=NEW.anho
+                                  AND 
+                                      departamento=NEW.departamento)
+                          WHERE 
+                              "Anho"=new.anho
+                          AND
+                              departamento=NEW.departamento;
+                      UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+                          SET 
+                              razonb=(
+                                  SELECT 
+                                      (2*razonanual-razona)::numeric(3,0)
+                                  FROM 
+                                      "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
+                                  WHERE
+                                      "Anho"=NEW.anho
+                                  AND 
+                                      departamento=NEW.departamento)
+                          WHERE 
+                              "Anho"=new.anho
+                          AND
+                              departamento=NEW.departamento;
+                  END IF;
+			END IF;
+		/*END IF;*/
+	return NEW;
+END;
+$body$
+LANGUAGE plpgsql;
+--
+-- Definition for function Fun_Actua_KPI_Form (OID = 19407) : 
+--
+CREATE FUNCTION public."Fun_Actua_KPI_Form" (
+)
+RETURNS trigger
+AS 
+$body$
 DECLARE
   cantidad_f INTEGER;
 BEGIN
@@ -174,18 +290,16 @@ BEGIN
     END IF; 
    return new;
  END;
-$$;
-
-
-ALTER FUNCTION public."Fun_Actua_KPI_Form"() OWNER TO postgres;
-
+$body$
+LANGUAGE plpgsql;
 --
--- Name: fun_actua_satisfaccion(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Definition for function fun_actua_satisfaccion (OID = 19408) : 
 --
-
-CREATE FUNCTION fun_actua_satisfaccion() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
+CREATE FUNCTION public.fun_actua_satisfaccion (
+)
+RETURNS trigger
+AS 
+$body$
 DECLARE
   cantidad_f INTEGER;
 BEGIN
@@ -195,139 +309,243 @@ BEGIN
    	END IF;  
    	return NEW;
 END;
-$$;
-
-
-ALTER FUNCTION public.fun_actua_satisfaccion() OWNER TO postgres;
-
+$body$
+LANGUAGE plpgsql;
+--
+-- Definition for function Fun_Actua_KPI_Est_Doc_UDENAR (OID = 19803) : 
+--
+CREATE FUNCTION public."Fun_Actua_KPI_Est_Doc_UDENAR" (
+)
+RETURNS trigger
+AS 
+$body$
+DECLARE
+  cantidad_eu INTEGER;
+BEGIN
+	SELECT Count(*) INTO cantidad_eu FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" ek WHERE ek."Anho"=NEW.anho AND ek.departamento='UD';
+    /*IF NEW.departamento<>'99' THEN*/
+      IF cantidad_eu < 1 THEN
+      	IF NEW.periodo='1' THEN
+          INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razonanual,razona) 
+            SELECT
+            	'UD',
+                t1.anho, 
+                t1.ea::numeric(5,0),
+				t2.da::numeric(3,0),
+				t1.ea/t2.da::numeric(3,0),
+				t1.ea/t2.da::numeric(3,0)
+            FROM ( 
+            	SELECT anho,sum(matriculados) AS ea
+                FROM estudiantes_departamento 
+                WHERE 
+                	periodo=NEW.periodo
+                AND 
+                	anho=NEW.anho
+                GROUP BY anho) t1
+            JOIN ( 
+            	SELECT anio,sum(t_completo) AS da
+                FROM formacion_departamento 
+                WHERE 
+                	periodo=NEW.periodo
+                AND 
+                	anio=NEW.anho
+                GROUP BY anio) t2 
+            ON t2.anio=t1.anho
+            ORDER BY t1.anho;
+        ELSE
+			INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razonb,razonanual) 
+				SELECT
+                	'UD',
+					t1.anho, 
+					t1.eb::numeric(5,0),
+					t2.db::numeric(3,0),
+					t1.eb/t2.db::numeric(3,0),
+					t1.eb/t2.db::numeric(3,0)
+				FROM ( 
+					SELECT anho,matriculados AS eb
+					FROM estudiantes_departamento 
+					WHERE 
+						periodo = NEW.periodo 
+					AND 
+						anho = NEW.anho
+                    GROUP BY anho) t1
+				JOIN ( 
+					SELECT anio,sum(t_completo) AS db
+					FROM formacion_departamento 
+					WHERE 
+						periodo = NEW.periodo 
+					AND 
+						anio=NEW.anho 
+					GROUP BY anio) t2 
+				ON t2.anio=t1.anho
+				ORDER BY t1.anho;
+        END IF;
+      ELSE
+      	IF NEW.periodo='2' THEN
+        	UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+            SET 
+            	estudiantes=(
+                	SELECT 
+                    	sum(matriculados)/2::numeric(5,0)
+                    FROM estudiantes_departamento 
+                    WHERE 
+                    	anho=NEW.anho),
+                docentes=(
+                	SELECT 
+                    	SUM(t_completo)/2::numeric(3,0)
+                    FROM formacion_departamento 
+            		WHERE 
+            			anio=NEW.anho)
+            WHERE 
+            	"Anho"=new.anho
+            AND departamento='UD';
+			UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+            SET 
+            	razonanual=(
+                	SELECT 
+                        t1.e/t2.d::numeric(3,0)
+                    FROM 
+                        (
+                        SELECT 
+                            anho,
+                            sum(matriculados)/2::numeric(5,0) AS e
+                        FROM estudiantes_departamento 
+                        WHERE 
+                            anho=NEW.anho
+                        GROUP BY anho) t1
+                    JOIN 
+                        (
+                        SELECT 
+                            anio,
+                            sum(t_completo)/2::numeric(5,0) AS d
+                        FROM formacion_departamento 
+                        WHERE 
+                            anio=NEW.anho
+                        GROUP BY anio) t2
+                    ON t1.anho=t2.anio
+                    WHERE
+                        anio=NEW.anho)
+            WHERE 
+            	"Anho"=NEW.anho
+            AND 
+            	departamento='UD';
+            UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+            SET 
+            	razonb=(
+                	SELECT 
+                    	(2*razonanual-razona)::numeric(3,0)
+                    FROM 
+                    	"Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
+                    WHERE
+                    	"Anho"=NEW.anho
+                    AND 
+                    	departamento='UD')
+        	WHERE 
+            	"Anho"=new.anho
+            AND
+                departamento='UD';
+      	END IF;
+            
+      END IF;       
+   /*END IF;*/
+   return NEW;
+ END;
+$body$
+LANGUAGE plpgsql;
+--
+-- Structure for table KPI_Acreditacion (OID = 19409) : 
+--
 SET search_path = "Datawarehouse", pg_catalog;
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
-
---
--- Name: KPI_Acreditacion; Type: TABLE; Schema: Datawarehouse; Owner: postgres
---
-
-CREATE TABLE "KPI_Acreditacion" (
-    "Anho" character(4),
+CREATE TABLE "Datawarehouse"."KPI_Acreditacion" (
+    "Anho" char(4),
     acreditados numeric(2,0),
     programas numeric(2,0),
     razon numeric(2,0),
-    "manual_Acredita" character(3) DEFAULT 4
-);
-
-
-ALTER TABLE "KPI_Acreditacion" OWNER TO postgres;
-
+    "manual_Acredita" char(3) DEFAULT 4
+)
+WITH (oids = false);
 --
--- Name: KPI_Desercion_Cohorte; Type: TABLE; Schema: Datawarehouse; Owner: postgres
+-- Structure for table KPI_Desercion_Cohorte (OID = 19413) : 
 --
-
-CREATE TABLE "KPI_Desercion_Cohorte" (
-    programa character varying(6) NOT NULL,
-    periodo character varying(7) NOT NULL,
-    porcentaje character varying(8),
-    manual character(3) DEFAULT 6
-);
-
-
-ALTER TABLE "KPI_Desercion_Cohorte" OWNER TO postgres;
-
+CREATE TABLE "Datawarehouse"."KPI_Desercion_Cohorte" (
+    programa varchar(6) NOT NULL,
+    periodo varchar(7) NOT NULL,
+    porcentaje varchar(8),
+    manual char(3) DEFAULT 6
+)
+WITH (oids = false);
 --
--- Name: KPI_Desercion_Periodo; Type: TABLE; Schema: Datawarehouse; Owner: postgres
+-- Structure for table KPI_Desercion_Periodo (OID = 19417) : 
 --
-
-CREATE TABLE "KPI_Desercion_Periodo" (
-    programa character varying(6) NOT NULL,
-    periodo character varying(7) NOT NULL,
-    no_graduados character varying(5),
-    desertores character varying(5),
-    desercion character varying(6),
-    retencion character varying(6),
-    manual character(3) DEFAULT 7
-);
-
-
-ALTER TABLE "KPI_Desercion_Periodo" OWNER TO postgres;
-
+CREATE TABLE "Datawarehouse"."KPI_Desercion_Periodo" (
+    programa varchar(6) NOT NULL,
+    periodo varchar(7) NOT NULL,
+    no_graduados varchar(5),
+    desertores varchar(5),
+    desercion varchar(6),
+    retencion varchar(6),
+    manual char(3) DEFAULT 7
+)
+WITH (oids = false);
 --
--- Name: KPI_Estudiantes_por_Docentes_TC; Type: TABLE; Schema: Datawarehouse; Owner: postgres
+-- Structure for table KPI_Estudiantes_por_Docentes_TC (OID = 19421) : 
 --
-
-CREATE TABLE "KPI_Estudiantes_por_Docentes_TC" (
-    "Anho" character(4) NOT NULL,
+CREATE TABLE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (
+    departamento char(2) NOT NULL,
+    "Anho" char(4) NOT NULL,
     estudiantes numeric(5,0) NOT NULL,
     docentes numeric(3,0) NOT NULL,
     razonanual numeric(3,0) NOT NULL,
     razona numeric(3,0) NOT NULL,
     razonb numeric(3,0) DEFAULT 0,
-    "manual_Estu_Docente" character(3) DEFAULT 5
-);
-
-
-ALTER TABLE "KPI_Estudiantes_por_Docentes_TC" OWNER TO postgres;
-
+    "manual_Estu_Docente" char(3) DEFAULT 5
+)
+WITH (oids = false);
 --
--- Name: KPI_Formacion; Type: TABLE; Schema: Datawarehouse; Owner: postgres
+-- Structure for table KPI_Formacion (OID = 19426) : 
 --
-
-CREATE TABLE "KPI_Formacion" (
-    formacion character(2),
+CREATE TABLE "Datawarehouse"."KPI_Formacion" (
+    formacion char(2),
     t_completo integer,
     t_ocasional integer,
     hora_catedra integer,
-    anio character varying(5),
-    "manual_Formacion" character(3) DEFAULT 2,
+    anio varchar(5),
+    "manual_Formacion" char(3) DEFAULT 2,
     estado_meta numeric(5,2)
-);
-
-
-ALTER TABLE "KPI_Formacion" OWNER TO postgres;
-
+)
+WITH (oids = false);
 --
--- Name: KPI_Nivel_Satisfaccion; Type: TABLE; Schema: Datawarehouse; Owner: postgres
+-- Structure for table KPI_Nivel_Satisfaccion (OID = 19430) : 
 --
-
-CREATE TABLE "KPI_Nivel_Satisfaccion" (
-    "Programa" character varying(6) NOT NULL,
-    "Nivel" character varying(7) NOT NULL,
-    "Anho" character varying(7) NOT NULL,
-    manual character(3) DEFAULT 1
-);
-
-
-ALTER TABLE "KPI_Nivel_Satisfaccion" OWNER TO postgres;
-
+CREATE TABLE "Datawarehouse"."KPI_Nivel_Satisfaccion" (
+    "Programa" varchar(6) NOT NULL,
+    "Nivel" varchar(7) NOT NULL,
+    "Anho" varchar(7) NOT NULL,
+    manual char(3) DEFAULT 1
+)
+WITH (oids = false);
 --
--- Name: KPI_Relacion_Docentes; Type: TABLE; Schema: Datawarehouse; Owner: postgres
+-- Structure for table KPI_Relacion_Docentes (OID = 19434) : 
 --
-
-CREATE TABLE "KPI_Relacion_Docentes" (
-    anio character(5) NOT NULL,
+CREATE TABLE "Datawarehouse"."KPI_Relacion_Docentes" (
+    anio char(5) NOT NULL,
     cant_docentes_tc integer,
     cant_docentes_hc integer,
     relacion_docentes numeric(5,2),
-    "manual_Rela" character(3) DEFAULT 3
-);
-
-
-ALTER TABLE "KPI_Relacion_Docentes" OWNER TO postgres;
-
+    "manual_Rela" char(3) DEFAULT 3
+)
+WITH (oids = false);
+--
+-- Structure for table acreditacion_alta_calidad (OID = 19438) : 
+--
 SET search_path = public, pg_catalog;
-
---
--- Name: acreditacion_alta_calidad; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE acreditacion_alta_calidad (
-    resolucion character varying NOT NULL,
-    programa character varying(6) NOT NULL,
+CREATE TABLE public.acreditacion_alta_calidad (
+    resolucion varchar NOT NULL,
+    programa varchar(6) NOT NULL,
     inicioacreditacion date NOT NULL,
     periodo integer DEFAULT 4 NOT NULL,
     activo boolean DEFAULT false NOT NULL,
-    aviso character varying(2) DEFAULT 99 NOT NULL,
+    aviso varchar(2) DEFAULT 99 NOT NULL,
     gravedad integer DEFAULT 0 NOT NULL,
     mail boolean DEFAULT false NOT NULL,
     chkpm1 boolean DEFAULT false,
@@ -340,68 +558,46 @@ CREATE TABLE acreditacion_alta_calidad (
     mailaev2 boolean DEFAULT false,
     chkmen boolean DEFAULT false,
     mailmen boolean DEFAULT false
-);
-
-
-ALTER TABLE acreditacion_alta_calidad OWNER TO postgres;
-
+)
+WITH (oids = false);
 --
--- Name: formacion; Type: TABLE; Schema: public; Owner: postgres
+-- Structure for table estudiantes_departamento (OID = 19459) : 
 --
-
-CREATE TABLE formacion (
-    cod_formacion character(2) NOT NULL,
-    nom_formacion character varying(12)
-);
-
-
-ALTER TABLE formacion OWNER TO postgres;
-
+CREATE TABLE public.estudiantes_departamento (
+    cod_est_dep serial NOT NULL,
+    departamento char(2),
+    matriculados integer,
+    anho char(4),
+    periodo char(1)
+)
+WITH (oids = false);
 --
--- Name: formacion_departamento; Type: TABLE; Schema: public; Owner: postgres
+-- Structure for table formacion (OID = 19464) : 
 --
-
-CREATE TABLE formacion_departamento (
-    cod_forma_dep integer NOT NULL,
-    departamento character(2) NOT NULL,
+CREATE TABLE public.formacion (
+    cod_formacion char(2) NOT NULL,
+    nom_formacion varchar(12)
+)
+WITH (oids = false);
+--
+-- Structure for table formacion_departamento (OID = 19467) : 
+--
+CREATE TABLE public.formacion_departamento (
+    cod_forma_dep serial NOT NULL,
+    departamento char(2) NOT NULL,
     t_completo integer,
     t_ocasional integer,
     hora_catedra integer,
-    anio character varying(5),
-    periodo character(2),
-    formacion character(2) NOT NULL
-);
-
-
-ALTER TABLE formacion_departamento OWNER TO postgres;
-
+    anio varchar(5),
+    periodo char(2),
+    formacion char(2) NOT NULL
+)
+WITH (oids = false);
 --
--- Name: formacion_departamento_cod_forma_dep_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Structure for table manuales_indicadores (OID = 19472) : 
 --
-
-CREATE SEQUENCE formacion_departamento_cod_forma_dep_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE formacion_departamento_cod_forma_dep_seq OWNER TO postgres;
-
---
--- Name: formacion_departamento_cod_forma_dep_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE formacion_departamento_cod_forma_dep_seq OWNED BY formacion_departamento.cod_forma_dep;
-
-
---
--- Name: manuales_indicadores; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE manuales_indicadores (
-    codigo character(3) NOT NULL,
+CREATE TABLE public.manuales_indicadores (
+    codigo char(3) NOT NULL,
     proceso text,
     lider text,
     "objProceso" text,
@@ -420,111 +616,43 @@ CREATE TABLE manuales_indicadores (
     "puntoRegistro" text,
     resposable text,
     instructivo text,
-    "sim_Rango_MA" character(2),
+    "sim_Rango_MA" char(2),
     "num_Rango_MA" numeric(4,2),
-    "sim_Rango_A" character(2),
+    "sim_Rango_A" char(2),
     "num_Rango_A" numeric(4,2),
-    "sim_Rango_I" character(2),
+    "sim_Rango_I" char(2),
     "num_Rango_I" numeric(4,2)
-);
-
-
-ALTER TABLE manuales_indicadores OWNER TO postgres;
-
+)
+WITH (oids = false);
 --
--- Name: poblacion_estudiantes; Type: TABLE; Schema: public; Owner: postgres
+-- Structure for table programas (OID = 19478) : 
 --
-
-CREATE TABLE poblacion_estudiantes (
-    anho character(4) NOT NULL,
-    "semestreA" integer NOT NULL,
-    "semestreB" integer DEFAULT 0,
-    promedio numeric(5,0)
-);
-
-
-ALTER TABLE poblacion_estudiantes OWNER TO postgres;
-
---
--- Name: programas; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE programas (
-    snies character varying(6) NOT NULL,
-    nivel character(1) DEFAULT 1 NOT NULL,
-    codigo character(3),
-    departamento character varying(2),
-    nombre character varying(100) NOT NULL,
-    abreviatura character varying(45),
-    "fechaRegistro" character(4),
+CREATE TABLE public.programas (
+    snies varchar(6) NOT NULL,
+    nivel char(1) DEFAULT 1 NOT NULL,
+    codigo char(3),
+    departamento varchar(2),
+    nombre varchar(100) NOT NULL,
+    abreviatura varchar(45),
+    "fechaRegistro" char(4),
     estado boolean DEFAULT true NOT NULL
-);
-
-
-ALTER TABLE programas OWNER TO postgres;
-
+)
+WITH (oids = false);
 --
--- Name: users; Type: TABLE; Schema: public; Owner: postgres
+-- Structure for table users (OID = 19483) : 
 --
-
-CREATE TABLE users (
-    codigo character(2) NOT NULL,
-    "user" character varying(200) NOT NULL,
-    pass character varying(200) NOT NULL,
-    name character varying(60) NOT NULL,
-    rol character(1) DEFAULT 0 NOT NULL,
-    encriptado character varying(200),
-    email character varying NOT NULL,
-    alternative_email character varying
-);
-
-
-ALTER TABLE users OWNER TO postgres;
-
---
--- Name: COLUMN users.email; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN users.email IS 'correo de cada departamento para recuperar contraseña';
-
-
---
--- Name: vista_poblacion_docentes; Type: VIEW; Schema: public; Owner: postgres
---
-
-CREATE VIEW vista_poblacion_docentes AS
- SELECT t1.anio AS anho,
-    t1.a AS "semestreA",
-    t2.b AS "semestreB",
-    (((t1.a + t2.b) / 2))::numeric AS promedio
-   FROM (( SELECT formacion_departamento.anio,
-            sum(formacion_departamento.t_completo) AS a
-           FROM formacion_departamento
-          WHERE (formacion_departamento.periodo = '1'::bpchar)
-          GROUP BY formacion_departamento.anio) t1
-     FULL JOIN ( SELECT formacion_departamento.anio,
-            sum(formacion_departamento.t_completo) AS b
-           FROM formacion_departamento
-          WHERE (formacion_departamento.periodo = '2'::bpchar)
-          GROUP BY formacion_departamento.anio) t2 ON (((t1.anio)::text = (t2.anio)::text)))
-  ORDER BY t1.anio;
-
-
-ALTER TABLE vista_poblacion_docentes OWNER TO postgres;
-
---
--- Name: cod_forma_dep; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY formacion_departamento ALTER COLUMN cod_forma_dep SET DEFAULT nextval('formacion_departamento_cod_forma_dep_seq'::regclass);
-
-
+CREATE TABLE public.users (
+    codigo char(2) NOT NULL,
+    "user" varchar(200) NOT NULL,
+    pass varchar(200) NOT NULL,
+    name varchar(60) NOT NULL,
+    rol char(1) DEFAULT 0 NOT NULL,
+    encriptado varchar(200),
+    email varchar NOT NULL,
+    alternative_email varchar
+)
+WITH (oids = false);
 SET search_path = "Datawarehouse", pg_catalog;
-
---
--- Data for Name: KPI_Acreditacion; Type: TABLE DATA; Schema: Datawarehouse; Owner: postgres
---
-
 COPY "KPI_Acreditacion" ("Anho", acreditados, programas, razon, "manual_Acredita") FROM stdin;
 2013	8	59	14	4  
 2015	13	59	22	4  
@@ -535,12 +663,6 @@ COPY "KPI_Acreditacion" ("Anho", acreditados, programas, razon, "manual_Acredita
 2016	16	59	27	4  
 2017	19	63	30	4  
 \.
-
-
---
--- Data for Name: KPI_Desercion_Cohorte; Type: TABLE DATA; Schema: Datawarehouse; Owner: postgres
---
-
 COPY "KPI_Desercion_Cohorte" (programa, periodo, porcentaje, manual) FROM stdin;
 786	2013-2	6.25	6  
 3426	2006-2	31.37	6  
@@ -884,38 +1006,12 @@ COPY "KPI_Desercion_Cohorte" (programa, periodo, porcentaje, manual) FROM stdin;
 1206	2015-1	22.16	6  
 1206	2015-2	15.27	6  
 \.
-
-
---
--- Data for Name: KPI_Desercion_Periodo; Type: TABLE DATA; Schema: Datawarehouse; Owner: postgres
---
-
 COPY "KPI_Desercion_Periodo" (programa, periodo, no_graduados, desertores, desercion, retencion, manual) FROM stdin;
 16839	2008-1	166	28	16.18	83.82	7  
 16839	2008-2	140	10	6.99	93.01	7  
 16839	2009-1	162	24	14.46	85.54	7  
 16839	2009-2	182	8	5.71	94.29	7  
-788	2010-1	598	25	5.42	94.58	7  
-788	2010-2	627	38	6.93	93.07	7  
-788	2011-1	507	65	10.87	89.13	7  
-788	2011-2	517	27	4.31	95.69	7  
-788	2012-1	510	17	3.35	96.65	7  
-788	2012-2	499	26	5.03	94.97	7  
-788	2013-1	437	28	5.49	94.51	7  
-788	2013-2	449	30	6.01	93.99	7  
-788	2014-1	321	15	3.43	96.57	7  
-788	2014-2	314	17	3.79	96.21	7  
-788	2015-1	283	4	1.25	98.75	7  
-788	2015-2	337	20	6.37	93.63	7  
-788	2016-1	0	12	4.24	95.76	7  
-788	2016-2	0	41	12.17	87.83	7  
-19127	2008-1	179	7	5.30	94.70	7  
-19127	2008-2	232	23	11.06	88.94	7  
-19127	2009-1	197	6	3.35	96.65	7  
-19127	2009-2	234	19	8.19	91.81	7  
-19127	2010-1	208	8	4.06	95.94	7  
 105002	2000-1	67	3	10.71	89.29	7  
-19127	2010-2	263	22	9.40	90.60	7  
 105002	2000-2	116	7	9.46	90.54	7  
 105002	2001-1	96	2	2.99	97.01	7  
 105002	2001-2	140	19	16.38	83.62	7  
@@ -935,6 +1031,26 @@ COPY "KPI_Desercion_Periodo" (programa, periodo, no_graduados, desertores, deser
 105002	2008-2	183	14	8.33	91.67	7  
 105002	2009-1	151	7	4.46	95.54	7  
 105002	2009-2	164	14	7.65	92.35	7  
+788	2010-1	598	25	5.42	94.58	7  
+788	2010-2	627	38	6.93	93.07	7  
+788	2011-1	507	65	10.87	89.13	7  
+788	2011-2	517	27	4.31	95.69	7  
+788	2012-1	510	17	3.35	96.65	7  
+788	2012-2	499	26	5.03	94.97	7  
+788	2013-1	437	28	5.49	94.51	7  
+788	2013-2	449	30	6.01	93.99	7  
+788	2014-1	321	15	3.43	96.57	7  
+788	2014-2	314	17	3.79	96.21	7  
+788	2015-1	283	4	1.25	98.75	7  
+788	2015-2	337	20	6.37	93.63	7  
+788	2016-1	0	12	4.24	95.76	7  
+788	2016-2	0	41	12.17	87.83	7  
+19127	2008-1	179	7	5.30	94.70	7  
+19127	2008-2	232	23	11.06	88.94	7  
+19127	2009-1	197	6	3.35	96.65	7  
+19127	2009-2	234	19	8.19	91.81	7  
+19127	2010-1	208	8	4.06	95.94	7  
+19127	2010-2	263	22	9.40	90.60	7  
 19127	2011-1	236	13	6.25	93.75	7  
 19127	2011-2	271	14	5.32	94.68	7  
 19127	2012-1	249	3	1.27	98.73	7  
@@ -1651,28 +1767,8 @@ COPY "KPI_Desercion_Periodo" (programa, periodo, no_graduados, desertores, deser
 1206	2016-1	0	693	7.78	92.22	7  
 1206	2016-2	0	720	7.89	92.11	7  
 \.
-
-
---
--- Data for Name: KPI_Estudiantes_por_Docentes_TC; Type: TABLE DATA; Schema: Datawarehouse; Owner: postgres
---
-
-COPY "KPI_Estudiantes_por_Docentes_TC" ("Anho", estudiantes, docentes, razonanual, razona, razonb, "manual_Estu_Docente") FROM stdin;
-2010	8298	267	31	32	29	5  
-2011	10244	267	38	37	38	5  
-2012	10444	267	39	38	39	5  
-2013	10458	268	39	39	38	5  
-2014	10614	269	39	39	39	5  
-2015	10976	270	41	41	39	5  
-2016	11360	270	43	42	43	5  
-2017	11732	259	45	45	0	5  
+COPY "KPI_Estudiantes_por_Docentes_TC" (departamento, "Anho", estudiantes, docentes, razonanual, razona, razonb, "manual_Estu_Docente") FROM stdin;
 \.
-
-
---
--- Data for Name: KPI_Formacion; Type: TABLE DATA; Schema: Datawarehouse; Owner: postgres
---
-
 COPY "KPI_Formacion" (formacion, t_completo, t_ocasional, hora_catedra, anio, "manual_Formacion", estado_meta) FROM stdin;
 1 	47	1	0	2010	2  	71.59
 2 	147	18	37	2010	2  	71.59
@@ -1702,13 +1798,11 @@ COPY "KPI_Formacion" (formacion, t_completo, t_ocasional, hora_catedra, anio, "m
 2 	143	14	138	2016	2  	89.93
 3 	21	28	180	2016	2  	89.93
 4 	6	11	198	2016	2  	89.93
+1 	98	2	8	2017	2  	90.00
+2 	141	11	138	2017	2  	90.00
+3 	20	23	190	2017	2  	90.00
+4 	6	14	214	2017	2  	90.00
 \.
-
-
---
--- Data for Name: KPI_Nivel_Satisfaccion; Type: TABLE DATA; Schema: Datawarehouse; Owner: postgres
---
-
 COPY "KPI_Nivel_Satisfaccion" ("Programa", "Nivel", "Anho", manual) FROM stdin;
 786	93.00	2015	1  
 3189	75.00	2015	1  
@@ -1873,13 +1967,8 @@ COPY "KPI_Nivel_Satisfaccion" ("Programa", "Nivel", "Anho", manual) FROM stdin;
 3319	100	2017-1	1  
 8405	100	2017-1	1  
 777	100	2017-1	1  
+1206	98.97	2017-1	1  
 \.
-
-
---
--- Data for Name: KPI_Relacion_Docentes; Type: TABLE DATA; Schema: Datawarehouse; Owner: postgres
---
-
 COPY "KPI_Relacion_Docentes" (anio, cant_docentes_tc, cant_docentes_hc, relacion_docentes, "manual_Rela") FROM stdin;
 2010 	271	467	1.72	3  
 2011 	267	451	1.69	3  
@@ -1888,15 +1977,9 @@ COPY "KPI_Relacion_Docentes" (anio, cant_docentes_tc, cant_docentes_hc, relacion
 2014 	270	493	1.83	3  
 2015 	274	510	1.86	3  
 2016 	268	526	1.96	3  
+2017 	265	550	2.08	3  
 \.
-
-
 SET search_path = public, pg_catalog;
-
---
--- Data for Name: acreditacion_alta_calidad; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
 COPY acreditacion_alta_calidad (resolucion, programa, inicioacreditacion, periodo, activo, aviso, gravedad, mail, chkpm1, mailpm1, chkaev1, mailaev1, chkpm2, mailpm2, chkaev2, mailaev2, chkmen, mailmen) FROM stdin;
 583	3928	2015-01-09	4	t	14	1	t	f	f	f	f	f	f	f	f	f	f
 581	16843	2015-01-09	4	t	13	1	t	f	f	f	f	f	f	f	f	f	f
@@ -1929,24 +2012,14 @@ COPY acreditacion_alta_calidad (resolucion, programa, inicioacreditacion, period
 14781	12696	2017-07-28	4	t	99	0	f	f	f	f	f	f	f	f	f	f	f
 9233	6564	2015-06-26	4	t	27	1	t	f	f	f	f	f	f	f	f	f	f
 \.
-
-
---
--- Data for Name: formacion; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+COPY estudiantes_departamento (cod_est_dep, departamento, matriculados, anho, periodo) FROM stdin;
+\.
 COPY formacion (cod_formacion, nom_formacion) FROM stdin;
 1 	Doctor
 3 	Especialista
 4 	Profesional
 2 	Magíster
 \.
-
-
---
--- Data for Name: formacion_departamento; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
 COPY formacion_departamento (cod_forma_dep, departamento, t_completo, t_ocasional, hora_catedra, anio, periodo, formacion) FROM stdin;
 1	4 	0	0	0	2010	1 	1 
 2	4 	2	0	0	2010	1 	2 
@@ -3748,20 +3821,127 @@ COPY formacion_departamento (cod_forma_dep, departamento, t_completo, t_ocasiona
 5016	30	3	0	3	2017	1 	2 
 5017	30	0	1	1	2017	1 	3 
 5018	30	1	1	3	2017	1 	4 
+11326	1 	5	0	0	2017	2 	1 
+11327	1 	3	0	4	2017	2 	2 
+11328	1 	2	1	4	2017	2 	3 
+11329	1 	1	0	2	2017	2 	4 
+11330	2 	2	0	0	2017	2 	1 
+11331	2 	4	0	4	2017	2 	2 
+11332	2 	3	1	13	2017	2 	3 
+11333	2 	0	0	9	2017	2 	4 
+11334	3 	1	0	0	2017	2 	1 
+11335	3 	7	1	4	2017	2 	2 
+11336	3 	0	1	6	2017	2 	3 
+11337	3 	0	2	20	2017	2 	4 
+11338	4 	0	0	0	2017	2 	1 
+11339	4 	4	0	2	2017	2 	2 
+11340	4 	1	2	7	2017	2 	3 
+11341	4 	1	1	6	2017	2 	4 
+11342	5 	7	0	0	2017	2 	1 
+11343	5 	3	0	8	2017	2 	2 
+11344	5 	0	0	3	2017	2 	3 
+11345	5 	0	0	2	2017	2 	4 
+11346	6 	6	0	2	2017	2 	1 
+11347	6 	4	0	13	2017	2 	2 
+11348	6 	0	0	4	2017	2 	3 
+11349	6 	1	2	12	2017	2 	4 
+11350	7 	0	0	0	2017	2 	1 
+11351	7 	6	0	4	2017	2 	2 
+11352	7 	2	0	8	2017	2 	3 
+11353	7 	0	0	3	2017	2 	4 
+11354	8 	1	0	0	2017	2 	1 
+11355	8 	3	1	6	2017	2 	2 
+11356	8 	2	4	9	2017	2 	3 
+11357	8 	0	0	3	2017	2 	4 
+11358	9 	1	0	0	2017	2 	1 
+11359	9 	1	0	1	2017	2 	2 
+11360	9 	1	4	5	2017	2 	3 
+11361	9 	0	1	0	2017	2 	4 
+11362	10	2	0	1	2017	2 	1 
+11363	10	4	0	1	2017	2 	2 
+11364	10	0	0	2	2017	2 	3 
+11365	10	0	0	3	2017	2 	4 
+11366	11	3	0	1	2017	2 	1 
+11367	11	7	1	2	2017	2 	2 
+11368	11	0	0	0	2017	2 	3 
+11369	11	0	0	0	2017	2 	4 
+11370	12	1	0	0	2017	2 	1 
+11371	12	1	1	1	2017	2 	2 
+11372	12	1	1	0	2017	2 	3 
+11373	12	0	0	0	2017	2 	4 
+11374	13	6	0	1	2017	2 	1 
+11375	13	11	0	8	2017	2 	2 
+11376	13	0	0	19	2017	2 	3 
+11377	13	0	2	50	2017	2 	4 
+11378	14	2	0	0	2017	2 	1 
+11379	14	5	0	8	2017	2 	2 
+11380	14	0	0	5	2017	2 	3 
+11381	14	0	1	9	2017	2 	4 
+11382	15	2	0	0	2017	2 	1 
+11383	15	4	0	4	2017	2 	2 
+11384	15	0	0	4	2017	2 	3 
+11385	15	0	0	1	2017	2 	4 
+11386	16	0	2	0	2017	2 	1 
+11387	16	3	0	5	2017	2 	2 
+11388	16	0	0	4	2017	2 	3 
+11389	16	0	0	4	2017	2 	4 
+11390	17	0	0	0	2017	2 	1 
+11391	17	1	0	2	2017	2 	2 
+11392	17	0	1	28	2017	2 	3 
+11393	17	0	4	27	2017	2 	4 
+11394	18	8	0	1	2017	2 	1 
+11395	18	4	0	6	2017	2 	2 
+11396	18	1	0	2	2017	2 	3 
+11397	18	0	0	6	2017	2 	4 
+11398	19	7	0	0	2017	2 	1 
+11399	19	4	0	7	2017	2 	2 
+11400	19	0	0	4	2017	2 	3 
+11401	19	0	0	5	2017	2 	4 
+11402	20	9	0	0	2017	2 	1 
+11403	20	16	0	10	2017	2 	2 
+11404	20	2	0	18	2017	2 	3 
+11405	20	0	0	8	2017	2 	4 
+11406	21	9	0	0	2017	2 	1 
+11407	21	3	1	2	2017	2 	2 
+11408	21	0	0	5	2017	2 	3 
+11409	21	0	0	4	2017	2 	4 
+11410	22	3	0	0	2017	2 	1 
+11411	22	4	1	6	2017	2 	2 
+11412	22	1	1	13	2017	2 	3 
+11413	22	0	0	12	2017	2 	4 
+11414	23	5	0	2	2017	2 	1 
+11415	23	7	2	12	2017	2 	2 
+11416	23	0	0	1	2017	2 	3 
+11417	23	0	0	3	2017	2 	4 
+11418	24	2	0	0	2017	2 	1 
+11419	24	5	1	1	2017	2 	2 
+11420	24	3	1	4	2017	2 	3 
+11421	24	1	0	3	2017	2 	4 
+11422	25	2	0	0	2017	2 	1 
+11423	25	8	1	7	2017	2 	2 
+11424	25	0	4	11	2017	2 	3 
+11425	25	0	0	6	2017	2 	4 
+11426	26	3	0	0	2017	2 	1 
+11427	26	4	0	1	2017	2 	2 
+11428	26	0	1	3	2017	2 	3 
+11429	26	0	1	3	2017	2 	4 
+11430	27	4	0	0	2017	2 	1 
+11431	27	4	0	1	2017	2 	2 
+11432	27	0	0	1	2017	2 	3 
+11433	27	0	0	5	2017	2 	4 
+11434	28	4	0	0	2017	2 	1 
+11435	28	3	1	3	2017	2 	2 
+11436	28	1	0	4	2017	2 	3 
+11437	28	0	0	0	2017	2 	4 
+11438	29	1	0	0	2017	2 	1 
+11439	29	5	0	1	2017	2 	2 
+11440	29	0	0	3	2017	2 	3 
+11441	29	1	0	4	2017	2 	4 
+11442	30	2	0	0	2017	2 	1 
+11443	30	3	0	4	2017	2 	2 
+11444	30	0	1	0	2017	2 	3 
+11445	30	1	0	4	2017	2 	4 
 \.
-
-
---
--- Name: formacion_departamento_cod_forma_dep_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('formacion_departamento_cod_forma_dep_seq', 11325, true);
-
-
---
--- Data for Name: manuales_indicadores; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
 COPY manuales_indicadores (codigo, proceso, lider, "objProceso", "nombreIndicador", "atriMedir", "objCalidad", "tipoIndicador", frecuencia, "periodoCalculo", tendencia, meta, "objIndicador", rango, formula, "maneraGrafica", "puntoRegistro", resposable, instructivo, "sim_Rango_MA", "num_Rango_MA", "sim_Rango_A", "num_Rango_A", "sim_Rango_I", "num_Rango_I") FROM stdin;
 4  	Formación Académica	Vicerrector (a)  Académico(a)	Formar integralmente estudiantes a través de los diferentes Programas, niveles y modalidades de Educación Superior.	Programas Acreditados en Alta Calidad	Formación académica	Mejorar permanentemente la calidad en la docencia, investigación y proyección social de la Universidad.	Eficacia 	Anual	Último mes antes de finalizar cada año	Incrementar	Lograr el 15% de los programas acreditables en Alta Calidad	Medir el porcentaje de los programas académicos acreditados en alta calidad 	>15% Muy Adecuado\r\n= 15% Adecuado\r\n>15% Inadecuado	No. Programas académicos acreditados/ Total de programas académicos de la UDENAR.	Diagrama de Bloque, señalando la relación de los programas acreditados	Sistema de Información Académico 	Profesional Sistema de Autoevaluación, Acreditación y Certificación	Con la información suministrada por la División de Autoevaluación, Acreditación y Certificación, se aplica la fórmula establecida en el manual del indicador y se analiza los resultados	> 	15.00	= 	15.00	< 	15.00
 5  	Formación Académica	Vicerrector (a)  Académico(a)	Formar integralmente estudiantes a través de los diferentes Programas, niveles y modalidades de Educación Superior.	Relación de todo el personal Docente con respecto al número de Estudiantes de Pregrado UDENAR.	Capacidad 	Mejorar permanentemente la calidad en la docencia, investigación y proyección social de la Universidad.	Eficacia 	Semestral 	Último mes antes de finalizar cada semestre	Mantener	Mantener la relación 30 estudiantes por docente	Establecer el número de docentes Tiempo Completo con relación a la cantidad de Estudiantes matriculados en la Universidad de Nariño.	=35 Muy Adecuado\r\n29% a 34 Adecuado\r\n>59% Inadecuado	No. de Estudiantes/ Total docentes UDENAR.	Diagrama de Bloque, señalando la relación estudiantes por docente	Diagrama de Bloque, señalando la relación estudiantes por docente	Profesional Información y Estadística	on la información suministrada por el Sistema de Información se obtienen los valores del número de estudiantes y el número de docente, se aplica la fórmula establecida en el manual del indicador y se analiza los resultados	= 	35.00	> 	29.00	> 	59.00
@@ -3771,28 +3951,6 @@ COPY manuales_indicadores (codigo, proceso, lider, "objProceso", "nombreIndicado
 1  	Formación Académca	Vicerrector(a) Académico (a)	Formar integralmente estudiantes a través de los diferentes Programas, niveles y modalidades de Educación Superior.	Nivel de Satisfacción  estudiantil.	Estudiantes del programas que califican la Formación Académica como satisfactoria.	Garantizar la satisfacción de los estudiantes con los servicios prestados de formación académica que ofrece la Universidad de Nariño	Eficacia	Semestral	Mes de marzo para semestre A y mes octubre para semestre B	Mantener (mantener y/o incrementar el nivel de satisfacción estudiantil)	Lograr que el 80% de los estudiantes califiquen la prestación del servicio de formación académica de cada programa académico como satisfactorio.	Medir el nivel de satisfacción que tiene la comunidad estudiantil, en lo que se refiera al servicio educativo impartido por cada uno de los programas académicos de la Universidad de Nariño.	80 – 100 %   Muy Adecuado\r\n70 – 79  % Adecuado\r\n60 – 69  % Inadecuado\r\n< 40 %  Muy inadecuado	(No. de estudiantes que calificaron Excelente, Bueno y Adecuado en la primera pregunta de la encuesta de satisfacción / Total de estudiantes) \n\nCalculo del número de encuestas a  aplicar : Muestra representativa del número de Estudiantes matriculados al periodo académico correspondiente. \n\nPregunta de encuesta: 1. ¿Cómo califica Usted la Formación Académica impartida por el Programa al que pertenece?	Diagrama de Columna, señalando la variación porcentual de cada período.	pagina Web Institucional/indicadoresacademicos	Director de Departamento.	http://indicadoresacademicos.udenar.edu.co/tutorial	> 	80.00	> 	70.00	< 	69.00
 7  	Formación Académica	Vicerrector(a) Académico(a)	Formar integralmente estudiantes a través de los diferentes Programas, niveles y modalidades de Educación Superior.	Deserción Académica por periodo	Nivel de deserción por periodo dentro del servicio educativo de cada programa académico	Mejorar permanentemente la calidad en la docencia, investigación y proyección social de la Universidad.	Eficiencia	Anual	Último mes antes de finalizar el año	Disminución 	Disminución al 8% de la deserción observada por Periodo. 	Medir la capacidad de retención del Proceso “Formación Académica”	< 10% Deserción Muy Adecuado\r\n10 – 15 %  Deserción  Adecuada\r\n>15 % Deserción  Inadecuado	No.  de Estudiantes que se retiran en forma definitiva del Proceso de Formación Académica por Periodo/No. de Estudiantes Matriculados por periodo)*100	Diagrama de Bloque, señalando el porcentaje obtenido de deserción, frente a la meta.	Estadísticas SPADIES  para cada cierre de año	irector de DepartamentoAsesor de Información y Estadística Oficina de Planeación y Desarrollo	Al finalizar cada año se aplica la fórmula y se confronta los resultados del año anterior con los del año actual.	< 	10.00	> 	10.00	> 	10.00
 \.
-
-
---
--- Data for Name: poblacion_estudiantes; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY poblacion_estudiantes (anho, "semestreA", "semestreB", promedio) FROM stdin;
-2011	10114	10374	10244
-2012	10406	10482	10444
-2013	10446	10470	10458
-2014	10632	10596	10614
-2015	11161	10791	10976
-2016	11308	11413	11360
-2010	8522	8075	8298
-2017	11732	0	11732
-\.
-
-
---
--- Data for Name: programas; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
 COPY programas (snies, nivel, codigo, departamento, nombre, abreviatura, "fechaRegistro", estado) FROM stdin;
 2972	1	010	20	Licenciatura en Informática	Lic. Informática	2010	t
 16843	1	027	13	Licenciatura en Educación Básica con Enfasis en Humanidades, Lengua Castellana e Inglés	Lic.Edu.Bas.Enf Human LengCastell-Ingles	2010	t
@@ -3903,12 +4061,6 @@ COPY programas (snies, nivel, codigo, departamento, nombre, abreviatura, "fechaR
 8405	1	073	16	Tecnología en Promoción de la Salud	Tecnologia Promoción Salud	2010	t
 92400	1	400	17	Auxiliar en Enfermeria	Auxiliar en Enfermeria	2017	t
 \.
-
-
---
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
 COPY users (codigo, "user", pass, name, rol, encriptado, email, alternative_email) FROM stdin;
 22	dcb201b195282662b8b152c9a5196f39	dcb201b195282662b8b152c9a5196f39	Departamento de Ciencias Jurídicas	0	2aaeafbf04dfc3d307afa06ffa5bf885	derecho@udenar.edu.co	leonardoaem@gmail.com
 00	0cd311a704f2627bce2c5429335c5dce	0cd311a704f2627bce2c5429335c5dce	División de Autoevaluación, Acreditacion y Certificación	1	30dcacf001743a948ae54b347ae32739	acreditacioninstitucional@udenar.edu.do	\N
@@ -3941,290 +4093,237 @@ COPY users (codigo, "user", pass, name, rol, encriptado, email, alternative_emai
 10	d07895a54abcdc6db06684d8cb53389a	d07895a54abcdc6db06684d8cb53389a	Departamento de Ciencias Sociales	0	745636ef595e4b0721787533686df2b5	licsociales@udenar.edu.co	merazocoral@gmail.com
 99	5f360e2e8bcb4274b4f9c23b6066f03b	5f360e2e8bcb4274b4f9c23b6066f03b	Vicerrectoría Académica	1	5f360e2e8bcb4274b4f9c23b6066f03b	v.academica@udenar.edu.co	\N
 11	8d9cf576c5110bbc3c74a5cc5112a51f	8d9cf576c5110bbc3c74a5cc5112a51f	Departamento de Filosofía	0	7f3b7b26a2a1ea13f2760d64ecf1a1c0	filosofia@udenar.edu.co	manrique@udenar.edu.co
-9 	2a0a0798dd43023ab30bdd4a777f4225	3bb9f7c241f35a769ecca64f80af3d04	Departamento de Comercio Internacional y Mercadeo	0	5dcb20b856c90f0b44cf8bc2261bf1c8	cim@udenar.edu.co	\N
+9 	2a0a0798dd43023ab30bdd4a777f4225	7a43bd1709ef441f1b3b3fa71c1175da	Departamento de Comercio Internacional y Mercadeo	0	c1ba95bb040905d1ea4c25d2fbd9768b	cim@udenar.edu.co	\N
 \.
-
-
+--
+-- Definition for index KPI_Desercion_Cohorte_idx (OID = 19492) : 
+--
 SET search_path = "Datawarehouse", pg_catalog;
-
---
--- Name: KPI_Desercion_Cohorte_idx; Type: CONSTRAINT; Schema: Datawarehouse; Owner: postgres
---
-
 ALTER TABLE ONLY "KPI_Desercion_Cohorte"
-    ADD CONSTRAINT "KPI_Desercion_Cohorte_idx" PRIMARY KEY (programa, periodo);
-
-
+    ADD CONSTRAINT "KPI_Desercion_Cohorte_idx"
+    PRIMARY KEY (programa, periodo);
 --
--- Name: KPI_Desercion_Periodo_idx; Type: CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Desercion_Periodo_idx (OID = 19494) : 
 --
-
 ALTER TABLE ONLY "KPI_Desercion_Periodo"
-    ADD CONSTRAINT "KPI_Desercion_Periodo_idx" PRIMARY KEY (programa, periodo);
-
-
+    ADD CONSTRAINT "KPI_Desercion_Periodo_idx"
+    PRIMARY KEY (programa, periodo);
 --
--- Name: KPI_Nivel_Satisfaccion_pkey; Type: CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Nivel_Satisfaccion_pkey (OID = 19496) : 
 --
-
 ALTER TABLE ONLY "KPI_Nivel_Satisfaccion"
-    ADD CONSTRAINT "KPI_Nivel_Satisfaccion_pkey" PRIMARY KEY ("Programa", "Anho");
-
-
+    ADD CONSTRAINT "KPI_Nivel_Satisfaccion_pkey"
+    PRIMARY KEY ("Programa", "Anho");
+--
+-- Definition for index acreditacion_alta_calidad_pkey (OID = 19498) : 
+--
 SET search_path = public, pg_catalog;
-
---
--- Name: acreditacion_alta_calidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY acreditacion_alta_calidad
-    ADD CONSTRAINT acreditacion_alta_calidad_pkey PRIMARY KEY (resolucion);
-
-
+    ADD CONSTRAINT acreditacion_alta_calidad_pkey
+    PRIMARY KEY (resolucion);
 --
--- Name: formacion_departamento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Definition for index formacion_departamento_pkey (OID = 19500) : 
 --
-
 ALTER TABLE ONLY formacion_departamento
-    ADD CONSTRAINT formacion_departamento_pkey PRIMARY KEY (cod_forma_dep);
-
-
+    ADD CONSTRAINT formacion_departamento_pkey
+    PRIMARY KEY (cod_forma_dep);
 --
--- Name: formacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Definition for index formacion_pkey (OID = 19502) : 
 --
-
 ALTER TABLE ONLY formacion
-    ADD CONSTRAINT formacion_pkey PRIMARY KEY (cod_formacion);
-
-
+    ADD CONSTRAINT formacion_pkey
+    PRIMARY KEY (cod_formacion);
 --
--- Name: manuales_indicadores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Definition for index manuales_indicadores_pkey (OID = 19504) : 
 --
-
 ALTER TABLE ONLY manuales_indicadores
-    ADD CONSTRAINT manuales_indicadores_pkey PRIMARY KEY (codigo);
-
-
+    ADD CONSTRAINT manuales_indicadores_pkey
+    PRIMARY KEY (codigo);
 --
--- Name: poblacion_estudiantes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Definition for index programas_pkey (OID = 19506) : 
 --
-
-ALTER TABLE ONLY poblacion_estudiantes
-    ADD CONSTRAINT poblacion_estudiantes_pkey PRIMARY KEY (anho);
-
-
---
--- Name: programas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY programas
-    ADD CONSTRAINT programas_pkey PRIMARY KEY (snies);
-
-
+    ADD CONSTRAINT programas_pkey
+    PRIMARY KEY (snies);
 --
--- Name: users_codigo_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Definition for index users_codigo_key (OID = 19508) : 
 --
-
 ALTER TABLE ONLY users
-    ADD CONSTRAINT users_codigo_key UNIQUE (codigo);
-
-
+    ADD CONSTRAINT users_codigo_key
+    UNIQUE (codigo);
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Definition for index users_pkey (OID = 19510) : 
 --
-
 ALTER TABLE ONLY users
-    ADD CONSTRAINT users_pkey PRIMARY KEY ("user", pass);
-
-
+    ADD CONSTRAINT users_pkey
+    PRIMARY KEY ("user", pass);
 --
--- Name: poblacion_estudiantes_promedio_key; Type: INDEX; Schema: public; Owner: postgres
+-- Definition for index KPI_Acreditacion_fk (OID = 19520) : 
 --
-
-CREATE UNIQUE INDEX poblacion_estudiantes_promedio_key ON poblacion_estudiantes USING btree (promedio);
-
-
 SET search_path = "Datawarehouse", pg_catalog;
-
---
--- Name: tr_actua_satisfaccion; Type: TRIGGER; Schema: Datawarehouse; Owner: postgres
---
-
-CREATE TRIGGER tr_actua_satisfaccion BEFORE INSERT ON "KPI_Nivel_Satisfaccion" FOR EACH ROW EXECUTE PROCEDURE public.fun_actua_satisfaccion();
-
-
---
--- Name: tr_cohort_desertion; Type: TRIGGER; Schema: Datawarehouse; Owner: postgres
---
-
-CREATE TRIGGER tr_cohort_desertion BEFORE INSERT ON "KPI_Desercion_Cohorte" FOR EACH ROW EXECUTE PROCEDURE fun_delete_cohort();
-
-
---
--- Name: tr_period_desertion; Type: TRIGGER; Schema: Datawarehouse; Owner: postgres
---
-
-CREATE TRIGGER tr_period_desertion BEFORE INSERT ON "KPI_Desercion_Periodo" FOR EACH ROW EXECUTE PROCEDURE fun_delete_period();
-
-
---
--- Name: tr_relacion; Type: TRIGGER; Schema: Datawarehouse; Owner: postgres
---
-
-CREATE TRIGGER tr_relacion AFTER INSERT OR UPDATE ON "KPI_Formacion" FOR EACH ROW EXECUTE PROCEDURE fun_actua_relacion();
-
-
-SET search_path = public, pg_catalog;
-
---
--- Name: tr_for_dep; Type: TRIGGER; Schema: public; Owner: postgres
---
-
-CREATE TRIGGER tr_for_dep BEFORE INSERT ON formacion_departamento FOR EACH ROW EXECUTE PROCEDURE "Actua_Formacion_Dep"();
-
-
---
--- Name: tr_kpi_form; Type: TRIGGER; Schema: public; Owner: postgres
---
-
-CREATE TRIGGER tr_kpi_form AFTER INSERT OR UPDATE ON formacion_departamento FOR EACH ROW EXECUTE PROCEDURE "Fun_Actua_KPI_Form"();
-
-
-SET search_path = "Datawarehouse", pg_catalog;
-
---
--- Name: KPI_Acreditacion_fk; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
---
-
 ALTER TABLE ONLY "KPI_Acreditacion"
-    ADD CONSTRAINT "KPI_Acreditacion_fk" FOREIGN KEY ("manual_Acredita") REFERENCES public.manuales_indicadores(codigo);
-
-
+    ADD CONSTRAINT "KPI_Acreditacion_fk"
+    FOREIGN KEY ("manual_Acredita") REFERENCES public.manuales_indicadores(codigo);
 --
--- Name: KPI_Cohort_Dropout_fk; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Cohort_Dropout_fk (OID = 19525) : 
 --
-
 ALTER TABLE ONLY "KPI_Desercion_Cohorte"
-    ADD CONSTRAINT "KPI_Cohort_Dropout_fk" FOREIGN KEY (programa) REFERENCES public.programas(snies);
-
-
+    ADD CONSTRAINT "KPI_Cohort_Dropout_fk"
+    FOREIGN KEY (programa) REFERENCES public.programas(snies);
 --
--- Name: KPI_Desercion_Cohorte_fk; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Desercion_Cohorte_fk (OID = 19530) : 
 --
-
 ALTER TABLE ONLY "KPI_Desercion_Cohorte"
-    ADD CONSTRAINT "KPI_Desercion_Cohorte_fk" FOREIGN KEY (manual) REFERENCES public.manuales_indicadores(codigo);
-
-
+    ADD CONSTRAINT "KPI_Desercion_Cohorte_fk"
+    FOREIGN KEY (manual) REFERENCES public.manuales_indicadores(codigo);
 --
--- Name: KPI_Desercion_Periodo_fk; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Desercion_Periodo_fk (OID = 19535) : 
 --
-
 ALTER TABLE ONLY "KPI_Desercion_Periodo"
-    ADD CONSTRAINT "KPI_Desercion_Periodo_fk" FOREIGN KEY (manual) REFERENCES public.manuales_indicadores(codigo);
-
-
+    ADD CONSTRAINT "KPI_Desercion_Periodo_fk"
+    FOREIGN KEY (manual) REFERENCES public.manuales_indicadores(codigo);
 --
--- Name: KPI_Estudiantes_por_Docentes_TC_fk; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Estudiantes_por_Docentes_TC_fk (OID = 19540) : 
 --
-
 ALTER TABLE ONLY "KPI_Estudiantes_por_Docentes_TC"
-    ADD CONSTRAINT "KPI_Estudiantes_por_Docentes_TC_fk" FOREIGN KEY ("manual_Estu_Docente") REFERENCES public.manuales_indicadores(codigo);
-
-
+    ADD CONSTRAINT "KPI_Estudiantes_por_Docentes_TC_fk"
+    FOREIGN KEY ("manual_Estu_Docente") REFERENCES public.manuales_indicadores(codigo);
 --
--- Name: KPI_Estudiantes_por_Docentes_TC_fk1; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Formacion_fk (OID = 19550) : 
 --
-
-ALTER TABLE ONLY "KPI_Estudiantes_por_Docentes_TC"
-    ADD CONSTRAINT "KPI_Estudiantes_por_Docentes_TC_fk1" FOREIGN KEY (estudiantes) REFERENCES public.poblacion_estudiantes(promedio);
-
-
---
--- Name: KPI_Formacion_fk; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
---
-
 ALTER TABLE ONLY "KPI_Formacion"
-    ADD CONSTRAINT "KPI_Formacion_fk" FOREIGN KEY (formacion) REFERENCES public.formacion(cod_formacion);
-
-
+    ADD CONSTRAINT "KPI_Formacion_fk"
+    FOREIGN KEY (formacion) REFERENCES public.formacion(cod_formacion);
 --
--- Name: KPI_Formacion_fk1; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Formacion_fk1 (OID = 19555) : 
 --
-
 ALTER TABLE ONLY "KPI_Formacion"
-    ADD CONSTRAINT "KPI_Formacion_fk1" FOREIGN KEY ("manual_Formacion") REFERENCES public.manuales_indicadores(codigo);
-
-
+    ADD CONSTRAINT "KPI_Formacion_fk1"
+    FOREIGN KEY ("manual_Formacion") REFERENCES public.manuales_indicadores(codigo);
 --
--- Name: KPI_Nivel_Satisfaccion_fk; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Nivel_Satisfaccion_fk (OID = 19560) : 
 --
-
 ALTER TABLE ONLY "KPI_Nivel_Satisfaccion"
-    ADD CONSTRAINT "KPI_Nivel_Satisfaccion_fk" FOREIGN KEY (manual) REFERENCES public.manuales_indicadores(codigo);
-
-
+    ADD CONSTRAINT "KPI_Nivel_Satisfaccion_fk"
+    FOREIGN KEY (manual) REFERENCES public.manuales_indicadores(codigo);
 --
--- Name: KPI_Period_Dropout_fk; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Period_Dropout_fk (OID = 19565) : 
 --
-
 ALTER TABLE ONLY "KPI_Desercion_Periodo"
-    ADD CONSTRAINT "KPI_Period_Dropout_fk" FOREIGN KEY (programa) REFERENCES public.programas(snies);
-
-
+    ADD CONSTRAINT "KPI_Period_Dropout_fk"
+    FOREIGN KEY (programa) REFERENCES public.programas(snies);
 --
--- Name: KPI_Relacion_Docentes_fk; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Relacion_Docentes_fk (OID = 19570) : 
 --
-
 ALTER TABLE ONLY "KPI_Relacion_Docentes"
-    ADD CONSTRAINT "KPI_Relacion_Docentes_fk" FOREIGN KEY ("manual_Rela") REFERENCES public.manuales_indicadores(codigo);
-
-
+    ADD CONSTRAINT "KPI_Relacion_Docentes_fk"
+    FOREIGN KEY ("manual_Rela") REFERENCES public.manuales_indicadores(codigo);
 --
--- Name: KPI_Satisfaction_level_fk; Type: FK CONSTRAINT; Schema: Datawarehouse; Owner: postgres
+-- Definition for index KPI_Satisfaction_level_fk (OID = 19575) : 
 --
-
 ALTER TABLE ONLY "KPI_Nivel_Satisfaccion"
-    ADD CONSTRAINT "KPI_Satisfaction_level_fk" FOREIGN KEY ("Programa") REFERENCES public.programas(snies);
-
-
+    ADD CONSTRAINT "KPI_Satisfaction_level_fk"
+    FOREIGN KEY ("Programa") REFERENCES public.programas(snies);
+--
+-- Definition for index acreditacion_alta_calidad_fk (OID = 19580) : 
+--
 SET search_path = public, pg_catalog;
-
---
--- Name: acreditacion_alta_calidad_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY acreditacion_alta_calidad
-    ADD CONSTRAINT acreditacion_alta_calidad_fk FOREIGN KEY (programa) REFERENCES programas(snies);
-
-
+    ADD CONSTRAINT acreditacion_alta_calidad_fk
+    FOREIGN KEY (programa) REFERENCES programas(snies);
 --
--- Name: formacion_departamento_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Definition for index estudiantes_departamento_fk (OID = 19585) : 
 --
-
+ALTER TABLE ONLY estudiantes_departamento
+    ADD CONSTRAINT estudiantes_departamento_fk
+    FOREIGN KEY (departamento) REFERENCES users(codigo);
+--
+-- Definition for index formacion_departamento_fk (OID = 19590) : 
+--
 ALTER TABLE ONLY formacion_departamento
-    ADD CONSTRAINT formacion_departamento_fk FOREIGN KEY (departamento) REFERENCES users(codigo);
-
-
+    ADD CONSTRAINT formacion_departamento_fk
+    FOREIGN KEY (departamento) REFERENCES users(codigo);
 --
--- Name: formacion_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Definition for index formacion_fk (OID = 19595) : 
 --
-
 ALTER TABLE ONLY formacion_departamento
-    ADD CONSTRAINT formacion_fk FOREIGN KEY (formacion) REFERENCES formacion(cod_formacion);
-
-
+    ADD CONSTRAINT formacion_fk
+    FOREIGN KEY (formacion) REFERENCES formacion(cod_formacion);
 --
--- Name: public; Type: ACL; Schema: -; Owner: postgres
+-- Definition for trigger tr_actua_satisfaccion (OID = 19512) : 
 --
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
-
-
+SET search_path = "Datawarehouse", pg_catalog;
+CREATE TRIGGER tr_actua_satisfaccion
+    BEFORE INSERT ON "KPI_Nivel_Satisfaccion"
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.fun_actua_satisfaccion ();
 --
--- PostgreSQL database dump complete
+-- Definition for trigger tr_cohort_desertion (OID = 19513) : 
 --
-
+CREATE TRIGGER tr_cohort_desertion
+    BEFORE INSERT ON "KPI_Desercion_Cohorte"
+    FOR EACH ROW
+    EXECUTE PROCEDURE fun_delete_cohort ();
+--
+-- Definition for trigger tr_period_desertion (OID = 19514) : 
+--
+CREATE TRIGGER tr_period_desertion
+    BEFORE INSERT ON "KPI_Desercion_Periodo"
+    FOR EACH ROW
+    EXECUTE PROCEDURE fun_delete_period ();
+--
+-- Definition for trigger tr_relacion (OID = 19515) : 
+--
+CREATE TRIGGER tr_relacion
+    AFTER INSERT OR UPDATE ON "KPI_Formacion"
+    FOR EACH ROW
+    EXECUTE PROCEDURE fun_actua_relacion ();
+--
+-- Definition for trigger tr_est_dep (OID = 19516) : 
+--
+SET search_path = public, pg_catalog;
+CREATE TRIGGER tr_est_dep
+    BEFORE INSERT ON estudiantes_departamento
+    FOR EACH ROW
+    EXECUTE PROCEDURE "Actua_Estudiantes_Dep" ();
+--
+-- Definition for trigger tr_for_dep (OID = 19517) : 
+--
+CREATE TRIGGER tr_for_dep
+    BEFORE INSERT ON formacion_departamento
+    FOR EACH ROW
+    EXECUTE PROCEDURE "Actua_Formacion_Dep" ();
+--
+-- Definition for trigger tr_kpi_est_doc (OID = 19518) : 
+--
+CREATE TRIGGER tr_kpi_est_doc
+    AFTER INSERT OR UPDATE ON estudiantes_departamento
+    FOR EACH ROW
+    EXECUTE PROCEDURE "Fun_Actua_KPI_Est_Doc" ();
+--
+-- Definition for trigger tr_kpi_form (OID = 19519) : 
+--
+CREATE TRIGGER tr_kpi_form
+    AFTER INSERT OR UPDATE ON formacion_departamento
+    FOR EACH ROW
+    EXECUTE PROCEDURE "Fun_Actua_KPI_Form" ();
+--
+-- Definition for trigger tr_kpi_est_doc_udenar (OID = 19804) : 
+--
+CREATE TRIGGER tr_kpi_est_doc_udenar
+    AFTER INSERT OR UPDATE ON estudiantes_departamento
+    FOR EACH ROW
+    EXECUTE PROCEDURE "Fun_Actua_KPI_Est_Doc_UDENAR" ();
+--
+-- Data for sequence public.estudiantes_departamento_cod_est_dep_seq (OID = 19462)
+--
+SELECT pg_catalog.setval('estudiantes_departamento_cod_est_dep_seq', 1, false);
+--
+-- Data for sequence public.formacion_departamento_cod_forma_dep_seq (OID = 19470)
+--
+SELECT pg_catalog.setval('formacion_departamento_cod_forma_dep_seq', 11445, true);
+--
+-- Comments
+--
+COMMENT ON SCHEMA public IS 'standard public schema';
+COMMENT ON COLUMN public.users.email IS 'correo de cada departamento para recuperar contraseña';
