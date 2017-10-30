@@ -399,13 +399,13 @@ function gaugesGraph(data,contentName, co1, co2, co3, soso, goal, title, symbol 
           "startValue": soso
         }, {
           "color": c3,
-          "endValue": 100,
+          "endValue": 200,
           "innerRadius": "90%",
           "startValue": goal
         } ],
         "bottomText": data + symbol,
         "bottomTextYOffset": -10,
-        "endValue": 100
+        "endValue": 200
       } ],
       "arrows": [{"value":data}], //es el valor que tiene
       "export": {

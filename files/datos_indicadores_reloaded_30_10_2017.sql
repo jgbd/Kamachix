@@ -141,7 +141,7 @@ DECLARE
   cantidad_e INTEGER;
 BEGIN
 	SELECT Count(*) INTO cantidad_e FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" ek WHERE ek."Anho"=NEW.anho AND ek.departamento=NEW.departamento;
-		/*IF NEW.departamento<>'99' THEN*/
+		IF NEW.departamento<>'99' THEN
 			IF cantidad_e < 1 THEN
 				IF NEW.periodo='1' THEN
 					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razona,razonanual) 
@@ -162,7 +162,7 @@ BEGIN
 							AND 
 								departamento = NEW.departamento) t1
 						JOIN ( 
-							SELECT anio,departamento,sum(t_completo) AS da
+							SELECT anio,departamento,sum(t_completo)+sum(t_ocasional) AS da
 							FROM formacion_departamento 
 							WHERE
 								periodo = NEW.periodo 
@@ -192,7 +192,7 @@ BEGIN
 							AND 
 								departamento = NEW.departamento) t1
 						JOIN ( 
-							SELECT anio,departamento,sum(t_completo) AS db
+							SELECT anio,departamento,sum(t_completo)+sum(t_ocasional) AS db
 							FROM formacion_departamento 
 							WHERE 
 								periodo = NEW.periodo 
@@ -205,62 +205,62 @@ BEGIN
 						ORDER BY t1.anho;
 				END IF;
 			ELSE
-                  IF NEW.periodo='2' THEN
-                      UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
-                          SET 
-                              estudiantes=(
-                                  SELECT 
-                                      sum(matriculados)/2::numeric(5,0)
-                                  FROM estudiantes_departamento 
-                                  WHERE 
-                                      anho=NEW.anho
-                                  AND 
-                                      departamento=NEW.departamento),
-                              docentes=(
-                                  SELECT 
-                                      sum(t_completo)/2::numeric(3,0)
-                                  FROM formacion_departamento 
-                                  WHERE 
-                                      anio=NEW.anho
-                                  AND 
-                                      departamento=NEW.departamento)
-                          WHERE 
-                              "Anho"=new.anho
-                          AND
-                              departamento=NEW.departamento;
-                      UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
-                          SET 
-                              razonanual=(
-                                  SELECT 
-                                      estudiantes/docentes::numeric(3,0)
-                                  FROM 
-                                      "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
-                                  WHERE
-                                      "Anho"=NEW.anho
-                                  AND 
-                                      departamento=NEW.departamento)
-                          WHERE 
-                              "Anho"=new.anho
-                          AND
-                              departamento=NEW.departamento;
-                      UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
-                          SET 
-                              razonb=(
-                                  SELECT 
-                                      (2*razonanual-razona)::numeric(3,0)
-                                  FROM 
-                                      "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
-                                  WHERE
-                                      "Anho"=NEW.anho
-                                  AND 
-                                      departamento=NEW.departamento)
-                          WHERE 
-                              "Anho"=new.anho
-                          AND
-                              departamento=NEW.departamento;
-                  END IF;
+                IF NEW.periodo='2' THEN
+                    UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+                        SET 
+                            estudiantes=(
+                                SELECT 
+                                    sum(matriculados)/2::numeric(5,0)
+                                FROM estudiantes_departamento 
+                                WHERE 
+                                    anho=NEW.anho
+                                AND 
+                                    departamento=NEW.departamento),
+                            docentes=(
+                                SELECT 
+                                    (sum(t_completo)+sum(t_ocasional))/2::numeric(3,0)
+                                FROM formacion_departamento 
+                                WHERE 
+                                    anio=NEW.anho
+                                AND 
+                                    departamento=NEW.departamento)
+                        WHERE 
+                            "Anho"=new.anho
+                        AND
+                            departamento=NEW.departamento;
+                    UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+                        SET 
+                            razonanual=(
+                                SELECT 
+                                    estudiantes/docentes::numeric(3,0)
+                                FROM 
+                                    "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
+                                WHERE
+                                    "Anho"=NEW.anho
+                                AND 
+                                    departamento=NEW.departamento)
+                        WHERE 
+                            "Anho"=new.anho
+                        AND
+                            departamento=NEW.departamento;
+                    UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+                        SET 
+                            razonb=(
+                                SELECT 
+                                    (2*razonanual-razona)::numeric(3,0)
+                                FROM 
+                                    "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
+                                WHERE
+                                    "Anho"=NEW.anho
+                                AND 
+                                    departamento=NEW.departamento)
+                        WHERE 
+                            "Anho"=new.anho
+                        AND
+                            departamento=NEW.departamento;
+                END IF;
 			END IF;
-		/*END IF;*/
+		END IF;
 	return NEW;
 END;
 $body$
@@ -323,132 +323,131 @@ DECLARE
   cantidad_eu INTEGER;
 BEGIN
 	SELECT Count(*) INTO cantidad_eu FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" ek WHERE ek."Anho"=NEW.anho AND ek.departamento='UD';
-    /*IF NEW.departamento<>'99' THEN*/
-      IF cantidad_eu < 1 THEN
-      	IF NEW.periodo='1' THEN
-          INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razonanual,razona) 
-            SELECT
-            	'UD',
-                t1.anho, 
-                t1.ea::numeric(5,0),
-				t2.da::numeric(3,0),
-				t1.ea/t2.da::numeric(3,0),
-				t1.ea/t2.da::numeric(3,0)
-            FROM ( 
-            	SELECT anho,sum(matriculados) AS ea
-                FROM estudiantes_departamento 
-                WHERE 
-                	periodo=NEW.periodo
-                AND 
-                	anho=NEW.anho
-                GROUP BY anho) t1
-            JOIN ( 
-            	SELECT anio,sum(t_completo) AS da
-                FROM formacion_departamento 
-                WHERE 
-                	periodo=NEW.periodo
-                AND 
-                	anio=NEW.anho
-                GROUP BY anio) t2 
-            ON t2.anio=t1.anho
-            ORDER BY t1.anho;
-        ELSE
-			INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razonb,razonanual) 
-				SELECT
-                	'UD',
-					t1.anho, 
-					t1.eb::numeric(5,0),
-					t2.db::numeric(3,0),
-					t1.eb/t2.db::numeric(3,0),
-					t1.eb/t2.db::numeric(3,0)
-				FROM ( 
-					SELECT anho,matriculados AS eb
-					FROM estudiantes_departamento 
+		IF NEW.departamento<>'99' THEN
+			IF cantidad_eu < 1 THEN
+				IF NEW.periodo='1' THEN
+					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razonanual,razona) 
+					SELECT
+						'UD',
+						t1.anho, 
+						t1.ea::numeric(5,0),
+						t2.da::numeric(3,0),
+						t1.ea/t2.da::numeric(3,0),
+						t1.ea/t2.da::numeric(3,0)
+					FROM ( 
+						SELECT anho,sum(matriculados) AS ea
+						FROM estudiantes_departamento 
+						WHERE 
+							periodo=NEW.periodo
+						AND 
+							anho=NEW.anho
+						GROUP BY anho) t1
+					JOIN ( 
+						SELECT anio,sum(t_completo)+sum(t_ocasional) AS da
+						FROM formacion_departamento 
+						WHERE 
+							periodo=NEW.periodo
+						AND 
+							anio=NEW.anho
+						GROUP BY anio) t2 
+					ON t2.anio=t1.anho
+					ORDER BY t1.anho;
+				ELSE
+					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razonb,razonanual) 
+						SELECT
+							'UD',
+							t1.anho, 
+							t1.eb::numeric(5,0),
+							t2.db::numeric(3,0),
+							t1.eb/t2.db::numeric(3,0),
+							t1.eb/t2.db::numeric(3,0)
+						FROM ( 
+							SELECT anho,matriculados AS eb
+							FROM estudiantes_departamento 
+							WHERE 
+								periodo = NEW.periodo 
+							AND 
+								anho = NEW.anho
+							GROUP BY anho) t1
+						JOIN ( 
+							SELECT anio,sum(t_completo)+sum(t_ocasional) AS db
+							FROM formacion_departamento 
+							WHERE 
+								periodo = NEW.periodo 
+							AND 
+								anio=NEW.anho 
+							GROUP BY anio) t2 
+						ON t2.anio=t1.anho
+						ORDER BY t1.anho;
+				END IF;
+			 ELSE
+				IF NEW.periodo='2' THEN
+					UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+					SET 
+						estudiantes=(
+							SELECT 
+								sum(matriculados)/2::numeric(5,0)
+							FROM estudiantes_departamento 
+							WHERE 
+								anho=NEW.anho),
+						docentes=(
+							SELECT 
+								(sum(t_completo)+sum(t_ocasional))/2::numeric(3,0)
+							FROM formacion_departamento 
+							WHERE 
+								anio=NEW.anho)
 					WHERE 
-						periodo = NEW.periodo 
-					AND 
-						anho = NEW.anho
-                    GROUP BY anho) t1
-				JOIN ( 
-					SELECT anio,sum(t_completo) AS db
-					FROM formacion_departamento 
+						"Anho"=new.anho
+					AND departamento='UD';
+					UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+					SET 
+						razonanual=(
+							SELECT 
+								t1.e/t2.d::numeric(3,0)
+							FROM 
+								(
+								SELECT 
+									anho,
+									sum(matriculados)/2::numeric(5,0) AS e
+								FROM estudiantes_departamento 
+								WHERE 
+									anho=NEW.anho
+								GROUP BY anho) t1
+							JOIN 
+								(
+								SELECT 
+									anio,
+									(sum(t_completo)+sum(t_ocasional))/2::numeric(5,0) AS d
+								FROM formacion_departamento 
+								WHERE 
+									anio=NEW.anho
+								GROUP BY anio) t2
+							ON t1.anho=t2.anio
+							WHERE
+								anio=NEW.anho)
 					WHERE 
-						periodo = NEW.periodo 
+						"Anho"=NEW.anho
 					AND 
-						anio=NEW.anho 
-					GROUP BY anio) t2 
-				ON t2.anio=t1.anho
-				ORDER BY t1.anho;
-        END IF;
-      ELSE
-      	IF NEW.periodo='2' THEN
-        	UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
-            SET 
-            	estudiantes=(
-                	SELECT 
-                    	sum(matriculados)/2::numeric(5,0)
-                    FROM estudiantes_departamento 
-                    WHERE 
-                    	anho=NEW.anho),
-                docentes=(
-                	SELECT 
-                    	SUM(t_completo)/2::numeric(3,0)
-                    FROM formacion_departamento 
-            		WHERE 
-            			anio=NEW.anho)
-            WHERE 
-            	"Anho"=new.anho
-            AND departamento='UD';
-			UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
-            SET 
-            	razonanual=(
-                	SELECT 
-                        t1.e/t2.d::numeric(3,0)
-                    FROM 
-                        (
-                        SELECT 
-                            anho,
-                            sum(matriculados)/2::numeric(5,0) AS e
-                        FROM estudiantes_departamento 
-                        WHERE 
-                            anho=NEW.anho
-                        GROUP BY anho) t1
-                    JOIN 
-                        (
-                        SELECT 
-                            anio,
-                            sum(t_completo)/2::numeric(5,0) AS d
-                        FROM formacion_departamento 
-                        WHERE 
-                            anio=NEW.anho
-                        GROUP BY anio) t2
-                    ON t1.anho=t2.anio
-                    WHERE
-                        anio=NEW.anho)
-            WHERE 
-            	"Anho"=NEW.anho
-            AND 
-            	departamento='UD';
-            UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
-            SET 
-            	razonb=(
-                	SELECT 
-                    	(2*razonanual-razona)::numeric(3,0)
-                    FROM 
-                    	"Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
-                    WHERE
-                    	"Anho"=NEW.anho
-                    AND 
-                    	departamento='UD')
-        	WHERE 
-            	"Anho"=new.anho
-            AND
-                departamento='UD';
-      	END IF;
-            
-      END IF;       
-   /*END IF;*/
-   return NEW;
+						departamento='UD';
+					UPDATE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" 
+					SET 
+						razonb=(
+							SELECT 
+								(2*razonanual-razona)::numeric(3,0)
+							FROM 
+								"Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
+							WHERE
+								"Anho"=NEW.anho
+							AND 
+								departamento='UD')
+					WHERE 
+						"Anho"=new.anho
+					AND
+						departamento='UD';
+				END IF;
+			END IF;       
+		END IF;
+	return NEW;
  END;
 $body$
 LANGUAGE plpgsql;
