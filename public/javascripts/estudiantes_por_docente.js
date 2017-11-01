@@ -552,7 +552,10 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI
         else{
           var now = new Date();
           $("#departamento").html(json.datos[0].departamento);
-          json.datos[0].departamento=json.datos[0].departamento.replace('Departamento de ','');
+          if (json.datos[0].departamento!='UDENAR'){
+            departamento=json.datos[0].departamento;
+            json.datos[0].departamento=departamento.replace('Departamento de ','');
+          } 
           $("#graph1").change(function () {
             if($(this).val() === '1'){
               columnGraph(json.datos,'divgraph2','Número de Estudiantes por \nDocente Tiempo Completo y Ocasional\n'+json.datos[0].departamento,json.fieldsthree[0],json.fieldsthree[3],0,0);
