@@ -104,13 +104,13 @@ $(document).ready(function(){
                
               if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){                
                 
-                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%');
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%',100);
                 
               } 
 
               else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '> ' ){    
                            
-                gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta', '%');
+                gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta', '%',100);
                 
               }              
 
@@ -123,7 +123,7 @@ $(document).ready(function(){
               }
 
               else{                               
-                gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%');
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%',100);
                 
               }
                              
@@ -193,13 +193,13 @@ $(document).ready(function(){
                
               if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){       
                 
-                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%');
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%',100);
                 
               } 
 
               else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '> ' ){    
                            
-                gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta', '%');
+                gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta', '%',100);
                 
               }              
 
@@ -211,7 +211,7 @@ $(document).ready(function(){
               }
 
               else{                               
-                gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%');
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%',100);
                 
               }        
             }
@@ -540,13 +540,13 @@ $(document).ready(function(){
               
             if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){
                 
-              gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%');
+              gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%',100);
               
             } 
 
             else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '> ' ){    
                         
-              gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta', '%');
+              gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta', '%',100);
               
             }              
 
@@ -558,7 +558,7 @@ $(document).ready(function(){
             }
 
             else{                               
-              gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%');
+              gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%',100);
              
             }       
 

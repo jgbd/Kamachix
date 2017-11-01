@@ -252,13 +252,13 @@ function Load_Fist_time(){
 
       if(json.datos[json.count-1].sim_Rango_MA == '< ' && json.datos[json.count-1].sim_Rango_I == '> '){
 
-        gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].num_Rango_I, titleg, '%');
+        gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].num_Rango_I, titleg, '%',100);
 
       }
 
       else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '> ' ){
 
-        gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'y','g','r',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+        gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'y','g','r',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%',100);
 
       }
 
@@ -270,7 +270,7 @@ function Load_Fist_time(){
       }
 
       else{
-        gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+        gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%',100);
 
       }
     //gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');
@@ -472,13 +472,13 @@ function Load_Filter(){
 
         if(json.datos[json.count-1].sim_Rango_MA == '< ' && json.datos[json.count-1].sim_Rango_I == '> '){
 
-          gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].num_Rango_I, titleg, '%');
+          gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].num_Rango_I, titleg, '%',100);
 
         }
 
         else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '> ' ){
 
-          gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'y','g','r',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+          gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'y','g','r',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%',100);
 
         }
 
@@ -488,7 +488,7 @@ function Load_Filter(){
         }
 
         else{
-          gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+          gaugesGraph(json.datos[json.count-1].Nivel,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%',100);
 
         }
         //gaugesGraph(json.datos[json.count-1].Nivel,'divgraph3','r','y','g',40,70,titleg, '%');

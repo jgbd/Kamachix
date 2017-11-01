@@ -91,6 +91,40 @@ block resto
     .col-md-4
       #divgraph3
       h6 Indicador Actual
+  .col-md-12
+    .col-md-6
+      table.table.table-hover.table-bordered.table-responsed
+        thead
+          tr
+            th.th#tablefirstot
+            #anho
+        tbody
+          tr
+            label(for='nrofirstest')
+            td#nfirstest
+          tr
+            label(for='nrofirstdoctc')  
+            td#nfirstdoctc
+          tr(style!=rols)
+            td#upddoctc(colspan='2')
+    .col-md-6
+      table.table.table-hover.table-bordered.table-responsed
+        thead
+          tr
+            th.th#tablelastot
+        tbody
+          tr
+            #sem2
+            #year2
+            label(for='nrolastest')  
+            td#nlastest
+            td#flaglastest
+          tr
+            label(for='nrofirstdoctc')  
+            td#nlastdoctc
+            td#flaglastdoctc
+          tr(style!=rols)
+            td#updest(colspan='2')
   //.col-md-12
     .col-md-6
       table.table.table-hover.table-bordered.table-responsed

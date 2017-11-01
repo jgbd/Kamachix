@@ -354,7 +354,7 @@ function lineTwoGraph(data, contentname, title, namecolumn, namerow1, namerow2, 
 
 //Grafica de Acelerometro simple recive el dato , la div contenedora y los tre scolores con ter letras
 //'g' verde, 'y' amarillo y 'r' rojo
-function gaugesGraph(data,contentName, co1, co2, co3, soso, goal, title, symbol ){
+function gaugesGraph(data,contentName, co1, co2, co3, soso, goal, title, symbol, percent){
     var col = ["#84b761","#fdd400","#cc4748"];
     var c1,c2,c3;
     //comprueba que los colores no sean iguales
@@ -399,13 +399,13 @@ function gaugesGraph(data,contentName, co1, co2, co3, soso, goal, title, symbol 
           "startValue": soso
         }, {
           "color": c3,
-          "endValue": 200,
+          "endValue": percent,
           "innerRadius": "90%",
           "startValue": goal
         } ],
         "bottomText": data + symbol,
         "bottomTextYOffset": -10,
-        "endValue": 200
+        "endValue": percent
       } ],
       "arrows": [{"value":data}], //es el valor que tiene
       "export": {

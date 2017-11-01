@@ -219,12 +219,12 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
 
       if(json.rows[json.rowCount-1].sim_Rango_MA == '< ' && json.rows[json.rowCount-1].sim_Rango_I == '> '){
 
-        gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].num_Rango_I, 'Acreditación \n Alta Calidad', '%');
+        gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].num_Rango_I, 'Acreditación \n Alta Calidad', '%',100);
 
       }
       else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '> ' ){
 
-        gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','y','g','r',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Acreditación \n Alta Calidad', '%');
+        gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','y','g','r',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Acreditación \n Alta Calidad', '%',100);
 
       }
 
@@ -237,7 +237,7 @@ function Load_Start(){//carga tabla y gráficos a partir de datos almacenados an
       }
       else {
 
-        gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA,'Acreditación \n Alta Calidad', '%');
+        gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA,'Acreditación \n Alta Calidad', '%',100);
 
       }
     }
@@ -412,12 +412,12 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI de acredi
 
         if(json.rows[json.rowCount-1].sim_Rango_MA == '< ' && json.rows[json.rowCount-1].sim_Rango_I == '> '){
 
-          gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].num_Rango_I, 'Acreditación \n Alta Calidad', '%');
+          gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','g','y','r',json.rows[json.rowCount-1].num_Rango_MA,json.rows[json.rowCount-1].num_Rango_I, 'Acreditación \n Alta Calidad', '%',100);
 
         }
         else if(json.rows[json.rowCount-1].sim_Rango_MA === '= ' && json.rows[json.rowCount-1].sim_Rango_A == '< ' && json.rows[json.rowCount-1].sim_Rango_A == '> ' ){
 
-          gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','y','g','r',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Acreditación \n Alta Calidad', '%');
+          gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','y','g','r',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA, 'Acreditación \n Alta Calidad', '%',100);
 
         }
 
@@ -430,7 +430,7 @@ function Load_Filter(){//valida y carga filtro de años a consulta KPI de acredi
         }
         else {
 
-          gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA,'Acreditación \n Alta Calidad', '%');
+          gaugesGraph(json.rows[json.rowCount-1].razon,'divgraph3','r','y','g',json.rows[json.rowCount-1].num_Rango_I,json.rows[json.rowCount-1].num_Rango_MA,'Acreditación \n Alta Calidad', '%',100);
 
         }
       }

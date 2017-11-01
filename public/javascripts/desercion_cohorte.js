@@ -195,13 +195,13 @@ function load_start(){
 
       if(json.datos[json.count-1].sim_Rango_MA == '> ' && json.datos[json.count-1].sim_Rango_I == '< '){
 
-        gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+        gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%',100);
 
       }
 
       else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '> ' ){
 
-        gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','g','y',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+        gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','g','y',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%',100);
 
       }
 
@@ -213,7 +213,7 @@ function load_start(){
       }
 
       else{
-        gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].num_Rango_I, titleg, '%');
+        gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].num_Rango_I, titleg, '%',100);
 
       }
       //gaugesGraph(json.datos[json.count-1].porcentaje,'divgraph3','g','y','r',40,70 ,titleg, '%');
@@ -467,13 +467,13 @@ function load_filters(){
 
           if(json.datos[json.count-1].sim_Rango_MA == '> ' && json.datos[json.count-1].sim_Rango_I == '< '){
 
-            gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+            gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','y','g',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%',100);
 
           }
 
           else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '> ' ){
 
-            gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','g','y',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%');
+            gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'r','g','y',json.datos[json.count-1].num_Rango_I,json.datos[json.count-1].num_Rango_MA, titleg, '%',100);
 
           }
 
@@ -485,7 +485,7 @@ function load_filters(){
           }
 
           else{
-            gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].num_Rango_I, titleg, '%');
+            gaugesGraph(json.datos[json.count-1].porcentaje,divgraph3,'g','y','r',json.datos[json.count-1].num_Rango_MA,json.datos[json.count-1].num_Rango_I, titleg, '%',100);
 
           }
          //gaugesGraph(json.datos[json.count-1].porcentaje,'divgraph3','g','y','r',40,70,titleg, '%');
