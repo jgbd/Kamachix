@@ -144,14 +144,15 @@ BEGIN
 		IF NEW.departamento<>'99' THEN
 			IF cantidad_e < 1 THEN
 				IF NEW.periodo='1' THEN
-					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razona,razonanual) 
+					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentestc,docentesoc,razona,razonanual) 
 						SELECT 
 							t2.departamento, 
 							t1.anho, 
 							t1.ea::numeric(5,0),
-							t2.da::numeric(3,0),
-							t1.ea/t2.da::numeric(3,0),
-							t1.ea/t2.da::numeric(3,0)
+							t2.datc::numeric(3,0),
+                            t2.daoc::numeric(3,0),
+							t1.ea/(t2.datc+t2.daoc)::numeric(3,0),
+							t1.ea/(t2.datc+t2.daoc)::numeric(3,0)
 						FROM ( 
 							SELECT anho,matriculados AS ea
 							FROM estudiantes_departamento 
@@ -162,7 +163,7 @@ BEGIN
 							AND 
 								departamento = NEW.departamento) t1
 						JOIN ( 
-							SELECT anio,departamento,sum(t_completo)+sum(t_ocasional) AS da
+							SELECT anio,departamento,sum(t_completo) AS datc,sum(t_ocasional) AS daoc
 							FROM formacion_departamento 
 							WHERE
 								periodo = NEW.periodo 
@@ -174,14 +175,15 @@ BEGIN
 						ON t2.departamento=NEW.departamento
 						ORDER BY t1.anho;
 				ELSE
-					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razonb,razonanual) 
+					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentestc,docentesoc,razonb,razonanual) 
 						SELECT 
 							t2.departamento,
 							t1.anho, 
 							t1.eb::numeric(5,0),
-							t2.db::numeric(3,0),
-							t1.eb/t2.db::numeric(3,0),
-							t1.eb/t2.db::numeric(3,0)
+							t2.dbtc::numeric(3,0),
+                            t2.dboc::numeric(3,0),
+							t1.eb/(t2.dbtc+t2.dboc)::numeric(3,0),
+							t1.eb/(t2.dbtc+t2.dboc)::numeric(3,0)
 						FROM ( 
 							SELECT anho,matriculados AS eb
 							FROM estudiantes_departamento 
@@ -192,7 +194,7 @@ BEGIN
 							AND 
 								departamento = NEW.departamento) t1
 						JOIN ( 
-							SELECT anio,departamento,sum(t_completo)+sum(t_ocasional) AS db
+							SELECT anio,departamento,sum(t_completo) AS dbtc,sum(t_ocasional) AS dboc
 							FROM formacion_departamento 
 							WHERE 
 								periodo = NEW.periodo 
@@ -216,9 +218,17 @@ BEGIN
                                     anho=NEW.anho
                                 AND 
                                     departamento=NEW.departamento),
-                            docentes=(
+                            docentestc=(
                                 SELECT 
-                                    (sum(t_completo)+sum(t_ocasional))/2::numeric(3,0)
+                                    (sum(t_completo))/2::numeric(3,0)
+                                FROM formacion_departamento 
+                                WHERE 
+                                    anio=NEW.anho
+                                AND 
+                                    departamento=NEW.departamento),
+                            docentesoc=(
+                                SELECT 
+                                    (sum(t_ocasional))/2::numeric(3,0)
                                 FROM formacion_departamento 
                                 WHERE 
                                     anio=NEW.anho
@@ -232,7 +242,7 @@ BEGIN
                         SET 
                             razonanual=(
                                 SELECT 
-                                    estudiantes/docentes::numeric(3,0)
+                                    estudiantes/(docentestc+docentesoc)::numeric(3,0)
                                 FROM 
                                     "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC"
                                 WHERE
@@ -326,14 +336,15 @@ BEGIN
 		IF NEW.departamento<>'99' THEN
 			IF cantidad_eu < 1 THEN
 				IF NEW.periodo='1' THEN
-					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razonanual,razona) 
+					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentestc,docentesoc,razonanual,razona) 
 					SELECT
 						'UD',
 						t1.anho, 
 						t1.ea::numeric(5,0),
-						t2.da::numeric(3,0),
-						t1.ea/t2.da::numeric(3,0),
-						t1.ea/t2.da::numeric(3,0)
+						t2.datc::numeric(3,0),
+						t2.daoc::numeric(3,0),
+						t1.ea/(t2.datc+t2.daoc)::numeric(3,0),
+						t1.ea/(t2.datc+t2.daoc)::numeric(3,0)
 					FROM ( 
 						SELECT anho,sum(matriculados) AS ea
 						FROM estudiantes_departamento 
@@ -343,7 +354,7 @@ BEGIN
 							anho=NEW.anho
 						GROUP BY anho) t1
 					JOIN ( 
-						SELECT anio,sum(t_completo)+sum(t_ocasional) AS da
+						SELECT anio,sum(t_completo) AS datc,sum(t_ocasional) AS daoc
 						FROM formacion_departamento 
 						WHERE 
 							periodo=NEW.periodo
@@ -353,14 +364,15 @@ BEGIN
 					ON t2.anio=t1.anho
 					ORDER BY t1.anho;
 				ELSE
-					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentes,razonb,razonanual) 
+					INSERT INTO "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (departamento,"Anho",estudiantes,docentestc,docentesoc,razonb,razonanual) 
 						SELECT
 							'UD',
 							t1.anho, 
 							t1.eb::numeric(5,0),
-							t2.db::numeric(3,0),
-							t1.eb/t2.db::numeric(3,0),
-							t1.eb/t2.db::numeric(3,0)
+							t2.dbtc::numeric(3,0),
+							t2.dboc::numeric(3,0),
+							t1.eb/(t2.dbtc+t2.dboc)::numeric(3,0),
+							t1.eb/(t2.dbtc+t2.dboc)::numeric(3,0)
 						FROM ( 
 							SELECT anho,matriculados AS eb
 							FROM estudiantes_departamento 
@@ -370,7 +382,7 @@ BEGIN
 								anho = NEW.anho
 							GROUP BY anho) t1
 						JOIN ( 
-							SELECT anio,sum(t_completo)+sum(t_ocasional) AS db
+							SELECT anio,sum(t_completo) AS dbtc,sum(t_ocasional) AS dboc
 							FROM formacion_departamento 
 							WHERE 
 								periodo = NEW.periodo 
@@ -390,9 +402,15 @@ BEGIN
 							FROM estudiantes_departamento 
 							WHERE 
 								anho=NEW.anho),
-						docentes=(
+						docentestc=(
 							SELECT 
-								(sum(t_completo)+sum(t_ocasional))/2::numeric(3,0)
+								(sum(t_completo))/2::numeric(3,0)
+							FROM formacion_departamento 
+							WHERE 
+								anio=NEW.anho),
+                        docentesoc=(
+							SELECT 
+								(sum(t_ocasional))/2::numeric(3,0)
 							FROM formacion_departamento 
 							WHERE 
 								anio=NEW.anho)
@@ -493,7 +511,8 @@ CREATE TABLE "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" (
     departamento char(2) NOT NULL,
     "Anho" char(4) NOT NULL,
     estudiantes numeric(5,0) NOT NULL,
-    docentes numeric(3,0) NOT NULL,
+    docentestc numeric(3,0) NOT NULL,
+	docentesoc numeric(3,0) NOT NULL,
     razonanual numeric(3,0) NOT NULL,
     razona numeric(3,0) NOT NULL,
     razonb numeric(3,0) DEFAULT 0,
@@ -1766,7 +1785,7 @@ COPY "KPI_Desercion_Periodo" (programa, periodo, no_graduados, desertores, deser
 1206	2016-1	0	693	7.78	92.22	7  
 1206	2016-2	0	720	7.89	92.11	7  
 \.
-COPY "KPI_Estudiantes_por_Docentes_TC" (departamento, "Anho", estudiantes, docentes, razonanual, razona, razonb, "manual_Estu_Docente") FROM stdin;
+COPY "KPI_Estudiantes_por_Docentes_TC" (departamento, "Anho", estudiantes, docentestc, docentesoc, razonanual, razona, razonb, "manual_Estu_Docente") FROM stdin;
 \.
 COPY "KPI_Formacion" (formacion, t_completo, t_ocasional, hora_catedra, anio, "manual_Formacion", estado_meta) FROM stdin;
 1 	47	1	0	2010	2  	71.59

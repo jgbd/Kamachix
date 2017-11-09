@@ -13,9 +13,9 @@ var pool = configdb.configdb();
 router.post('/', function(req, res, next) {
     //arreglo que contine filtros
     var filters = [req.body.department];
-    if (filters=='UD') var sql ='SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual, spctt.departamento, spctt.estudiantes, spctt.docentes, "sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt JOIN manuales_indicadores on "manual_Estu_Docente"=codigo WHERE ';
+    if (filters=='UD') var sql ='SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual, spctt.departamento, spctt.estudiantes, spctt.docentestc,spctt.docentesoc, "sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt JOIN manuales_indicadores on "manual_Estu_Docente"=codigo WHERE ';
     //consulta basica sin condiciones
-    else var sql ='SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual, u.name, spctt.departamento, spctt.estudiantes, spctt.docentes, "sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt JOIN manuales_indicadores on "manual_Estu_Docente"=codigo JOIN users u ON spctt.departamento=u.codigo WHERE ';
+    else var sql ='SELECT spctt."Anho", spctt."razona", spctt."razonb", spctt.razonanual, u.name, spctt.departamento, spctt.estudiantes, spctt.docentestc, spctt.docentesoc,"sim_Rango_MA","num_Rango_MA","sim_Rango_A","num_Rango_A","sim_Rango_I","num_Rango_I" FROM "Datawarehouse"."KPI_Estudiantes_por_Docentes_TC" spctt JOIN manuales_indicadores on "manual_Estu_Docente"=codigo JOIN users u ON spctt.departamento=u.codigo WHERE ';
     sql=sql+'spctt.departamento LIKE $1';
     //concatena al sql los valores d elos filtros
     if(req.body.yearfrom!=0){
@@ -77,7 +77,8 @@ router.post('/', function(req, res, next) {
               "sim_Rango_A":result.rows[i].sim_Rango_A,
               "sim_Rango_MA":result.rows[i].sim_Rango_MA,
               "estudiantes":result.rows[i].estudiantes,
-              "docentes":result.rows[i].docentes
+              "docentestc":result.rows[i].docentestc,
+              "docentesoc":result.rows[i].docentesoc,
             };
           else 
             var d ={
@@ -93,7 +94,8 @@ router.post('/', function(req, res, next) {
               "sim_Rango_A":result.rows[i].sim_Rango_A,
               "sim_Rango_MA":result.rows[i].sim_Rango_MA,
               "estudiantes":result.rows[i].estudiantes,
-              "docentes":result.rows[i].docentes
+              "docentestc":result.rows[i].docentestc,
+              "docentesoc":result.rows[i].docentesoc
             };
             datarray.push(d);
         }
