@@ -54,7 +54,11 @@ $(document).ready(function () {
               /*var fecha = new Date();
               var ano = fecha.getFullYear();
               alert('El año actual es: '+ano);*/
+<<<<<<< HEAD
               tittle = "Nivel de formación de docentes tiempo completo del año: " + json.rows[conta - 3].anio;
+=======
+              tittle="Nivel de Formación de Docentes Tiempo Completo del Año: "+json.rows[conta-3].anio;
+>>>>>>> origin/master
               $("#datBody").append(r);
               $("#titulo").append(tittle);
 
@@ -101,6 +105,7 @@ $(document).ready(function () {
 
               //semaforo divgraph4 
               //toma los datos de los manuales del indicador para graficar el acelerometro           
+<<<<<<< HEAD
 
               if (json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> ') {
 
@@ -116,15 +121,38 @@ $(document).ready(function () {
 
               else if (json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '< ') {
 
+=======
+               
+              if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){                
+                
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
+                
+              } 
+
+              else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '> ' ){    
+                           
+                gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
+                
+              }              
+
+              else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '< ' ){
+                
+>>>>>>> origin/master
                 //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
                 $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
                 $('#myModal').modal('show');
 
               }
 
+<<<<<<< HEAD
               else {
                 gaugesGraph(json.rows[2].estado_meta, divgraph4, 'r', 'y', 'g', json.rows[2].num_Rango_I, json.rows[2].num_Rango_MA, 'Indicador de Meta', '%', 100);
 
+=======
+              else{                               
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
+                
+>>>>>>> origin/master
               }
 
 
@@ -140,8 +168,13 @@ $(document).ready(function () {
 
 
               }
+<<<<<<< HEAD
 
               tittle = "Nivel de formación de docentes tiempo completo del año: " + json.rows[2].anio;
+=======
+              
+              tittle="Nivel de Formación de Docentes Tiempo Completo del Año: "+json.rows[2].anio;
+>>>>>>> origin/master
               $("#datBody").append(r);
               $("#titulo").append(tittle);
 
@@ -190,6 +223,7 @@ $(document).ready(function () {
 
               //semaforo divgraph4 
               //toma los datos de los manuales del indicador para graficar el acelerometro           
+<<<<<<< HEAD
 
               if (json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> ') {
 
@@ -204,16 +238,39 @@ $(document).ready(function () {
               }
 
               else if (json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '< ') {
+=======
+               
+              if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){       
+                
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, '\nAño'+json.rows[2].anio, '%',100);
+                
+              } 
+
+              else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '> ' ){    
+                           
+                gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[2].anio, '%',100);
+                
+              }              
+
+              else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '< ' ){
+>>>>>>> origin/master
                 //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no ');
                 $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
                 $('#myModal').modal('show');
 
               }
 
+<<<<<<< HEAD
               else {
                 gaugesGraph(json.rows[2].estado_meta, divgraph4, 'r', 'y', 'g', json.rows[2].num_Rango_I, json.rows[2].num_Rango_MA, 'Indicador de Meta', '%', 100);
 
               }
+=======
+              else{                               
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[2].anio, '%',100);
+                
+              }        
+>>>>>>> origin/master
             }
           }
 
@@ -471,7 +528,11 @@ $(document).ready(function () {
               "</label></td><td><label id='tot" + i + "'>" + json.rows[i].t_completo + "</label></td></tr>";
           }
 
+<<<<<<< HEAD
           tittle = "Nivel de formación de docentes tiempo completo del año: " + json.rows[conta - 3].anio;
+=======
+          tittle="Nivel de Formación de Docentes Tiempo Completo del Año: "+json.rows[conta-3].anio;
+>>>>>>> origin/master
           $("#datBody").append(r);
           $("#titulo").append(tittle);
 
@@ -534,6 +595,7 @@ $(document).ready(function () {
           });
 
           //grafica por defecto
+<<<<<<< HEAD
           pieGraph(arra, divgraph1, "anio", "cantidad", "Porcentaje Docentes Tiempo Completo");
 
           //semaforo divgraph4 
@@ -542,6 +604,36 @@ $(document).ready(function () {
           if (json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> ') {
 
             gaugesGraph(json.rows[2].estado_meta, divgraph4, 'g', 'y', 'r', json.rows[2].num_Rango_MA, json.rows[2].num_Rango_I, 'Indicador de Meta', '%', 100);
+=======
+           pieGraph(arra, divgraph1, "anio", "cantidad","Porcentaje Docentes Tiempo Completo");
+
+           //semaforo divgraph4 
+            //toma los datos de los manuales del indicador para graficar el acelerometro           
+              
+            if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){
+                
+              gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
+              
+            } 
+
+            else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '> ' ){    
+                        
+              gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
+              
+            }              
+
+            else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '< ' ){
+              //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+               $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+               $('#myModal').modal('show');
+              
+            }
+
+            else{                               
+              gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
+             
+            }       
+>>>>>>> origin/master
 
           }
 

@@ -390,7 +390,7 @@ function Load_filter_period(){  //ajax para llenar la lista de periodos
           'anio':$("#lst_anio").val()},//Primera consulta
       //se ejecutasi todo se realiza bien
       success : function(json) {
-        $("#lst_per").append('<option value="0" selected>Seleccionar periodo</option>');
+        $("#lst_per").append('<option value="0" selected>Seleccionar Periodo</option>');
         // llenado de lista de periodo
         var r4="";
         for(var k = 0 ; k<json.rowCount; k++){
