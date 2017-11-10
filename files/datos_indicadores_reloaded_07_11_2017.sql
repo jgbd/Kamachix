@@ -4081,7 +4081,7 @@ COPY programas (snies, nivel, codigo, departamento, nombre, abreviatura, "fechaR
 \.
 COPY users (codigo, "user", pass, name, rol, encriptado, email, alternative_email) FROM stdin;
 22	dcb201b195282662b8b152c9a5196f39	dcb201b195282662b8b152c9a5196f39	Departamento de Ciencias Jurídicas	0	2aaeafbf04dfc3d307afa06ffa5bf885	derecho@udenar.edu.co	leonardoaem@gmail.com
-00	0cd311a704f2627bce2c5429335c5dce	0cd311a704f2627bce2c5429335c5dce	División de Autoevaluación, Acreditacion y Certificación	1	30dcacf001743a948ae54b347ae32739	acreditacioninstitucional@udenar.edu.do	\N
+00	0cd311a704f2627bce2c5429335c5dce	0cd311a704f2627bce2c5429335c5dce	División de Autoevaluación, Acreditación y Certificación	1	30dcacf001743a948ae54b347ae32739	acreditacioninstitucional@udenar.edu.do	\N
 1 	a5e20a44288e0cdae59849bb35749252	a5e20a44288e0cdae59849bb35749252	Departamento de Artes Visuales	0	6ce83f558d3d8dde939f9d3ce2e90ccc	fartesvisu@udenar.edu.co	dptoartesvisualesudenar@gmail.com
 8 	8fc941f707be07265b887d36621db259	8fc941f707be07265b887d36621db259	Departamento de Administración de Empresas y Finanzas	0	1602c8cef7ff873e66d80c317b479f08	adempresas@udenar.edu.co	comsasur3@hotmail.com
 4 	feb7f9412b6ea62597b6aec005f3a589	feb7f9412b6ea62597b6aec005f3a589	Departamento de Arquitectura	0	e359292798a4fb459373e1f7b2069f9f	arquitectura@udenar.edu.co	pastoplb@hotmail.com
