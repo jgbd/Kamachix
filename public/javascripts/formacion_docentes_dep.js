@@ -248,7 +248,7 @@ $.ajax({
         for(var i =conta-1; i>=conta-10;i--){
           var y=i-1;
           var programa2;
-          if(json.rows[i].periodo == '2'){
+          if(json.rows[i].periodo == '2 '){
             programa2 = {
                 "anio": json.rows[i].anio,
                 "periodoa": json.rows[i].total,
