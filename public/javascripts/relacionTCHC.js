@@ -407,28 +407,28 @@ $(document).ready(function(){
        //cambio de graficas de barras docentes tiempo completo
         $("#graph1").change(function () {
           if($(this).val() === '1'){
-            columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',0,0);
+            columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
           }
           else if($(this).val() === '2'){
-            columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',40,30);
+            columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',40,30);
           }
           else if($(this).val() === '3'){
-            lineGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad');
+            lineGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad');
           }
           else if($(this).val() === '4'){
-            areaGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad');
+            areaGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad');
           }
           else if($(this).val() === '5'){
-            barGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',0,0);
+            barGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
           }
           else if($(this).val() === '6'){
-            barGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',40,30);
+            barGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',40,30);
           }
           
         });
 
        //   
-       columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',0,0);
+       columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
 
        //cambio de graficas de barras hora catedra
         $("#graph2").change(function () {
@@ -701,28 +701,28 @@ $(document).ready(function(){
        //cambio de graficas de barras docentes tiempo completo
         $("#graph1").change(function () {
           if($(this).val() === '1'){
-            columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',0,0);
+            columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
           }
           else if($(this).val() === '2'){
-            columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',40,30);
+            columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',40,30);
           }
           else if($(this).val() === '3'){
-            lineGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad');
+            lineGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad');
           }
           else if($(this).val() === '4'){
-            areaGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad');
+            areaGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad');
           }
           else if($(this).val() === '5'){
-            barGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',0,0);
+            barGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
           }
           else if($(this).val() === '6'){
-            barGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',40,30);
+            barGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',40,30);
           }
            
         });
 
        //   
-       columnGraph(arra2,divgraph1,'Docentes tiempo completo','anio','cantidad',0,0);
+       columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
        //cambio de graficas de barras hora catedra
         $("#graph2").change(function () {
           if($(this).val() === '1'){
