@@ -186,7 +186,7 @@ $(document).ready(function(){
         $("#datBody").append(tabla2);
 
         // titulo
-        tittle="Porcentaje de Docentes TC con relación a los  Docentes HC de los ultimos 5 años";
+        tittle="Porcentaje de Docentes TC con relación a los Docentes HC de los Últimos 5 años";
         $("#titulo").append(tittle);
 
         //arreglo para la grafica de la division 4 con la relacion de docentes
@@ -366,7 +366,7 @@ $(document).ready(function(){
         $("#datBody").append(tabla2);
 
         // titulo
-        tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes <br> Hora Catedra de los ultimos 5 años";
+        tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes <br> Hora Cátedra de los Últimos 5 años";
         $("#titulo").append(tittle);
 
         //arreglo para la grafica de la division 4 con la relacion de docentes
@@ -433,53 +433,53 @@ $(document).ready(function(){
        //cambio de graficas de barras hora catedra
         $("#graph2").change(function () {
           if($(this).val() === '1'){
-            columnGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
+            columnGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
           }
           else if($(this).val() === '2'){
-            columnGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',40,30);
+            columnGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',40,30);
           }
           else if($(this).val() === '3'){
-            lineGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad');
+            lineGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad');
           }
           else if($(this).val() === '4'){
-            areaGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad');
+            areaGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad');
           }
           else if($(this).val() === '5'){
-            barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
+            barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
           }
           else if($(this).val() === '6'){
-            barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',40,30);
+            barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',40,30);
           }
           
         });
 
        //   
-       barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
+       barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
        // cambio de grafica de tendencia relacion docentes
        $("#graph3").change(function () {
 
           if($(this).val() === '1'){
-            columnGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',0,0);
+            columnGraph(arra,divgraph2,'Relación Docentes','anio','cantidad',0,0);
           }
           else if($(this).val() === '2'){
-            columnGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',40,30);
+            columnGraph(arra,divgraph2,'Relación Docentes','anio','cantidad',40,30);
           }
           else if($(this).val() === '3'){
-            lineGraph(arra,divgraph2," Relacion docentes","anio","cantidad");
+            lineGraph(arra,divgraph2," Relación Docentes","anio","cantidad");
           }
           else if($(this).val() === '4'){
-            areaGraph(arra,divgraph2," Relacion docentes","anio","cantidad");
+            areaGraph(arra,divgraph2," Relación Docentes","anio","cantidad");
           } 
           else if($(this).val() === '5'){
-            barGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',0,0);
+            barGraph(arra,divgraph2,'Relación Docentes','anio','cantidad',0,0);
           }
           else if($(this).val() === '6'){
-            barGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',40,30);
+            barGraph(arra,divgraph2,'Relación Docentes','anio','cantidad',40,30);
           }
           
 
       });
-       lineGraph(arra,divgraph2," Relacion docentes","anio","cantidad");
+       lineGraph(arra,divgraph2," Relación Docentes","anio","cantidad");
 
             
      }
@@ -647,15 +647,15 @@ $(document).ready(function(){
        // condiciones para el titulo de las graficas
        // si en los filtros se escogio que el primer año sea mayor al segundo
        if($('#lstfilter1').val() > $('#lstfilter2').val()){
-         tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes Hora Catedra <br> del Año "+$('#lstfilter2').val()+" al Año "+$('#lstfilter1').val();
+         tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes Hora Cátedra <br> del Año "+$('#lstfilter2').val()+" al Año "+$('#lstfilter1').val();
        }
        // si se scogio el mismo año en los dos filtros
        else if($('#lstfilter1').val() == $('#lstfilter2').val()){
-         tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes Hora Catedra <br> del Año "+$('#lstfilter1').val();
+         tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes Hora Cátedra <br> del Año "+$('#lstfilter1').val();
        }
        // si se escogio que el primer año sea menor al segundo año
        else {
-         tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes Hora Catedra <br> del Año "+$('#lstfilter1').val()+" al Año "+$('#lstfilter2').val();
+         tittle="Porcentaje de Docentes Tiempo Completo con Relación a los Docentes Hora Cátedra <br> del Año "+$('#lstfilter1').val()+" al Año "+$('#lstfilter2').val();
        }
 
        // se llena la tabla
@@ -726,52 +726,52 @@ $(document).ready(function(){
        //cambio de graficas de barras hora catedra
         $("#graph2").change(function () {
           if($(this).val() === '1'){
-            columnGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
+            columnGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
           }
           else if($(this).val() === '2'){
-            columnGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',40,30);
+            columnGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',40,30);
           }
           else if($(this).val() === '3'){
-            lineGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad');
+            lineGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad');
           }
           else if($(this).val() === '4'){
-            areaGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad');
+            areaGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad');
           }
           else if($(this).val() === '5'){
-            barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
+            barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
           }
           else if($(this).val() === '6'){
-            barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',40,30);
+            barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',40,30);
           }
           
         });
 
        //   
-        barGraph(arra3,divgraph3,'Docentes hora catedra','anio','cantidad',0,0);
+        barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
        // cambio de grafica de tendencia relacion docentes
        $("#graph3").change(function () {
 
           if($(this).val() === '1'){
-            columnGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',0,0);
+            columnGraph(arra,divgraph2,'Relación Docentes','anio','cantidad',0,0);
           }
           else if($(this).val() === '2'){
-            columnGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',40,30);
+            columnGraph(arra,divgraph2,'Relación Docentes','anio','cantidad',40,30);
           }
           else if($(this).val() === '3'){
-            lineGraph(arra,divgraph2," Relacion docentes","anio","cantidad");
+            lineGraph(arra,divgraph2," Relación Docentes","anio","cantidad");
           }
           else if($(this).val() === '4'){
-            areaGraph(arra,divgraph2," Relacion docentes","anio","cantidad");
+            areaGraph(arra,divgraph2," Relación Docentes","anio","cantidad");
           } 
           else if($(this).val() === '5'){
-            barGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',0,0);
+            barGraph(arra,divgraph2,'Relación Docentes','anio','cantidad',0,0);
           }
           else if($(this).val() === '6'){
-            barGraph(arra,divgraph2,'Relacion docentes','anio','cantidad',40,30);
+            barGraph(arra,divgraph2,'Relación Docentes','anio','cantidad',40,30);
           }
           
       });
-       lineGraph(arra,divgraph2,"Relacion docentes","anio","cantidad");
+       lineGraph(arra,divgraph2,"Relación Docentes","anio","cantidad");
       
      }
    });
