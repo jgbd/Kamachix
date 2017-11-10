@@ -56,10 +56,10 @@ block resto
           p
             | Establecer el número de Docentes Tiempo Completo 
             | con relación a la cantidad de Horas Cátedra en la Universidad de Nariño.
-          label Formula para el Calculo
+          label Fórmula para el Cálculo
           p
-            | No. Docentes Horas Cátedra / Total de Docentes Tiempo Completo de la UDENAR.
-          label Fuente: Base de datos docentes Universidad de Nariño
+            | Nº Docentes Horas Cátedra / Total de Docentes Tiempo Completo de la UDENAR.
+          label Fuente: Base de Datos Docentes Universidad de Nariño
   //codigo principal 
   .col-md-8
     h3#titulo
@@ -73,11 +73,11 @@ block resto
         table(border='1').table.hover.tablestyle
           thead
             tr(align='center')
-              th.th(style='text-align:center;' title="Año del Calculo") Año
-              th.th(style='text-align:center;' title="Numero de docentes tiempo completo") N°. Docentes tiempo completo             
-              th.th(style='text-align:center;' title="Numero de docentes hora cadtedra") N°. Docentes hora Cátedra
-              th.th(style='text-align:center;' title="Relación de docentes TC vs HC") Relacion Docentes
-              th.th.est(style='text-align:center;' title="Estado del Indicador Respecto a la meta") Estado 
+              th.th(style='text-align:center;' title="Año del Cálculo") Año
+              th.th(style='text-align:center;' title="Número de Docentes Tiempo completo") N°. Docentes Tiempo Completo             
+              th.th(style='text-align:center;' title="Número de Docentes Hora Cátedra") N°. Docentes Hora Cátedra
+              th.th(style='text-align:center;' title="Relación de Docentes TC vs HC") Relación Docentes
+              th.th.est(style='text-align:center;' title="Estado del Indicador Respecto a la Meta") Estado 
           tbody#datBody!= datos  
     .col-md-6
       #divgraph1

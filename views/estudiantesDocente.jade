@@ -18,9 +18,9 @@ block resto
           p
             | Establecer el número de docentes Tiempo Completo y Completo Ocasional 
             | con relación a la cantidad de Estudiantes matriculados en la Universidad de Nariño.
-          label Formula para el Calculo
+          label Fórmula para el Cálculo
           p 
-            |No. de Estudiantes/ Total docentes UDENAR.
+            |(Nº de Estudiantes/ (Total Docentes TC + Total Docentes OC))*100 UDENAR.
           label Fuente: Sistema de Información Académico UDENAR
   //modal de filtros
   #divfilter.modal.fade.bd-example-modal-lg
@@ -88,9 +88,9 @@ block resto
         table.table.table-hover.table-bordered.table-responsed(border='1')
           thead 
             tr
-              th(title="Año de calculo").th Año
-              th(title="Razon entre numero de docente TC vs numero de estudiantes matriculados").th Razón
-              th(title="Estado del indicador respeto a la meta").th.est Estado
+              th(title="Año de Cálculo").th Año
+              th(title="Razón entre el Número de Docentes TC y OC vs el Número de Estudiantes Matriculados").th Razón
+              th(title="Estado del Indicador Respeto a la Meta").th.est Estado
           tbody#tableres
     .col-md-4
       #divgraph3
