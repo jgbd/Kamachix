@@ -19,6 +19,11 @@ block resto
           p
             | Porcentaje de estudiantes de los diferentes programas académicos   
             | que califican la Formación Académica como satisfactoria.
+          label Formula para el Calculo
+          p
+            | (No. de estudiantes que calificaron Excelente, Bueno y Adecuado en la primera pregunta de la encuesta de satisfacción / Total de estudiantes) 
+          label
+            | Fuente: Encuesta Nivel de Satisfacción Comunidad Estudiantil UDENAR
   //modal de filtros
   #divfilter.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
@@ -56,12 +61,13 @@ block resto
   .col-md-12
     .col-md-6
       #divtable
+        label#meta
         table#tabsat.table.table-hover.table-bordered.table-responsed(border='1')
           thead 
             tr
-              th.th Nivel
-              th.th Año
-              th.th.est Estado
+              th(title="Valor del indicador").th Nivel
+              th(title="Semestre o año del calculo").th Año / Periodo
+              th(title="Estado del indicador respecto a la meta").th.est Estado
           tbody#tableres
     .col-md-6
       #divgraph1

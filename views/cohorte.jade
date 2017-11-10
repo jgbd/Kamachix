@@ -27,6 +27,12 @@ block resto
           p
             | Medir la capacidad de retención del Proceso “Formación Académica” por cohorte
             | (Semestral) 
+          label Formula para el Calculo
+          p 
+            | (No.  de Estudiantes que se retiran en forma definitiva del Proceso de Formación Académica por cohorte/No. de Estudiantes Matriculados por periodo en una cohorte)*100
+          label 
+            | Fuente: 
+            | SISTEMA ESPADIES
   //modal para los filtros 
   #modalfilter.modal.fade.bd-example-modal-lg
     .modal-dialog.modal-lg
@@ -68,12 +74,14 @@ block resto
   .col-md-12
     .col-md-6
       #divtable
+        center
+          label#meta
         table.table.table-hover.table-bordered.table-responsed.table-striped(border='1' width="100%" cellspacing="0")
           thead 
             tr
-              th.th Periodo
-              th.th Porcentaje de Deserción
-              th.th.est Estado
+              th(title="Semestre").th Periodo
+              th(title="Valor del Indicador").th Porcentaje de Deserción
+              th(title="Estado del indicador respecto a la meta").th.est Estado
           tbody#tableres
     .col-md-6
       #divgraph1

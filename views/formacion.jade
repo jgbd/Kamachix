@@ -65,6 +65,13 @@ block resto
           p
             | Incrementar el nivel de formación de los docentes Tiempo Completo de la 
             | Universidad de Nariño.
+          label Formular para el Caludo
+          p 
+            | (Número de Docentes que cumplen con el nivel de formación de doctorado y maestría/ Total de Docentes)*100 
+          label 
+            | Fuente:
+            | Sistema de Asignación de Puntajes UDENAR
+
   .col-md-8
       h3
         span#more.glyphicon.glyphicon-question-sign(onclick='openinfo()')
@@ -74,6 +81,7 @@ block resto
   .col-md-12
     .col-md-6 
       #divgraph3
+        label#meta
         table(border='1').table.hover.tablestyle
           thead
             tr(align='center')

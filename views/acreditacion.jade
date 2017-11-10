@@ -39,6 +39,10 @@ block resto
         #modal-body.modal-body
           p
             | Porcentaje de los programas académicos acreditados en Alta Calidad   
+          label Formula para el Calculo
+          p 
+            | No. Programas académicos acreditados/ Total de programas académicos de la UDENAR.
+          label Fuente: Sistema de Información Académico UDENAR
   //modal de Filtros
   #divfilter.modal.fade.bd-example-modal-lg
       .modal-dialog.modal-lg
@@ -120,15 +124,15 @@ block resto
       .col-md-3
     .col-md-6
       #divtable
-        h6#goal
+        label#goal
         table.table.table-hover.table-bordered.table-responsed(border='1')
           thead 
             tr
-              th.th Año
-              th.th No Acreditados Pregrado
-              th.th Total Programas Pregrado
-              th.th Indicador(%)
-              th.th.est Estado
+              th(title="Año de calculo").th Año
+              th(title="Numero de Programas Acreditados").th N° Acreditados Pregrado
+              th(title="Numero total de programas de pregrado").th Total Programas Pregrado
+              th(title="Porcentaje de programas acreditados").th Indicador(%)
+              th(title="Estado del indicador respecto a la meta").th.est Estado
           tbody#tableres
   .col-md-12        
     h3#lblper
