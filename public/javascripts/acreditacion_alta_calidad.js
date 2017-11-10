@@ -252,7 +252,7 @@ function Load_Accredited(){//carga tabla-menú de programas acreditados actualme
     dataType : 'json',
     data:{c:2,flag:1},//señala a consulta general de programas acreditados activos en public
     success : function(json) {
-      $("#anhoactual").html('<h6>Programas Acreditados en Alta Calidad al año '+now.getFullYear()+'</h>');
+      $("#anhoactual").html('<h6>Programas Acreditados en Alta Calidad al Año '+now.getFullYear()+'</h>');
       for (var j = json.rowCount-1; j >=0; j--) {
         $("#tableresprogram").append('<tr>');
         var codigo=parseInt(json.rows[j].programa);
@@ -318,7 +318,7 @@ function Load_Not_Accredited(){//carga tabla-menú de programas no acreditados a
     dataType : 'json',
     data:{c:3,flag:1},//señala a consulta excepcion de programas no acreditados
     success : function(json) {
-      $("#anhoactual2").html('<h6>Programas No Acreditados al año '+now.getFullYear()+'</h>');
+      $("#anhoactual2").html('<h6>Programas No Acreditados al Año '+now.getFullYear()+'</h>');
       for (var j = json.rowCount-1; j >=0; j--) {
         $("#tableresprogram2").append('<tr>');
         var codigo=parseInt(json.rows[j].snies);
