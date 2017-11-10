@@ -54,7 +54,7 @@ $(document).ready(function(){
               /*var fecha = new Date();
               var ano = fecha.getFullYear();
               alert('El año actual es: '+ano);*/
-              tittle="Nivel de formación de docentes tiempo completo del año: "+json.rows[conta-3].anio;
+              tittle="Nivel de Formación de Docentes Tiempo Completo del Año: "+json.rows[conta-3].anio;
               $("#datBody").append(r);
               $("#titulo").append(tittle);
 
@@ -104,13 +104,13 @@ $(document).ready(function(){
                
               if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){                
                 
-                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%',100);
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
                 
               } 
 
               else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '> ' ){    
                            
-                gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta', '%',100);
+                gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
                 
               }              
 
@@ -123,7 +123,7 @@ $(document).ready(function(){
               }
 
               else{                               
-                gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%',100);
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
                 
               }
                              
@@ -141,7 +141,7 @@ $(document).ready(function(){
 
               }
               
-              tittle="Nivel de formación de docentes tiempo completo del año: "+json.rows[2].anio;
+              tittle="Nivel de Formación de Docentes Tiempo Completo del Año: "+json.rows[2].anio;
               $("#datBody").append(r);
               $("#titulo").append(tittle);
 
@@ -193,13 +193,13 @@ $(document).ready(function(){
                
               if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){       
                 
-                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%',100);
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, '\nAño'+json.rows[2].anio, '%',100);
                 
               } 
 
               else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '> ' ){    
                            
-                gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta', '%',100);
+                gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[2].anio, '%',100);
                 
               }              
 
@@ -211,7 +211,7 @@ $(document).ready(function(){
               }
 
               else{                               
-                gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%',100);
+                gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[2].anio, '%',100);
                 
               }        
             }
@@ -470,7 +470,7 @@ $(document).ready(function(){
             "</label></td><td><label id='tot"+i+"'>"+json.rows[i].t_completo+"</label></td></tr>";            
           }
 
-          tittle="Nivel de formación de docentes tiempo completo del año: "+json.rows[conta-3].anio;
+          tittle="Nivel de Formación de Docentes Tiempo Completo del Año: "+json.rows[conta-3].anio;
           $("#datBody").append(r);
           $("#titulo").append(tittle);
 
@@ -540,13 +540,13 @@ $(document).ready(function(){
               
             if(json.rows[2].sim_Rango_MA == '< ' && json.rows[2].sim_Rango_I == '> '){
                 
-              gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta', '%',100);
+              gaugesGraph(json.rows[2].estado_meta,divgraph4,'g','y','r',json.rows[2].num_Rango_MA,json.rows[2].num_Rango_I, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
               
             } 
 
             else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '> ' ){    
                         
-              gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta', '%',100);
+              gaugesGraph(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
               
             }              
 
@@ -558,7 +558,7 @@ $(document).ready(function(){
             }
 
             else{                               
-              gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta', '%',100);
+              gaugesGraph(json.rows[2].estado_meta,divgraph4,'r','y','g',json.rows[2].num_Rango_I,json.rows[2].num_Rango_MA, 'Indicador de Meta\nAño: '+json.rows[conta-3].anio, '%',100);
              
             }       
 
