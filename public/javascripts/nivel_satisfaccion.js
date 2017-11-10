@@ -263,7 +263,7 @@ function Load_Fist_time() {
 
       }
 
-      else if (json.datos[json.count - 1].sim_Rango_MA === '= ' && json.datos[json.count - 1].sim_Rango_A == '< ' && json.datos[json.count - 1].sim_Rango_A == '< ') {
+      else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_I == '< ' ){
         //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
         $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
         $('#myModal').modal('show');
@@ -483,8 +483,8 @@ function Load_Filter() {
 
           }
 
-          else if (json.datos[json.count - 1].sim_Rango_MA === '= ' && json.datos[json.count - 1].sim_Rango_A == '< ' && json.datos[json.count - 1].sim_Rango_A == '< ') {
-            alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+        else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_I == '< ' ){
+          alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
 
           }
 

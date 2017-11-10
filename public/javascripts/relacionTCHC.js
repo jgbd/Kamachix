@@ -208,7 +208,8 @@ $(document).ready(function(){
         for(var i =1; i<6;i++){
           var programa2 = {
             "anio": json.rows[i].anio,
-            "cantidad": json.rows[i].cant_docentes_tc           
+            "cantidadTC": json.rows[i].cant_docentes_tc,
+            "cantidadHC": json.rows[i].cant_docentes_hc          
           }
           arra2.push(programa2);
 
@@ -357,8 +358,8 @@ $(document).ready(function(){
         }
 
         //datos para el filtro
-        for(var j = 0 ; j<conta; j++){
-          r2 = r2+"<option value='"+ json.rows[j].anio +"' >"+ json.rows[j].anio+"</option>";
+        for(var j = conta-1 ; j>=0; j--){
+          r2 = r2+"<option value='"+ json.rows[j].anio +"' >"+ json.rows[j].anio+"</option>";          
         }
         // se llena los Filtros
         $("#lstfilter1").append(r2);
@@ -388,74 +389,66 @@ $(document).ready(function(){
         for(var i = 4; i>= 0;i--){
           var programa2 = {
             "anio": json.rows[i].anio,
-            "cantidad": json.rows[i].cant_docentes_tc           
+            "cantidadTC": json.rows[i].cant_docentes_tc,
+            "cantidadHC": json.rows[i].cant_docentes_hc          
           }
           arra2.push(programa2);
 
         }
-        //arreglo para la grafica de la division 3 con docentes hora catedra
-        var arra3=[];
-        for(var i = 4; i>= 0;i--){
-          var programa3 = {
-            "anio": json.rows[i].anio,
-            "cantidad": json.rows[i].cant_docentes_hc
-            
-          }
-          arra3.push(programa3);
-
-        }
+        
+        
        }
-       //cambio de graficas de barras docentes tiempo completo
-        $("#graph1").change(function () {
-          if($(this).val() === '1'){
-            columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
-          }
-          else if($(this).val() === '2'){
-            columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',40,30);
-          }
-          else if($(this).val() === '3'){
-            lineGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad');
-          }
-          else if($(this).val() === '4'){
-            areaGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad');
-          }
-          else if($(this).val() === '5'){
-            barGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
-          }
-          else if($(this).val() === '6'){
-            barGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',40,30);
-          }
-          
-        });
-
-       //   
-       columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
-
-       //cambio de graficas de barras hora catedra
+       //cambio de graficas de barras docentes tiempo completo       
         $("#graph2").change(function () {
           if($(this).val() === '1'){
-            columnGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
+            columnTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo  \n vs\n  Docentes Hora Catedra ',"anio","cantidadTC","cantidadHC",0,0,"Docentes TC","Docentes HC");
           }
           else if($(this).val() === '2'){
-            columnGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',40,30);
+            columnTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo  \n vs\n  Docentes Hora Catedra',"anio","cantidadTC","cantidadHC",40,30,"Docentes TC","Docentes HC");
           }
           else if($(this).val() === '3'){
-            lineGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad');
+            lineTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo  \n vs\n  Docentes Hora Catedra',"anio","cantidadTC","cantidadHC","Docentes TC","Docentes HC");
           }
           else if($(this).val() === '4'){
-            areaGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad');
+            barTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo  \n vs\n  Docentes Hora Catedra',"anio","cantidadTC","cantidadHC",0,0,"Docentes TC","Docentes HC");
           }
           else if($(this).val() === '5'){
-            barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
+            barTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo  \n vs\n  Docentes Hora Catedra',"anio","cantidadTC","cantidadHC",40,30,"Docentes TC","Docentes HC");
           }
-          else if($(this).val() === '6'){
-            barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',40,30);
-          }
-          
         });
+        columnTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo \n vs\n  Docentes Hora Catedra',"anio","cantidadTC","cantidadHC",0,0,"Docentes TC","Docentes HC");
 
        //   
-       barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
+              
+        //semaforo divgraph4 
+        //toma los datos de los manuales del indicador para graficar el acelerometro           
+          
+        if(json.rows[0].sim_Rango_MA == '< ' && json.rows[0].sim_Rango_I == '> '){       
+          
+          gaugesGraph2(json.rows[0].relacion_docentes,divgraph4,'g','y','r',json.rows[0].num_Rango_MA,json.rows[0].num_Rango_I, 'Porcentaje de Docentes TC con Relación a los Docentes HC \n Año: '+json.rows[0].anio, '%',10);
+          
+        } 
+
+        else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '> ' ){    
+                      
+          gaugesGraph2(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Porcentaje de Docentes TC con Relación a los Docentes HC \n Año: '+json.rows[0].anio, '%',10);
+          
+        }              
+
+        else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_I == '< ' ){
+ 
+          //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+          $('#myModal').modal('show');
+            
+        }
+
+        else{                               
+          gaugesGraph2(json.rows[0].relacion_docentes,divgraph4,'r','y','g',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Porcentaje de Docentes TC con Relación a los Docentes HC \n Año: '+json.rows[0].anio, '%',10);
+          
+        }
+
+       
        // cambio de grafica de tendencia relacion docentes
        $("#graph3").change(function () {
 
@@ -679,12 +672,12 @@ $(document).ready(function(){
        //arreglo para la grafica de la division 2 con docentes tiempo completo
        var arra2=[];
        for(var i =conta-1; i>= 0;i--){
-         var programa2 = {
-           "anio": json.rows[i].anio,
-           "cantidad": json.rows[i].cant_docentes_tc
-           
-         }
-         arra2.push(programa2);
+        var programa2 = {
+          "anio": json.rows[i].anio,
+          "cantidadTC": json.rows[i].cant_docentes_tc,
+          "cantidadHC": json.rows[i].cant_docentes_hc          
+        }
+        arra2.push(programa2);
 
        }
 
@@ -700,55 +693,53 @@ $(document).ready(function(){
 
        }
        //cambio de graficas de barras docentes tiempo completo
-        $("#graph1").change(function () {
-          if($(this).val() === '1'){
-            columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
-          }
-          else if($(this).val() === '2'){
-            columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',40,30);
-          }
-          else if($(this).val() === '3'){
-            lineGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad');
-          }
-          else if($(this).val() === '4'){
-            areaGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad');
-          }
-          else if($(this).val() === '5'){
-            barGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
-          }
-          else if($(this).val() === '6'){
-            barGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',40,30);
-          }
-           
-        });
-
-       //   
-       columnGraph(arra2,divgraph1,'Docentes Tiempo Completo','anio','cantidad',0,0);
-       //cambio de graficas de barras hora catedra
         $("#graph2").change(function () {
           if($(this).val() === '1'){
-            columnGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
+            columnTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo  \n vs\n  Docentes Hora Catedra ',"anio","cantidadTC","cantidadHC",0,0,"Docentes TC","Docentes HC");
           }
           else if($(this).val() === '2'){
-            columnGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',40,30);
+            columnTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo  \n vs\n  Docentes Hora Catedra',"anio","cantidadTC","cantidadHC",40,30,"Docentes TC","Docentes HC");
           }
           else if($(this).val() === '3'){
-            lineGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad');
+            lineTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo  \n vs\n  Docentes Hora Catedra',"anio","cantidadTC","cantidadHC","Docentes TC","Docentes HC");
           }
           else if($(this).val() === '4'){
-            areaGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad');
+            barTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo  \n vs\n  Docentes Hora Catedra',"anio","cantidadTC","cantidadHC",0,0,"Docentes TC","Docentes HC");
           }
           else if($(this).val() === '5'){
-            barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
+            barTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo  \n vs\n  Docentes Hora Catedra',"anio","cantidadTC","cantidadHC",40,30,"Docentes TC","Docentes HC");
           }
-          else if($(this).val() === '6'){
-            barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',40,30);
-          }
-          
         });
+        columnTwoGraph(arra2,'divgraph1','Docentes Tiempo Completo \n vs\n  Docentes Hora Catedra',"anio","cantidadTC","cantidadHC",0,0,"Docentes TC","Docentes HC");
 
-       //   
-        barGraph(arra3,divgraph3,'Docentes Hora Cátedra','anio','cantidad',0,0);
+       ///semaforo divgraph4 
+        //toma los datos de los manuales del indicador para graficar el acelerometro           
+          
+        if(json.rows[0].sim_Rango_MA == '< ' && json.rows[0].sim_Rango_I == '> '){                
+          
+          gaugesGraph2(json.rows[0].relacion_docentes,divgraph4,'g','y','r',json.rows[0].num_Rango_MA,json.rows[0].num_Rango_I, 'Porcentaje de Docentes TC con Relación a los Docentes HC \n Año: '+json.rows[0].anio, '%',10);
+          
+        } 
+
+        else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '> ' ){    
+                      
+          gaugesGraph2(json.rows[0].relacion_docentes,divgraph4,'y','g','r',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Porcentaje de Docentes TC con Relación a los Docentes HC \n Año: '+json.rows[0].anio, '%',10);
+          
+        }              
+
+        else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_I == '< ' ){
+          
+          //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
+          $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
+          $('#myModal').modal('show');
+            
+        }
+
+        else{                               
+          gaugesGraph2(json.rows[0].relacion_docentes,divgraph4,'r','y','g',json.rows[0].num_Rango_I,json.rows[0].num_Rango_MA, 'Porcentaje de Docentes TC con Relación a los Docentes HC \n Año: '+json.rows[0].anio, '%',10);
+          
+        }
+
        // cambio de grafica de tendencia relacion docentes
        $("#graph3").change(function () {
 

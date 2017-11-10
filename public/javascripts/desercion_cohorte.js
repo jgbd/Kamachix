@@ -183,7 +183,9 @@ function load_start() {
 
         gaugesGraph(json.datos[json.count - 1].porcentaje, divgraph3, 'r', 'g', 'y', json.datos[json.count - 1].num_Rango_I, json.datos[json.count - 1].num_Rango_MA, titleg, '%', 100);
 
-      } else if (json.datos[json.count - 1].sim_Rango_MA === '= ' && json.datos[json.count - 1].sim_Rango_A == '< ' && json.datos[json.count - 1].sim_Rango_A == '< ') {
+      }
+
+      else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '< ' ){
         //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
         $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
         $('#myModal').modal('show');
@@ -434,7 +436,7 @@ function load_filters() {
 
             gaugesGraph(json.datos[json.count - 1].porcentaje, divgraph3, 'r', 'g', 'y', json.datos[json.count - 1].num_Rango_I, json.datos[json.count - 1].num_Rango_MA, titleg, '%', 100);
 
-          } else if (json.datos[json.count - 1].sim_Rango_MA === '= ' && json.datos[json.count - 1].sim_Rango_A == '< ' && json.datos[json.count - 1].sim_Rango_A == '< ') {
+          }else if(json.datos[json.count-1].sim_Rango_MA === '= ' && json.datos[json.count-1].sim_Rango_A == '< ' && json.datos[json.count-1].sim_Rango_A == '< ' ){
             //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
             $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
             $('#myModal').modal('show');

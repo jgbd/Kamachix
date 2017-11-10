@@ -416,6 +416,69 @@ function gaugesGraph(data,contentName, co1, co2, co3, soso, goal, title, symbol,
     //gaugeChart.arrows[0].setValue( data );
 }
 
+//Grafica de Acelerometro simple para indicadores con rango por debajo de 50 recive el dato , la div contenedora y los tre scolores con ter letras
+//'g' verde, 'y' amarillo y 'r' rojo
+function gaugesGraph2(data,contentName, co1, co2, co3, soso, goal, title, symbol, percent){
+  var col = ["#84b761","#fdd400","#cc4748"];
+  var c1,c2,c3;
+  //comprueba que los colores no sean iguales
+  if(co1!=co2 && co2!=co3 && co1!=co3){
+    //asigna color segun envio primer intervalo
+    if(co1=='g') c1=col[0];
+    else if (co1=='y') c1=col[1];
+    else c1=col[2];
+    //asigna color segundo intervalo
+    if(co2=='g') c2=col[0];
+    else if (co2=='y') c2=col[1];
+    else c2=col[2];
+    //asigna color tercer intervalo
+    if(co3=='g') c3=col[0];
+    else if (co3=='y') c3=col[1];
+    else c3=col[2];
+  }else{
+    c1=col[0];
+    c2=col[0];
+    c3=col[0];
+  }
+
+  var gaugeChart = AmCharts.makeChart( contentName, {
+    "type": "gauge",
+    "theme": "chalk",
+    "titles": [{"text":title}],
+    "axes": [ {
+      "axisThickness": 1,
+      "axisAlpha": 0.2,
+      "tickAlpha": 0.2,
+      "gridInside": true,
+      "inside": true,
+      "radius": "100%",
+      "valueInterval": 0.5,
+      "bands": [ {
+        "color": c1,
+        "endValue": soso,
+        "startValue": 0
+      }, {
+        "color": c2,
+        "endValue": goal,
+        "startValue": soso
+      }, {
+        "color": c3,
+        "endValue": percent,
+        "innerRadius": "90%",
+        "startValue": goal
+      } ],
+      "bottomText": data + symbol,
+      "bottomTextYOffset": -10,
+      "endValue": percent
+    } ],
+    "arrows": [{"value":data}], //es el valor que tiene
+    "export": {
+      "enabled": true,
+      "menu": menu_export
+    }
+  });
+  //gaugeChart.arrows[0].setValue( data );
+}
 //Grafica de acelerometro doble
 function gaugesTwoAxesGraph(data1, data2, contentname, title){
   var chart = AmCharts.makeChart( contentname, {

@@ -259,8 +259,8 @@ $.ajax({
           else{
             programa2 = {
                 "anio": json.rows[i].anio,
-                "periodob": json.rows[y].total,
-                "periodoa": json.rows[i].total
+                "periodoa": json.rows[y].total,
+                "periodob": json.rows[i].total
 
             }
           }

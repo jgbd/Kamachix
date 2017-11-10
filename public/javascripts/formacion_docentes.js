@@ -114,7 +114,7 @@ $(document).ready(function(){
                 
               }              
 
-              else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_A == '< ' ){
+              else if(json.rows[0].sim_Rango_MA === '= ' && json.rows[0].sim_Rango_A == '< ' && json.rows[0].sim_Rango_I == '< ' ){
                 
                 //alert('los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<). por ende la grafica del estado del indicador (velocimetro) no se mostrara');
                 $("#messageError").html("los simbolos para los rangos Adecuado e inadecuado no pueden ser el simbolo menor(<).");
